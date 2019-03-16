@@ -1,0 +1,37 @@
+{
+    "generator-jhipster": {
+        "promptValues": {
+            "packageName": "ir.samta.project",
+            "nativeLanguage": "fa"
+        },
+        "jhipsterVersion": "5.8.2",
+        "applicationType": "monolith",
+        "baseName": "project",
+        "packageName": "ir.samta.project",
+        "packageFolder": "ir/samta/project",
+        "serverPort": "8080",
+        "authenticationType": "jwt",
+        "cacheProvider": "no",
+        "websocket": false,
+        "databaseType": "sql",
+        "devDatabaseType": "postgresql",
+        "prodDatabaseType": "postgresql",
+        "searchEngine": "elasticsearch",
+        "messageBroker": false,
+        "serviceDiscoveryType": false,
+        "buildTool": "maven",
+        "enableSwaggerCodegen": false,
+        "jwtSecretKey": "ZjI1M2UyM2U1NWI3ZWE0NDE1YWMxOTcyYzExNTk1ZDU5MzY1NGU2MjUxNTRlNzk1Y2RkMWEzOTZiMDc0ZmIzMjBmODg0MjAxNDcyZGUyZmQ2OWNiYmIxMzE4ODU1MmU1NDI1M2UzY2VlOTRjZDYxMzcwYzUzMTVlM2ExNDc4MzU=",
+        "clientFramework": "angularX",
+        "useSass": false,
+        "clientPackageManager": "npm",
+        "testFrameworks": [],
+        "jhiPrefix": "jhi",
+        "entitySuffix": "",
+        "dtoSuffix": "DTO",
+        "otherModules": [],
+        "enableTranslation": true,
+        "nativeLanguage": "fa",
+        "languages": ["fa"]
+    }
+}
