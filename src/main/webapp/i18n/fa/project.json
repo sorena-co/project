@@ -1,0 +1,25 @@
+{
+    "projectApp": {
+        "project": {
+            "home": {
+                "title": "پروژه ها",
+                "createLabel": "تعریف پروژه",
+                "createOrEditLabel": "ویرایش پروژه",
+                "search": "جستجو"
+            },
+            "created": "پروژه جدید با موفقیت ایجاد شد.",
+            "updated": "پروژه جدید با موفقیت ایجاد شد.",
+            "deleted": "پروژه جدید با موفقیت ایجاد شد.",
+            "delete": {
+                "question": "آیا برای حذف این پروژه مطمئن هستید ؟ "
+            },
+            "detail": {
+                "title": "پروژه"
+            },
+            "title": "عنوان",
+            "createDate": "تاریخ ایجاد",
+            "users": "مدیران پروژه",
+            "projectType": "نوع پروژه"
+        }
+    }
+}

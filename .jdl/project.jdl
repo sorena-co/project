@@ -1,0 +1,18 @@
+entity UserGroup{
+    title String required
+}
+
+entity Project{
+    title String required,
+    createDate Instant required,
+    projectType ProjectType required
+}
+
+enum ProjectType {
+    SOFTWARE,
+    HARDWARE
+}
+
+dto * with mapstruct
+paginate * with pager
+service * with serviceClass

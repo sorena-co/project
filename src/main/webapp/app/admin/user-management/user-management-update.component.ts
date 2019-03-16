@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { JhiLanguageHelper, User, UserService } from 'app/core';
+import { UserGroup } from 'app/shared/model/user-group.model';
+import { UserGroupService } from 'app/entities/user-group';
 
 @Component({
     selector: 'jhi-user-mgmt-update',
@@ -12,12 +14,14 @@ export class UserMgmtUpdateComponent implements OnInit {
     languages: any[];
     authorities: any[];
     isSaving: boolean;
+    userGroups: UserGroup[];
 
     constructor(
         private languageHelper: JhiLanguageHelper,
         private userService: UserService,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private userGroupService: UserGroupService
     ) {}
 
     ngOnInit() {
@@ -31,6 +35,9 @@ export class UserMgmtUpdateComponent implements OnInit {
         });
         this.languageHelper.getAll().then(languages => {
             this.languages = languages;
+        });
+        this.userGroupService.query().subscribe(value => {
+            this.userGroups = value.body;
         });
     }
 

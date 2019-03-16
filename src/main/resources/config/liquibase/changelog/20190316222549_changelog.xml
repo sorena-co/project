@@ -1,0 +1,22 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="mohammad (generated)" id="1552775376183-1">
+        <createTable tableName="project_user">
+            <column name="projects_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1552775376183-2">
+        <addPrimaryKey columnNames="projects_id, user_id" tableName="project_user"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1552775376183-3">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="project_user" constraintName="FK6n21k6vfgxbt1bwlw4vj4brkd" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1552775376183-4">
+        <addForeignKeyConstraint baseColumnNames="projects_id" baseTableName="project_user" constraintName="FKhe6l1c3lbqpls2cqdv8bjw5pf" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="project"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,9 @@
+{
+    "projectApp": {
+        "ProjectType": {
+            "null": "",
+            "SOFTWARE": "نرم افزار",
+            "HARDWARE": "سخت افزار"
+        }
+    }
+}

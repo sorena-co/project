@@ -25,6 +25,7 @@
         "createdBy": "ایجاد شده با",
         "createdDate": "زمان ایجاد",
         "lastModifiedBy": "تغییر کرده با",
-        "lastModifiedDate": "آخرین زمان تغییر"
+        "lastModifiedDate": "آخرین زمان تغییر",
+        "userGroup": "نوع کاربر"
     }
 }

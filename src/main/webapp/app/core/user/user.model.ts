@@ -28,7 +28,9 @@ export class User implements IUser {
         public createdDate?: Date,
         public lastModifiedBy?: string,
         public lastModifiedDate?: Date,
-        public password?: string
+        public password?: string,
+        public userGroupTitle?: string,
+        public userGroupId?: number
     ) {
         this.id = id ? id : null;
         this.login = login ? login : null;

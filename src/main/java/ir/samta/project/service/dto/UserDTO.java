@@ -53,6 +53,10 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    private String userGroupTitle;
+
+    private Long userGroupId;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -73,6 +77,10 @@ public class UserDTO {
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
+        if (user.getUserGroup() != null) {
+            this.userGroupId = user.getUserGroup().getId();
+            this.userGroupTitle = user.getUserGroup().getTitle();
+        }
     }
 
     public Long getId() {
@@ -195,5 +203,21 @@ public class UserDTO {
             ", lastModifiedDate=" + lastModifiedDate +
             ", authorities=" + authorities +
             "}";
+    }
+
+    public String getUserGroupTitle() {
+        return userGroupTitle;
+    }
+
+    public void setUserGroupTitle(String userGroupTitle) {
+        this.userGroupTitle = userGroupTitle;
+    }
+
+    public Long getUserGroupId() {
+        return userGroupId;
+    }
+
+    public void setUserGroupId(Long userGroupId) {
+        this.userGroupId = userGroupId;
     }
 }

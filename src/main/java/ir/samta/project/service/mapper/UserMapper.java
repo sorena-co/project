@@ -2,6 +2,7 @@ package ir.samta.project.service.mapper;
 
 import ir.samta.project.domain.Authority;
 import ir.samta.project.domain.User;
+import ir.samta.project.domain.UserGroup;
 import ir.samta.project.service.dto.UserDTO;
 
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import java.util.stream.Collectors;
 
 /**
  * Mapper for the entity User and its DTO called UserDTO.
- *
+ * <p>
  * Normal mappers are generated using MapStruct, this one is hand-coded as MapStruct
  * support is still in beta, and requires a manual step with an IDE.
  */
@@ -51,6 +52,11 @@ public class UserMapper {
             user.setLangKey(userDTO.getLangKey());
             Set<Authority> authorities = this.authoritiesFromStrings(userDTO.getAuthorities());
             user.setAuthorities(authorities);
+            if (userDTO.getUserGroupId() != null) {
+                UserGroup userGroup = new UserGroup();
+                userGroup.setId(userDTO.getUserGroupId());
+                user.setUserGroup(userGroup);
+            }
             return user;
         }
     }
@@ -59,7 +65,7 @@ public class UserMapper {
     private Set<Authority> authoritiesFromStrings(Set<String> authoritiesAsString) {
         Set<Authority> authorities = new HashSet<>();
 
-        if(authoritiesAsString != null){
+        if (authoritiesAsString != null) {
             authorities = authoritiesAsString.stream().map(string -> {
                 Authority auth = new Authority();
                 auth.setName(string);
