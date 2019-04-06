@@ -1,67 +1,70 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-project-heading" jhiTranslate="projectApp.project.home.createOrEditLabel">Create or edit a Project</h2>
+            <h2 id="jhi-project-heading" jhiTranslate="projectApp.project.home.createOrEditLabel">Create or edit a
+                Project</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!project.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="project.id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="projectApp.project.title" for="field_title">Title</label>
-                    <input type="text" class="form-control" name="title" id="field_title"
-                        [(ngModel)]="project.title" required/>
-                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.title?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.project.title" for="field_title">Title</label>
+                            <input type="text" class="form-control" name="title" id="field_title"
+                                   [(ngModel)]="project.title" required/>
+                            <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.title?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="projectApp.project.createDate" for="field_createDate">Create Date</label>
-                    <div class="d-flex">
-                        <input id="field_createDate" type="datetime-local" class="form-control" name="createDate" [(ngModel)]="createDate" placeholder="YYYY-MM-DD HH:mm"
-                        required/>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.project.projectType"
+                                   for="field_projectType">Project Type</label>
+                            <select class="form-control" name="projectType" [(ngModel)]="project.projectType"
+                                    id="field_projectType" required>
+                                <option value="SOFTWARE">{{'projectApp.ProjectType.SOFTWARE' | translate}}</option>
+                                <option value="HARDWARE">{{'projectApp.ProjectType.HARDWARE' | translate}}</option>
+                            </select>
+                            <div
+                                [hidden]="!(editForm.controls.projectType?.dirty && editForm.controls.projectType?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.projectType?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                            </div>
+                        </div>
                     </div>
-                    <div [hidden]="!(editForm.controls.createDate?.dirty && editForm.controls.createDate?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.createDate?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.createDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
-                            This field should be a date and time.
-                        </small>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.financialProject.amount"
+                                   for="field_amount">Amount</label>
+                            <input type="number" class="form-control" name="amount" id="field_amount"
+                                   [(ngModel)]="project.amountConfirmed"/>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="projectApp.project.projectType" for="field_projectType">Project Type</label>
-                    <select class="form-control" name="projectType" [(ngModel)]="project.projectType" id="field_projectType"  required>
-                        <option value="SOFTWARE">{{'projectApp.ProjectType.SOFTWARE' | translate}}</option>
-                        <option value="HARDWARE">{{'projectApp.ProjectType.HARDWARE' | translate}}</option>
-                    </select>
-                    <div [hidden]="!(editForm.controls.projectType?.dirty && editForm.controls.projectType?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.projectType?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label jhiTranslate="projectApp.project.users" for="field_users">Course</label>
+                            <select class="form-control" id="field_users" multiple name="users"
+                                    [(ngModel)]="project.users">
+                                <option [ngValue]="getSelected(project.users, userOption)"
+                                        *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label jhiTranslate="projectApp.project.users" for="field_users">Course</label>
-                    <select class="form-control" id="field_users" multiple name="users" [(ngModel)]="project.users">
-                        <option [ngValue]="getSelected(project.users, userOption)" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
-                    </select>
                 </div>
             </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving"
+                        class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

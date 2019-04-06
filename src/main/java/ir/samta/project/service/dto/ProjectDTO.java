@@ -1,13 +1,13 @@
 package ir.samta.project.service.dto;
-import java.time.Instant;
-import javax.validation.constraints.*;
+
+import ir.samta.project.domain.enumeration.ProjectType;
+
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
-import ir.samta.project.domain.User;
-import ir.samta.project.domain.enumeration.ProjectType;
 
 /**
  * A DTO for the Project entity.
@@ -19,13 +19,14 @@ public class ProjectDTO implements Serializable {
     @NotNull
     private String title;
 
-    @NotNull
     private Instant createDate;
 
     @NotNull
     private ProjectType projectType;
 
     private Set<UserDTO> users = new HashSet<>();
+
+    private Long amountConfirmed;
 
     public Long getId() {
         return id;
@@ -96,5 +97,13 @@ public class ProjectDTO implements Serializable {
 
     public void setUsers(Set<UserDTO> users) {
         this.users = users;
+    }
+
+    public Long getAmountConfirmed() {
+        return amountConfirmed;
+    }
+
+    public void setAmountConfirmed(Long amountConfirmed) {
+        this.amountConfirmed = amountConfirmed;
     }
 }

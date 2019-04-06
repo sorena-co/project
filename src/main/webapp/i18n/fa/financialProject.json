@@ -1,0 +1,32 @@
+{
+    "projectApp": {
+        "financialProject": {
+            "home": {
+                "title": "رکوردهای مالی پروژه",
+                "createLabel": "ایجاد رکورد مالی پروژه",
+                "createOrEditLabel": "ویرایش رکورد مالی پروژه",
+                "search": "جستجو"
+            },
+            "created": "رکورد مالی پروژه با موفقیت ایجاد شد.",
+            "updated": "رکورد مالی پروژه با موفقیت ویرایش شد.",
+            "deleted": "رکورد مالی پروژه با موفقیت حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف رکورد مالی پروژه اطمینان دارید؟"
+            },
+            "detail": {
+                "title": "رکورد مالی"
+            },
+            "title": "عنوان",
+            "code": "شماره نامه",
+            "name": "نام",
+            "sellContractNo": "شماره قرارداد",
+            "amount": "مقدار مبلغ",
+            "registerDate": "تاریخ ثبت",
+            "startDate": "تاریخ شروع",
+            "finishDate": "تاریخ پایان",
+            "description": "توضیحات",
+            "financialProjectType": "نوع",
+            "project": "پروژه"
+        }
+    }
+}

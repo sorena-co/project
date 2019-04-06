@@ -1,0 +1,99 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-financial-project-heading" jhiTranslate="projectApp.financialProject.home.createOrEditLabel">Create or edit a Financial Project</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!financialProject.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="financialProject.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.financialProject.title" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                        [(ngModel)]="financialProject.title" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.financialProject.code" for="field_code">Code</label>
+                    <input type="text" class="form-control" name="code" id="field_code"
+                        [(ngModel)]="financialProject.code" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.financialProject.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="financialProject.name" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.financialProject.sellContractNo" for="field_sellContractNo">Sell Contract No</label>
+                    <input type="text" class="form-control" name="sellContractNo" id="field_sellContractNo"
+                        [(ngModel)]="financialProject.sellContractNo" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.financialProject.amount" for="field_amount">Amount</label>
+                    <input type="number" class="form-control" name="amount" id="field_amount"
+                        [(ngModel)]="financialProject.amount" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.financialProject.registerDate" for="field_registerDate">Register Date</label>
+                    <div class="d-flex">
+                        <input id="field_registerDate" type="datetime-local" class="form-control" name="registerDate" [(ngModel)]="registerDate" placeholder="YYYY-MM-DD HH:mm"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.financialProject.startDate" for="field_startDate">Start Date</label>
+                    <div class="d-flex">
+                        <input id="field_startDate" type="datetime-local" class="form-control" name="startDate" [(ngModel)]="startDate" placeholder="YYYY-MM-DD HH:mm"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.financialProject.finishDate" for="field_finishDate">Finish Date</label>
+                    <div class="d-flex">
+                        <input id="field_finishDate" type="datetime-local" class="form-control" name="finishDate" [(ngModel)]="finishDate" placeholder="YYYY-MM-DD HH:mm"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.financialProject.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="financialProject.description" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.financialProject.financialProjectType" for="field_financialProjectType">Financial Project Type</label>
+                    <select class="form-control" name="financialProjectType" [(ngModel)]="financialProject.financialProjectType" id="field_financialProjectType" >
+                        <option value="CREDIT_ESTIMATES">{{'projectApp.FinancialProjectType.CREDIT_ESTIMATES' | translate}}</option>
+                        <option value="AMOUNT_CONFIRMED">{{'projectApp.FinancialProjectType.AMOUNT_CONFIRMED' | translate}}</option>
+                        <option value="RECEIVED_FROM_INSTITUTION">{{'projectApp.FinancialProjectType.RECEIVED_FROM_INSTITUTION' | translate}}</option>
+                        <option value="RECEIVED_FROM_ORGANIZATION">{{'projectApp.FinancialProjectType.RECEIVED_FROM_ORGANIZATION' | translate}}</option>
+                        <option value="RECEIVED_TOTAL_FOR_PROJECT">{{'projectApp.FinancialProjectType.RECEIVED_TOTAL_FOR_PROJECT' | translate}}</option>
+                        <option value="SEND_TO_PROJECT_HAVE_CODE">{{'projectApp.FinancialProjectType.SEND_TO_PROJECT_HAVE_CODE' | translate}}</option>
+                        <option value="SURPLUS_COST">{{'projectApp.FinancialProjectType.SURPLUS_COST' | translate}}</option>
+                        <option value="CREDIT_REMAIN">{{'projectApp.FinancialProjectType.CREDIT_REMAIN' | translate}}</option>
+                        <option value="BEFORE_CLEARING">{{'projectApp.FinancialProjectType.BEFORE_CLEARING' | translate}}</option>
+                        <option value="IN_CLEARING">{{'projectApp.FinancialProjectType.IN_CLEARING' | translate}}</option>
+                        <option value="FINAL_CLEARING">{{'projectApp.FinancialProjectType.FINAL_CLEARING' | translate}}</option>
+                        <option value="DEBIT_TO_INSTITUTION">{{'projectApp.FinancialProjectType.DEBIT_TO_INSTITUTION' | translate}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.financialProject.project" for="field_project">Project</label>
+                    <select class="form-control" id="field_project" name="project" [(ngModel)]="financialProject.projectId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="projectOption.id" *ngFor="let projectOption of projects; trackBy: trackProjectById">{{projectOption.title}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

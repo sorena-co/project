@@ -1,0 +1,64 @@
+{
+    "name": "FinancialProject",
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sellContractNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "amount",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "registerDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "startDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "finishDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "financialProjectType",
+            "fieldType": "FinancialProjectType",
+            "fieldValues": "CREDIT_ESTIMATES,AMOUNT_CONFIRMED,RECEIVED_FROM_INSTITUTION,RECEIVED_FROM_ORGANIZATION,RECEIVED_TOTAL_FOR_PROJECT,SEND_TO_PROJECT_HAVE_CODE,SURPLUS_COST,CREDIT_REMAIN,BEFORE_CLEARING,IN_CLEARING,FINAL_CLEARING,DEBIT_TO_INSTITUTION"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "project",
+            "otherEntityRelationshipName": "financialProject",
+            "relationshipName": "project",
+            "otherEntityField": "title"
+        }
+    ],
+    "changelogDate": "20190406213929",
+    "entityTableName": "financial_project",
+    "dto": "mapstruct",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

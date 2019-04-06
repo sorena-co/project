@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="financialProject">
+            <h2><span jhiTranslate="projectApp.financialProject.detail.title">Financial Project</span> {{financialProject.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="projectApp.financialProject.title">Title</span></dt>
+                <dd>
+                    <span>{{financialProject.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.financialProject.code">Code</span></dt>
+                <dd>
+                    <span>{{financialProject.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.financialProject.name">Name</span></dt>
+                <dd>
+                    <span>{{financialProject.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.financialProject.sellContractNo">Sell Contract No</span></dt>
+                <dd>
+                    <span>{{financialProject.sellContractNo}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.financialProject.amount">Amount</span></dt>
+                <dd>
+                    <span>{{financialProject.amount}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.financialProject.registerDate">Register Date</span></dt>
+                <dd>
+                    <span>{{financialProject.registerDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.financialProject.startDate">Start Date</span></dt>
+                <dd>
+                    <span>{{financialProject.startDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.financialProject.finishDate">Finish Date</span></dt>
+                <dd>
+                    <span>{{financialProject.finishDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.financialProject.description">Description</span></dt>
+                <dd>
+                    <span>{{financialProject.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.financialProject.financialProjectType">Financial Project Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'projectApp.FinancialProjectType.' + financialProject.financialProjectType}}">{{financialProject.financialProjectType}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.financialProject.project">Project</span></dt>
+                <dd>
+                    <div *ngIf="financialProject.projectId">
+                        <a [routerLink]="['/project', financialProject.projectId, 'view']">{{financialProject.projectTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/financial-project', financialProject.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -9,6 +9,7 @@
                 "main": "موجودیت ها",
                 "userGroup": "نوع کاربر",
                 "project": "پروژه",
+                "financialProject": "رکورد مالی پروژه",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

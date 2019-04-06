@@ -8,9 +8,41 @@ entity Project{
     projectType ProjectType required
 }
 
+entity FinancialProject{
+    title String,
+    code String,
+    name String,
+    sellContractNo String,
+    amount Long,
+    registerDate ZonedDateTime,
+    startDate ZonedDateTime,
+    finishDate ZonedDateTime,
+    description String,
+    financialProjectType FinancialProjectType
+}
+
+enum FinancialProjectType{
+    CREDIT_ESTIMATES,
+    AMOUNT_CONFIRMED,
+    RECEIVED_FROM_INSTITUTION,
+    RECEIVED_FROM_ORGANIZATION,
+    RECEIVED_TOTAL_FOR_PROJECT,
+    SEND_TO_PROJECT_HAVE_CODE,
+    SURPLUS_COST,
+    CREDIT_REMAIN,
+    BEFORE_CLEARING,
+    IN_CLEARING,
+    FINAL_CLEARING,
+    DEBIT_TO_INSTITUTION
+}
+
 enum ProjectType {
     SOFTWARE,
     HARDWARE
+}
+
+relationship ManyToOne{
+    FinancialProject {project(title)} to Project
 }
 
 dto * with mapstruct

@@ -1,6 +1,8 @@
 package ir.samta.project.service;
 
+import ir.samta.project.domain.FinancialProject;
 import ir.samta.project.domain.Project;
+import ir.samta.project.repository.FinancialProjectRepository;
 import ir.samta.project.repository.ProjectRepository;
 import ir.samta.project.repository.search.ProjectSearchRepository;
 import ir.samta.project.security.SecurityUtils;
@@ -8,15 +10,16 @@ import ir.samta.project.service.dto.ProjectDTO;
 import ir.samta.project.service.mapper.ProjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing Project.
@@ -33,10 +36,13 @@ public class ProjectService {
 
     private final ProjectSearchRepository projectSearchRepository;
 
-    public ProjectService(ProjectRepository projectRepository, ProjectMapper projectMapper, ProjectSearchRepository projectSearchRepository) {
+    private final FinancialProjectRepository financialProjectRepository;
+
+    public ProjectService(ProjectRepository projectRepository, ProjectMapper projectMapper, ProjectSearchRepository projectSearchRepository, FinancialProjectRepository financialProjectRepository) {
         this.projectRepository = projectRepository;
         this.projectMapper = projectMapper;
         this.projectSearchRepository = projectSearchRepository;
+        this.financialProjectRepository = financialProjectRepository;
     }
 
     /**
@@ -48,7 +54,13 @@ public class ProjectService {
     public ProjectDTO save(ProjectDTO projectDTO) {
         log.debug("Request to save Project : {}", projectDTO);
         Project project = projectMapper.toEntity(projectDTO);
+        project.setCreateDate(Instant.now());
         project = projectRepository.save(project);
+        FinancialProject financialProject = new FinancialProject();
+        financialProject.setAmount(projectDTO.getAmountConfirmed());
+        financialProject.setRegisterDate(ZonedDateTime.now());
+        financialProject.setProject(project);
+        financialProjectRepository.save(financialProject);
         ProjectDTO result = projectMapper.toDto(project);
         projectSearchRepository.save(project);
         return result;
