@@ -1,8 +1,13 @@
 package ir.samta.project.repository;
 
 import ir.samta.project.domain.FinancialProject;
-import org.springframework.data.jpa.repository.*;
+import ir.samta.project.domain.enumeration.FinancialProjectType;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 
 /**
@@ -11,5 +16,15 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface FinancialProjectRepository extends JpaRepository<FinancialProject, Long> {
+    FinancialProject findFirstByProject_IdAndFinancialProjectType(Long projectId, FinancialProjectType type);
 
+    @Query(
+        "select distinct sum(fp.amount) from FinancialProject fp " +
+            "inner join fp.project project " +
+            "where project.id=:projectId and fp.financialProjectType in (:financialProjectTypes)"
+    )
+    Long getSumOfCostForProject(
+        @Param("projectId") Long projectId,
+        @Param("financialProjectTypes") List<FinancialProjectType> financialProjectTypes
+    );
 }

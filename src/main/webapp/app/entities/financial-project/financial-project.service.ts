@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { map } from 'rxjs/operators';
 
 import { SERVER_API_URL } from 'app/app.constants';
@@ -10,6 +9,7 @@ import { createRequestOption } from 'app/shared';
 import { IFinancialProject } from 'app/shared/model/financial-project.model';
 
 type EntityResponseType = HttpResponse<IFinancialProject>;
+type NumberResponseType = HttpResponse<number>;
 type EntityArrayResponseType = HttpResponse<IFinancialProject[]>;
 
 @Injectable({ providedIn: 'root' })
@@ -37,6 +37,19 @@ export class FinancialProjectService {
         return this.http
             .get<IFinancialProject>(`${this.resourceUrl}/${id}`, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
+
+    findByProjectAndType(projectId: number, type: any): Observable<EntityResponseType> {
+        const params = new HttpParams().set('projectId', projectId.toString()).set('type', type.toString());
+        return this.http
+            .get<IFinancialProject>(`${this.resourceUrl}/find-by-project-type`, { params, observe: 'response' })
+            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
+
+    getCostOfProject(projectId: number): Observable<NumberResponseType> {
+        return this.http
+            .get<number>(`${this.resourceUrl}/cost/${projectId}`, { observe: 'response' })
+            .pipe(map((res: NumberResponseType) => res));
     }
 
     query(req?: any): Observable<EntityArrayResponseType> {

@@ -21,6 +21,7 @@ export class Project implements IProject {
         public title?: string,
         public createDate?: Moment,
         public amountConfirmed?: number,
+        public totalCost?: number,
         public projectType?: ProjectType
     ) {}
 }

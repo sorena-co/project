@@ -1,27 +1,24 @@
 package ir.samta.project.web.rest;
+
+import io.github.jhipster.web.util.ResponseUtil;
+import ir.samta.project.domain.enumeration.FinancialProjectType;
 import ir.samta.project.service.FinancialProjectService;
+import ir.samta.project.service.dto.FinancialProjectDTO;
 import ir.samta.project.web.rest.errors.BadRequestAlertException;
 import ir.samta.project.web.rest.util.HeaderUtil;
 import ir.samta.project.web.rest.util.PaginationUtil;
-import ir.samta.project.service.dto.FinancialProjectDTO;
-import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing FinancialProject.
@@ -30,10 +27,8 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 @RequestMapping("/api")
 public class FinancialProjectResource {
 
-    private final Logger log = LoggerFactory.getLogger(FinancialProjectResource.class);
-
     private static final String ENTITY_NAME = "financialProject";
-
+    private final Logger log = LoggerFactory.getLogger(FinancialProjectResource.class);
     private final FinancialProjectService financialProjectService;
 
     public FinancialProjectResource(FinancialProjectService financialProjectService) {
@@ -124,7 +119,7 @@ public class FinancialProjectResource {
      * SEARCH  /_search/financial-projects?query=:query : search for the financialProject corresponding
      * to the query.
      *
-     * @param query the query of the financialProject search
+     * @param query    the query of the financialProject search
      * @param pageable the pagination information
      * @return the result of the search
      */
@@ -135,5 +130,26 @@ public class FinancialProjectResource {
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/financial-projects");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
+
+    @GetMapping("/financial-projects/find-by-project-type")
+    public ResponseEntity<FinancialProjectDTO> getByProjectAndType(
+        @RequestParam(value = "projectId") Long projectId,
+        @RequestParam(value = "type") FinancialProjectType type
+    ) {
+        log.debug("REST request to get FinancialProject By Project Id and Type");
+        FinancialProjectDTO financialProjectDTO = financialProjectService.findByProjectAndType(projectId,
+            type);
+        return ResponseEntity.ok(financialProjectDTO);
+    }
+
+    @GetMapping("/financial-projects/cost/{projectId}")
+    public ResponseEntity<Long> getByProjectAndType(
+        @PathVariable(value = "projectId") Long projectId
+    ) {
+        log.debug("REST request to get sum of cost FinancialProject By Project Id");
+        Long costs = financialProjectService.getSumOfCostForProject(projectId);
+        return ResponseEntity.ok(costs);
+    }
+
 
 }

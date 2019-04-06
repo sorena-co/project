@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
 
-export const enum FinancialProjectType {
+export enum FinancialProjectType {
     CREDIT_ESTIMATES = 'CREDIT_ESTIMATES',
     AMOUNT_CONFIRMED = 'AMOUNT_CONFIRMED',
     RECEIVED_FROM_INSTITUTION = 'RECEIVED_FROM_INSTITUTION',

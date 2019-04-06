@@ -1,21 +1,23 @@
 package ir.samta.project.service;
 
 import ir.samta.project.domain.FinancialProject;
+import ir.samta.project.domain.enumeration.FinancialProjectType;
 import ir.samta.project.repository.FinancialProjectRepository;
 import ir.samta.project.repository.search.FinancialProjectSearchRepository;
 import ir.samta.project.service.dto.FinancialProjectDTO;
 import ir.samta.project.service.mapper.FinancialProjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing FinancialProject.
@@ -94,7 +96,7 @@ public class FinancialProjectService {
     /**
      * Search for the financialProject corresponding to the query.
      *
-     * @param query the query of the search
+     * @param query    the query of the search
      * @param pageable the pagination information
      * @return the list of entities
      */
@@ -103,5 +105,15 @@ public class FinancialProjectService {
         log.debug("Request to search for a page of FinancialProjects for query {}", query);
         return financialProjectSearchRepository.search(queryStringQuery(query), pageable)
             .map(financialProjectMapper::toDto);
+    }
+
+    public FinancialProjectDTO findByProjectAndType(Long projectId, FinancialProjectType type) {
+        return financialProjectMapper.toDto(financialProjectRepository.findFirstByProject_IdAndFinancialProjectType(projectId, type));
+    }
+
+    public Long getSumOfCostForProject(Long projectId) {
+        List<FinancialProjectType> type = new ArrayList<>();
+        type.add(FinancialProjectType.SEND_TO_PROJECT_HAVE_CODE);
+        return financialProjectRepository.getSumOfCostForProject(projectId, type);
     }
 }

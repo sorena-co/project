@@ -2,6 +2,7 @@ package ir.samta.project.service;
 
 import ir.samta.project.domain.FinancialProject;
 import ir.samta.project.domain.Project;
+import ir.samta.project.domain.enumeration.FinancialProjectType;
 import ir.samta.project.repository.FinancialProjectRepository;
 import ir.samta.project.repository.ProjectRepository;
 import ir.samta.project.repository.search.ProjectSearchRepository;
@@ -59,6 +60,7 @@ public class ProjectService {
         FinancialProject financialProject = new FinancialProject();
         financialProject.setAmount(projectDTO.getAmountConfirmed());
         financialProject.setRegisterDate(ZonedDateTime.now());
+        financialProject.setFinancialProjectType(FinancialProjectType.AMOUNT_CONFIRMED);
         financialProject.setProject(project);
         financialProjectRepository.save(financialProject);
         ProjectDTO result = projectMapper.toDto(project);
