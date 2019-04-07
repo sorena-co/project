@@ -51,7 +51,7 @@
                             <label class="form-control-label" jhiTranslate="projectApp.financialProject.registerDate"
                                    for="field_registerDate">Register Date</label>
                             <div class="d-flex">
-                                <input id="field_registerDate" type="datetime-local" class="form-control"
+                                <input id="field_registerDate" type="date" class="form-control"
                                        name="registerDate" [(ngModel)]="registerDate" placeholder="YYYY-MM-DD HH:mm"
                                 />
                             </div>
@@ -62,8 +62,8 @@
                             <label class="form-control-label" jhiTranslate="projectApp.financialProject.startDate"
                                    for="field_startDate">Start Date</label>
                             <div class="d-flex">
-                                <input id="field_startDate" type="datetime-local" class="form-control" name="startDate"
-                                       [(ngModel)]="startDate" placeholder="YYYY-MM-DD HH:mm"
+                                <input id="field_startDate" type="date" class="form-control" name="startDate"
+                                       [(ngModel)]="startDate" placeholder="YYYY-MM-DD"
                                 />
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                             <label class="form-control-label" jhiTranslate="projectApp.financialProject.finishDate"
                                    for="field_finishDate">Finish Date</label>
                             <div class="d-flex">
-                                <input id="field_finishDate" type="datetime-local" class="form-control"
+                                <input id="field_finishDate" type="date" class="form-control"
                                        name="finishDate"
                                        [(ngModel)]="finishDate" placeholder="YYYY-MM-DD HH:mm"
                                 />

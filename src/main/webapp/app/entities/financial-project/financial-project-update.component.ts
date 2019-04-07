@@ -4,7 +4,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_FORMAT, DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
 import { IFinancialProject } from 'app/shared/model/financial-project.model';
 import { FinancialProjectService } from './financial-project.service';
@@ -39,10 +39,9 @@ export class FinancialProjectUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ financialProject }) => {
             this.financialProject = financialProject;
             this.financialProject.projectId = this.projectId;
-            this.registerDate =
-                this.financialProject.registerDate != null ? this.financialProject.registerDate.format(DATE_TIME_FORMAT) : null;
-            this.startDate = this.financialProject.startDate != null ? this.financialProject.startDate.format(DATE_TIME_FORMAT) : null;
-            this.finishDate = this.financialProject.finishDate != null ? this.financialProject.finishDate.format(DATE_TIME_FORMAT) : null;
+            this.registerDate = this.financialProject.registerDate != null ? this.financialProject.registerDate.format(DATE_FORMAT) : null;
+            this.startDate = this.financialProject.startDate != null ? this.financialProject.startDate.format(DATE_FORMAT) : null;
+            this.finishDate = this.financialProject.finishDate != null ? this.financialProject.finishDate.format(DATE_FORMAT) : null;
         });
         this.projectService
             .query()
@@ -59,9 +58,9 @@ export class FinancialProjectUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        this.financialProject.registerDate = this.registerDate != null ? moment(this.registerDate, DATE_TIME_FORMAT) : null;
-        this.financialProject.startDate = this.startDate != null ? moment(this.startDate, DATE_TIME_FORMAT) : null;
-        this.financialProject.finishDate = this.finishDate != null ? moment(this.finishDate, DATE_TIME_FORMAT) : null;
+        this.financialProject.registerDate = this.registerDate != null ? moment(this.registerDate, DATE_FORMAT) : null;
+        this.financialProject.startDate = this.startDate != null ? moment(this.startDate, DATE_FORMAT) : null;
+        this.financialProject.finishDate = this.finishDate != null ? moment(this.finishDate, DATE_FORMAT) : null;
         if (this.financialProject.id !== undefined) {
             this.subscribeToSaveResponse(this.financialProjectService.update(this.financialProject));
         } else {

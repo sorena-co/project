@@ -27,7 +27,9 @@ export class ProjectUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ project }) => {
             this.project = project;
-            this.createDate = this.project.createDate != null ? this.project.createDate.format(DATE_TIME_FORMAT) : null;
+            this.project.startDate = this.project.startDate != null ? moment(this.project.startDate, DATE_FORMAT) : null;
+            this.project.finishDate = this.project.finishDate != null ? moment(this.project.finishDate, DATE_FORMAT) : null;
+            this.createDate = this.project.createDate != null ? this.project.createDate.format(DATE_FORMAT) : null;
             this.startDate = this.project.startDate != null ? this.project.startDate.format(DATE_FORMAT) : null;
             this.finishDate = this.project.finishDate != null ? this.project.finishDate.format(DATE_FORMAT) : null;
         });
@@ -43,7 +45,7 @@ export class ProjectUpdateComponent implements OnInit {
         this.isSaving = true;
         if (!this.project.parentProjectId) {
             this.project.level = 0;
-            this.project.createDate = this.createDate != null ? moment(this.createDate, DATE_TIME_FORMAT) : null;
+            this.project.createDate = this.createDate != null ? moment(this.createDate, DATE_FORMAT) : null;
             this.project.startDate = this.startDate != null ? moment(this.startDate, DATE_FORMAT) : null;
             this.project.finishDate = this.finishDate != null ? moment(this.finishDate, DATE_FORMAT) : null;
             if (this.project.id !== undefined) {
@@ -54,7 +56,7 @@ export class ProjectUpdateComponent implements OnInit {
         } else {
             this.projectService.find(this.project.parentProjectId).subscribe(value => {
                 this.project.level = value.body.level + 1;
-                this.project.createDate = this.createDate != null ? moment(this.createDate, DATE_TIME_FORMAT) : null;
+                this.project.createDate = this.createDate != null ? moment(this.createDate, DATE_FORMAT) : null;
                 this.project.startDate = this.startDate != null ? moment(this.startDate, DATE_FORMAT) : null;
                 this.project.finishDate = this.finishDate != null ? moment(this.finishDate, DATE_FORMAT) : null;
                 if (this.project.id !== undefined) {
