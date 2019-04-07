@@ -1,4 +1,7 @@
 <div class="row justify-content-center">
+    <div class="col-md-12">
+        <jhi-project-title [projectId]="projectId"></jhi-project-title>
+    </div>
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
             <h2 id="jhi-financial-project-heading" jhiTranslate="projectApp.financialProject.home.createOrEditLabel">
@@ -6,6 +9,52 @@
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="projectApp.financialProject.financialProjectType"
+                                   for="field_financialProjectType">Financial Project Type</label>
+                            <select class="form-control" name="financialProjectType"
+                                    [(ngModel)]="financialProject.financialProjectType" id="field_financialProjectType">
+                                <option
+                                    [ngStyle]="{'color': financialProjectTypeExist.existCreditEstimates?'green':'red'}"
+                                    value="CREDIT_ESTIMATES">{{'projectApp.FinancialProjectType.CREDIT_ESTIMATES' | translate}}</option>
+                                <option
+                                    [ngStyle]="{'color': financialProjectTypeExist.existAmountConfirmed?'green':'red'}"
+                                    value="AMOUNT_CONFIRMED">{{'projectApp.FinancialProjectType.AMOUNT_CONFIRMED' | translate}}</option>
+                                <option
+                                    [ngStyle]="{'color': financialProjectTypeExist.existReceivedFromInstitution?'green':'red'}"
+                                    value="RECEIVED_FROM_INSTITUTION">{{'projectApp.FinancialProjectType.RECEIVED_FROM_INSTITUTION' | translate}}</option>
+                                <option
+                                    [ngStyle]="{'color': financialProjectTypeExist.existReceivedFromOrganization?'green':'red'}"
+                                    value="RECEIVED_FROM_ORGANIZATION">{{'projectApp.FinancialProjectType.RECEIVED_FROM_ORGANIZATION' | translate}}</option>
+                                <option
+                                    [ngStyle]="{'color': financialProjectTypeExist.existReceivedTotalForProject?'green':'red'}"
+                                    value="RECEIVED_TOTAL_FOR_PROJECT">{{'projectApp.FinancialProjectType.RECEIVED_TOTAL_FOR_PROJECT' | translate}}</option>
+                                <option
+                                    [ngStyle]="{'color': financialProjectTypeExist.existSendToProjectHaveCode?'green':'red'}"
+                                    value="SEND_TO_PROJECT_HAVE_CODE">{{'projectApp.FinancialProjectType.SEND_TO_PROJECT_HAVE_CODE' | translate}}</option>
+                                <option
+                                    [ngStyle]="{'color': financialProjectTypeExist.existSurplusCost?'green':'red'}"
+                                    value="SURPLUS_COST">{{'projectApp.FinancialProjectType.SURPLUS_COST' | translate}}</option>
+                                <option
+                                    [ngStyle]="{'color': financialProjectTypeExist.existCreditRemain?'green':'red'}"
+                                    value="CREDIT_REMAIN">{{'projectApp.FinancialProjectType.CREDIT_REMAIN' | translate}}</option>
+                                <option
+                                    [ngStyle]="{'color': financialProjectTypeExist.existBeforeClearing?'green':'red'}"
+                                    value="BEFORE_CLEARING">{{'projectApp.FinancialProjectType.BEFORE_CLEARING' | translate}}</option>
+                                <option
+                                    [ngStyle]="{'color': financialProjectTypeExist.existInClearing?'green':'red'}"
+                                    value="IN_CLEARING">{{'projectApp.FinancialProjectType.IN_CLEARING' | translate}}</option>
+                                <option
+                                    [ngStyle]="{'color': financialProjectTypeExist.existFinalClearing?'green':'red'}"
+                                    value="FINAL_CLEARING">{{'projectApp.FinancialProjectType.FINAL_CLEARING' | translate}}</option>
+                                <option
+                                    [ngStyle]="{'color': financialProjectTypeExist.existDebitToInstitution?'green':'red'}"
+                                    value="DEBIT_TO_INSTITUTION">{{'projectApp.FinancialProjectType.DEBIT_TO_INSTITUTION' | translate}}</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-control-label" jhiTranslate="projectApp.financialProject.title"
@@ -24,13 +73,26 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.financialProject.registerDate"
+                                   for="field_registerDate">Register Date</label>
+                            <div class="d-flex">
+                                <input id="field_registerDate" type="date" class="form-control"
+                                       name="registerDate" [(ngModel)]="registerDate" placeholder="YYYY-MM-DD HH:mm"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3"
+                         *ngIf="financialProject.financialProjectType!==FinancialProjectType[FinancialProjectType.CREDIT_ESTIMATES]">
+                        <div class="form-group">
                             <label class="form-control-label" jhiTranslate="projectApp.financialProject.name"
                                    for="field_name">Name</label>
                             <input type="text" class="form-control" name="name" id="field_name"
                                    [(ngModel)]="financialProject.name"/>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3"
+                         *ngIf="financialProject.financialProjectType!==FinancialProjectType[FinancialProjectType.CREDIT_ESTIMATES]">
                         <div class="form-group">
                             <label class="form-control-label" jhiTranslate="projectApp.financialProject.sellContractNo"
                                    for="field_sellContractNo">Sell Contract No</label>
@@ -46,18 +108,8 @@
                                    [(ngModel)]="financialProject.amount"/>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="projectApp.financialProject.registerDate"
-                                   for="field_registerDate">Register Date</label>
-                            <div class="d-flex">
-                                <input id="field_registerDate" type="date" class="form-control"
-                                       name="registerDate" [(ngModel)]="registerDate" placeholder="YYYY-MM-DD HH:mm"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3"
+                         *ngIf="financialProject.financialProjectType!==FinancialProjectType[FinancialProjectType.CREDIT_ESTIMATES]">
                         <div class="form-group">
                             <label class="form-control-label" jhiTranslate="projectApp.financialProject.startDate"
                                    for="field_startDate">Start Date</label>
@@ -68,7 +120,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3"
+                         *ngIf="financialProject.financialProjectType!==FinancialProjectType[FinancialProjectType.CREDIT_ESTIMATES]">
                         <div class="form-group">
                             <label class="form-control-label" jhiTranslate="projectApp.financialProject.finishDate"
                                    for="field_finishDate">Finish Date</label>
@@ -80,40 +133,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="form-control-label"
-                                   jhiTranslate="projectApp.financialProject.financialProjectType"
-                                   for="field_financialProjectType">Financial Project Type</label>
-                            <select class="form-control" name="financialProjectType"
-                                    [(ngModel)]="financialProject.financialProjectType" id="field_financialProjectType">
-                                <option
-                                    value="CREDIT_ESTIMATES">{{'projectApp.FinancialProjectType.CREDIT_ESTIMATES' | translate}}</option>
-                                <option
-                                    value="AMOUNT_CONFIRMED">{{'projectApp.FinancialProjectType.AMOUNT_CONFIRMED' | translate}}</option>
-                                <option
-                                    value="RECEIVED_FROM_INSTITUTION">{{'projectApp.FinancialProjectType.RECEIVED_FROM_INSTITUTION' | translate}}</option>
-                                <option
-                                    value="RECEIVED_FROM_ORGANIZATION">{{'projectApp.FinancialProjectType.RECEIVED_FROM_ORGANIZATION' | translate}}</option>
-                                <option
-                                    value="RECEIVED_TOTAL_FOR_PROJECT">{{'projectApp.FinancialProjectType.RECEIVED_TOTAL_FOR_PROJECT' | translate}}</option>
-                                <option
-                                    value="SEND_TO_PROJECT_HAVE_CODE">{{'projectApp.FinancialProjectType.SEND_TO_PROJECT_HAVE_CODE' | translate}}</option>
-                                <option
-                                    value="SURPLUS_COST">{{'projectApp.FinancialProjectType.SURPLUS_COST' | translate}}</option>
-                                <option
-                                    value="CREDIT_REMAIN">{{'projectApp.FinancialProjectType.CREDIT_REMAIN' | translate}}</option>
-                                <option
-                                    value="BEFORE_CLEARING">{{'projectApp.FinancialProjectType.BEFORE_CLEARING' | translate}}</option>
-                                <option
-                                    value="IN_CLEARING">{{'projectApp.FinancialProjectType.IN_CLEARING' | translate}}</option>
-                                <option
-                                    value="FINAL_CLEARING">{{'projectApp.FinancialProjectType.FINAL_CLEARING' | translate}}</option>
-                                <option
-                                    value="DEBIT_TO_INSTITUTION">{{'projectApp.FinancialProjectType.DEBIT_TO_INSTITUTION' | translate}}</option>
-                            </select>
-                        </div>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -121,7 +140,7 @@
                             <label class="form-control-label" jhiTranslate="projectApp.financialProject.description"
                                    for="field_description">Description</label>
                             <textarea type="text" class="form-control" name="description" id="field_description"
-                                   [(ngModel)]="financialProject.description"></textarea>
+                                      [(ngModel)]="financialProject.description"></textarea>
                         </div>
                     </div>
                 </div>

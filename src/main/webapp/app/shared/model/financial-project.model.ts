@@ -15,6 +15,23 @@ export enum FinancialProjectType {
     DEBIT_TO_INSTITUTION = 'DEBIT_TO_INSTITUTION'
 }
 
+export class FinancialProjectTypeExist {
+    constructor(
+        public existCreditEstimates?: boolean,
+        public existBeforeClearing?: boolean,
+        public existAmountConfirmed?: boolean,
+        public existReceivedFromInstitution?: boolean,
+        public existReceivedFromOrganization?: boolean,
+        public existReceivedTotalForProject?: boolean,
+        public existSendToProjectHaveCode?: boolean,
+        public existSurplusCost?: boolean,
+        public existCreditRemain?: boolean,
+        public existInClearing?: boolean,
+        public existFinalClearing?: boolean,
+        public existDebitToInstitution?: boolean
+    ) {}
+}
+
 export interface IFinancialProject {
     id?: number;
     title?: string;

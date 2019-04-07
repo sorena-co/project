@@ -37,17 +37,11 @@ export class HomeComponent implements OnInit {
                 this.financialProjectService
                     .findByProjectAndType(project.id, this.FinancialProjectType[this.FinancialProjectType.AMOUNT_CONFIRMED])
                     .subscribe(financialProject => {
-                        project.amountConfirmed = financialProject.body.amount;
-                        if (!project.amountConfirmed) {
-                            project.amountConfirmed = 0;
-                        }
+                        project.amountConfirmed = financialProject.body && financialProject.body.amount ? financialProject.body.amount : 0;
                     });
 
                 this.financialProjectService.getCostOfProject(project.id).subscribe(financialProject => {
-                    project.totalCost = financialProject.body;
-                    if (!project.totalCost) {
-                        project.totalCost = 0;
-                    }
+                    project.totalCost = financialProject.body ? financialProject.body : 0;
                 });
             });
         });

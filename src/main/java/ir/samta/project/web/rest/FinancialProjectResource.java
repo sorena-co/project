@@ -4,6 +4,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 import ir.samta.project.domain.enumeration.FinancialProjectType;
 import ir.samta.project.service.FinancialProjectService;
 import ir.samta.project.service.dto.FinancialProjectDTO;
+import ir.samta.project.service.dto.FinancialProjectTypeExistDTO;
 import ir.samta.project.web.rest.errors.BadRequestAlertException;
 import ir.samta.project.web.rest.util.HeaderUtil;
 import ir.samta.project.web.rest.util.PaginationUtil;
@@ -151,5 +152,13 @@ public class FinancialProjectResource {
         return ResponseEntity.ok(costs);
     }
 
+    @GetMapping("/financial-projects/project/{projectId}/get-style")
+    public ResponseEntity<FinancialProjectTypeExistDTO> getStyle(
+        @PathVariable(value = "projectId") Long projectId
+    ) {
+        log.debug("REST request to get sum of cost FinancialProject By Project Id");
+        FinancialProjectTypeExistDTO style = financialProjectService.getStyle(projectId);
+        return ResponseEntity.ok(style);
+    }
 
 }

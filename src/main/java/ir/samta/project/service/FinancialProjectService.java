@@ -5,6 +5,7 @@ import ir.samta.project.domain.enumeration.FinancialProjectType;
 import ir.samta.project.repository.FinancialProjectRepository;
 import ir.samta.project.repository.search.FinancialProjectSearchRepository;
 import ir.samta.project.service.dto.FinancialProjectDTO;
+import ir.samta.project.service.dto.FinancialProjectTypeExistDTO;
 import ir.samta.project.service.mapper.FinancialProjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -116,5 +117,23 @@ public class FinancialProjectService {
         List<FinancialProjectType> type = new ArrayList<>();
         type.add(FinancialProjectType.SEND_TO_PROJECT_HAVE_CODE);
         return financialProjectRepository.getSumOfCostForProject(projectId, type);
+    }
+
+    public FinancialProjectTypeExistDTO getStyle(Long projectId) {
+        FinancialProjectTypeExistDTO result = new FinancialProjectTypeExistDTO();
+        result.setExistSurplusCost(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.SURPLUS_COST));
+        result.setExistSendToProjectHaveCode(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.SEND_TO_PROJECT_HAVE_CODE));
+        result.setExistReceivedTotalForProject(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.RECEIVED_TOTAL_FOR_PROJECT));
+        result.setExistReceivedFromOrganization(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.RECEIVED_FROM_ORGANIZATION));
+        result.setExistReceivedFromInstitution(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.RECEIVED_FROM_INSTITUTION));
+        result.setExistInClearing(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.IN_CLEARING));
+        result.setExistFinalClearing(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.FINAL_CLEARING));
+        result.setExistDebitToInstitution(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.DEBIT_TO_INSTITUTION));
+        result.setExistCreditRemain(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.CREDIT_REMAIN));
+        result.setExistCreditEstimates(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.CREDIT_ESTIMATES));
+        result.setExistBeforeClearing(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.BEFORE_CLEARING));
+        result.setExistAmountConfirmed(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.AMOUNT_CONFIRMED));
+
+        return result;
     }
 }

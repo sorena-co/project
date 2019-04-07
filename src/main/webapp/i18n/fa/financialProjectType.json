@@ -6,7 +6,7 @@
             "AMOUNT_CONFIRMED": "جمع کل اعتبارات مصوب",
             "RECEIVED_FROM_INSTITUTION": "واریز از موسسه به سازمان",
             "RECEIVED_FROM_ORGANIZATION": "واریز از سازمان به معاونت",
-            "RECEIVED_TOTAL_FOR_PROJECT": "دریافتی کل برای پروژه",
+            "RECEIVED_TOTAL_FOR_PROJECT": "دریافتی کل برای پروژه بدون کد",
             "SEND_TO_PROJECT_HAVE_CODE": "مبلغ هزینه شده برای پروژه کد دار",
             "SURPLUS_COST": "مازاد هزینه",
             "CREDIT_REMAIN": "مانده اعتبار پروژه در حساب معاونت",

@@ -6,9 +6,10 @@ import { map } from 'rxjs/operators';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
-import { IFinancialProject } from 'app/shared/model/financial-project.model';
+import { FinancialProjectTypeExist, IFinancialProject } from 'app/shared/model/financial-project.model';
 
 type EntityResponseType = HttpResponse<IFinancialProject>;
+type FinancialProjectTypeExistResponseType = HttpResponse<FinancialProjectTypeExist>;
 type NumberResponseType = HttpResponse<number>;
 type EntityArrayResponseType = HttpResponse<IFinancialProject[]>;
 
@@ -47,6 +48,12 @@ export class FinancialProjectService {
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
+    getStyleForType(projectId: number): Observable<FinancialProjectTypeExistResponseType> {
+        return this.http
+            .get<FinancialProjectTypeExist>(`${this.resourceUrl}/project/${projectId}/get-style`, { observe: 'response' })
+            .pipe(map((res: FinancialProjectTypeExistResponseType) => res));
+    }
+
     getCostOfProject(projectId: number): Observable<NumberResponseType> {
         return this.http
             .get<number>(`${this.resourceUrl}/cost/${projectId}`, { observe: 'response' })
@@ -56,7 +63,10 @@ export class FinancialProjectService {
     query(projectId: number, req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http
-            .get<IFinancialProject[]>(`${this.resourceUrl}/${projectId}/project`, { params: options, observe: 'response' })
+            .get<IFinancialProject[]>(`${this.resourceUrl}/${projectId}/project`, {
+                params: options,
+                observe: 'response'
+            })
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 

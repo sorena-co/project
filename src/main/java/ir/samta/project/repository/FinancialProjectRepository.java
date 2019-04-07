@@ -31,4 +31,6 @@ public interface FinancialProjectRepository extends JpaRepository<FinancialProje
     );
 
     Page<FinancialProject> findAllByProject_Id(Long projectId, Pageable pageable);
+
+    Boolean existsAllByProject_IdAndFinancialProjectType(Long projectId, FinancialProjectType type);
 }

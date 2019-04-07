@@ -11,7 +11,8 @@ import {
     FinancialProjectDeletePopupComponent,
     FinancialProjectDeleteDialogComponent,
     financialProjectRoute,
-    financialProjectPopupRoute
+    financialProjectPopupRoute,
+    ProjectTitleComponent
 } from './';
 
 const ENTITY_STATES = [...financialProjectRoute, ...financialProjectPopupRoute];
@@ -23,13 +24,15 @@ const ENTITY_STATES = [...financialProjectRoute, ...financialProjectPopupRoute];
         FinancialProjectDetailComponent,
         FinancialProjectUpdateComponent,
         FinancialProjectDeleteDialogComponent,
-        FinancialProjectDeletePopupComponent
+        FinancialProjectDeletePopupComponent,
+        ProjectTitleComponent
     ],
     entryComponents: [
         FinancialProjectComponent,
         FinancialProjectUpdateComponent,
         FinancialProjectDeleteDialogComponent,
-        FinancialProjectDeletePopupComponent
+        FinancialProjectDeletePopupComponent,
+        ProjectTitleComponent
     ],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

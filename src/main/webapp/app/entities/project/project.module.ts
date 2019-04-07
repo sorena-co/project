@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { JhiLanguageService } from 'ng-jhipster';
 import { JhiLanguageHelper } from 'app/core';
@@ -6,13 +6,14 @@ import { JhiLanguageHelper } from 'app/core';
 import { ProjectSharedModule } from 'app/shared';
 import {
     ProjectComponent,
-    ProjectDetailComponent,
-    ProjectUpdateComponent,
-    ProjectDeletePopupComponent,
     ProjectDeleteDialogComponent,
+    ProjectDeletePopupComponent,
+    ProjectDetailComponent,
+    projectPopupRoute,
     projectRoute,
-    projectPopupRoute
+    ProjectUpdateComponent
 } from './';
+import { ProjectTitleComponent } from 'app/entities/project/project-title.component';
 
 const ENTITY_STATES = [...projectRoute, ...projectPopupRoute];
 
@@ -23,9 +24,16 @@ const ENTITY_STATES = [...projectRoute, ...projectPopupRoute];
         ProjectDetailComponent,
         ProjectUpdateComponent,
         ProjectDeleteDialogComponent,
-        ProjectDeletePopupComponent
+        ProjectDeletePopupComponent,
+        ProjectTitleComponent
     ],
-    entryComponents: [ProjectComponent, ProjectUpdateComponent, ProjectDeleteDialogComponent, ProjectDeletePopupComponent],
+    entryComponents: [
+        ProjectComponent,
+        ProjectUpdateComponent,
+        ProjectDeleteDialogComponent,
+        ProjectDeletePopupComponent,
+        ProjectTitleComponent
+    ],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
