@@ -1,10 +1,10 @@
 package ir.samta.project.service.dto;
 
+import ir.samta.project.domain.Project;
 import ir.samta.project.domain.enumeration.ProjectType;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
@@ -32,6 +32,12 @@ public class ProjectDTO implements Serializable {
     private Instant startDate;
 
     private Instant finishDate;
+
+    private String code;
+
+    private Long parentProjectId;
+
+    private Long level;
 
     public Long getId() {
         return id;
@@ -127,4 +133,29 @@ public class ProjectDTO implements Serializable {
     public void setFinishDate(Instant finishDate) {
         this.finishDate = finishDate;
     }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Long getLevel() {
+        return level;
+    }
+
+    public void setLevel(Long level) {
+        this.level = level;
+    }
+
+    public Long getParentProjectId() {
+        return parentProjectId;
+    }
+
+    public void setParentProjectId(Long parentProjectId) {
+        this.parentProjectId = parentProjectId;
+    }
+
 }

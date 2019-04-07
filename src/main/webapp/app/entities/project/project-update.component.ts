@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_FORMAT, DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
-import { IProject } from 'app/shared/model/project.model';
+import { IProject, Project } from 'app/shared/model/project.model';
 import { ProjectService } from './project.service';
 import { User, UserService } from 'app/core';
 
@@ -20,6 +19,7 @@ export class ProjectUpdateComponent implements OnInit {
     startDate: string;
     finishDate: string;
     users: User[];
+    projects: Project[] = [];
 
     constructor(protected projectService: ProjectService, protected activatedRoute: ActivatedRoute, private userService: UserService) {}
 
@@ -32,6 +32,7 @@ export class ProjectUpdateComponent implements OnInit {
             this.finishDate = this.project.finishDate != null ? this.project.finishDate.format(DATE_FORMAT) : null;
         });
         this.userService.query().subscribe(value => (this.users = value.body));
+        this.projectService.query().subscribe(value => (this.projects = value.body));
     }
 
     previousState() {
@@ -40,13 +41,28 @@ export class ProjectUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        this.project.createDate = this.createDate != null ? moment(this.createDate, DATE_TIME_FORMAT) : null;
-        this.project.startDate = this.startDate != null ? moment(this.startDate, DATE_FORMAT) : null;
-        this.project.finishDate = this.finishDate != null ? moment(this.finishDate, DATE_FORMAT) : null;
-        if (this.project.id !== undefined) {
-            this.subscribeToSaveResponse(this.projectService.update(this.project));
+        if (!this.project.parentProjectId) {
+            this.project.level = 0;
+            this.project.createDate = this.createDate != null ? moment(this.createDate, DATE_TIME_FORMAT) : null;
+            this.project.startDate = this.startDate != null ? moment(this.startDate, DATE_FORMAT) : null;
+            this.project.finishDate = this.finishDate != null ? moment(this.finishDate, DATE_FORMAT) : null;
+            if (this.project.id !== undefined) {
+                this.subscribeToSaveResponse(this.projectService.update(this.project));
+            } else {
+                this.subscribeToSaveResponse(this.projectService.create(this.project));
+            }
         } else {
-            this.subscribeToSaveResponse(this.projectService.create(this.project));
+            this.projectService.find(this.project.parentProjectId).subscribe(value => {
+                this.project.level = value.body.level + 1;
+                this.project.createDate = this.createDate != null ? moment(this.createDate, DATE_TIME_FORMAT) : null;
+                this.project.startDate = this.startDate != null ? moment(this.startDate, DATE_FORMAT) : null;
+                this.project.finishDate = this.finishDate != null ? moment(this.finishDate, DATE_FORMAT) : null;
+                if (this.project.id !== undefined) {
+                    this.subscribeToSaveResponse(this.projectService.update(this.project));
+                } else {
+                    this.subscribeToSaveResponse(this.projectService.create(this.project));
+                }
+            });
         }
     }
 

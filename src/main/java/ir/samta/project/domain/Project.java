@@ -2,12 +2,12 @@ package ir.samta.project.domain;
 
 
 import ir.samta.project.domain.enumeration.ProjectType;
+import org.springframework.cloud.cloudfoundry.com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
@@ -54,6 +54,15 @@ public class Project implements Serializable {
         joinColumns = @JoinColumn(name = "projects_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
     private Set<User> users = new HashSet<>();
+
+    @Column(name = "code")
+    private String code;
+
+    @Column(name = "parent_project_id")
+    private Long parentProjectId;
+
+    @Column(name = "jhi_level")
+    private Long level;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -156,5 +165,29 @@ public class Project implements Serializable {
 
     public void setFinishDate(Instant finishDate) {
         this.finishDate = finishDate;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Long getLevel() {
+        return level;
+    }
+
+    public void setLevel(Long level) {
+        this.level = level;
+    }
+
+    public Long getParentProjectId() {
+        return parentProjectId;
+    }
+
+    public void setParentProjectId(Long parentProjectId) {
+        this.parentProjectId = parentProjectId;
     }
 }

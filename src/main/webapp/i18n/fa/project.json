@@ -23,6 +23,8 @@
             "title": "عنوان",
             "createDate": "تاریخ ایجاد",
             "users": "مدیران پروژه",
+            "parentProject": "پروژه بالاسری",
+            "code": "کد پروژه",
             "projectType": "نوع پروژه"
         }
     }

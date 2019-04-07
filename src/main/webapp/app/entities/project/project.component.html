@@ -30,7 +30,6 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="title"><span jhiTranslate="projectApp.project.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="createDate"><span jhiTranslate="projectApp.project.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="projectType"><span jhiTranslate="projectApp.project.projectType">Project Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
@@ -38,7 +37,6 @@
             <tbody>
             <tr *ngFor="let project of projects ;trackBy: trackId">
                 <td>{{project.title}}</td>
-                <td>{{project.createDate | date:'medium'}}</td>
                 <td jhiTranslate="{{'projectApp.ProjectType.' + project.projectType}}">{{project.projectType}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
