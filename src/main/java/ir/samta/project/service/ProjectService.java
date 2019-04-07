@@ -56,6 +56,7 @@ public class ProjectService {
         log.debug("Request to save Project : {}", projectDTO);
         Project project = projectMapper.toEntity(projectDTO);
         project.setCreateDate(Instant.now());
+
         project = projectRepository.save(project);
         FinancialProject financialProject = new FinancialProject();
         financialProject.setAmount(projectDTO.getAmountConfirmed());

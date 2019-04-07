@@ -2,6 +2,8 @@ package ir.samta.project.repository;
 
 import ir.samta.project.domain.FinancialProject;
 import ir.samta.project.domain.enumeration.FinancialProjectType;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -27,4 +29,6 @@ public interface FinancialProjectRepository extends JpaRepository<FinancialProje
         @Param("projectId") Long projectId,
         @Param("financialProjectTypes") List<FinancialProjectType> financialProjectTypes
     );
+
+    Page<FinancialProject> findAllByProject_Id(Long projectId, Pageable pageable);
 }

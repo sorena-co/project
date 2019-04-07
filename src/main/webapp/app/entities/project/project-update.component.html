@@ -6,6 +6,31 @@
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.financialProject.startDate"
+                                   for="field_startDate">Start Date</label>
+                            <div class="d-flex">
+                                <input id="field_startDate" type="datetime-local" class="form-control" name="startDate"
+                                       [(ngModel)]="startDate" placeholder="YYYY-MM-DD"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.financialProject.finishDate"
+                                   for="field_finishDate">Finish Date</label>
+                            <div class="d-flex">
+                                <input id="field_finishDate" type="datetime-local" class="form-control"
+                                       name="finishDate"
+                                       [(ngModel)]="finishDate" placeholder="YYYY-MM-DD"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-control-label" jhiTranslate="projectApp.project.title" for="field_title">Title</label>

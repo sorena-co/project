@@ -1,35 +1,43 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="project">
-            <h2><span jhiTranslate="projectApp.project.detail.title">Project</span> {{project.id}}</h2>
-            <hr>
             <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="projectApp.project.title">Title</span></dt>
-                <dd>
-                    <span>{{project.title}}</span>
-                </dd>
-                <dt><span jhiTranslate="projectApp.project.createDate">Create Date</span></dt>
-                <dd>
-                    <span>{{project.createDate}}</span>
-                </dd>
-                <dt><span jhiTranslate="projectApp.project.projectType">Project Type</span></dt>
-                <dd>
-                    <span jhiTranslate="{{'projectApp.ProjectType.' + project.projectType}}">{{project.projectType}}</span>
-                </dd>
-            </dl>
-
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
-
-            <button type="button"
-                    [routerLink]="['/project', project.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
+            <div class="card">
+                <div class="card-header">
+                    <h1><span jhiTranslate="projectApp.project.detail.title">Project</span> {{project.title}}</h1>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <a [href]="'#/project/' + project.id + '/financial-project'" class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 jhiTranslate="projectApp.project.home.financial"></h4>
+                                </div>
+                                <div class="card-body">
+                                    <h6>مبلغ قرار داد : {{project.amountConfirmed}}</h6>
+                                    <h6>هزینه شده : {{project.totalCost}}</h6>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 jhiTranslate="projectApp.project.home.technical"></h4>
+                                </div>
+                                <div class="card-body"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 jhiTranslate="projectApp.project.home.document"></h4>
+                                </div>
+                                <div class="card-body"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

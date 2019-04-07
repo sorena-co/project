@@ -81,10 +81,10 @@ public class FinancialProjectResource {
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of financialProjects in body
      */
-    @GetMapping("/financial-projects")
-    public ResponseEntity<List<FinancialProjectDTO>> getAllFinancialProjects(Pageable pageable) {
+    @GetMapping("/financial-projects/{projectId}/project")
+    public ResponseEntity<List<FinancialProjectDTO>> getAllFinancialProjects(@PathVariable Long projectId, Pageable pageable) {
         log.debug("REST request to get a page of FinancialProjects");
-        Page<FinancialProjectDTO> page = financialProjectService.findAll(pageable);
+        Page<FinancialProjectDTO> page = financialProjectService.findAll(projectId, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/financial-projects");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

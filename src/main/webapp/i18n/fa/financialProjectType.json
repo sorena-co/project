@@ -2,18 +2,18 @@
     "projectApp": {
         "FinancialProjectType": {
             "null": "",
-            "CREDIT_ESTIMATES": "CREDIT_ESTIMATES",
-            "AMOUNT_CONFIRMED": "AMOUNT_CONFIRMED",
-            "RECEIVED_FROM_INSTITUTION": "RECEIVED_FROM_INSTITUTION",
-            "RECEIVED_FROM_ORGANIZATION": "RECEIVED_FROM_ORGANIZATION",
-            "RECEIVED_TOTAL_FOR_PROJECT": "RECEIVED_TOTAL_FOR_PROJECT",
-            "SEND_TO_PROJECT_HAVE_CODE": "SEND_TO_PROJECT_HAVE_CODE",
-            "SURPLUS_COST": "SURPLUS_COST",
-            "CREDIT_REMAIN": "CREDIT_REMAIN",
-            "BEFORE_CLEARING": "BEFORE_CLEARING",
-            "IN_CLEARING": "IN_CLEARING",
-            "FINAL_CLEARING": "FINAL_CLEARING",
-            "DEBIT_TO_INSTITUTION": "DEBIT_TO_INSTITUTION"
+            "CREDIT_ESTIMATES": "مبلغ مصوب",
+            "AMOUNT_CONFIRMED": "جمع کل اعتبارات مصوب",
+            "RECEIVED_FROM_INSTITUTION": "واریز از موسسه به سازمان",
+            "RECEIVED_FROM_ORGANIZATION": "واریز از سازمان به معاونت",
+            "RECEIVED_TOTAL_FOR_PROJECT": "دریافتی کل برای پروژه",
+            "SEND_TO_PROJECT_HAVE_CODE": "مبلغ هزینه شده برای پروژه کد دار",
+            "SURPLUS_COST": "مازاد هزینه",
+            "CREDIT_REMAIN": "مانده اعتبار پروژه در حساب معاونت",
+            "BEFORE_CLEARING": "قبل از تسویه",
+            "IN_CLEARING": "در حال تسویه",
+            "FINAL_CLEARING": "تسویه شده",
+            "DEBIT_TO_INSTITUTION": "بدهی سازمان به موسسه"
         }
     }
 }

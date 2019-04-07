@@ -54,11 +54,17 @@ export class FinancialProjectDeletePopupComponent implements OnInit, OnDestroy {
                 this.ngbModalRef.componentInstance.financialProject = financialProject;
                 this.ngbModalRef.result.then(
                     result => {
-                        this.router.navigate(['/financial-project', { outlets: { popup: null } }]);
+                        this.router.navigate([
+                            '/project/' + financialProject.projectId + '/financial-project',
+                            { outlets: { popup: null } }
+                        ]);
                         this.ngbModalRef = null;
                     },
                     reason => {
-                        this.router.navigate(['/financial-project', { outlets: { popup: null } }]);
+                        this.router.navigate([
+                            '/project/' + financialProject.projectId + '/financial-project',
+                            { outlets: { popup: null } }
+                        ]);
                         this.ngbModalRef = null;
                     }
                 );

@@ -5,7 +5,11 @@
                 "title": "پروژه ها",
                 "createLabel": "تعریف پروژه",
                 "createOrEditLabel": "ویرایش پروژه",
-                "search": "جستجو"
+                "search": "جستجو",
+                "detail": "جزئیات پروژه",
+                "financial": "مالی",
+                "document": "اسناد",
+                "technical": "فنی"
             },
             "created": "پروژه جدید با موفقیت ایجاد شد.",
             "updated": "پروژه جدید با موفقیت ایجاد شد.",

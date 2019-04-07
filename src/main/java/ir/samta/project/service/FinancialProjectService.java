@@ -58,13 +58,14 @@ public class FinancialProjectService {
     /**
      * Get all the financialProjects.
      *
-     * @param pageable the pagination information
+     * @param projectId
+     * @param pageable  the pagination information
      * @return the list of entities
      */
     @Transactional(readOnly = true)
-    public Page<FinancialProjectDTO> findAll(Pageable pageable) {
+    public Page<FinancialProjectDTO> findAll(Long projectId, Pageable pageable) {
         log.debug("Request to get all FinancialProjects");
-        return financialProjectRepository.findAll(pageable)
+        return financialProjectRepository.findAllByProject_Id(projectId, pageable)
             .map(financialProjectMapper::toDto);
     }
 

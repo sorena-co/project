@@ -1,18 +1,17 @@
 package ir.samta.project.domain;
 
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import ir.samta.project.domain.enumeration.ProjectType;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.Instant;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
-import ir.samta.project.domain.enumeration.ProjectType;
 
 /**
  * A Project.
@@ -38,6 +37,14 @@ public class Project implements Serializable {
     private Instant createDate;
 
     @NotNull
+    @Column(name = "start_date", nullable = false)
+    private Instant startDate;
+
+    @NotNull
+    @Column(name = "finish_date", nullable = false)
+    private Instant finishDate;
+
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "project_type", nullable = false)
     private ProjectType projectType;
@@ -61,17 +68,21 @@ public class Project implements Serializable {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public Project title(String title) {
         this.title = title;
         return this;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public Instant getCreateDate() {
         return createDate;
+    }
+
+    public void setCreateDate(Instant createDate) {
+        this.createDate = createDate;
     }
 
     public Project createDate(Instant createDate) {
@@ -79,21 +90,17 @@ public class Project implements Serializable {
         return this;
     }
 
-    public void setCreateDate(Instant createDate) {
-        this.createDate = createDate;
-    }
-
     public ProjectType getProjectType() {
         return projectType;
+    }
+
+    public void setProjectType(ProjectType projectType) {
+        this.projectType = projectType;
     }
 
     public Project projectType(ProjectType projectType) {
         this.projectType = projectType;
         return this;
-    }
-
-    public void setProjectType(ProjectType projectType) {
-        this.projectType = projectType;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -133,5 +140,21 @@ public class Project implements Serializable {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    public Instant getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Instant startDate) {
+        this.startDate = startDate;
+    }
+
+    public Instant getFinishDate() {
+        return finishDate;
+    }
+
+    public void setFinishDate(Instant finishDate) {
+        this.finishDate = finishDate;
     }
 }

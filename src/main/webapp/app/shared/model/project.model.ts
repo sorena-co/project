@@ -11,7 +11,10 @@ export interface IProject {
     title?: string;
     users?: User[];
     createDate?: Moment;
+    startDate?: Moment;
+    finishDate?: Moment;
     amountConfirmed?: number;
+    totalCost?: number;
     projectType?: any | ProjectType;
 }
 
@@ -20,6 +23,8 @@ export class Project implements IProject {
         public id?: number,
         public title?: string,
         public createDate?: Moment,
+        public startDate?: Moment,
+        public finishDate?: Moment,
         public amountConfirmed?: number,
         public totalCost?: number,
         public projectType?: ProjectType

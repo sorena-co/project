@@ -5,6 +5,7 @@ import ir.samta.project.domain.enumeration.ProjectType;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -27,6 +28,10 @@ public class ProjectDTO implements Serializable {
     private Set<UserDTO> users = new HashSet<>();
 
     private Long amountConfirmed;
+
+    private Instant startDate;
+
+    private Instant finishDate;
 
     public Long getId() {
         return id;
@@ -105,5 +110,21 @@ public class ProjectDTO implements Serializable {
 
     public void setAmountConfirmed(Long amountConfirmed) {
         this.amountConfirmed = amountConfirmed;
+    }
+
+    public Instant getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Instant startDate) {
+        this.startDate = startDate;
+    }
+
+    public Instant getFinishDate() {
+        return finishDate;
+    }
+
+    public void setFinishDate(Instant finishDate) {
+        this.finishDate = finishDate;
     }
 }

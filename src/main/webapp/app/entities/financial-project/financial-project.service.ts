@@ -15,6 +15,7 @@ type EntityArrayResponseType = HttpResponse<IFinancialProject[]>;
 @Injectable({ providedIn: 'root' })
 export class FinancialProjectService {
     public resourceUrl = SERVER_API_URL + 'api/financial-projects';
+    public resourceProjectUrl = SERVER_API_URL + 'api/projects';
     public resourceSearchUrl = SERVER_API_URL + 'api/_search/financial-projects';
 
     constructor(protected http: HttpClient) {}
@@ -52,10 +53,10 @@ export class FinancialProjectService {
             .pipe(map((res: NumberResponseType) => res));
     }
 
-    query(req?: any): Observable<EntityArrayResponseType> {
+    query(projectId: number, req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http
-            .get<IFinancialProject[]>(this.resourceUrl, { params: options, observe: 'response' })
+            .get<IFinancialProject[]>(`${this.resourceUrl}/${projectId}/project`, { params: options, observe: 'response' })
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 

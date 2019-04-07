@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import * as moment from 'moment';
@@ -23,18 +23,22 @@ export class FinancialProjectUpdateComponent implements OnInit {
     registerDate: string;
     startDate: string;
     finishDate: string;
+    projectId: number;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected financialProjectService: FinancialProjectService,
         protected projectService: ProjectService,
         protected activatedRoute: ActivatedRoute
-    ) {}
+    ) {
+        this.projectId = Number(this.activatedRoute.snapshot.params['projectId']);
+    }
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ financialProject }) => {
             this.financialProject = financialProject;
+            this.financialProject.projectId = this.projectId;
             this.registerDate =
                 this.financialProject.registerDate != null ? this.financialProject.registerDate.format(DATE_TIME_FORMAT) : null;
             this.startDate = this.financialProject.startDate != null ? this.financialProject.startDate.format(DATE_TIME_FORMAT) : null;
