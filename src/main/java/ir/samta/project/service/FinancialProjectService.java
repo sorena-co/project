@@ -133,6 +133,9 @@ public class FinancialProjectService {
         result.setExistCreditEstimates(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.CREDIT_ESTIMATES));
         result.setExistBeforeClearing(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.BEFORE_CLEARING));
         result.setExistAmountConfirmed(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.AMOUNT_CONFIRMED));
+        result.setExistSellContractAmount(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.SELL_CONTRACT_AMOUNT));
+        result.setExistCreditApply(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.CREDIT_APPLY));
+        result.setExistSendToProjectNotHaveCode(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.SEND_TO_PROJECT_NOT_HAVE_CODE));
 
         return result;
     }

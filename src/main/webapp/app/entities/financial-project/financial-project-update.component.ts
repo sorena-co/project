@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
@@ -46,13 +45,9 @@ export class FinancialProjectUpdateComponent implements OnInit {
             this.finishDate = this.financialProject.finishDate != null ? this.financialProject.finishDate.format(DATE_FORMAT) : null;
         });
         this.financialProjectService.getStyleForType(this.projectId).subscribe(value => (this.financialProjectTypeExist = value.body));
-        this.projectService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IProject[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IProject[]>) => response.body)
-            )
-            .subscribe((res: IProject[]) => (this.projects = res), (res: HttpErrorResponse) => this.onError(res.message));
+        this.projectService.queryAll(0).subscribe(value => {
+            this.projects = value.body;
+        });
     }
 
     previousState() {

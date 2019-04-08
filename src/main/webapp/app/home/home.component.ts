@@ -30,7 +30,12 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         this.accountService.identity().then((account: Account) => {
             this.account = account;
+            this.loadProject();
         });
+        this.registerAuthenticationSuccess();
+    }
+
+    loadProject() {
         this.projectService.query().subscribe(value => {
             this.projects = value.body;
             this.projects.forEach(project => {
@@ -45,13 +50,13 @@ export class HomeComponent implements OnInit {
                 });
             });
         });
-        this.registerAuthenticationSuccess();
     }
 
     registerAuthenticationSuccess() {
         this.eventManager.subscribe('authenticationSuccess', message => {
             this.accountService.identity().then(account => {
                 this.account = account;
+                this.loadProject();
             });
         });
     }

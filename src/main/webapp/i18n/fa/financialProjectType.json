@@ -3,17 +3,20 @@
         "FinancialProjectType": {
             "null": "",
             "CREDIT_ESTIMATES": "مبلغ مصوب",
+            "SELL_CONTRACT_AMOUNT": "مبلغ قرارداد",
             "AMOUNT_CONFIRMED": "جمع کل اعتبارات مصوب",
             "RECEIVED_FROM_INSTITUTION": "واریز از موسسه به سازمان",
             "RECEIVED_FROM_ORGANIZATION": "واریز از سازمان به معاونت",
             "RECEIVED_TOTAL_FOR_PROJECT": "دریافتی کل برای پروژه بدون کد",
             "SEND_TO_PROJECT_HAVE_CODE": "مبلغ هزینه شده برای پروژه کد دار",
+            "SEND_TO_PROJECT_NOT_HAVE_CODE": "مبلغ هزینه شده برای پروژه بدون کد",
             "SURPLUS_COST": "مازاد هزینه",
             "CREDIT_REMAIN": "مانده اعتبار پروژه در حساب معاونت",
             "BEFORE_CLEARING": "قبل از تسویه",
             "IN_CLEARING": "در حال تسویه",
             "FINAL_CLEARING": "تسویه شده",
-            "DEBIT_TO_INSTITUTION": "بدهی سازمان به موسسه"
+            "DEBIT_TO_INSTITUTION": "بدهی سازمان به موسسه",
+            "CREDIT_APPLY": "اعتبار تخصیصی"
         }
     }
 }

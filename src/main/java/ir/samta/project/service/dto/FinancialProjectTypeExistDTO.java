@@ -2,17 +2,20 @@ package ir.samta.project.service.dto;
 
 public class FinancialProjectTypeExistDTO {
     private Boolean existCreditEstimates;
+    private Boolean existSellContractAmount;
     private Boolean existBeforeClearing;
     private Boolean existAmountConfirmed;
     private Boolean existReceivedFromInstitution;
     private Boolean existReceivedFromOrganization;
     private Boolean existReceivedTotalForProject;
     private Boolean existSendToProjectHaveCode;
+    private Boolean existSendToProjectNotHaveCode;
     private Boolean existSurplusCost;
     private Boolean existCreditRemain;
     private Boolean existInClearing;
     private Boolean existFinalClearing;
     private Boolean existDebitToInstitution;
+    private Boolean existCreditApply;
 
     public Boolean getExistCreditEstimates() {
         return existCreditEstimates;
@@ -108,5 +111,29 @@ public class FinancialProjectTypeExistDTO {
 
     public void setExistDebitToInstitution(Boolean existDebitToInstitution) {
         this.existDebitToInstitution = existDebitToInstitution;
+    }
+
+    public Boolean getExistSellContractAmount() {
+        return existSellContractAmount;
+    }
+
+    public void setExistSellContractAmount(Boolean existSellContractAmount) {
+        this.existSellContractAmount = existSellContractAmount;
+    }
+
+    public Boolean getExistCreditApply() {
+        return existCreditApply;
+    }
+
+    public void setExistCreditApply(Boolean existCreditApply) {
+        this.existCreditApply = existCreditApply;
+    }
+
+    public Boolean getExistSendToProjectNotHaveCode() {
+        return existSendToProjectNotHaveCode;
+    }
+
+    public void setExistSendToProjectNotHaveCode(Boolean existSendToProjectNotHaveCode) {
+        this.existSendToProjectNotHaveCode = existSendToProjectNotHaveCode;
     }
 }

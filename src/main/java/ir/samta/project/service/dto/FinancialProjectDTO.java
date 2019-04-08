@@ -1,8 +1,10 @@
 package ir.samta.project.service.dto;
-import java.time.ZonedDateTime;
-import java.io.Serializable;
-import java.util.Objects;
+
 import ir.samta.project.domain.enumeration.FinancialProjectType;
+
+import java.io.Serializable;
+import java.time.ZonedDateTime;
+import java.util.Objects;
 
 /**
  * A DTO for the FinancialProject entity.
@@ -16,6 +18,8 @@ public class FinancialProjectDTO implements Serializable {
     private String code;
 
     private String name;
+
+    private String factorNo;
 
     private String sellContractNo;
 
@@ -31,10 +35,11 @@ public class FinancialProjectDTO implements Serializable {
 
     private FinancialProjectType financialProjectType;
 
-
     private Long projectId;
 
     private String projectTitle;
+
+    private Long getCreditProjectId;
 
     public Long getId() {
         return id;
@@ -178,5 +183,21 @@ public class FinancialProjectDTO implements Serializable {
             ", project=" + getProjectId() +
             ", project='" + getProjectTitle() + "'" +
             "}";
+    }
+
+    public String getFactorNo() {
+        return factorNo;
+    }
+
+    public void setFactorNo(String factorNo) {
+        this.factorNo = factorNo;
+    }
+
+    public Long getGetCreditProjectId() {
+        return getCreditProjectId;
+    }
+
+    public void setGetCreditProjectId(Long getCreditProjectId) {
+        this.getCreditProjectId = getCreditProjectId;
     }
 }

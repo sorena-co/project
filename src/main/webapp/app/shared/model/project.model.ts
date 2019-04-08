@@ -16,6 +16,8 @@ export interface IProject {
     finishDate?: Moment;
     amountConfirmed?: number;
     totalCost?: number;
+    creditEstimates?: number;
+    sellContractAmount?: number;
     parentProjectId?: number;
     level?: number;
     projectType?: any | ProjectType;
@@ -31,6 +33,8 @@ export class Project implements IProject {
         public finishDate?: Moment,
         public amountConfirmed?: number,
         public totalCost?: number,
+        public creditEstimates?: number,
+        public sellContractAmount?: number,
         public parentProjectId?: number,
         public level?: number,
         public projectType?: ProjectType

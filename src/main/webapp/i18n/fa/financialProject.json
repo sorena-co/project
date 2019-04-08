@@ -26,7 +26,9 @@
             "finishDate": "تاریخ پایان",
             "description": "توضیحات",
             "financialProjectType": "نوع",
-            "project": "پروژه"
+            "project": "پروژه",
+            "factorNo": "شماره فاکتور",
+            "getCreditProjectId": "اعتبار دریافتی از پروژه"
         }
     }
 }

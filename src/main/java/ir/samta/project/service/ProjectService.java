@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
@@ -119,5 +120,9 @@ public class ProjectService {
         log.debug("Request to search for a page of Projects for query {}", query);
         return projectSearchRepository.search(queryStringQuery(query), pageable)
             .map(projectMapper::toDto);
+    }
+
+    public List<ProjectDTO> findAllWithOutAccess(Long level) {
+        return projectMapper.toDto(projectRepository.findAllByLevel(level));
     }
 }
