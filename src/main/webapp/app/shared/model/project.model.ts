@@ -18,6 +18,7 @@ export interface IProject {
     totalCost?: number;
     creditEstimates?: number;
     sellContractAmount?: number;
+    creditApply?: number;
     parentProjectId?: number;
     level?: number;
     projectType?: any | ProjectType;
@@ -35,6 +36,7 @@ export class Project implements IProject {
         public totalCost?: number,
         public creditEstimates?: number,
         public sellContractAmount?: number,
+        public creditApply?: number,
         public parentProjectId?: number,
         public level?: number,
         public projectType?: ProjectType

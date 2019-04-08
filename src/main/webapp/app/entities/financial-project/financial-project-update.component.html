@@ -31,21 +31,21 @@
                                 <option
                                     [ngStyle]="{'color': financialProjectTypeExist.existReceivedFromOrganization?'green':'red'}"
                                     value="RECEIVED_FROM_ORGANIZATION">{{'projectApp.FinancialProjectType.RECEIVED_FROM_ORGANIZATION' | translate}}</option>
-                                <option
+                           <!--     <option
                                     [ngStyle]="{'color': financialProjectTypeExist.existReceivedTotalForProject?'green':'red'}"
-                                    value="RECEIVED_TOTAL_FOR_PROJECT">{{'projectApp.FinancialProjectType.RECEIVED_TOTAL_FOR_PROJECT' | translate}}</option>
+                                    value="RECEIVED_TOTAL_FOR_PROJECT">{{'projectApp.FinancialProjectType.RECEIVED_TOTAL_FOR_PROJECT' | translate}}</option>-->
                                 <option
                                     [ngStyle]="{'color': financialProjectTypeExist.existSendToProjectHaveCode?'green':'red'}"
                                     value="SEND_TO_PROJECT_HAVE_CODE">{{'projectApp.FinancialProjectType.SEND_TO_PROJECT_HAVE_CODE' | translate}}</option>
                                 <option
                                     [ngStyle]="{'color': financialProjectTypeExist.existSendToProjectNotHaveCode?'green':'red'}"
                                     value="SEND_TO_PROJECT_NOT_HAVE_CODE">{{'projectApp.FinancialProjectType.SEND_TO_PROJECT_NOT_HAVE_CODE' | translate}}</option>
-                                <option
+                               <!-- <option
                                     [ngStyle]="{'color': financialProjectTypeExist.existSurplusCost?'green':'red'}"
                                     value="SURPLUS_COST">{{'projectApp.FinancialProjectType.SURPLUS_COST' | translate}}</option>
                                 <option
                                     [ngStyle]="{'color': financialProjectTypeExist.existCreditRemain?'green':'red'}"
-                                    value="CREDIT_REMAIN">{{'projectApp.FinancialProjectType.CREDIT_REMAIN' | translate}}</option>
+                                    value="CREDIT_REMAIN">{{'projectApp.FinancialProjectType.CREDIT_REMAIN' | translate}}</option>-->
                                 <option
                                     [ngStyle]="{'color': financialProjectTypeExist.existBeforeClearing?'green':'red'}"
                                     value="BEFORE_CLEARING">{{'projectApp.FinancialProjectType.BEFORE_CLEARING' | translate}}</option>
@@ -55,9 +55,9 @@
                                 <option
                                     [ngStyle]="{'color': financialProjectTypeExist.existFinalClearing?'green':'red'}"
                                     value="FINAL_CLEARING">{{'projectApp.FinancialProjectType.FINAL_CLEARING' | translate}}</option>
-                                <option
+                                <!--<option
                                     [ngStyle]="{'color': financialProjectTypeExist.existDebitToInstitution?'green':'red'}"
-                                    value="DEBIT_TO_INSTITUTION">{{'projectApp.FinancialProjectType.DEBIT_TO_INSTITUTION' | translate}}</option>
+                                    value="DEBIT_TO_INSTITUTION">{{'projectApp.FinancialProjectType.DEBIT_TO_INSTITUTION' | translate}}</option>-->
                                 <option
                                     [ngStyle]="{'color': financialProjectTypeExist.existCreditApply?'green':'red'}"
                                     value="CREDIT_APPLY">{{'projectApp.FinancialProjectType.CREDIT_APPLY' | translate}}</option>
