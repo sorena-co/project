@@ -4,11 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 
-import { IFinancialProject } from 'app/shared/model/financial-project.model';
+import { FinancialProject, IFinancialProject } from 'app/shared/model/financial-project.model';
 import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { FinancialProjectService } from './financial-project.service';
+import { ProjectService } from 'app/entities/project';
 
 @Component({
     selector: 'jhi-financial-project',
@@ -38,7 +39,8 @@ export class FinancialProjectComponent implements OnInit, OnDestroy {
         protected accountService: AccountService,
         protected activatedRoute: ActivatedRoute,
         protected router: Router,
-        protected eventManager: JhiEventManager
+        protected eventManager: JhiEventManager,
+        protected projectService: ProjectService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -162,9 +164,20 @@ export class FinancialProjectComponent implements OnInit, OnDestroy {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.financialProjects = data;
+        this.financialProjects.forEach(value => {
+            if (value.getCreditProjectId) {
+                this.projectService.find(value.getCreditProjectId).subscribe(projectRes => {
+                    value.getCreditProjectTitle = projectRes.body.title;
+                });
+            }
+        });
     }
 
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    editFinancialProject(item: FinancialProject) {
+        this.financialProjectService.update(item).subscribe(value => console.log(value));
     }
 }

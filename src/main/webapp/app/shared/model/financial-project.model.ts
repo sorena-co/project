@@ -54,6 +54,7 @@ export interface IFinancialProject {
     projectTitle?: string;
     projectId?: number;
     getCreditProjectId?: number;
+    getCreditProjectTitle?: string;
 }
 
 export class FinancialProject implements IFinancialProject {

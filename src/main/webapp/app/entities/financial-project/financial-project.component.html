@@ -16,6 +16,7 @@
         </button>
     </h2>
     <jhi-alert></jhi-alert>
+    <jhi-alert-error></jhi-alert-error>
     <div class="row">
         <div class="col-sm-12">
             <form name="searchForm" class="form-inline">
@@ -35,60 +36,89 @@
     </div>
     <br/>
     <div class="table-responsive" *ngIf="financialProjects">
-        <table class="table table-striped">
-            <thead>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-                <th jhiSortBy="title"><span jhiTranslate="projectApp.financialProject.title">Title</span>
-                    <fa-icon [icon]="'sort'"></fa-icon>
-                </th>
-                <th jhiSortBy="code"><span jhiTranslate="projectApp.financialProject.code">Code</span>
-                    <fa-icon [icon]="'sort'"></fa-icon>
-                </th>
-                <th jhiSortBy="name"><span jhiTranslate="projectApp.financialProject.name">Name</span>
-                    <fa-icon [icon]="'sort'"></fa-icon>
-                </th>
-                <th jhiSortBy="sellContractNo"><span jhiTranslate="projectApp.financialProject.sellContractNo">Sell Contract No</span>
+                <th jhiSortBy="financialProjectType"><span
+                    jhiTranslate="projectApp.financialProject.financialProjectType">Financial Project Type</span>
                     <fa-icon [icon]="'sort'"></fa-icon>
                 </th>
                 <th jhiSortBy="amount"><span jhiTranslate="projectApp.financialProject.amount">Amount</span>
                     <fa-icon [icon]="'sort'"></fa-icon>
                 </th>
-                <th jhiSortBy="financialProjectType"><span
-                    jhiTranslate="projectApp.financialProject.financialProjectType">Financial Project Type</span>
+                <th jhiSortBy="code"><span jhiTranslate="projectApp.financialProject.code">Code</span>
                     <fa-icon [icon]="'sort'"></fa-icon>
                 </th>
-                <th></th>
+                <th jhiSortBy="registerDate"><span jhiTranslate="projectApp.financialProject.registerDate">Title</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th><span jhiTranslate="projectApp.financialProject.getCreditProjectId">Name</span>
+                </th>
+                <th jhiSortBy="sellContractNo"><span jhiTranslate="projectApp.financialProject.sellContractNo">Sell Contract No</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="factorNo"><span
+                    jhiTranslate="projectApp.financialProject.factorNo">Sell Contract No</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                </th>
+                <th>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                </th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let financialProject of financialProjects ;trackBy: trackId">
-                <td>{{financialProject.title}}</td>
+                <td style="max-width: 150px" jhiTranslate="{{'projectApp.FinancialProjectType.' + financialProject.financialProjectType}}">{{financialProject.financialProjectType}}</td>
+
+                <td>
+                    <input style="max-width: 150px" type="number" class="form-control" name="amount" id="field_amount"
+                           [(ngModel)]="financialProject.amount"/>
+                </td>
+                <td>
+                    <input style="max-width: 150px" type="text" class="form-control" name="code" id="field_code"
+                           [(ngModel)]="financialProject.code"/>
+                </td>
+                <td>{{financialProject.registerDate | date}}</td>
+                <td>{{financialProject.getCreditProjectTitle}}</td>
+                <td>
+                    <input style="max-width: 150px" type="text" class="form-control" name="sellContractNo" id="field_sellContractNo"
+                           [(ngModel)]="financialProject.sellContractNo"/>
+                </td>
+                <td>
+                    <input style="max-width: 150px" type="text" class="form-control" name="factorNo" id="field_factorNo"
+                           [(ngModel)]="financialProject.factorNo"/>
+                </td>
+                <!--<td>{{financialProject.amount}}</td>
                 <td>{{financialProject.code}}</td>
-                <td>{{financialProject.name}}</td>
+                <td>{{financialProject.registerDate | date}}</td>
+                <td>{{financialProject.getCreditProjectTitle}}</td>
                 <td>{{financialProject.sellContractNo}}</td>
-                <td>{{financialProject.amount}}</td>
-                <td jhiTranslate="{{'projectApp.FinancialProjectType.' + financialProject.financialProjectType}}">{{financialProject.financialProjectType}}</td>
+                <td>{{financialProject.factorNo}}</td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/project',projectId,'financial-project', financialProject.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
+                        <!--<button type="button"
                                 [routerLink]="['/project',projectId,'financial-project', financialProject.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>-->
+                        <button type="button"
+                                (click)="editFinancialProject(financialProject)"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
                         </button>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['/','project',projectId,'financial-project', { outlets: { popup: financialProject.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>
                     </div>
                 </td>
