@@ -1,0 +1,84 @@
+<div>
+    <div class="row">
+
+    </div>
+    <h2 id="page-heading">
+        <div class="col-md-12">
+            <jhi-project-title [projectId]="projectId"></jhi-project-title>
+        </div>
+        <span jhiTranslate="projectApp.financialProject.home.title">Financial Projects</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-financial-project"
+                [routerLink]="['/project',projectId,'financial-project','new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span class="hidden-sm-down" jhiTranslate="projectApp.financialProject.home.createLabel">
+            Create new Financial Project
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <jhi-alert-error></jhi-alert-error>
+    <br/>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                <th>
+                    <span jhiTranslate="projectApp.FinancialProjectType.CREDIT_ESTIMATES">Financial Project Type</span>
+                </th>
+                <th>
+                    <span
+                        jhiTranslate="projectApp.FinancialProjectType.SELL_CONTRACT_AMOUNT">Financial Project Type</span>
+                </th>
+                <th>
+                    <span jhiTranslate="projectApp.FinancialProjectType.AMOUNT_CONFIRMED_TOTAL">Financial Project Type</span>
+                </th>
+                <th>
+                    <span jhiTranslate="projectApp.FinancialProjectType.RECEIVED_FROM_INSTITUTION">Financial Project Type</span>
+                </th>
+                <th>
+                    <span jhiTranslate="projectApp.FinancialProjectType.RECEIVED_FROM_ORGANIZATION">Financial Project Type</span>
+                </th>
+                <th>
+                    <span jhiTranslate="projectApp.FinancialProjectType.SEND_TO_PROJECT_HAVE_CODE">Financial Project Type</span>
+                </th>
+                <th>
+                    <span jhiTranslate="projectApp.FinancialProjectType.SEND_TO_PROJECT_NOT_HAVE_CODE">Financial Project Type</span>
+                </th>
+                <th>
+                    <span jhiTranslate="projectApp.FinancialProjectType.CREDIT_APPLY">Financial Project Type</span>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td style="cursor: pointer"
+                    (click)="navigateToDetail('CREDIT_ESTIMATES')">{{financialProjectMain.creditEstimatesAmount}}</td>
+                <td style="cursor: pointer"
+                    (click)="navigateToDetail('SELL_CONTRACT_AMOUNT')">{{financialProjectMain.sellContractAmount}}</td>
+                <td style="cursor: pointer"
+                    (click)="navigateToDetail('AMOUNT_CONFIRMED')">{{financialProjectMain.amountConfirmed}}</td>
+                <td style="cursor: pointer"
+                    (click)="navigateToDetail('RECEIVED_FROM_INSTITUTION')">{{financialProjectMain.receivedFromInstitution}}</td>
+                <td style="cursor: pointer"
+                    (click)="navigateToDetail('RECEIVED_FROM_ORGANIZATION')">{{financialProjectMain.receivedFromOrganization}}</td>
+                <td style="cursor: pointer"
+                    (click)="navigateToDetail('SEND_TO_PROJECT_HAVE_CODE')">{{financialProjectMain.sendToProjectHaveCode}}</td>
+                <td style="cursor: pointer"
+                    (click)="navigateToDetail('SEND_TO_PROJECT_NOT_HAVE_CODE')">{{financialProjectMain.sendToProjectNotHaveCode}}</td>
+                <td style="cursor: pointer"
+                    (click)="navigateToDetail('CREDIT_APPLY')">{{financialProjectMain.creditApply}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Pager is not implemented yet, so this is normal pagination instead -->
+    <div *ngIf="financialProjects && financialProjects.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                            [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

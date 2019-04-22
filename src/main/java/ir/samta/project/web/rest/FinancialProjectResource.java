@@ -4,6 +4,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 import ir.samta.project.domain.enumeration.FinancialProjectType;
 import ir.samta.project.service.FinancialProjectService;
 import ir.samta.project.service.dto.FinancialProjectDTO;
+import ir.samta.project.service.dto.FinancialProjectMainDTO;
 import ir.samta.project.service.dto.FinancialProjectTypeExistDTO;
 import ir.samta.project.web.rest.errors.BadRequestAlertException;
 import ir.samta.project.web.rest.util.HeaderUtil;
@@ -83,9 +84,12 @@ public class FinancialProjectResource {
      * @return the ResponseEntity with status 200 (OK) and the list of financialProjects in body
      */
     @GetMapping("/financial-projects/{projectId}/project")
-    public ResponseEntity<List<FinancialProjectDTO>> getAllFinancialProjects(@PathVariable Long projectId, Pageable pageable) {
+    public ResponseEntity<List<FinancialProjectDTO>> getAllFinancialProjects(
+        @PathVariable Long projectId,
+        @RequestParam(value = "type") FinancialProjectType type,
+        Pageable pageable) {
         log.debug("REST request to get a page of FinancialProjects");
-        Page<FinancialProjectDTO> page = financialProjectService.findAll(projectId, pageable);
+        Page<FinancialProjectDTO> page = financialProjectService.findAll(projectId, type, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/financial-projects");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -159,6 +163,15 @@ public class FinancialProjectResource {
         log.debug("REST request to get sum of cost FinancialProject By Project Id");
         FinancialProjectTypeExistDTO style = financialProjectService.getStyle(projectId);
         return ResponseEntity.ok(style);
+    }
+
+    @GetMapping("/financial-projects/project/{projectId}/get-main")
+    public ResponseEntity<FinancialProjectMainDTO> getMainFinancialProject(
+        @PathVariable(value = "projectId") Long projectId
+    ) {
+        log.debug("REST request to get sum of cost FinancialProject By Project Id");
+        FinancialProjectMainDTO main = financialProjectService.getMainFinancialProject(projectId);
+        return ResponseEntity.ok(main);
     }
 
 }

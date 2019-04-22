@@ -30,7 +30,14 @@ public interface FinancialProjectRepository extends JpaRepository<FinancialProje
         @Param("financialProjectTypes") List<FinancialProjectType> financialProjectTypes
     );
 
-    Page<FinancialProject> findAllByProject_Id(Long projectId, Pageable pageable);
+    Page<FinancialProject> findAllByProject_IdAndFinancialProjectType(Long projectId, FinancialProjectType type, Pageable pageable);
 
     Boolean existsAllByProject_IdAndFinancialProjectType(Long projectId, FinancialProjectType type);
+
+    @Query(
+        "select sum(financialProject.amount) from FinancialProject financialProject " +
+            "inner join financialProject.project project " +
+            "where project.id = :projectId and financialProject.financialProjectType=:type  "
+    )
+    Long getMainFinancialProject(@Param("projectId") Long projectId, @Param("type") FinancialProjectType type);
 }

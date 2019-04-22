@@ -5,6 +5,7 @@ import ir.samta.project.domain.enumeration.FinancialProjectType;
 import ir.samta.project.repository.FinancialProjectRepository;
 import ir.samta.project.repository.search.FinancialProjectSearchRepository;
 import ir.samta.project.service.dto.FinancialProjectDTO;
+import ir.samta.project.service.dto.FinancialProjectMainDTO;
 import ir.samta.project.service.dto.FinancialProjectTypeExistDTO;
 import ir.samta.project.service.mapper.FinancialProjectMapper;
 import org.slf4j.Logger;
@@ -60,13 +61,14 @@ public class FinancialProjectService {
      * Get all the financialProjects.
      *
      * @param projectId
+     * @param type
      * @param pageable  the pagination information
      * @return the list of entities
      */
     @Transactional(readOnly = true)
-    public Page<FinancialProjectDTO> findAll(Long projectId, Pageable pageable) {
+    public Page<FinancialProjectDTO> findAll(Long projectId, FinancialProjectType type, Pageable pageable) {
         log.debug("Request to get all FinancialProjects");
-        return financialProjectRepository.findAllByProject_Id(projectId, pageable)
+        return financialProjectRepository.findAllByProject_IdAndFinancialProjectType(projectId, type, pageable)
             .map(financialProjectMapper::toDto);
     }
 
@@ -137,6 +139,19 @@ public class FinancialProjectService {
         result.setExistCreditApply(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.CREDIT_APPLY));
         result.setExistSendToProjectNotHaveCode(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.SEND_TO_PROJECT_NOT_HAVE_CODE));
 
+        return result;
+    }
+
+    public FinancialProjectMainDTO getMainFinancialProject(Long projectId) {
+        FinancialProjectMainDTO result = new FinancialProjectMainDTO();
+        result.setAmountConfirmed(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.AMOUNT_CONFIRMED));
+        result.setSendToProjectNotHaveCode(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.SEND_TO_PROJECT_NOT_HAVE_CODE));
+        result.setSendToProjectHaveCode(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.SEND_TO_PROJECT_HAVE_CODE));
+        result.setSellContractAmount(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.SELL_CONTRACT_AMOUNT));
+        result.setReceivedFromOrganization(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.RECEIVED_FROM_ORGANIZATION));
+        result.setReceivedFromInstitution(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.RECEIVED_FROM_INSTITUTION));
+        result.setCreditEstimatesAmount(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.CREDIT_ESTIMATES));
+        result.setCreditApply(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.CREDIT_APPLY));
         return result;
     }
 }

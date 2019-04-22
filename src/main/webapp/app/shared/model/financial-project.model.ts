@@ -37,6 +37,18 @@ export class FinancialProjectTypeExist {
         public existCreditApply?: boolean
     ) {}
 }
+export class FinancialProjectMain {
+    constructor(
+        public creditEstimatesAmount?: number,
+        public sellContractAmount?: number,
+        public amountConfirmed?: number,
+        public receivedFromInstitution?: number,
+        public receivedFromOrganization?: number,
+        public sendToProjectHaveCode?: number,
+        public sendToProjectNotHaveCode?: number,
+        public creditApply?: number
+    ) {}
+}
 
 export interface IFinancialProject {
     id?: number;
@@ -53,6 +65,7 @@ export interface IFinancialProject {
     financialProjectType?: FinancialProjectType;
     projectTitle?: string;
     projectId?: number;
+    yearConfirmed?: number;
     getCreditProjectId?: number;
     getCreditProjectTitle?: string;
 }
@@ -73,6 +86,7 @@ export class FinancialProject implements IFinancialProject {
         public financialProjectType?: FinancialProjectType,
         public projectTitle?: string,
         public projectId?: number,
+        public yearConfirmed?: number,
         public getCreditProjectId?: number
     ) {}
 }

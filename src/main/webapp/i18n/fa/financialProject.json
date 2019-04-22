@@ -28,7 +28,8 @@
             "financialProjectType": "نوع",
             "project": "پروژه",
             "factorNo": "شماره فاکتور",
-            "getCreditProjectId": "اعتبار دریافتی از پروژه"
+            "getCreditProjectId": "اعتبار دریافتی از پروژه",
+            "yearConfirmed": "سال مصوب"
         }
     }
 }

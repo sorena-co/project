@@ -12,6 +12,7 @@ import { FinancialProjectDetailComponent } from './financial-project-detail.comp
 import { FinancialProjectUpdateComponent } from './financial-project-update.component';
 import { FinancialProjectDeletePopupComponent } from './financial-project-delete-dialog.component';
 import { IFinancialProject } from 'app/shared/model/financial-project.model';
+import { FinancialProjectMainComponent } from 'app/entities/financial-project/financial-project-main.component';
 
 @Injectable({ providedIn: 'root' })
 export class FinancialProjectResolve implements Resolve<IFinancialProject> {
@@ -31,8 +32,21 @@ export class FinancialProjectResolve implements Resolve<IFinancialProject> {
 
 export const financialProjectRoute: Routes = [
     {
-        path: '',
+        path: 'details-of-main/:type',
         component: FinancialProjectComponent,
+        resolve: {
+            pagingParams: JhiResolvePagingParams
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            defaultSort: 'id,asc',
+            pageTitle: 'projectApp.financialProject.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: '',
+        component: FinancialProjectMainComponent,
         resolve: {
             pagingParams: JhiResolvePagingParams
         },

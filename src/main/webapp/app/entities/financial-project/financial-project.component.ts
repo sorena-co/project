@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 
-import { FinancialProject, IFinancialProject } from 'app/shared/model/financial-project.model';
+import { FinancialProject, FinancialProjectType, IFinancialProject } from 'app/shared/model/financial-project.model';
 import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
@@ -31,6 +31,8 @@ export class FinancialProjectComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
     projectId: number;
+    type: any;
+    FinancialProjectType = FinancialProjectType;
 
     constructor(
         protected financialProjectService: FinancialProjectService,
@@ -54,6 +56,7 @@ export class FinancialProjectComponent implements OnInit, OnDestroy {
                 ? this.activatedRoute.snapshot.params['search']
                 : '';
         this.projectId = Number(this.activatedRoute.snapshot.params['projectId']);
+        this.type = this.activatedRoute.snapshot.params['type'];
     }
 
     loadAll() {
@@ -61,6 +64,7 @@ export class FinancialProjectComponent implements OnInit, OnDestroy {
             this.financialProjectService
                 .search({
                     page: this.page - 1,
+                    type: this.type,
                     query: this.currentSearch,
                     size: this.itemsPerPage,
                     sort: this.sort()
@@ -74,6 +78,7 @@ export class FinancialProjectComponent implements OnInit, OnDestroy {
         this.financialProjectService
             .query(this.projectId, {
                 page: this.page - 1,
+                type: this.type,
                 size: this.itemsPerPage,
                 sort: this.sort()
             })
@@ -91,7 +96,7 @@ export class FinancialProjectComponent implements OnInit, OnDestroy {
     }
 
     transition() {
-        this.router.navigate(['/project/' + this.projectId + '/financial-project'], {
+        this.router.navigate(['/project/' + this.projectId + '/financial-project/details-of-main/' + this.type], {
             queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -106,7 +111,7 @@ export class FinancialProjectComponent implements OnInit, OnDestroy {
         this.page = 0;
         this.currentSearch = '';
         this.router.navigate([
-            '/project/' + this.projectId + '/financial-project',
+            '/project/' + this.projectId + '/financial-project/details-of-main/' + this.type,
             {
                 page: this.page,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
@@ -122,7 +127,7 @@ export class FinancialProjectComponent implements OnInit, OnDestroy {
         this.page = 0;
         this.currentSearch = query;
         this.router.navigate([
-            '/project/' + this.projectId + '/financial-project',
+            '/project/' + this.projectId + '/financial-project/details-of-main/' + this.type,
             {
                 search: this.currentSearch,
                 page: this.page,

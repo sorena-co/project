@@ -66,6 +66,9 @@ public class FinancialProject implements Serializable {
     @Column(name = "get_credit_project_id")
     private Long getCreditProjectId;
 
+    @Column(name = "year_confirmed")
+    private Long yearConfirmed;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -270,5 +273,13 @@ public class FinancialProject implements Serializable {
 
     public void setGetCreditProjectId(Long getCreditProjectId) {
         this.getCreditProjectId = getCreditProjectId;
+    }
+
+    public Long getYearConfirmed() {
+        return yearConfirmed;
+    }
+
+    public void setYearConfirmed(Long yearConfirmed) {
+        this.yearConfirmed = yearConfirmed;
     }
 }

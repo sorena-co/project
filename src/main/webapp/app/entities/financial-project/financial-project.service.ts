@@ -6,10 +6,11 @@ import { map } from 'rxjs/operators';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
-import { FinancialProjectTypeExist, IFinancialProject } from 'app/shared/model/financial-project.model';
+import { FinancialProjectMain, FinancialProjectTypeExist, IFinancialProject } from 'app/shared/model/financial-project.model';
 
 type EntityResponseType = HttpResponse<IFinancialProject>;
 type FinancialProjectTypeExistResponseType = HttpResponse<FinancialProjectTypeExist>;
+type FinancialProjectMainResponseType = HttpResponse<FinancialProjectMain>;
 type NumberResponseType = HttpResponse<number>;
 type EntityArrayResponseType = HttpResponse<IFinancialProject[]>;
 
@@ -68,6 +69,12 @@ export class FinancialProjectService {
                 observe: 'response'
             })
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
+
+    getFinancialProjectMain(projectId: number): Observable<FinancialProjectMainResponseType> {
+        return this.http
+            .get<FinancialProjectMain>(`${this.resourceUrl}/project/${projectId}/get-main`, { observe: 'response' })
+            .pipe(map((res: FinancialProjectMainResponseType) => res));
     }
 
     delete(id: number): Observable<HttpResponse<any>> {
