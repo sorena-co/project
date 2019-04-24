@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil, JhiResolvePagingParams } from 'ng-jhipster';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes } from '@angular/router';
+import { JhiResolvePagingParams } from 'ng-jhipster';
 import { UserRouteAccessService } from 'app/core';
 import { Observable, of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { FinancialProject } from 'app/shared/model/financial-project.model';
+import { FinancialProject, IFinancialProject } from 'app/shared/model/financial-project.model';
 import { FinancialProjectService } from './financial-project.service';
 import { FinancialProjectComponent } from './financial-project.component';
 import { FinancialProjectDetailComponent } from './financial-project-detail.component';
 import { FinancialProjectUpdateComponent } from './financial-project-update.component';
 import { FinancialProjectDeletePopupComponent } from './financial-project-delete-dialog.component';
-import { IFinancialProject } from 'app/shared/model/financial-project.model';
 import { FinancialProjectMainComponent } from 'app/entities/financial-project/financial-project-main.component';
+import { FinancialProjectMainReportComponent } from 'app/entities/financial-project/financial-project-main-report.component';
 
 @Injectable({ providedIn: 'root' })
 export class FinancialProjectResolve implements Resolve<IFinancialProject> {
@@ -34,6 +34,19 @@ export const financialProjectRoute: Routes = [
     {
         path: 'details-of-main/:type',
         component: FinancialProjectComponent,
+        resolve: {
+            pagingParams: JhiResolvePagingParams
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            defaultSort: 'id,asc',
+            pageTitle: 'projectApp.financialProject.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'details-of-main-report',
+        component: FinancialProjectMainReportComponent,
         resolve: {
             pagingParams: JhiResolvePagingParams
         },

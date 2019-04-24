@@ -14,13 +14,6 @@
             Create new Financial Project
             </span>
         </button>
-        <button id="jh-create-report" class="btn btn-primary float-right jh-create-entity create-financial-project"
-                [routerLink]="['/project',projectId,'financial-project','details-of-main-report']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="hidden-sm-down" jhiTranslate="projectApp.financialProject.home.report">
-            Create new Financial Project
-            </span>
-        </button>
     </h2>
     <jhi-alert></jhi-alert>
     <jhi-alert-error></jhi-alert-error>
@@ -34,10 +27,7 @@
                 </th>
                 <th>
                     <span
-                        jhiTranslate="projectApp.FinancialProjectType.SELL_CONTRACT_AMOUNT">Financial Project Type</span>
-                </th>
-                <th>
-                    <span jhiTranslate="projectApp.FinancialProjectType.AMOUNT_CONFIRMED_TOTAL">Financial Project Type</span>
+                        jhiTranslate="projectApp.FinancialProjectType.AMOUNT_CONFIRMED_TOTAL">Financial Project Type</span>
                 </th>
                 <th>
                     <span jhiTranslate="projectApp.FinancialProjectType.RECEIVED_FROM_INSTITUTION">Financial Project Type</span>
@@ -46,14 +36,28 @@
                     <span jhiTranslate="projectApp.FinancialProjectType.RECEIVED_FROM_ORGANIZATION">Financial Project Type</span>
                 </th>
                 <th>
+                    <span>دریافتی کل برای پروژه</span>
+                </th>
+                <th>
                     <span jhiTranslate="projectApp.FinancialProjectType.SEND_TO_PROJECT_HAVE_CODE">Financial Project Type</span>
                 </th>
                 <th>
                     <span jhiTranslate="projectApp.FinancialProjectType.SEND_TO_PROJECT_NOT_HAVE_CODE">Financial Project Type</span>
                 </th>
                 <th>
+                    <span>مازاد هزینه</span>
+                </th>
+                <th>
+                    <span>مانده اعتبار پروژه در حساب معاونت</span>
+                </th>
+                <th>
                     <span jhiTranslate="projectApp.FinancialProjectType.CREDIT_APPLY">Financial Project Type</span>
                 </th>
+                <th>
+                    <span
+                        jhiTranslate="projectApp.FinancialProjectType.SELL_CONTRACT_AMOUNT">Financial Project Type</span>
+                </th>
+
             </tr>
             </thead>
             <tbody>
@@ -61,19 +65,24 @@
                 <td style="cursor: pointer"
                     (click)="navigateToDetail('CREDIT_ESTIMATES')">{{financialProjectMain.creditEstimatesAmount}}</td>
                 <td style="cursor: pointer"
-                    (click)="navigateToDetail('SELL_CONTRACT_AMOUNT')">{{financialProjectMain.sellContractAmount}}</td>
-                <td style="cursor: pointer"
                     (click)="navigateToDetail('AMOUNT_CONFIRMED')">{{financialProjectMain.amountConfirmed}}</td>
                 <td style="cursor: pointer"
                     (click)="navigateToDetail('RECEIVED_FROM_INSTITUTION')">{{financialProjectMain.receivedFromInstitution}}</td>
                 <td style="cursor: pointer"
                     (click)="navigateToDetail('RECEIVED_FROM_ORGANIZATION')">{{financialProjectMain.receivedFromOrganization}}</td>
                 <td style="cursor: pointer"
+                    (click)="navigateToDetail('RECEIVED_FROM_ORGANIZATION')">{{financialProjectMain.receivedFromOrganization}}</td>
+                <td style="cursor: pointer"
                     (click)="navigateToDetail('SEND_TO_PROJECT_HAVE_CODE')">{{financialProjectMain.sendToProjectHaveCode}}</td>
                 <td style="cursor: pointer"
                     (click)="navigateToDetail('SEND_TO_PROJECT_NOT_HAVE_CODE')">{{financialProjectMain.sendToProjectNotHaveCode}}</td>
+                <td>{{financialProjectMain.overfllowCost}}</td>
+                <td>{{financialProjectMain.remainCredit}}</td>
                 <td style="cursor: pointer"
                     (click)="navigateToDetail('CREDIT_APPLY')">{{financialProjectMain.creditApply}}</td>
+                <td style="cursor: pointer"
+                    (click)="navigateToDetail('SELL_CONTRACT_AMOUNT')">{{financialProjectMain.sellContractAmount}}</td>
+
             </tr>
             </tbody>
         </table>

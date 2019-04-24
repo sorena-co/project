@@ -46,7 +46,9 @@ export class FinancialProjectMain {
         public receivedFromOrganization?: number,
         public sendToProjectHaveCode?: number,
         public sendToProjectNotHaveCode?: number,
-        public creditApply?: number
+        public creditApply?: number,
+        public overfllowCost?: number,
+        public remainCredit?: number
     ) {}
 }
 

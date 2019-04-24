@@ -145,7 +145,7 @@
                             </div>
                         </div>
                     </ng-container>
-                    <div class="col-md-3">
+                    <div class="col-md-3" *ngIf="financialProject.financialProjectType===FinancialProjectType[FinancialProjectType.AMOUNT_CONFIRMED]">
                         <div class="form-group">
                             <label class="form-control-label"
                                    jhiTranslate="projectApp.financialProject.yearConfirmed"

@@ -13,7 +13,8 @@ import {
     financialProjectRoute,
     financialProjectPopupRoute,
     ProjectTitleComponent,
-    FinancialProjectMainComponent
+    FinancialProjectMainComponent,
+    FinancialProjectMainReportComponent
 } from './';
 
 const ENTITY_STATES = [...financialProjectRoute, ...financialProjectPopupRoute];
@@ -27,7 +28,8 @@ const ENTITY_STATES = [...financialProjectRoute, ...financialProjectPopupRoute];
         FinancialProjectDeleteDialogComponent,
         FinancialProjectDeletePopupComponent,
         ProjectTitleComponent,
-        FinancialProjectMainComponent
+        FinancialProjectMainComponent,
+        FinancialProjectMainReportComponent
     ],
     entryComponents: [
         FinancialProjectComponent,
@@ -35,7 +37,8 @@ const ENTITY_STATES = [...financialProjectRoute, ...financialProjectPopupRoute];
         FinancialProjectDeleteDialogComponent,
         FinancialProjectDeletePopupComponent,
         ProjectTitleComponent,
-        FinancialProjectMainComponent
+        FinancialProjectMainComponent,
+        FinancialProjectMainReportComponent
     ],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
