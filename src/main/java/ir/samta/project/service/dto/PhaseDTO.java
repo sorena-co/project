@@ -25,6 +25,10 @@ public class PhaseDTO implements Serializable {
     private Boolean isFinish;
 
 
+    private Long projectId;
+
+    private String projectTitle;
+
     public Long getId() {
         return id;
     }
@@ -89,6 +93,22 @@ public class PhaseDTO implements Serializable {
         this.isFinish = isFinish;
     }
 
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getProjectTitle() {
+        return projectTitle;
+    }
+
+    public void setProjectTitle(String projectTitle) {
+        this.projectTitle = projectTitle;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -121,6 +141,8 @@ public class PhaseDTO implements Serializable {
             ", cost=" + getCost() +
             ", reasonOfDelay='" + getReasonOfDelay() + "'" +
             ", isFinish='" + isIsFinish() + "'" +
+            ", project=" + getProjectId() +
+            ", project='" + getProjectTitle() + "'" +
             "}";
     }
 }

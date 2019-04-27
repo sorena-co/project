@@ -1,6 +1,7 @@
 package ir.samta.project.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -44,6 +45,10 @@ public class Phase implements Serializable {
 
     @Column(name = "is_finish")
     private Boolean isFinish;
+
+    @ManyToOne
+    @JsonIgnoreProperties("phases")
+    private Project project;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -143,6 +148,19 @@ public class Phase implements Serializable {
 
     public void setIsFinish(Boolean isFinish) {
         this.isFinish = isFinish;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public Phase project(Project project) {
+        this.project = project;
+        return this;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

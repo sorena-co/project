@@ -61,6 +61,7 @@ enum ProjectType {
 
 relationship ManyToOne{
     FinancialProject {project(title)} to Project,
+    Phase {project(title)} to Project,
     Action {phase(title)} to Phase
 }
 

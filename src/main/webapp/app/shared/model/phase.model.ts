@@ -9,6 +9,8 @@ export interface IPhase {
     cost?: number;
     reasonOfDelay?: string;
     isFinish?: boolean;
+    projectTitle?: string;
+    projectId?: number;
 }
 
 export class Phase implements IPhase {
@@ -20,7 +22,9 @@ export class Phase implements IPhase {
         public finishDate?: Moment,
         public cost?: number,
         public reasonOfDelay?: string,
-        public isFinish?: boolean
+        public isFinish?: boolean,
+        public projectTitle?: string,
+        public projectId?: number
     ) {
         this.isFinish = this.isFinish || false;
     }

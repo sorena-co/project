@@ -30,7 +30,15 @@
             "fieldType": "Boolean"
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "project",
+            "otherEntityRelationshipName": "phase",
+            "relationshipName": "project",
+            "otherEntityField": "title"
+        }
+    ],
     "changelogDate": "20190427111528",
     "entityTableName": "phase",
     "dto": "mapstruct",

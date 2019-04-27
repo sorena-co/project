@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
@@ -19,31 +18,27 @@ export class ActionUpdateComponent implements OnInit {
     action: IAction;
     isSaving: boolean;
 
-    phases: IPhase[];
     startDate: string;
     finishDate: string;
+    phaseId: number;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected actionService: ActionService,
         protected phaseService: PhaseService,
         protected activatedRoute: ActivatedRoute
-    ) {}
+    ) {
+        this.phaseId = Number(this.activatedRoute.snapshot.params['phaseId']);
+    }
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ action }) => {
             this.action = action;
+            this.action.phaseId = this.phaseId;
             this.startDate = this.action.startDate != null ? this.action.startDate.format(DATE_TIME_FORMAT) : null;
             this.finishDate = this.action.finishDate != null ? this.action.finishDate.format(DATE_TIME_FORMAT) : null;
         });
-        this.phaseService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IPhase[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IPhase[]>) => response.body)
-            )
-            .subscribe((res: IPhase[]) => (this.phases = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {

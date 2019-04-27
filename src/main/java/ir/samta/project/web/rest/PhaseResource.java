@@ -1,27 +1,23 @@
 package ir.samta.project.web.rest;
+
+import io.github.jhipster.web.util.ResponseUtil;
 import ir.samta.project.service.PhaseService;
+import ir.samta.project.service.dto.PhaseDTO;
 import ir.samta.project.web.rest.errors.BadRequestAlertException;
 import ir.samta.project.web.rest.util.HeaderUtil;
 import ir.samta.project.web.rest.util.PaginationUtil;
-import ir.samta.project.service.dto.PhaseDTO;
-import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Phase.
@@ -30,10 +26,8 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 @RequestMapping("/api")
 public class PhaseResource {
 
-    private final Logger log = LoggerFactory.getLogger(PhaseResource.class);
-
     private static final String ENTITY_NAME = "phase";
-
+    private final Logger log = LoggerFactory.getLogger(PhaseResource.class);
     private final PhaseService phaseService;
 
     public PhaseResource(PhaseService phaseService) {
@@ -86,10 +80,10 @@ public class PhaseResource {
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of phases in body
      */
-    @GetMapping("/phases")
-    public ResponseEntity<List<PhaseDTO>> getAllPhases(Pageable pageable) {
+    @GetMapping("/phases/{projectId}/project")
+    public ResponseEntity<List<PhaseDTO>> getAllPhases(@PathVariable Long projectId, Pageable pageable) {
         log.debug("REST request to get a page of Phases");
-        Page<PhaseDTO> page = phaseService.findAll(pageable);
+        Page<PhaseDTO> page = phaseService.findAll(projectId, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/phases");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -124,7 +118,7 @@ public class PhaseResource {
      * SEARCH  /_search/phases?query=:query : search for the phase corresponding
      * to the query.
      *
-     * @param query the query of the phase search
+     * @param query    the query of the phase search
      * @param pageable the pagination information
      * @return the result of the search
      */

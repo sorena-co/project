@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { JhiAlertService } from 'ng-jhipster';
 import { IPhase } from 'app/shared/model/phase.model';
 import { PhaseService } from './phase.service';
+import { IProject } from 'app/shared/model/project.model';
+import { ProjectService } from 'app/entities/project';
 
 @Component({
     selector: 'jhi-phase-update',
@@ -15,18 +18,36 @@ import { PhaseService } from './phase.service';
 export class PhaseUpdateComponent implements OnInit {
     phase: IPhase;
     isSaving: boolean;
+
+    projects: IProject[];
     startDate: string;
     finishDate: string;
+    projectId: number;
 
-    constructor(protected phaseService: PhaseService, protected activatedRoute: ActivatedRoute) {}
+    constructor(
+        protected jhiAlertService: JhiAlertService,
+        protected phaseService: PhaseService,
+        protected projectService: ProjectService,
+        protected activatedRoute: ActivatedRoute
+    ) {
+        this.projectId = Number(this.activatedRoute.snapshot.params['projectId']);
+    }
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ phase }) => {
             this.phase = phase;
+            this.phase.projectId = this.projectId;
             this.startDate = this.phase.startDate != null ? this.phase.startDate.format(DATE_TIME_FORMAT) : null;
             this.finishDate = this.phase.finishDate != null ? this.phase.finishDate.format(DATE_TIME_FORMAT) : null;
         });
+        this.projectService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IProject[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IProject[]>) => response.body)
+            )
+            .subscribe((res: IProject[]) => (this.projects = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -55,5 +76,13 @@ export class PhaseUpdateComponent implements OnInit {
 
     protected onSaveError() {
         this.isSaving = false;
+    }
+
+    protected onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackProjectById(index: number, item: IProject) {
+        return item.id;
     }
 }

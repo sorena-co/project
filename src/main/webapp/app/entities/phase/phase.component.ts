@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 
 import { IPhase } from 'app/shared/model/phase.model';
 import { AccountService } from 'app/core';
@@ -30,6 +29,7 @@ export class PhaseComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    projectId: number;
 
     constructor(
         protected phaseService: PhaseService,
@@ -51,6 +51,7 @@ export class PhaseComponent implements OnInit, OnDestroy {
             this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
                 ? this.activatedRoute.snapshot.params['search']
                 : '';
+        this.projectId = Number(this.activatedRoute.snapshot.params['projectId']);
     }
 
     loadAll() {
@@ -69,7 +70,7 @@ export class PhaseComponent implements OnInit, OnDestroy {
             return;
         }
         this.phaseService
-            .query({
+            .query(this.projectId, {
                 page: this.page - 1,
                 size: this.itemsPerPage,
                 sort: this.sort()

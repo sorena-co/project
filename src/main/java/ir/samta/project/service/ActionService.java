@@ -56,13 +56,15 @@ public class ActionService {
     /**
      * Get all the actions.
      *
+     *
+     * @param phaseId
      * @param pageable the pagination information
      * @return the list of entities
      */
     @Transactional(readOnly = true)
-    public Page<ActionDTO> findAll(Pageable pageable) {
+    public Page<ActionDTO> findAll(Long phaseId, Pageable pageable) {
         log.debug("Request to get all Actions");
-        return actionRepository.findAll(pageable)
+        return actionRepository.findAllByPhase_Id(phaseId,pageable)
             .map(actionMapper::toDto);
     }
 

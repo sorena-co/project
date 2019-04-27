@@ -11,7 +11,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <a [href]="'#/project/' + project.id + '/financial-project'" class="col-md-4">
+                        <a [href]="'#/project/' + project.id + '/financial-project'" class="col-md-3">
                             <div class="card">
                                 <div class="card-header">
                                     <h4 jhiTranslate="projectApp.project.home.financial"></h4>
@@ -25,7 +25,7 @@
 
                             </div>
                         </a>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="card">
                                 <div class="card-header">
                                     <h4 jhiTranslate="projectApp.project.home.technical"></h4>
@@ -33,12 +33,26 @@
                                 <div class="card-body"></div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="card">
                                 <div class="card-header">
                                     <h4 jhiTranslate="projectApp.project.home.document"></h4>
                                 </div>
                                 <div class="card-body"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 jhiTranslate="projectApp.project.home.phase"></h4>
+                                </div>
+                                <div class="card-body">
+                                    <span>
+                                    <a [href]="'#/project/' + project.id + '/phase'">
+                                        فازها
+                                    </a>
+                                        </span>
+                                </div>
                             </div>
                         </div>
                     </div>

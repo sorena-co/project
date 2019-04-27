@@ -17,11 +17,11 @@ import { RouterModule } from '@angular/router';
                 loadChildren: './financial-project/financial-project.module#ProjectFinancialProjectModule'
             },
             {
-                path: 'phase',
+                path: 'project/:projectId/phase',
                 loadChildren: './phase/phase.module#ProjectPhaseModule'
             },
             {
-                path: 'action',
+                path: 'project/:projectId/phase/:phaseId/action',
                 loadChildren: './action/action.module#ProjectActionModule'
             }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */

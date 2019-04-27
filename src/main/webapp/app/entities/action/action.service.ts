@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { map } from 'rxjs/operators';
 
 import { SERVER_API_URL } from 'app/app.constants';
@@ -39,10 +38,10 @@ export class ActionService {
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
-    query(req?: any): Observable<EntityArrayResponseType> {
+    query(phaseId: number, req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http
-            .get<IAction[]>(this.resourceUrl, { params: options, observe: 'response' })
+            .get<IAction[]>(`${this.resourceUrl}/${phaseId}/phase`, { params: options, observe: 'response' })
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 

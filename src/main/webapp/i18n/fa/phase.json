@@ -22,7 +22,8 @@
             "finishDate": "تاریخ پایان",
             "cost": "هزینه",
             "reasonOfDelay": "دلایل تاخیر",
-            "isFinish": "اتمام"
+            "isFinish": "اتمام",
+            "project": "پروژه"
         }
     }
 }

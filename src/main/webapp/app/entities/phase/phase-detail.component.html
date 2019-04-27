@@ -33,6 +33,12 @@
                 <dd>
                     <span>{{phase.isFinish}}</span>
                 </dd>
+                <dt><span jhiTranslate="projectApp.phase.project">Project</span></dt>
+                <dd>
+                    <div *ngIf="phase.projectId">
+                        <a [routerLink]="['/project', phase.projectId, 'view']">{{phase.projectTitle}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"
