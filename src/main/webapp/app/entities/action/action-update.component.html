@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-action-heading" jhiTranslate="projectApp.action.home.createOrEditLabel">Create or edit a Action</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!action.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="action.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.action.title" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                        [(ngModel)]="action.title" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.action.doPercent" for="field_doPercent">Do Percent</label>
+                    <input type="checkbox" class="form-control" name="doPercent" id="field_doPercent"
+                        [(ngModel)]="action.doPercent" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.action.finalPercent" for="field_finalPercent">Final Percent</label>
+                    <input type="checkbox" class="form-control" name="finalPercent" id="field_finalPercent"
+                        [(ngModel)]="action.finalPercent" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.action.startDate" for="field_startDate">Start Date</label>
+                    <div class="d-flex">
+                        <input id="field_startDate" type="datetime-local" class="form-control" name="startDate" [(ngModel)]="startDate" placeholder="YYYY-MM-DD HH:mm"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.action.finishDate" for="field_finishDate">Finish Date</label>
+                    <div class="d-flex">
+                        <input id="field_finishDate" type="datetime-local" class="form-control" name="finishDate" [(ngModel)]="finishDate" placeholder="YYYY-MM-DD HH:mm"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.action.reasonOfDelay" for="field_reasonOfDelay">Reason Of Delay</label>
+                    <input type="text" class="form-control" name="reasonOfDelay" id="field_reasonOfDelay"
+                        [(ngModel)]="action.reasonOfDelay" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.action.isFinish" for="field_isFinish">Is Finish</label>
+                    <input type="checkbox" class="form-control" name="isFinish" id="field_isFinish"
+                        [(ngModel)]="action.isFinish" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.action.phase" for="field_phase">Phase</label>
+                    <select class="form-control" id="field_phase" name="phase" [(ngModel)]="action.phaseId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="phaseOption.id" *ngFor="let phaseOption of phases; trackBy: trackPhaseById">{{phaseOption.title}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

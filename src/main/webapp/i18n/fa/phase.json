@@ -1,0 +1,28 @@
+{
+    "projectApp": {
+        "phase": {
+            "home": {
+                "title": "فازها",
+                "createLabel": "ایجاد فاز جدید",
+                "createOrEditLabel": "ویراش فاز",
+                "search": "جستجو"
+            },
+            "created": "فاز جدید با موفقیت ایجاد شد.",
+            "updated": "فاز با موفقیت ویرایش شد.",
+            "deleted": "فاز با موفقیت حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف فاز مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "فاز"
+            },
+            "title": "عنوان",
+            "percent": "درصد",
+            "startDate": "تاریخ شروع",
+            "finishDate": "تاریخ پایان",
+            "cost": "هزینه",
+            "reasonOfDelay": "دلایل تاخیر",
+            "isFinish": "اتمام"
+        }
+    }
+}

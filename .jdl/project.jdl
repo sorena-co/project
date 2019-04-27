@@ -20,6 +20,24 @@ entity FinancialProject{
     description String,
     financialProjectType FinancialProjectType
 }
+entity Phase{
+    title String,
+    percent Long,
+    startDate ZonedDateTime,
+    finishDate ZonedDateTime,
+    cost Long,
+    reasonOfDelay String,
+    isFinish Boolean
+}
+entity Action{
+    title String,
+    doPercent Boolean,
+    finalPercent Boolean,
+    startDate ZonedDateTime,
+    finishDate ZonedDateTime,
+    reasonOfDelay String,
+    isFinish Boolean
+}
 
 enum FinancialProjectType{
     CREDIT_ESTIMATES,
@@ -42,7 +60,8 @@ enum ProjectType {
 }
 
 relationship ManyToOne{
-    FinancialProject {project(title)} to Project
+    FinancialProject {project(title)} to Project,
+    Action {phase(title)} to Phase
 }
 
 dto * with mapstruct

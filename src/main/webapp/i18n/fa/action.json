@@ -1,0 +1,29 @@
+{
+    "projectApp": {
+        "action": {
+            "home": {
+                "title": "فعالیت ها",
+                "createLabel": "ایجاد فعالیت جدید",
+                "createOrEditLabel": "ویرایش فعالیت",
+                "search": "جستجو"
+            },
+            "created": "فعالیت جدید با موفقیت ایجاد شد.",
+            "updated": "فعالیت با موفقیت ویرایش شد.",
+            "deleted": "فعالیت با موفقیت حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف فعالیت مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "فعالیت"
+            },
+            "title": "عنوان",
+            "doPercent": "درصد انجام شده",
+            "finalPercent": "درصد",
+            "startDate": "تاریخ شروع",
+            "finishDate": "تاریخ پایان",
+            "reasonOfDelay": "دلایل  تاخیر",
+            "isFinish": "اتمام",
+            "phase": "فاز"
+        }
+    }
+}

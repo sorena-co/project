@@ -1,0 +1,51 @@
+{
+    "name": "Action",
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "doPercent",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "finalPercent",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "startDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "finishDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "reasonOfDelay",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "isFinish",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "phase",
+            "otherEntityRelationshipName": "action",
+            "relationshipName": "phase",
+            "otherEntityField": "title"
+        }
+    ],
+    "changelogDate": "20190427111529",
+    "entityTableName": "action",
+    "dto": "mapstruct",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,43 @@
+{
+    "name": "Phase",
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "percent",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "startDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "finishDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "cost",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "reasonOfDelay",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "isFinish",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190427111528",
+    "entityTableName": "phase",
+    "dto": "mapstruct",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
