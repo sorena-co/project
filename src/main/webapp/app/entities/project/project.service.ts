@@ -72,6 +72,8 @@ export class ProjectService {
     protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
         if (res.body) {
             res.body.createDate = res.body.createDate != null ? moment(res.body.createDate) : null;
+            res.body.startDate = res.body.startDate != null ? moment(res.body.startDate) : null;
+            res.body.finishDate = res.body.finishDate != null ? moment(res.body.finishDate) : null;
         }
         return res;
     }
@@ -80,6 +82,8 @@ export class ProjectService {
         if (res.body) {
             res.body.forEach((project: IProject) => {
                 project.createDate = project.createDate != null ? moment(project.createDate) : null;
+                project.startDate = project.startDate != null ? moment(project.startDate) : null;
+                project.finishDate = project.finishDate != null ? moment(project.finishDate) : null;
             });
         }
         return res;

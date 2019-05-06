@@ -15,4 +15,6 @@ import org.springframework.stereotype.Repository;
 public interface ActionRepository extends JpaRepository<Action, Long> {
 
     Page<Action> findAllByPhase_Id(Long phaseId, Pageable pageable);
+
+    Page<Action> findAllByPhase_Project_Id(Long projectId, Pageable pageable);
 }

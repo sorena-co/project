@@ -3,10 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { DATE_FORMAT, DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_FORMAT, JALALI_DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { IProject, Project } from 'app/shared/model/project.model';
 import { ProjectService } from './project.service';
 import { User, UserService } from 'app/core';
+import * as jalali from 'jalali-moment';
 
 @Component({
     selector: 'jhi-project-update',
@@ -15,9 +16,6 @@ import { User, UserService } from 'app/core';
 export class ProjectUpdateComponent implements OnInit {
     project: IProject;
     isSaving: boolean;
-    createDate: string;
-    startDate: string;
-    finishDate: string;
     users: User[];
     projects: Project[] = [];
 
@@ -27,11 +25,26 @@ export class ProjectUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ project }) => {
             this.project = project;
-            this.project.startDate = this.project.startDate != null ? moment(this.project.startDate, DATE_FORMAT) : null;
-            this.project.finishDate = this.project.finishDate != null ? moment(this.project.finishDate, DATE_FORMAT) : null;
-            this.createDate = this.project.createDate != null ? this.project.createDate.format(DATE_FORMAT) : null;
-            this.startDate = this.project.startDate != null ? this.project.startDate.format(DATE_FORMAT) : null;
-            this.finishDate = this.project.finishDate != null ? this.project.finishDate.format(DATE_FORMAT) : null;
+            moment('1989/01/24', 'YYYY/MM/DD')
+                .locale('fa')
+                .format('YYYY/MM/DD'); // 1367/11/04
+
+            const startDate = this.project.startDate != null ? this.project.startDate.format(DATE_FORMAT) : null;
+            const finishDate = this.project.finishDate != null ? this.project.finishDate.format(DATE_FORMAT) : null;
+            const jalaliStartDate =
+                startDate != null
+                    ? jalali(startDate, DATE_FORMAT)
+                          .locale('fa')
+                          .format(DATE_FORMAT)
+                    : null;
+            const jalaliFinishDate =
+                finishDate != null
+                    ? jalali(finishDate, DATE_FORMAT)
+                          .locale('fa')
+                          .format(DATE_FORMAT)
+                    : null;
+            this.project.startDate = jalaliStartDate != null ? jalali(jalaliStartDate, JALALI_DATE_FORMAT) : null;
+            this.project.finishDate = jalaliFinishDate != null ? jalali(jalaliFinishDate, JALALI_DATE_FORMAT) : null;
         });
         this.userService.query().subscribe(value => (this.users = value.body));
         this.projectService.query().subscribe(value => (this.projects = value.body));
@@ -45,9 +58,6 @@ export class ProjectUpdateComponent implements OnInit {
         this.isSaving = true;
         if (!this.project.parentProjectId) {
             this.project.level = 0;
-            this.project.createDate = this.createDate != null ? moment(this.createDate, DATE_FORMAT) : null;
-            this.project.startDate = this.startDate != null ? moment(this.startDate, DATE_FORMAT) : null;
-            this.project.finishDate = this.finishDate != null ? moment(this.finishDate, DATE_FORMAT) : null;
             if (this.project.id !== undefined) {
                 this.subscribeToSaveResponse(this.projectService.update(this.project));
             } else {
@@ -56,9 +66,6 @@ export class ProjectUpdateComponent implements OnInit {
         } else {
             this.projectService.find(this.project.parentProjectId).subscribe(value => {
                 this.project.level = value.body.level + 1;
-                this.project.createDate = this.createDate != null ? moment(this.createDate, DATE_FORMAT) : null;
-                this.project.startDate = this.startDate != null ? moment(this.startDate, DATE_FORMAT) : null;
-                this.project.finishDate = this.finishDate != null ? moment(this.finishDate, DATE_FORMAT) : null;
                 if (this.project.id !== undefined) {
                     this.subscribeToSaveResponse(this.projectService.update(this.project));
                 } else {

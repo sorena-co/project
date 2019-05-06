@@ -12,9 +12,9 @@ public class ActionDTO implements Serializable {
 
     private String title;
 
-    private Boolean doPercent;
+    private Long doPercent;
 
-    private Boolean finalPercent;
+    private Long finalPercent;
 
     private ZonedDateTime startDate;
 
@@ -43,22 +43,6 @@ public class ActionDTO implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Boolean isDoPercent() {
-        return doPercent;
-    }
-
-    public void setDoPercent(Boolean doPercent) {
-        this.doPercent = doPercent;
-    }
-
-    public Boolean isFinalPercent() {
-        return finalPercent;
-    }
-
-    public void setFinalPercent(Boolean finalPercent) {
-        this.finalPercent = finalPercent;
     }
 
     public ZonedDateTime getStartDate() {
@@ -135,8 +119,8 @@ public class ActionDTO implements Serializable {
         return "ActionDTO{" +
             "id=" + getId() +
             ", title='" + getTitle() + "'" +
-            ", doPercent='" + isDoPercent() + "'" +
-            ", finalPercent='" + isFinalPercent() + "'" +
+            ", doPercent='" + getDoPercent() + "'" +
+            ", finalPercent='" + getFinalPercent() + "'" +
             ", startDate='" + getStartDate() + "'" +
             ", finishDate='" + getFinishDate() + "'" +
             ", reasonOfDelay='" + getReasonOfDelay() + "'" +
@@ -144,5 +128,21 @@ public class ActionDTO implements Serializable {
             ", phase=" + getPhaseId() +
             ", phase='" + getPhaseTitle() + "'" +
             "}";
+    }
+
+    public Long getDoPercent() {
+        return doPercent;
+    }
+
+    public void setDoPercent(Long doPercent) {
+        this.doPercent = doPercent;
+    }
+
+    public Long getFinalPercent() {
+        return finalPercent;
+    }
+
+    public void setFinalPercent(Long finalPercent) {
+        this.finalPercent = finalPercent;
     }
 }

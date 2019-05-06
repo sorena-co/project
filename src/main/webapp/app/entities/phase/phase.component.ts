@@ -4,12 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 
-import { IPhase } from 'app/shared/model/phase.model';
+import { IPhase, Phase } from 'app/shared/model/phase.model';
 import { AccountService } from 'app/core';
 
-import { ITEMS_PER_PAGE } from 'app/shared';
+import { DATE_FORMAT, DATE_TIME_FORMAT, ITEMS_PER_PAGE, JALALI_DATE_FORMAT } from 'app/shared';
 import { PhaseService } from './phase.service';
 
+import * as jalali from 'jalali-moment';
 @Component({
     selector: 'jhi-phase',
     templateUrl: './phase.component.html'
@@ -89,7 +90,7 @@ export class PhaseComponent implements OnInit, OnDestroy {
     }
 
     transition() {
-        this.router.navigate(['/phase'], {
+        this.router.navigate(['/project/' + this.projectId + '/phase'], {
             queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -104,7 +105,7 @@ export class PhaseComponent implements OnInit, OnDestroy {
         this.page = 0;
         this.currentSearch = '';
         this.router.navigate([
-            '/phase',
+            '/project/' + this.projectId + '/phase',
             {
                 page: this.page,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
@@ -120,7 +121,7 @@ export class PhaseComponent implements OnInit, OnDestroy {
         this.page = 0;
         this.currentSearch = query;
         this.router.navigate([
-            '/phase',
+            '/project/' + this.projectId + '/phase',
             {
                 search: this.currentSearch,
                 page: this.page,
@@ -162,9 +163,41 @@ export class PhaseComponent implements OnInit, OnDestroy {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.phases = data;
+        this.phases.forEach(phase => {
+            const startDate = phase.startDate != null ? phase.startDate.format(DATE_FORMAT) : null;
+            const finishDate = phase.finishDate != null ? phase.finishDate.format(DATE_FORMAT) : null;
+            const jalaliStartDate =
+                startDate != null
+                    ? jalali(startDate, DATE_FORMAT)
+                          .locale('fa')
+                          .format(DATE_FORMAT)
+                    : null;
+            const jalaliFinishDate =
+                finishDate != null
+                    ? jalali(finishDate, DATE_FORMAT)
+                          .locale('fa')
+                          .format(DATE_FORMAT)
+                    : null;
+            phase.startDate = jalaliStartDate != null ? jalali(jalaliStartDate, JALALI_DATE_FORMAT) : null;
+            phase.finishDate = jalaliFinishDate != null ? jalali(jalaliFinishDate, JALALI_DATE_FORMAT) : null;
+        });
     }
 
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    editOrCreate(item: Phase) {
+        if (item.id) {
+            this.phaseService.update(item).subscribe(value => this.loadAll());
+        } else {
+            this.phaseService.create(item).subscribe(value => this.loadAll());
+        }
+    }
+
+    createNewPhase() {
+        const phase = new Phase();
+        phase.projectId = this.projectId;
+        this.phases.push(phase);
     }
 }

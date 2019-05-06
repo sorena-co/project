@@ -2,7 +2,7 @@
     <h2 id="page-heading">
         <span jhiTranslate="projectApp.phase.home.title">Phases</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-phase"
-                [routerLink]="['/project/'+ projectId + '/phase/new']">
+                (click)="createNewPhase()">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span class="hidden-sm-down" jhiTranslate="projectApp.phase.home.createLabel">
             Create new Phase
@@ -27,13 +27,10 @@
         </div>
     </div>
     <br/>
-    <div class="table-responsive" *ngIf="phases">
+    <div class="table-responsive" *ngIf="phases" style="min-height: 500px;">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>
-                    <fa-icon [icon]="'sort'"></fa-icon>
-                </th>
                 <th jhiSortBy="title"><span jhiTranslate="projectApp.phase.title">Title</span>
                     <fa-icon [icon]="'sort'"></fa-icon>
                 </th>
@@ -49,13 +46,7 @@
                 <th jhiSortBy="cost"><span jhiTranslate="projectApp.phase.cost">Cost</span>
                     <fa-icon [icon]="'sort'"></fa-icon>
                 </th>
-                <th jhiSortBy="reasonOfDelay"><span jhiTranslate="projectApp.phase.reasonOfDelay">Reason Of Delay</span>
-                    <fa-icon [icon]="'sort'"></fa-icon>
-                </th>
                 <th jhiSortBy="isFinish"><span jhiTranslate="projectApp.phase.isFinish">Is Finish</span>
-                    <fa-icon [icon]="'sort'"></fa-icon>
-                </th>
-                <th jhiSortBy="projectTitle"><span jhiTranslate="projectApp.phase.project">Project</span>
                     <fa-icon [icon]="'sort'"></fa-icon>
                 </th>
                 <th></th>
@@ -63,40 +54,72 @@
             </thead>
             <tbody>
             <tr *ngFor="let phase of phases ;trackBy: trackId">
-                <td><a [routerLink]="['/phase', phase.id, 'view' ]">{{phase.id}}</a></td>
-                <td>{{phase.title}}</td>
-                <td>{{phase.percent}}</td>
-                <td>{{phase.startDate | date:'medium'}}</td>
-                <td>{{phase.finishDate | date:'medium'}}</td>
-                <td>{{phase.cost}}</td>
-                <td>{{phase.reasonOfDelay}}</td>
-                <td>{{phase.isFinish}}</td>
                 <td>
-                    <div *ngIf="phase.projectId">
-                        <a [routerLink]="['../project', phase.projectId , 'view' ]">{{phase.projectTitle}}</a>
+                    <input style="max-width: 150px" type="text" class="form-control" name="title"
+                           id="field_title"
+                           [(ngModel)]="phase.title"/>
+                </td>
+                <td>
+                    <input style="max-width: 150px" type="number" class="form-control" name="percent"
+                           id="field_percent"
+                           [(ngModel)]="phase.percent"/>
+                </td>
+                <td>
+                    <div class="d-flex" style="width: 100%">
+                        <dp-date-picker
+                            dir="ltr"
+                            class="form-control"
+                            [(ngModel)]="phase.startDate"
+                            id="field_startDate"
+                            mode="day"
+                            placeholder="تاریخ"
+                            theme="dp-material"
+                            [ngModelOptions]="{standalone: true}"
+                        ></dp-date-picker>
                     </div>
+                </td>
+                <td>
+                    <div class="d-flex" style="width: 100%">
+                        <dp-date-picker
+                            dir="ltr"
+                            class="form-control"
+                            [(ngModel)]="phase.finishDate"
+                            id="field_finishDate"
+                            mode="day"
+                            placeholder="تاریخ"
+                            theme="dp-material"
+                            [ngModelOptions]="{standalone: true}"
+                        ></dp-date-picker>
+                    </div>
+                </td>
+                <td>
+                    <input style="max-width: 150px" type="number" class="form-control" name="cost"
+                           id="field_cost"
+                           [(ngModel)]="phase.cost"/>
+                </td>
+                <td>
+                    <input type="checkbox" class="form-control" name="isFinish" id="field_isFinish"
+                           [(ngModel)]="phase.isFinish"/>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/phase', phase.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        <button type="button"
+                                [routerLink]="['/project',projectId,'phase',phase.id,'action']"
+                                replaceUrl="true"
+                                class="btn btn-warning btn-sm">
+                            <fa-icon [icon]="'tasks'"></fa-icon>
                         </button>
-                        <button type="submit"
-                                [routerLink]="['/phase', phase.id, 'edit']"
+                        <button type="button"
+                                (click)="editOrCreate(phase)"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit"
+                        <button type="button"
                                 [routerLink]="['/', 'phase', { outlets: { popup: phase.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>
                     </div>
                 </td>

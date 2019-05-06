@@ -6,27 +6,39 @@
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="projectApp.financialProject.startDate"
-                                   for="field_startDate">Start Date</label>
-                            <div class="d-flex">
-                                <input id="field_startDate" type="date" class="form-control" name="startDate"
-                                       [(ngModel)]="startDate" placeholder="YYYY-MM-DD"
-                                />
-                            </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" jhiTranslate="projectApp.financialProject.startDate"
+                               for="field_startDate">Start Date</label>
+                        <div class="d-flex"                                 style="width: 100%"
+                        >
+                            <dp-date-picker
+                                dir="ltr"
+                                class="form-control"
+                                [(ngModel)]="project.startDate"
+                                id="field_startDate"
+                                mode="day"
+                                placeholder="تاریخ"
+                                theme="dp-material"
+                                [ngModelOptions]="{standalone: true}"
+                            ></dp-date-picker>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="projectApp.financialProject.finishDate"
-                                   for="field_finishDate">Finish Date</label>
-                            <div class="d-flex">
-                                <input id="field_finishDate" type="date" class="form-control"
-                                       name="finishDate"
-                                       [(ngModel)]="finishDate" placeholder="YYYY-MM-DD"
-                                />
-                            </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" jhiTranslate="projectApp.financialProject.finishDate"
+                               for="field_finishDate">Finish Date</label>
+                        <div class="d-flex">
+                            <dp-date-picker
+                                dir="ltr"
+                                class="form-control"
+                                [(ngModel)]="project.finishDate"
+                                id="field_finishDate"
+                                mode="day"
+                                placeholder="تاریخ"
+                                theme="dp-material"
+                                [ngModelOptions]="{standalone: true}"
+                            ></dp-date-picker>
                         </div>
                     </div>
                 </div>

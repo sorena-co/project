@@ -130,4 +130,11 @@ public class ActionResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/actions/{projectId}/project")
+    public ResponseEntity<List<ActionDTO>> getAllActionsByProject(@PathVariable Long projectId, Pageable pageable) {
+        log.debug("REST request to get a page of Actions");
+        Page<ActionDTO> page = actionService.findAllByProject(projectId, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/actions");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
 }

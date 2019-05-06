@@ -1,5 +1,3 @@
-import { Moment } from 'moment';
-
 export enum FinancialProjectType {
     CREDIT_ESTIMATES = 'CREDIT_ESTIMATES',
     SELL_CONTRACT_AMOUNT = 'SELL_CONTRACT_AMOUNT',
@@ -60,9 +58,9 @@ export interface IFinancialProject {
     factorNo?: string;
     sellContractNo?: string;
     amount?: number;
-    registerDate?: Moment;
-    startDate?: Moment;
-    finishDate?: Moment;
+    registerDate?: any;
+    startDate?: any;
+    finishDate?: any;
     description?: string;
     financialProjectType?: FinancialProjectType;
     projectTitle?: string;
@@ -81,9 +79,9 @@ export class FinancialProject implements IFinancialProject {
         public factorNo?: string,
         public sellContractNo?: string,
         public amount?: number,
-        public registerDate?: Moment,
-        public startDate?: Moment,
-        public finishDate?: Moment,
+        public registerDate?: any,
+        public startDate?: any,
+        public finishDate?: any,
         public description?: string,
         public financialProjectType?: FinancialProjectType,
         public projectTitle?: string,

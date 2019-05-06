@@ -1,4 +1,3 @@
-import { Moment } from 'moment';
 import { User } from 'app/core';
 
 export enum ProjectType {
@@ -11,9 +10,9 @@ export interface IProject {
     title?: string;
     code?: string;
     users?: User[];
-    createDate?: Moment;
-    startDate?: Moment;
-    finishDate?: Moment;
+    createDate?: any;
+    startDate?: any;
+    finishDate?: any;
     amountConfirmed?: number;
     totalCost?: number;
     creditEstimates?: number;
@@ -29,9 +28,9 @@ export class Project implements IProject {
         public id?: number,
         public title?: string,
         public code?: string,
-        public createDate?: Moment,
-        public startDate?: Moment,
-        public finishDate?: Moment,
+        public createDate?: any,
+        public startDate?: any,
+        public finishDate?: any,
         public amountConfirmed?: number,
         public totalCost?: number,
         public creditEstimates?: number,

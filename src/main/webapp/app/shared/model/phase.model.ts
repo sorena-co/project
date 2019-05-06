@@ -1,11 +1,9 @@
-import { Moment } from 'moment';
-
 export interface IPhase {
     id?: number;
     title?: string;
     percent?: number;
-    startDate?: Moment;
-    finishDate?: Moment;
+    startDate?: any;
+    finishDate?: any;
     cost?: number;
     reasonOfDelay?: string;
     isFinish?: boolean;
@@ -18,8 +16,8 @@ export class Phase implements IPhase {
         public id?: number,
         public title?: string,
         public percent?: number,
-        public startDate?: Moment,
-        public finishDate?: Moment,
+        public startDate?: any,
+        public finishDate?: any,
         public cost?: number,
         public reasonOfDelay?: string,
         public isFinish?: boolean,

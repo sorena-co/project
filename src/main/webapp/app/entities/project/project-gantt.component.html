@@ -1,0 +1,16 @@
+<div>
+    <div [ngStyle]="{'display':'inline-flex','max-width':totalWidth + 'px'}">
+        <div style="width: 150px;"></div>
+        <div *ngFor="let months of monthNames" style="width: 150px;">
+            <span>{{months.month}} - {{months.year}}</span>
+        </div>
+    </div>
+    <div [ngStyle]="{'max-width':totalWidth + 'px'}">
+        <div *ngFor="let action of actions" style="width: 100%;display: inline-flex;margin-bottom: 10px;">
+            <span style="width: 150px;">{{action.phaseTitle}}</span>
+            <div
+                [ngStyle]="{'width':action.beforeWidth + 'px','background':'white','color':'white'}"></div>
+            <div [ngStyle]="{'width':action.width + 'px','background':'black','color':'white'}">{{action.title}}</div>
+        </div>
+    </div>
+</div>

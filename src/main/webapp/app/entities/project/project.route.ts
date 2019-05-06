@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil, JhiResolvePagingParams } from 'ng-jhipster';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes } from '@angular/router';
+import { JhiResolvePagingParams } from 'ng-jhipster';
 import { UserRouteAccessService } from 'app/core';
 import { Observable, of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { Project } from 'app/shared/model/project.model';
+import { IProject, Project } from 'app/shared/model/project.model';
 import { ProjectService } from './project.service';
 import { ProjectComponent } from './project.component';
 import { ProjectDetailComponent } from './project-detail.component';
 import { ProjectUpdateComponent } from './project-update.component';
 import { ProjectDeletePopupComponent } from './project-delete-dialog.component';
-import { IProject } from 'app/shared/model/project.model';
+import { ProjectGanttComponent } from 'app/entities/project/project-gantt.component';
 
 @Injectable({ providedIn: 'root' })
 export class ProjectResolve implements Resolve<IProject> {
@@ -39,6 +39,18 @@ export const projectRoute: Routes = [
         data: {
             authorities: ['ROLE_USER'],
             defaultSort: 'id,asc',
+            pageTitle: 'projectApp.project.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: ':projectId/gantt',
+        component: ProjectGanttComponent,
+        resolve: {
+            project: ProjectResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
             pageTitle: 'projectApp.project.home.title'
         },
         canActivate: [UserRouteAccessService]

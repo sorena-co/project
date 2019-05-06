@@ -4,12 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 
-import { IAction } from 'app/shared/model/action.model';
+import { Action, IAction } from 'app/shared/model/action.model';
 import { AccountService } from 'app/core';
 
-import { ITEMS_PER_PAGE } from 'app/shared';
+import { DATE_FORMAT, ITEMS_PER_PAGE, JALALI_DATE_FORMAT } from 'app/shared';
 import { ActionService } from './action.service';
-
+import * as jalali from 'jalali-moment';
 @Component({
     selector: 'jhi-action',
     templateUrl: './action.component.html'
@@ -165,9 +165,41 @@ export class ActionComponent implements OnInit, OnDestroy {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.actions = data;
+        this.actions.forEach(action => {
+            const startDate = action.startDate != null ? action.startDate.format(DATE_FORMAT) : null;
+            const finishDate = action.finishDate != null ? action.finishDate.format(DATE_FORMAT) : null;
+            const jalaliStartDate =
+                startDate != null
+                    ? jalali(startDate, DATE_FORMAT)
+                          .locale('fa')
+                          .format(DATE_FORMAT)
+                    : null;
+            const jalaliFinishDate =
+                finishDate != null
+                    ? jalali(finishDate, DATE_FORMAT)
+                          .locale('fa')
+                          .format(DATE_FORMAT)
+                    : null;
+            action.startDate = jalaliStartDate != null ? jalali(jalaliStartDate, JALALI_DATE_FORMAT) : null;
+            action.finishDate = jalaliFinishDate != null ? jalali(jalaliFinishDate, JALALI_DATE_FORMAT) : null;
+        });
     }
 
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    editOrCreate(item: Action) {
+        if (item.id) {
+            this.actionService.update(item).subscribe(value => this.loadAll());
+        } else {
+            this.actionService.create(item).subscribe(value => this.loadAll());
+        }
+    }
+
+    createNewAction() {
+        const action = new Action();
+        action.phaseId = this.phaseId;
+        this.actions.push(action);
     }
 }

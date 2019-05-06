@@ -106,4 +106,9 @@ public class ActionService {
         return actionSearchRepository.search(queryStringQuery(query), pageable)
             .map(actionMapper::toDto);
     }
+
+    public Page<ActionDTO> findAllByProject(Long projectId, Pageable pageable) {
+        return actionRepository.findAllByPhase_Project_Id(projectId,pageable)
+            .map(actionMapper::toDto);
+    }
 }

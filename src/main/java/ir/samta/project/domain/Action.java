@@ -29,10 +29,10 @@ public class Action implements Serializable {
     private String title;
 
     @Column(name = "do_percent")
-    private Boolean doPercent;
+    private Long doPercent;
 
     @Column(name = "final_percent")
-    private Boolean finalPercent;
+    private Long finalPercent;
 
     @Column(name = "start_date")
     private ZonedDateTime startDate;
@@ -70,32 +70,6 @@ public class Action implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Boolean isDoPercent() {
-        return doPercent;
-    }
-
-    public Action doPercent(Boolean doPercent) {
-        this.doPercent = doPercent;
-        return this;
-    }
-
-    public void setDoPercent(Boolean doPercent) {
-        this.doPercent = doPercent;
-    }
-
-    public Boolean isFinalPercent() {
-        return finalPercent;
-    }
-
-    public Action finalPercent(Boolean finalPercent) {
-        this.finalPercent = finalPercent;
-        return this;
-    }
-
-    public void setFinalPercent(Boolean finalPercent) {
-        this.finalPercent = finalPercent;
     }
 
     public ZonedDateTime getStartDate() {
@@ -189,12 +163,28 @@ public class Action implements Serializable {
         return "Action{" +
             "id=" + getId() +
             ", title='" + getTitle() + "'" +
-            ", doPercent='" + isDoPercent() + "'" +
-            ", finalPercent='" + isFinalPercent() + "'" +
+            ", doPercent='" + getDoPercent() + "'" +
+            ", finalPercent='" + getFinalPercent() + "'" +
             ", startDate='" + getStartDate() + "'" +
             ", finishDate='" + getFinishDate() + "'" +
             ", reasonOfDelay='" + getReasonOfDelay() + "'" +
             ", isFinish='" + isIsFinish() + "'" +
             "}";
+    }
+
+    public Long getDoPercent() {
+        return doPercent;
+    }
+
+    public void setDoPercent(Long doPercent) {
+        this.doPercent = doPercent;
+    }
+
+    public Long getFinalPercent() {
+        return finalPercent;
+    }
+
+    public void setFinalPercent(Long finalPercent) {
+        this.finalPercent = finalPercent;
     }
 }
