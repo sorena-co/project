@@ -33,6 +33,7 @@
             <th jhiSortBy="organization"><span jhiTranslate="projectApp.organizationPartner.organization">Organization</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="type"><span jhiTranslate="projectApp.organizationPartner.type">Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="name"><span jhiTranslate="projectApp.organizationPartner.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="documentId"><span jhiTranslate="projectApp.organizationPartner.document">Document</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -42,6 +43,11 @@
                 <td>{{organizationPartner.organization}}</td>
                 <td>{{organizationPartner.type}}</td>
                 <td>{{organizationPartner.name}}</td>
+                <td>
+                    <div *ngIf="organizationPartner.documentId">
+                        <a [routerLink]="['../document', organizationPartner.documentId , 'view' ]" >{{organizationPartner.documentId}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

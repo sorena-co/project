@@ -145,88 +145,53 @@
     ],
     "relationships": [
         {
-            "relationshipType": "many-to-one",
+            "relationshipType": "one-to-many",
             "otherEntityName": "mainStep",
             "otherEntityRelationshipName": "document",
-            "relationshipName": "mainStep",
-            "otherEntityField": "mainStep"
+            "relationshipName": "mainStep"
         },
         {
-            "relationshipType": "many-to-one",
+            "relationshipType": "one-to-many",
             "otherEntityName": "collageEducation",
             "otherEntityRelationshipName": "document",
-            "relationshipName": "collageEducation",
-            "otherEntityField": "fullName"
+            "relationshipName": "collageEducation"
         },
         {
-            "relationshipType": "many-to-one",
+            "relationshipType": "one-to-many",
             "otherEntityName": "researcherHistory",
             "otherEntityRelationshipName": "document",
-            "relationshipName": "researcherHistory",
-            "otherEntityField": "id"
+            "relationshipName": "researcherHistory"
         },
         {
-            "relationshipType": "many-to-one",
+            "relationshipType": "one-to-many",
             "otherEntityName": "existingResearchProject",
             "otherEntityRelationshipName": "document",
-            "relationshipName": "existingResearchProject",
-            "otherEntityField": "id"
+            "relationshipName": "existingResearchProject"
         },
         {
-            "relationshipType": "many-to-one",
+            "relationshipType": "one-to-many",
             "otherEntityName": "organizationPartner",
             "otherEntityRelationshipName": "document",
-            "relationshipName": "organizationPartner",
-            "otherEntityField": "id"
+            "relationshipName": "organizationPartner"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "costSummary",
+            "otherEntityRelationshipName": "document",
+            "relationshipName": "costSummary"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "foreCastCost",
+            "otherEntityRelationshipName": "document",
+            "relationshipName": "foreCastCost"
         },
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "costSummary",
+            "otherEntityName": "project",
             "otherEntityRelationshipName": "document",
-            "relationshipName": "costSummary",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "costSummary",
-            "otherEntityRelationshipName": "document",
-            "relationshipName": "foreCastCostConsume",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "costSummary",
-            "otherEntityRelationshipName": "document",
-            "relationshipName": "foreCastCostCost",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "costSummary",
-            "otherEntityRelationshipName": "document",
-            "relationshipName": "foreCastCostSupport",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "costSummary",
-            "otherEntityRelationshipName": "document",
-            "relationshipName": "foreCastCostSpace",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "costSummary",
-            "otherEntityRelationshipName": "document",
-            "relationshipName": "foreCastCostSellContract",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "costSummary",
-            "otherEntityRelationshipName": "document",
-            "relationshipName": "foreCastCostOther",
-            "otherEntityField": "id"
+            "relationshipName": "project",
+            "otherEntityField": "title"
         }
     ],
     "changelogDate": "20190511082420",

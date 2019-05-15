@@ -177,20 +177,18 @@ relationship ManyToOne{
     FinancialProject {project(title)} to Project,
     Phase {project(title)} to Project,
     Action {phase(title)} to Phase,
-    Document {mainStep(mainStep)} to MainStep,
-    Document {collageEducation(fullName)} to CollageEducation,
-    Document {researcherHistory} to ResearcherHistory,
-    Document {existingResearchProject} to ExistingResearchProject,
-    Document {organizationPartner} to OrganizationPartner,
-    Document {costSummary} to CostSummary,
-    Document {foreCastCostConsume} to CostSummary,
-    Document {foreCastCostCost} to CostSummary,
-    Document {foreCastCostSupport} to CostSummary,
-    Document {foreCastCostSupport} to CostSummary,
-    Document {foreCastCostSpace} to CostSummary,
-    Document {foreCastCostSellContract} to CostSummary,
-    Document {foreCastCostOther} to CostSummary
+    Document {project(title)} to Project
 
+}
+
+relationship OneToMany{
+     Document {mainStep(mainStep)} to MainStep,
+     Document {collageEducation(fullName)} to CollageEducation,
+     Document {researcherHistory} to ResearcherHistory,
+     Document {existingResearchProject} to ExistingResearchProject,
+     Document {organizationPartner} to OrganizationPartner,
+     Document {costSummary} to CostSummary,
+     Document {foreCastCost} to ForeCastCost,
 }
 
 dto * with mapstruct

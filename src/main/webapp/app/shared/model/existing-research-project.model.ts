@@ -8,6 +8,7 @@ export interface IExistingResearchProject {
     fromDate?: Moment;
     toDate?: Moment;
     lastStatus?: string;
+    documentId?: number;
 }
 
 export class ExistingResearchProject implements IExistingResearchProject {
@@ -18,6 +19,7 @@ export class ExistingResearchProject implements IExistingResearchProject {
         public institution?: string,
         public fromDate?: Moment,
         public toDate?: Moment,
-        public lastStatus?: string
+        public lastStatus?: string,
+        public documentId?: number
     ) {}
 }

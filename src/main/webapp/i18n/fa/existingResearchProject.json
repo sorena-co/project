@@ -21,7 +21,8 @@
             "institution": "Institution",
             "fromDate": "From Date",
             "toDate": "To Date",
-            "lastStatus": "Last Status"
+            "lastStatus": "Last Status",
+            "document": "Document"
         }
     }
 }

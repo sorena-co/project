@@ -6,6 +6,7 @@ export interface ICollageEducation {
     institution?: string;
     country?: string;
     receiveDateDegree?: string;
+    documentId?: number;
 }
 
 export class CollageEducation implements ICollageEducation {
@@ -16,6 +17,7 @@ export class CollageEducation implements ICollageEducation {
         public program?: string,
         public institution?: string,
         public country?: string,
-        public receiveDateDegree?: string
+        public receiveDateDegree?: string,
+        public documentId?: number
     ) {}
 }

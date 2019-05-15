@@ -36,6 +36,7 @@
             <th jhiSortBy="month"><span jhiTranslate="projectApp.mainStep.month">Month</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="percent"><span jhiTranslate="projectApp.mainStep.percent">Percent</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="result"><span jhiTranslate="projectApp.mainStep.result">Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="documentId"><span jhiTranslate="projectApp.mainStep.document">Document</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -48,6 +49,11 @@
                 <td>{{mainStep.month}}</td>
                 <td>{{mainStep.percent}}</td>
                 <td>{{mainStep.result}}</td>
+                <td>
+                    <div *ngIf="mainStep.documentId">
+                        <a [routerLink]="['../document', mainStep.documentId , 'view' ]" >{{mainStep.documentId}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

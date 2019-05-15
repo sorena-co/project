@@ -1,6 +1,7 @@
 package ir.samta.project.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -41,6 +42,10 @@ public class ExistingResearchProject implements Serializable {
 
     @Column(name = "last_status")
     private String lastStatus;
+
+    @ManyToOne
+    @JsonIgnoreProperties("existingResearchProjects")
+    private Documents document;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -127,6 +132,19 @@ public class ExistingResearchProject implements Serializable {
 
     public void setLastStatus(String lastStatus) {
         this.lastStatus = lastStatus;
+    }
+
+    public Documents getDocument() {
+        return document;
+    }
+
+    public ExistingResearchProject document(Documents document) {
+        this.document = document;
+        return this;
+    }
+
+    public void setDocument(Documents document) {
+        this.document = document;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

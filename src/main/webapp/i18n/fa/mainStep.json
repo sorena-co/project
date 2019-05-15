@@ -16,12 +16,13 @@
             "detail": {
                 "title": "Main Step"
             },
-            "mainStep": "گام های اصلی",
-            "actionTitle": "عنوان اصلی فعالیت",
-            "detailOfAction": "شرح فعالیت های اصلی در این گام",
-            "month": "مدت زمان تقریبی(ماه)",
-            "percent": "درصد وزنی فعالیت",
-            "result": "دستاورد"
+            "mainStep": "Main Step",
+            "actionTitle": "Action Title",
+            "detailOfAction": "Detail Of Action",
+            "month": "Month",
+            "percent": "Percent",
+            "result": "Result",
+            "document": "Document"
         }
     }
 }

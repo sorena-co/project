@@ -1,6 +1,7 @@
 package ir.samta.project.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -40,6 +41,10 @@ public class CollageEducation implements Serializable {
 
     @Column(name = "receive_date_degree")
     private String receiveDateDegree;
+
+    @ManyToOne
+    @JsonIgnoreProperties("collageEducations")
+    private Documents document;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -126,6 +131,19 @@ public class CollageEducation implements Serializable {
 
     public void setReceiveDateDegree(String receiveDateDegree) {
         this.receiveDateDegree = receiveDateDegree;
+    }
+
+    public Documents getDocument() {
+        return document;
+    }
+
+    public CollageEducation document(Documents document) {
+        this.document = document;
+        return this;
+    }
+
+    public void setDocument(Documents document) {
+        this.document = document;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

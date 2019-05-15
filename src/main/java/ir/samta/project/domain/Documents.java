@@ -8,7 +8,9 @@ import javax.persistence.*;
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import ir.samta.project.domain.enumeration.PlanType;
 
@@ -21,7 +23,7 @@ import ir.samta.project.domain.enumeration.PlanType;
 public class Documents implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
@@ -133,53 +135,23 @@ public class Documents implements Serializable {
     @Column(name = "imagined_date")
     private String imaginedDate;
 
+    @OneToMany(mappedBy = "document")
+    private Set<MainStep> mainSteps = new HashSet<>();
+    @OneToMany(mappedBy = "document")
+    private Set<CollageEducation> collageEducations = new HashSet<>();
+    @OneToMany(mappedBy = "document")
+    private Set<ResearcherHistory> researcherHistories = new HashSet<>();
+    @OneToMany(mappedBy = "document")
+    private Set<ExistingResearchProject> existingResearchProjects = new HashSet<>();
+    @OneToMany(mappedBy = "document")
+    private Set<OrganizationPartner> organizationPartners = new HashSet<>();
+    @OneToMany(mappedBy = "document")
+    private Set<CostSummary> costSummaries = new HashSet<>();
+    @OneToMany(mappedBy = "document")
+    private Set<ForeCastCost> foreCastCosts = new HashSet<>();
     @ManyToOne
     @JsonIgnoreProperties("documents")
-    private MainStep mainStep;
-
-    @ManyToOne
-    @JsonIgnoreProperties("documents")
-    private CollageEducation collageEducation;
-
-    @ManyToOne
-    @JsonIgnoreProperties("documents")
-    private ResearcherHistory researcherHistory;
-
-    @ManyToOne
-    @JsonIgnoreProperties("documents")
-    private ExistingResearchProject existingResearchProject;
-
-    @ManyToOne
-    @JsonIgnoreProperties("documents")
-    private OrganizationPartner organizationPartner;
-
-    @ManyToOne
-    @JsonIgnoreProperties("documents")
-    private CostSummary costSummary;
-
-    @ManyToOne
-    @JsonIgnoreProperties("documents")
-    private CostSummary foreCastCostConsume;
-
-    @ManyToOne
-    @JsonIgnoreProperties("documents")
-    private CostSummary foreCastCostCost;
-
-    @ManyToOne
-    @JsonIgnoreProperties("documents")
-    private CostSummary foreCastCostSupport;
-
-    @ManyToOne
-    @JsonIgnoreProperties("documents")
-    private CostSummary foreCastCostSpace;
-
-    @ManyToOne
-    @JsonIgnoreProperties("documents")
-    private CostSummary foreCastCostSellContract;
-
-    @ManyToOne
-    @JsonIgnoreProperties("documents")
-    private CostSummary foreCastCostOther;
+    private Project project;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -645,160 +617,192 @@ public class Documents implements Serializable {
         this.imaginedDate = imaginedDate;
     }
 
-    public MainStep getMainStep() {
-        return mainStep;
+    public Set<MainStep> getMainSteps() {
+        return mainSteps;
     }
 
-    public Documents mainStep(MainStep mainStep) {
-        this.mainStep = mainStep;
+    public Documents mainSteps(Set<MainStep> mainSteps) {
+        this.mainSteps = mainSteps;
         return this;
     }
 
-    public void setMainStep(MainStep mainStep) {
-        this.mainStep = mainStep;
-    }
-
-    public CollageEducation getCollageEducation() {
-        return collageEducation;
-    }
-
-    public Documents collageEducation(CollageEducation collageEducation) {
-        this.collageEducation = collageEducation;
+    public Documents addMainStep(MainStep mainStep) {
+        this.mainSteps.add(mainStep);
+        mainStep.setDocument(this);
         return this;
     }
 
-    public void setCollageEducation(CollageEducation collageEducation) {
-        this.collageEducation = collageEducation;
-    }
-
-    public ResearcherHistory getResearcherHistory() {
-        return researcherHistory;
-    }
-
-    public Documents researcherHistory(ResearcherHistory researcherHistory) {
-        this.researcherHistory = researcherHistory;
+    public Documents removeMainStep(MainStep mainStep) {
+        this.mainSteps.remove(mainStep);
+        mainStep.setDocument(null);
         return this;
     }
 
-    public void setResearcherHistory(ResearcherHistory researcherHistory) {
-        this.researcherHistory = researcherHistory;
+    public void setMainSteps(Set<MainStep> mainSteps) {
+        this.mainSteps = mainSteps;
     }
 
-    public ExistingResearchProject getExistingResearchProject() {
-        return existingResearchProject;
+    public Set<CollageEducation> getCollageEducations() {
+        return collageEducations;
     }
 
-    public Documents existingResearchProject(ExistingResearchProject existingResearchProject) {
-        this.existingResearchProject = existingResearchProject;
+    public Documents collageEducations(Set<CollageEducation> collageEducations) {
+        this.collageEducations = collageEducations;
         return this;
     }
 
-    public void setExistingResearchProject(ExistingResearchProject existingResearchProject) {
-        this.existingResearchProject = existingResearchProject;
-    }
-
-    public OrganizationPartner getOrganizationPartner() {
-        return organizationPartner;
-    }
-
-    public Documents organizationPartner(OrganizationPartner organizationPartner) {
-        this.organizationPartner = organizationPartner;
+    public Documents addCollageEducation(CollageEducation collageEducation) {
+        this.collageEducations.add(collageEducation);
+        collageEducation.setDocument(this);
         return this;
     }
 
-    public void setOrganizationPartner(OrganizationPartner organizationPartner) {
-        this.organizationPartner = organizationPartner;
-    }
-
-    public CostSummary getCostSummary() {
-        return costSummary;
-    }
-
-    public Documents costSummary(CostSummary costSummary) {
-        this.costSummary = costSummary;
+    public Documents removeCollageEducation(CollageEducation collageEducation) {
+        this.collageEducations.remove(collageEducation);
+        collageEducation.setDocument(null);
         return this;
     }
 
-    public void setCostSummary(CostSummary costSummary) {
-        this.costSummary = costSummary;
+    public void setCollageEducations(Set<CollageEducation> collageEducations) {
+        this.collageEducations = collageEducations;
     }
 
-    public CostSummary getForeCastCostConsume() {
-        return foreCastCostConsume;
+    public Set<ResearcherHistory> getResearcherHistories() {
+        return researcherHistories;
     }
 
-    public Documents foreCastCostConsume(CostSummary costSummary) {
-        this.foreCastCostConsume = costSummary;
+    public Documents researcherHistories(Set<ResearcherHistory> researcherHistories) {
+        this.researcherHistories = researcherHistories;
         return this;
     }
 
-    public void setForeCastCostConsume(CostSummary costSummary) {
-        this.foreCastCostConsume = costSummary;
-    }
-
-    public CostSummary getForeCastCostCost() {
-        return foreCastCostCost;
-    }
-
-    public Documents foreCastCostCost(CostSummary costSummary) {
-        this.foreCastCostCost = costSummary;
+    public Documents addResearcherHistory(ResearcherHistory researcherHistory) {
+        this.researcherHistories.add(researcherHistory);
+        researcherHistory.setDocument(this);
         return this;
     }
 
-    public void setForeCastCostCost(CostSummary costSummary) {
-        this.foreCastCostCost = costSummary;
-    }
-
-    public CostSummary getForeCastCostSupport() {
-        return foreCastCostSupport;
-    }
-
-    public Documents foreCastCostSupport(CostSummary costSummary) {
-        this.foreCastCostSupport = costSummary;
+    public Documents removeResearcherHistory(ResearcherHistory researcherHistory) {
+        this.researcherHistories.remove(researcherHistory);
+        researcherHistory.setDocument(null);
         return this;
     }
 
-    public void setForeCastCostSupport(CostSummary costSummary) {
-        this.foreCastCostSupport = costSummary;
+    public void setResearcherHistories(Set<ResearcherHistory> researcherHistories) {
+        this.researcherHistories = researcherHistories;
     }
 
-    public CostSummary getForeCastCostSpace() {
-        return foreCastCostSpace;
+    public Set<ExistingResearchProject> getExistingResearchProjects() {
+        return existingResearchProjects;
     }
 
-    public Documents foreCastCostSpace(CostSummary costSummary) {
-        this.foreCastCostSpace = costSummary;
+    public Documents existingResearchProjects(Set<ExistingResearchProject> existingResearchProjects) {
+        this.existingResearchProjects = existingResearchProjects;
         return this;
     }
 
-    public void setForeCastCostSpace(CostSummary costSummary) {
-        this.foreCastCostSpace = costSummary;
-    }
-
-    public CostSummary getForeCastCostSellContract() {
-        return foreCastCostSellContract;
-    }
-
-    public Documents foreCastCostSellContract(CostSummary costSummary) {
-        this.foreCastCostSellContract = costSummary;
+    public Documents addExistingResearchProject(ExistingResearchProject existingResearchProject) {
+        this.existingResearchProjects.add(existingResearchProject);
+        existingResearchProject.setDocument(this);
         return this;
     }
 
-    public void setForeCastCostSellContract(CostSummary costSummary) {
-        this.foreCastCostSellContract = costSummary;
-    }
-
-    public CostSummary getForeCastCostOther() {
-        return foreCastCostOther;
-    }
-
-    public Documents foreCastCostOther(CostSummary costSummary) {
-        this.foreCastCostOther = costSummary;
+    public Documents removeExistingResearchProject(ExistingResearchProject existingResearchProject) {
+        this.existingResearchProjects.remove(existingResearchProject);
+        existingResearchProject.setDocument(null);
         return this;
     }
 
-    public void setForeCastCostOther(CostSummary costSummary) {
-        this.foreCastCostOther = costSummary;
+    public void setExistingResearchProjects(Set<ExistingResearchProject> existingResearchProjects) {
+        this.existingResearchProjects = existingResearchProjects;
+    }
+
+    public Set<OrganizationPartner> getOrganizationPartners() {
+        return organizationPartners;
+    }
+
+    public Documents organizationPartners(Set<OrganizationPartner> organizationPartners) {
+        this.organizationPartners = organizationPartners;
+        return this;
+    }
+
+    public Documents addOrganizationPartner(OrganizationPartner organizationPartner) {
+        this.organizationPartners.add(organizationPartner);
+        organizationPartner.setDocument(this);
+        return this;
+    }
+
+    public Documents removeOrganizationPartner(OrganizationPartner organizationPartner) {
+        this.organizationPartners.remove(organizationPartner);
+        organizationPartner.setDocument(null);
+        return this;
+    }
+
+    public void setOrganizationPartners(Set<OrganizationPartner> organizationPartners) {
+        this.organizationPartners = organizationPartners;
+    }
+
+    public Set<CostSummary> getCostSummaries() {
+        return costSummaries;
+    }
+
+    public Documents costSummaries(Set<CostSummary> costSummaries) {
+        this.costSummaries = costSummaries;
+        return this;
+    }
+
+    public Documents addCostSummary(CostSummary costSummary) {
+        this.costSummaries.add(costSummary);
+        costSummary.setDocument(this);
+        return this;
+    }
+
+    public Documents removeCostSummary(CostSummary costSummary) {
+        this.costSummaries.remove(costSummary);
+        costSummary.setDocument(null);
+        return this;
+    }
+
+    public void setCostSummaries(Set<CostSummary> costSummaries) {
+        this.costSummaries = costSummaries;
+    }
+
+    public Set<ForeCastCost> getForeCastCosts() {
+        return foreCastCosts;
+    }
+
+    public Documents foreCastCosts(Set<ForeCastCost> foreCastCosts) {
+        this.foreCastCosts = foreCastCosts;
+        return this;
+    }
+
+    public Documents addForeCastCost(ForeCastCost foreCastCost) {
+        this.foreCastCosts.add(foreCastCost);
+        foreCastCost.setDocument(this);
+        return this;
+    }
+
+    public Documents removeForeCastCost(ForeCastCost foreCastCost) {
+        this.foreCastCosts.remove(foreCastCost);
+        foreCastCost.setDocument(null);
+        return this;
+    }
+
+    public void setForeCastCosts(Set<ForeCastCost> foreCastCosts) {
+        this.foreCastCosts = foreCastCosts;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public Documents project(Project project) {
+        this.project = project;
+        return this;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -824,7 +828,7 @@ public class Documents implements Serializable {
 
     @Override
     public String toString() {
-        return "Documents{" +
+        return "Document{" +
             "id=" + getId() +
             ", title='" + getTitle() + "'" +
             ", protectiveClassification='" + getProtectiveClassification() + "'" +

@@ -22,6 +22,8 @@ public class CollageEducationDTO implements Serializable {
     private String receiveDateDegree;
 
 
+    private Long documentId;
+
     public Long getId() {
         return id;
     }
@@ -78,6 +80,14 @@ public class CollageEducationDTO implements Serializable {
         this.receiveDateDegree = receiveDateDegree;
     }
 
+    public Long getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(Long documentId) {
+        this.documentId = documentId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -109,6 +119,7 @@ public class CollageEducationDTO implements Serializable {
             ", institution='" + getInstitution() + "'" +
             ", country='" + getCountry() + "'" +
             ", receiveDateDegree='" + getReceiveDateDegree() + "'" +
+            ", document=" + getDocumentId() +
             "}";
     }
 }

@@ -10,7 +10,6 @@ import ir.samta.project.service.mapper.DocumentMapper;
 import ir.samta.project.service.mapper.MainStepMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing Document.
@@ -62,9 +61,9 @@ public class DocumentService {
 
         List<MainStep> mainSteps = mainStepMapper.toEntity(documentDTO.getMainSteps());
         for (MainStep mainStep : mainSteps) {
-
+            mainStep.setDocument(document);
         }
-
+        mainStepRepository.saveAll(mainSteps);
         return result;
     }
 
@@ -109,7 +108,7 @@ public class DocumentService {
     /**
      * Search for the document corresponding to the query.
      *
-     * @param query the query of the search
+     * @param query    the query of the search
      * @param pageable the pagination information
      * @return the list of entities
      */

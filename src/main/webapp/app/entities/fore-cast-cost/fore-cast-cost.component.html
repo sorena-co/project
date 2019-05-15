@@ -41,6 +41,7 @@
             <th jhiSortBy="space"><span jhiTranslate="projectApp.foreCastCost.space">Space</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="sellContractType"><span jhiTranslate="projectApp.foreCastCost.sellContractType">Sell Contract Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="type"><span jhiTranslate="projectApp.foreCastCost.type">Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="documentId"><span jhiTranslate="projectApp.foreCastCost.document">Document</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -58,6 +59,11 @@
                 <td>{{foreCastCost.space}}</td>
                 <td>{{foreCastCost.sellContractType}}</td>
                 <td jhiTranslate="{{'projectApp.ForeCastCostType.' + foreCastCost.type}}">{{foreCastCost.type}}</td>
+                <td>
+                    <div *ngIf="foreCastCost.documentId">
+                        <a [routerLink]="['../document', foreCastCost.documentId , 'view' ]" >{{foreCastCost.documentId}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

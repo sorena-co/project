@@ -39,6 +39,13 @@
                         [(ngModel)]="researcherHistory.job" />
                 </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.researcherHistory.document" for="field_document">Document</label>
+                    <select class="form-control" id="field_document" name="document" [(ngModel)]="researcherHistory.documentId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="documentOption.id" *ngFor="let documentOption of documents; trackBy: trackDocumentById">{{documentOption.id}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

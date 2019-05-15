@@ -36,6 +36,7 @@
             <th jhiSortBy="fromDate"><span jhiTranslate="projectApp.existingResearchProject.fromDate">From Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="toDate"><span jhiTranslate="projectApp.existingResearchProject.toDate">To Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="lastStatus"><span jhiTranslate="projectApp.existingResearchProject.lastStatus">Last Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="documentId"><span jhiTranslate="projectApp.existingResearchProject.document">Document</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -48,6 +49,11 @@
                 <td>{{existingResearchProject.fromDate | date:'medium'}}</td>
                 <td>{{existingResearchProject.toDate | date:'medium'}}</td>
                 <td>{{existingResearchProject.lastStatus}}</td>
+                <td>
+                    <div *ngIf="existingResearchProject.documentId">
+                        <a [routerLink]="['../document', existingResearchProject.documentId , 'view' ]" >{{existingResearchProject.documentId}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

@@ -1,12 +1,10 @@
 package ir.samta.project.service.dto;
-
-import ir.samta.project.domain.enumeration.PlanType;
-
-import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import ir.samta.project.domain.enumeration.PlanType;
 
 /**
  * A DTO for the Document entity.
@@ -86,33 +84,9 @@ public class DocumentDTO implements Serializable {
     private String imaginedDate;
 
 
-    private Long mainStepId;
+    private Long projectId;
 
-    private String mainStepMainStep;
-
-    private Long collageEducationId;
-
-    private String collageEducationFullName;
-
-    private Long researcherHistoryId;
-
-    private Long existingResearchProjectId;
-
-    private Long organizationPartnerId;
-
-    private Long costSummaryId;
-
-    private Long foreCastCostConsumeId;
-
-    private Long foreCastCostCostId;
-
-    private Long foreCastCostSupportId;
-
-    private Long foreCastCostSpaceId;
-
-    private Long foreCastCostSellContractId;
-
-    private Long foreCastCostOtherId;
+    private String projectTitle;
 
     private List<MainStepDTO> mainSteps = new ArrayList<>();
 
@@ -404,116 +378,20 @@ public class DocumentDTO implements Serializable {
         this.imaginedDate = imaginedDate;
     }
 
-    public Long getMainStepId() {
-        return mainStepId;
+    public Long getProjectId() {
+        return projectId;
     }
 
-    public void setMainStepId(Long mainStepId) {
-        this.mainStepId = mainStepId;
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
 
-    public String getMainStepMainStep() {
-        return mainStepMainStep;
+    public String getProjectTitle() {
+        return projectTitle;
     }
 
-    public void setMainStepMainStep(String mainStepMainStep) {
-        this.mainStepMainStep = mainStepMainStep;
-    }
-
-    public Long getCollageEducationId() {
-        return collageEducationId;
-    }
-
-    public void setCollageEducationId(Long collageEducationId) {
-        this.collageEducationId = collageEducationId;
-    }
-
-    public String getCollageEducationFullName() {
-        return collageEducationFullName;
-    }
-
-    public void setCollageEducationFullName(String collageEducationFullName) {
-        this.collageEducationFullName = collageEducationFullName;
-    }
-
-    public Long getResearcherHistoryId() {
-        return researcherHistoryId;
-    }
-
-    public void setResearcherHistoryId(Long researcherHistoryId) {
-        this.researcherHistoryId = researcherHistoryId;
-    }
-
-    public Long getExistingResearchProjectId() {
-        return existingResearchProjectId;
-    }
-
-    public void setExistingResearchProjectId(Long existingResearchProjectId) {
-        this.existingResearchProjectId = existingResearchProjectId;
-    }
-
-    public Long getOrganizationPartnerId() {
-        return organizationPartnerId;
-    }
-
-    public void setOrganizationPartnerId(Long organizationPartnerId) {
-        this.organizationPartnerId = organizationPartnerId;
-    }
-
-    public Long getCostSummaryId() {
-        return costSummaryId;
-    }
-
-    public void setCostSummaryId(Long costSummaryId) {
-        this.costSummaryId = costSummaryId;
-    }
-
-    public Long getForeCastCostConsumeId() {
-        return foreCastCostConsumeId;
-    }
-
-    public void setForeCastCostConsumeId(Long costSummaryId) {
-        this.foreCastCostConsumeId = costSummaryId;
-    }
-
-    public Long getForeCastCostCostId() {
-        return foreCastCostCostId;
-    }
-
-    public void setForeCastCostCostId(Long costSummaryId) {
-        this.foreCastCostCostId = costSummaryId;
-    }
-
-    public Long getForeCastCostSupportId() {
-        return foreCastCostSupportId;
-    }
-
-    public void setForeCastCostSupportId(Long costSummaryId) {
-        this.foreCastCostSupportId = costSummaryId;
-    }
-
-    public Long getForeCastCostSpaceId() {
-        return foreCastCostSpaceId;
-    }
-
-    public void setForeCastCostSpaceId(Long costSummaryId) {
-        this.foreCastCostSpaceId = costSummaryId;
-    }
-
-    public Long getForeCastCostSellContractId() {
-        return foreCastCostSellContractId;
-    }
-
-    public void setForeCastCostSellContractId(Long costSummaryId) {
-        this.foreCastCostSellContractId = costSummaryId;
-    }
-
-    public Long getForeCastCostOtherId() {
-        return foreCastCostOtherId;
-    }
-
-    public void setForeCastCostOtherId(Long costSummaryId) {
-        this.foreCastCostOtherId = costSummaryId;
+    public void setProjectTitle(String projectTitle) {
+        this.projectTitle = projectTitle;
     }
 
     @Override
@@ -576,20 +454,8 @@ public class DocumentDTO implements Serializable {
             ", whichMilitary='" + getWhichMilitary() + "'" +
             ", civilianApplications='" + getCivilianApplications() + "'" +
             ", imaginedDate='" + getImaginedDate() + "'" +
-            ", mainStep=" + getMainStepId() +
-            ", mainStep='" + getMainStepMainStep() + "'" +
-            ", collageEducation=" + getCollageEducationId() +
-            ", collageEducation='" + getCollageEducationFullName() + "'" +
-            ", researcherHistory=" + getResearcherHistoryId() +
-            ", existingResearchProject=" + getExistingResearchProjectId() +
-            ", organizationPartner=" + getOrganizationPartnerId() +
-            ", costSummary=" + getCostSummaryId() +
-            ", foreCastCostConsume=" + getForeCastCostConsumeId() +
-            ", foreCastCostCost=" + getForeCastCostCostId() +
-            ", foreCastCostSupport=" + getForeCastCostSupportId() +
-            ", foreCastCostSpace=" + getForeCastCostSpaceId() +
-            ", foreCastCostSellContract=" + getForeCastCostSellContractId() +
-            ", foreCastCostOther=" + getForeCastCostOtherId() +
+            ", project=" + getProjectId() +
+            ", project='" + getProjectTitle() + "'" +
             "}";
     }
 

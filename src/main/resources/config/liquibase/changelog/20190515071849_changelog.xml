@@ -1,0 +1,139 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="mohammad (generated)" id="1557904781777-1">
+        <addColumn tableName="collage_education">
+            <column name="document_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-2">
+        <addColumn tableName="cost_summary">
+            <column name="document_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-3">
+        <addColumn tableName="existing_research_project">
+            <column name="document_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-4">
+        <addColumn tableName="fore_cast_cost">
+            <column name="document_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-5">
+        <addColumn tableName="main_step">
+            <column name="document_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-6">
+        <addColumn tableName="organization_partner">
+            <column name="document_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-7">
+        <addColumn tableName="researcher_history">
+            <column name="document_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-8">
+        <addColumn tableName="document">
+            <column name="project_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-9">
+        <addForeignKeyConstraint baseColumnNames="document_id" baseTableName="researcher_history" constraintName="FK358ciku8km8u0up8hdpn08cgs" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="document"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-10">
+        <addForeignKeyConstraint baseColumnNames="document_id" baseTableName="existing_research_project" constraintName="FK5pxxeax7wjija6eg4baf9vm4e" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="document"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-11">
+        <addForeignKeyConstraint baseColumnNames="project_id" baseTableName="document" constraintName="FKebvohyx0uckt4eb2cpiqiciba" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="project"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-12">
+        <addForeignKeyConstraint baseColumnNames="document_id" baseTableName="collage_education" constraintName="FKg7pb8y06bdou4wcy9gshrmeg9" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="document"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-13">
+        <addForeignKeyConstraint baseColumnNames="document_id" baseTableName="main_step" constraintName="FKngseiy21i8i8cclm3o7m8ut1j" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="document"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-14">
+        <addForeignKeyConstraint baseColumnNames="document_id" baseTableName="fore_cast_cost" constraintName="FKqy686qp8f7jh33gyeryng0wlq" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="document"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-15">
+        <addForeignKeyConstraint baseColumnNames="document_id" baseTableName="cost_summary" constraintName="FKs5up45ca2kcg32s1hr2nimjw3" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="document"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-16">
+        <addForeignKeyConstraint baseColumnNames="document_id" baseTableName="organization_partner" constraintName="FKt6gru6ams303rfwxnjca3sbk5" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="document"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-17">
+        <dropForeignKeyConstraint baseTableName="document" constraintName="fk_document_collage_education_id"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-18">
+        <dropForeignKeyConstraint baseTableName="document" constraintName="fk_document_cost_summary_id"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-19">
+        <dropForeignKeyConstraint baseTableName="document" constraintName="fk_document_existing_research_project_id"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-20">
+        <dropForeignKeyConstraint baseTableName="document" constraintName="fk_document_fore_cast_cost_consume_id"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-21">
+        <dropForeignKeyConstraint baseTableName="document" constraintName="fk_document_fore_cast_cost_cost_id"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-22">
+        <dropForeignKeyConstraint baseTableName="document" constraintName="fk_document_fore_cast_cost_other_id"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-23">
+        <dropForeignKeyConstraint baseTableName="document" constraintName="fk_document_fore_cast_cost_sell_contract_id"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-24">
+        <dropForeignKeyConstraint baseTableName="document" constraintName="fk_document_fore_cast_cost_space_id"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-25">
+        <dropForeignKeyConstraint baseTableName="document" constraintName="fk_document_fore_cast_cost_support_id"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-26">
+        <dropForeignKeyConstraint baseTableName="document" constraintName="fk_document_main_step_id"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-27">
+        <dropForeignKeyConstraint baseTableName="document" constraintName="fk_document_organization_partner_id"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-28">
+        <dropForeignKeyConstraint baseTableName="document" constraintName="fk_document_researcher_history_id"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-29">
+        <dropColumn columnName="collage_education_id" tableName="document"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-30">
+        <dropColumn columnName="cost_summary_id" tableName="document"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-31">
+        <dropColumn columnName="existing_research_project_id" tableName="document"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-32">
+        <dropColumn columnName="fore_cast_cost_consume_id" tableName="document"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-33">
+        <dropColumn columnName="fore_cast_cost_cost_id" tableName="document"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-34">
+        <dropColumn columnName="fore_cast_cost_other_id" tableName="document"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-35">
+        <dropColumn columnName="fore_cast_cost_sell_contract_id" tableName="document"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-36">
+        <dropColumn columnName="fore_cast_cost_space_id" tableName="document"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-37">
+        <dropColumn columnName="fore_cast_cost_support_id" tableName="document"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-38">
+        <dropColumn columnName="main_step_id" tableName="document"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-39">
+        <dropColumn columnName="organization_partner_id" tableName="document"/>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1557904781777-40">
+        <dropColumn columnName="researcher_history_id" tableName="document"/>
+    </changeSet>
+</databaseChangeLog>

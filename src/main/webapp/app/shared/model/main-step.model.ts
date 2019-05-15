@@ -6,6 +6,7 @@ export interface IMainStep {
     month?: number;
     percent?: number;
     result?: string;
+    documentId?: number;
 }
 
 export class MainStep implements IMainStep {
@@ -16,6 +17,7 @@ export class MainStep implements IMainStep {
         public detailOfAction?: string,
         public month?: number,
         public percent?: number,
-        public result?: string
+        public result?: string,
+        public documentId?: number
     ) {}
 }

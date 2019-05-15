@@ -33,6 +33,8 @@ public class ForeCastCostDTO implements Serializable {
     private ForeCastCostType type;
 
 
+    private Long documentId;
+
     public Long getId() {
         return id;
     }
@@ -129,6 +131,14 @@ public class ForeCastCostDTO implements Serializable {
         this.type = type;
     }
 
+    public Long getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(Long documentId) {
+        this.documentId = documentId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -165,6 +175,7 @@ public class ForeCastCostDTO implements Serializable {
             ", space=" + getSpace() +
             ", sellContractType='" + getSellContractType() + "'" +
             ", type='" + getType() + "'" +
+            ", document=" + getDocumentId() +
             "}";
     }
 }

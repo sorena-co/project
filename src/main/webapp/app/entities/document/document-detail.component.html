@@ -145,76 +145,10 @@
                 <dd>
                     <span>{{document.imaginedDate}}</span>
                 </dd>
-                <dt><span jhiTranslate="projectApp.document.mainStep">Main Step</span></dt>
+                <dt><span jhiTranslate="projectApp.document.project">Project</span></dt>
                 <dd>
-                    <div *ngIf="document.mainStepId">
-                        <a [routerLink]="['/main-step', document.mainStepId, 'view']">{{document.mainStepMainStep}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="projectApp.document.collageEducation">Collage Education</span></dt>
-                <dd>
-                    <div *ngIf="document.collageEducationId">
-                        <a [routerLink]="['/collage-education', document.collageEducationId, 'view']">{{document.collageEducationFullName}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="projectApp.document.researcherHistory">Researcher History</span></dt>
-                <dd>
-                    <div *ngIf="document.researcherHistoryId">
-                        <a [routerLink]="['/researcher-history', document.researcherHistoryId, 'view']">{{document.researcherHistoryId}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="projectApp.document.existingResearchProject">Existing Research Project</span></dt>
-                <dd>
-                    <div *ngIf="document.existingResearchProjectId">
-                        <a [routerLink]="['/existing-research-project', document.existingResearchProjectId, 'view']">{{document.existingResearchProjectId}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="projectApp.document.organizationPartner">Organization Partner</span></dt>
-                <dd>
-                    <div *ngIf="document.organizationPartnerId">
-                        <a [routerLink]="['/organization-partner', document.organizationPartnerId, 'view']">{{document.organizationPartnerId}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="projectApp.document.costSummary">Cost Summary</span></dt>
-                <dd>
-                    <div *ngIf="document.costSummaryId">
-                        <a [routerLink]="['/cost-summary', document.costSummaryId, 'view']">{{document.costSummaryId}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="projectApp.document.foreCastCostConsume">Fore Cast Cost Consume</span></dt>
-                <dd>
-                    <div *ngIf="document.foreCastCostConsumeId">
-                        <a [routerLink]="['/cost-summary', document.foreCastCostConsumeId, 'view']">{{document.foreCastCostConsumeId}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="projectApp.document.foreCastCostCost">Fore Cast Cost Cost</span></dt>
-                <dd>
-                    <div *ngIf="document.foreCastCostCostId">
-                        <a [routerLink]="['/cost-summary', document.foreCastCostCostId, 'view']">{{document.foreCastCostCostId}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="projectApp.document.foreCastCostSupport">Fore Cast Cost Support</span></dt>
-                <dd>
-                    <div *ngIf="document.foreCastCostSupportId">
-                        <a [routerLink]="['/cost-summary', document.foreCastCostSupportId, 'view']">{{document.foreCastCostSupportId}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="projectApp.document.foreCastCostSpace">Fore Cast Cost Space</span></dt>
-                <dd>
-                    <div *ngIf="document.foreCastCostSpaceId">
-                        <a [routerLink]="['/cost-summary', document.foreCastCostSpaceId, 'view']">{{document.foreCastCostSpaceId}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="projectApp.document.foreCastCostSellContract">Fore Cast Cost Sell Contract</span></dt>
-                <dd>
-                    <div *ngIf="document.foreCastCostSellContractId">
-                        <a [routerLink]="['/cost-summary', document.foreCastCostSellContractId, 'view']">{{document.foreCastCostSellContractId}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="projectApp.document.foreCastCostOther">Fore Cast Cost Other</span></dt>
-                <dd>
-                    <div *ngIf="document.foreCastCostOtherId">
-                        <a [routerLink]="['/cost-summary', document.foreCastCostOtherId, 'view']">{{document.foreCastCostOtherId}}</a>
+                    <div *ngIf="document.projectId">
+                        <a [routerLink]="['/project', document.projectId, 'view']">{{document.projectTitle}}</a>
                     </div>
                 </dd>
             </dl>

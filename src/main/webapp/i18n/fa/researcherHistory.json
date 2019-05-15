@@ -20,7 +20,8 @@
             "toDate": "To Date",
             "organization": "Organization",
             "level": "Level",
-            "job": "Job"
+            "job": "Job",
+            "document": "Document"
         }
     }
 }

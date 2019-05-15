@@ -36,6 +36,7 @@
             <th jhiSortBy="institution"><span jhiTranslate="projectApp.collageEducation.institution">Institution</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="country"><span jhiTranslate="projectApp.collageEducation.country">Country</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="receiveDateDegree"><span jhiTranslate="projectApp.collageEducation.receiveDateDegree">Receive Date Degree</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="documentId"><span jhiTranslate="projectApp.collageEducation.document">Document</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -48,6 +49,11 @@
                 <td>{{collageEducation.institution}}</td>
                 <td>{{collageEducation.country}}</td>
                 <td>{{collageEducation.receiveDateDegree}}</td>
+                <td>
+                    <div *ngIf="collageEducation.documentId">
+                        <a [routerLink]="['../document', collageEducation.documentId , 'view' ]" >{{collageEducation.documentId}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

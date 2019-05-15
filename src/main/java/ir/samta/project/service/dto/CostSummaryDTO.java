@@ -18,6 +18,8 @@ public class CostSummaryDTO implements Serializable {
     private Long costDollar;
 
 
+    private Long documentId;
+
     public Long getId() {
         return id;
     }
@@ -58,6 +60,14 @@ public class CostSummaryDTO implements Serializable {
         this.costDollar = costDollar;
     }
 
+    public Long getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(Long documentId) {
+        this.documentId = documentId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -87,6 +97,7 @@ public class CostSummaryDTO implements Serializable {
             ", fromPage=" + getFromPage() +
             ", costRial=" + getCostRial() +
             ", costDollar=" + getCostDollar() +
+            ", document=" + getDocumentId() +
             "}";
     }
 }

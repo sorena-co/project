@@ -21,6 +21,12 @@
                 <dd>
                     <span>{{costSummary.costDollar}}</span>
                 </dd>
+                <dt><span jhiTranslate="projectApp.costSummary.document">Document</span></dt>
+                <dd>
+                    <div *ngIf="costSummary.documentId">
+                        <a [routerLink]="['/document', costSummary.documentId, 'view']">{{costSummary.documentId}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

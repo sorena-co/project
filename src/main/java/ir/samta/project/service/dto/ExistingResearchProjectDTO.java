@@ -23,6 +23,8 @@ public class ExistingResearchProjectDTO implements Serializable {
     private String lastStatus;
 
 
+    private Long documentId;
+
     public Long getId() {
         return id;
     }
@@ -79,6 +81,14 @@ public class ExistingResearchProjectDTO implements Serializable {
         this.lastStatus = lastStatus;
     }
 
+    public Long getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(Long documentId) {
+        this.documentId = documentId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -110,6 +120,7 @@ public class ExistingResearchProjectDTO implements Serializable {
             ", fromDate='" + getFromDate() + "'" +
             ", toDate='" + getToDate() + "'" +
             ", lastStatus='" + getLastStatus() + "'" +
+            ", document=" + getDocumentId() +
             "}";
     }
 }

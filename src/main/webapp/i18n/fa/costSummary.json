@@ -19,7 +19,8 @@
             "costDetail": "Cost Detail",
             "fromPage": "From Page",
             "costRial": "Cost Rial",
-            "costDollar": "Cost Dollar"
+            "costDollar": "Cost Dollar",
+            "document": "Document"
         }
     }
 }

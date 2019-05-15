@@ -7,6 +7,7 @@ export interface IResearcherHistory {
     organization?: string;
     level?: string;
     job?: string;
+    documentId?: number;
 }
 
 export class ResearcherHistory implements IResearcherHistory {
@@ -16,6 +17,7 @@ export class ResearcherHistory implements IResearcherHistory {
         public toDate?: Moment,
         public organization?: string,
         public level?: string,
-        public job?: string
+        public job?: string,
+        public documentId?: number
     ) {}
 }

@@ -25,6 +25,12 @@
                 <dd>
                     <span>{{researcherHistory.job}}</span>
                 </dd>
+                <dt><span jhiTranslate="projectApp.researcherHistory.document">Document</span></dt>
+                <dd>
+                    <div *ngIf="researcherHistory.documentId">
+                        <a [routerLink]="['/document', researcherHistory.documentId, 'view']">{{researcherHistory.documentId}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

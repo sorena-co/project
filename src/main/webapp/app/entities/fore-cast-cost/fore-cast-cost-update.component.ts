@@ -3,8 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
+import { JhiAlertService } from 'ng-jhipster';
 import { IForeCastCost } from 'app/shared/model/fore-cast-cost.model';
 import { ForeCastCostService } from './fore-cast-cost.service';
+import { IDocument } from 'app/shared/model/document.model';
+import { DocumentService } from 'app/entities/document';
 
 @Component({
     selector: 'jhi-fore-cast-cost-update',
@@ -14,13 +17,27 @@ export class ForeCastCostUpdateComponent implements OnInit {
     foreCastCost: IForeCastCost;
     isSaving: boolean;
 
-    constructor(protected foreCastCostService: ForeCastCostService, protected activatedRoute: ActivatedRoute) {}
+    documents: IDocument[];
+
+    constructor(
+        protected jhiAlertService: JhiAlertService,
+        protected foreCastCostService: ForeCastCostService,
+        protected documentService: DocumentService,
+        protected activatedRoute: ActivatedRoute
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ foreCastCost }) => {
             this.foreCastCost = foreCastCost;
         });
+        this.documentService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IDocument[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IDocument[]>) => response.body)
+            )
+            .subscribe((res: IDocument[]) => (this.documents = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -47,5 +64,13 @@ export class ForeCastCostUpdateComponent implements OnInit {
 
     protected onSaveError() {
         this.isSaving = false;
+    }
+
+    protected onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackDocumentById(index: number, item: IDocument) {
+        return item.id;
     }
 }

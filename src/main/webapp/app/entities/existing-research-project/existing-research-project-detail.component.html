@@ -29,6 +29,12 @@
                 <dd>
                     <span>{{existingResearchProject.lastStatus}}</span>
                 </dd>
+                <dt><span jhiTranslate="projectApp.existingResearchProject.document">Document</span></dt>
+                <dd>
+                    <div *ngIf="existingResearchProject.documentId">
+                        <a [routerLink]="['/document', existingResearchProject.documentId, 'view']">{{existingResearchProject.documentId}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

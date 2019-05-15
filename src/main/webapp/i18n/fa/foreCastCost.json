@@ -26,7 +26,8 @@
             "totalPriceDollar": "Total Price Dollar",
             "space": "Space",
             "sellContractType": "Sell Contract Type",
-            "type": "Type"
+            "type": "Type",
+            "document": "Document"
         }
     }
 }

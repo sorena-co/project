@@ -2,9 +2,9 @@
     "projectApp": {
         "PlanType": {
             "null": "",
-            "FUNDANMENTAL": "بنيادي",
-            "PRACTICAL": "كاربردي",
-            "DEVELOPMENT": "توسه ای"
+            "FUNDANMENTAL": "FUNDANMENTAL",
+            "PRACTICAL": "PRACTICAL",
+            "DEVELOPMENT": "DEVELOPMENT"
         }
     }
 }

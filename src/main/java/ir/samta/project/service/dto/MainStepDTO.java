@@ -22,6 +22,8 @@ public class MainStepDTO implements Serializable {
     private String result;
 
 
+    private Long documentId;
+
     public Long getId() {
         return id;
     }
@@ -78,6 +80,14 @@ public class MainStepDTO implements Serializable {
         this.result = result;
     }
 
+    public Long getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(Long documentId) {
+        this.documentId = documentId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -109,6 +119,7 @@ public class MainStepDTO implements Serializable {
             ", month=" + getMonth() +
             ", percent=" + getPercent() +
             ", result='" + getResult() + "'" +
+            ", document=" + getDocumentId() +
             "}";
     }
 }

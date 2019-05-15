@@ -34,6 +34,7 @@
             <th jhiSortBy="fromPage"><span jhiTranslate="projectApp.costSummary.fromPage">From Page</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="costRial"><span jhiTranslate="projectApp.costSummary.costRial">Cost Rial</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="costDollar"><span jhiTranslate="projectApp.costSummary.costDollar">Cost Dollar</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="documentId"><span jhiTranslate="projectApp.costSummary.document">Document</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -44,6 +45,11 @@
                 <td>{{costSummary.fromPage}}</td>
                 <td>{{costSummary.costRial}}</td>
                 <td>{{costSummary.costDollar}}</td>
+                <td>
+                    <div *ngIf="costSummary.documentId">
+                        <a [routerLink]="['../document', costSummary.documentId , 'view' ]" >{{costSummary.documentId}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

@@ -1,5 +1,11 @@
 import { Moment } from 'moment';
-import { MainStep } from 'app/shared/model/main-step.model';
+import { IMainStep } from 'app/shared/model/main-step.model';
+import { ICollageEducation } from 'app/shared/model/collage-education.model';
+import { IResearcherHistory } from 'app/shared/model/researcher-history.model';
+import { IExistingResearchProject } from 'app/shared/model/existing-research-project.model';
+import { IOrganizationPartner } from 'app/shared/model/organization-partner.model';
+import { ICostSummary } from 'app/shared/model/cost-summary.model';
+import { IForeCastCost } from 'app/shared/model/fore-cast-cost.model';
 
 export const enum PlanType {
     FUNDANMENTAL = 'FUNDANMENTAL',
@@ -44,21 +50,15 @@ export interface IDocument {
     whichMilitary?: string;
     civilianApplications?: string;
     imaginedDate?: string;
-    mainStepMainStep?: string;
-    mainStepId?: number;
-    collageEducationFullName?: string;
-    collageEducationId?: number;
-    researcherHistoryId?: number;
-    existingResearchProjectId?: number;
-    organizationPartnerId?: number;
-    costSummaryId?: number;
-    foreCastCostConsumeId?: number;
-    foreCastCostCostId?: number;
-    foreCastCostSupportId?: number;
-    foreCastCostSpaceId?: number;
-    foreCastCostSellContractId?: number;
-    foreCastCostOtherId?: number;
-    mainSteps?: MainStep[];
+    mainSteps?: IMainStep[];
+    collageEducations?: ICollageEducation[];
+    researcherHistories?: IResearcherHistory[];
+    existingResearchProjects?: IExistingResearchProject[];
+    organizationPartners?: IOrganizationPartner[];
+    costSummaries?: ICostSummary[];
+    foreCastCosts?: IForeCastCost[];
+    projectTitle?: string;
+    projectId?: number;
 }
 
 export class Document implements IDocument {
@@ -99,20 +99,14 @@ export class Document implements IDocument {
         public whichMilitary?: string,
         public civilianApplications?: string,
         public imaginedDate?: string,
-        public mainStepMainStep?: string,
-        public mainStepId?: number,
-        public collageEducationFullName?: string,
-        public collageEducationId?: number,
-        public researcherHistoryId?: number,
-        public existingResearchProjectId?: number,
-        public organizationPartnerId?: number,
-        public costSummaryId?: number,
-        public foreCastCostConsumeId?: number,
-        public foreCastCostCostId?: number,
-        public foreCastCostSupportId?: number,
-        public foreCastCostSpaceId?: number,
-        public foreCastCostSellContractId?: number,
-        public foreCastCostOtherId?: number,
-        public mainSteps?: MainStep[]
+        public mainSteps?: IMainStep[],
+        public collageEducations?: ICollageEducation[],
+        public researcherHistories?: IResearcherHistory[],
+        public existingResearchProjects?: IExistingResearchProject[],
+        public organizationPartners?: IOrganizationPartner[],
+        public costSummaries?: ICostSummary[],
+        public foreCastCosts?: IForeCastCost[],
+        public projectTitle?: string,
+        public projectId?: number
     ) {}
 }

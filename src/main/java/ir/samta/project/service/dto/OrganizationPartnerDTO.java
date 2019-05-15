@@ -16,6 +16,8 @@ public class OrganizationPartnerDTO implements Serializable {
     private String name;
 
 
+    private Long documentId;
+
     public Long getId() {
         return id;
     }
@@ -48,6 +50,14 @@ public class OrganizationPartnerDTO implements Serializable {
         this.name = name;
     }
 
+    public Long getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(Long documentId) {
+        this.documentId = documentId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -76,6 +86,7 @@ public class OrganizationPartnerDTO implements Serializable {
             ", organization='" + getOrganization() + "'" +
             ", type='" + getType() + "'" +
             ", name='" + getName() + "'" +
+            ", document=" + getDocumentId() +
             "}";
     }
 }

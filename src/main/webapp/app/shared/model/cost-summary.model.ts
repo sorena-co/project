@@ -4,6 +4,7 @@ export interface ICostSummary {
     fromPage?: number;
     costRial?: number;
     costDollar?: number;
+    documentId?: number;
 }
 
 export class CostSummary implements ICostSummary {
@@ -12,6 +13,7 @@ export class CostSummary implements ICostSummary {
         public costDetail?: string,
         public fromPage?: number,
         public costRial?: number,
-        public costDollar?: number
+        public costDollar?: number,
+        public documentId?: number
     ) {}
 }

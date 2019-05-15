@@ -20,6 +20,7 @@ export interface IForeCastCost {
     space?: number;
     sellContractType?: string;
     type?: ForeCastCostType;
+    documentId?: number;
 }
 
 export class ForeCastCost implements IForeCastCost {
@@ -35,6 +36,7 @@ export class ForeCastCost implements IForeCastCost {
         public totalPriceDollar?: number,
         public space?: number,
         public sellContractType?: string,
-        public type?: ForeCastCostType
+        public type?: ForeCastCostType,
+        public documentId?: number
     ) {}
 }

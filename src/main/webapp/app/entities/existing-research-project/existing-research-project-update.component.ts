@@ -5,8 +5,11 @@ import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { JhiAlertService } from 'ng-jhipster';
 import { IExistingResearchProject } from 'app/shared/model/existing-research-project.model';
 import { ExistingResearchProjectService } from './existing-research-project.service';
+import { IDocument } from 'app/shared/model/document.model';
+import { DocumentService } from 'app/entities/document';
 
 @Component({
     selector: 'jhi-existing-research-project-update',
@@ -15,10 +18,17 @@ import { ExistingResearchProjectService } from './existing-research-project.serv
 export class ExistingResearchProjectUpdateComponent implements OnInit {
     existingResearchProject: IExistingResearchProject;
     isSaving: boolean;
+
+    documents: IDocument[];
     fromDate: string;
     toDate: string;
 
-    constructor(protected existingResearchProjectService: ExistingResearchProjectService, protected activatedRoute: ActivatedRoute) {}
+    constructor(
+        protected jhiAlertService: JhiAlertService,
+        protected existingResearchProjectService: ExistingResearchProjectService,
+        protected documentService: DocumentService,
+        protected activatedRoute: ActivatedRoute
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
@@ -28,6 +38,13 @@ export class ExistingResearchProjectUpdateComponent implements OnInit {
                 this.existingResearchProject.fromDate != null ? this.existingResearchProject.fromDate.format(DATE_TIME_FORMAT) : null;
             this.toDate = this.existingResearchProject.toDate != null ? this.existingResearchProject.toDate.format(DATE_TIME_FORMAT) : null;
         });
+        this.documentService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IDocument[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IDocument[]>) => response.body)
+            )
+            .subscribe((res: IDocument[]) => (this.documents = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -59,5 +76,13 @@ export class ExistingResearchProjectUpdateComponent implements OnInit {
 
     protected onSaveError() {
         this.isSaving = false;
+    }
+
+    protected onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackDocumentById(index: number, item: IDocument) {
+        return item.id;
     }
 }

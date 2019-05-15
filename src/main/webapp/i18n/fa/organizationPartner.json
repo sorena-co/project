@@ -18,7 +18,8 @@
             },
             "organization": "Organization",
             "type": "Type",
-            "name": "Name"
+            "name": "Name",
+            "document": "Document"
         }
     }
 }

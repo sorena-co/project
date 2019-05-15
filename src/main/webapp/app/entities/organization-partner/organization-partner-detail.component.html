@@ -17,6 +17,12 @@
                 <dd>
                     <span>{{organizationPartner.name}}</span>
                 </dd>
+                <dt><span jhiTranslate="projectApp.organizationPartner.document">Document</span></dt>
+                <dd>
+                    <div *ngIf="organizationPartner.documentId">
+                        <a [routerLink]="['/document', organizationPartner.documentId, 'view']">{{organizationPartner.documentId}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

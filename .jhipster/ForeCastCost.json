@@ -47,7 +47,14 @@
             "fieldValues": "CONSUME,COST,SUPPORT,SPACE,SELL_CONTRACT,OTHER"
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipName": "document",
+            "otherEntityName": "document",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
     "changelogDate": "20190511082427",
     "entityTableName": "fore_cast_cost",
     "dto": "mapstruct",

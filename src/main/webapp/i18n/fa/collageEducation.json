@@ -21,7 +21,8 @@
             "program": "Program",
             "institution": "Institution",
             "country": "Country",
-            "receiveDateDegree": "Receive Date Degree"
+            "receiveDateDegree": "Receive Date Degree",
+            "document": "Document"
         }
     }
 }

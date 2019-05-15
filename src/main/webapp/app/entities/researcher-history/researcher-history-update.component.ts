@@ -5,8 +5,11 @@ import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { JhiAlertService } from 'ng-jhipster';
 import { IResearcherHistory } from 'app/shared/model/researcher-history.model';
 import { ResearcherHistoryService } from './researcher-history.service';
+import { IDocument } from 'app/shared/model/document.model';
+import { DocumentService } from 'app/entities/document';
 
 @Component({
     selector: 'jhi-researcher-history-update',
@@ -15,10 +18,17 @@ import { ResearcherHistoryService } from './researcher-history.service';
 export class ResearcherHistoryUpdateComponent implements OnInit {
     researcherHistory: IResearcherHistory;
     isSaving: boolean;
+
+    documents: IDocument[];
     fromDate: string;
     toDate: string;
 
-    constructor(protected researcherHistoryService: ResearcherHistoryService, protected activatedRoute: ActivatedRoute) {}
+    constructor(
+        protected jhiAlertService: JhiAlertService,
+        protected researcherHistoryService: ResearcherHistoryService,
+        protected documentService: DocumentService,
+        protected activatedRoute: ActivatedRoute
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
@@ -27,6 +37,13 @@ export class ResearcherHistoryUpdateComponent implements OnInit {
             this.fromDate = this.researcherHistory.fromDate != null ? this.researcherHistory.fromDate.format(DATE_TIME_FORMAT) : null;
             this.toDate = this.researcherHistory.toDate != null ? this.researcherHistory.toDate.format(DATE_TIME_FORMAT) : null;
         });
+        this.documentService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IDocument[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IDocument[]>) => response.body)
+            )
+            .subscribe((res: IDocument[]) => (this.documents = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -55,5 +72,13 @@ export class ResearcherHistoryUpdateComponent implements OnInit {
 
     protected onSaveError() {
         this.isSaving = false;
+    }
+
+    protected onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackDocumentById(index: number, item: IDocument) {
+        return item.id;
     }
 }

@@ -3,8 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
+import { JhiAlertService } from 'ng-jhipster';
 import { ICostSummary } from 'app/shared/model/cost-summary.model';
 import { CostSummaryService } from './cost-summary.service';
+import { IDocument } from 'app/shared/model/document.model';
+import { DocumentService } from 'app/entities/document';
 
 @Component({
     selector: 'jhi-cost-summary-update',
@@ -14,13 +17,27 @@ export class CostSummaryUpdateComponent implements OnInit {
     costSummary: ICostSummary;
     isSaving: boolean;
 
-    constructor(protected costSummaryService: CostSummaryService, protected activatedRoute: ActivatedRoute) {}
+    documents: IDocument[];
+
+    constructor(
+        protected jhiAlertService: JhiAlertService,
+        protected costSummaryService: CostSummaryService,
+        protected documentService: DocumentService,
+        protected activatedRoute: ActivatedRoute
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ costSummary }) => {
             this.costSummary = costSummary;
         });
+        this.documentService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IDocument[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IDocument[]>) => response.body)
+            )
+            .subscribe((res: IDocument[]) => (this.documents = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -47,5 +64,13 @@ export class CostSummaryUpdateComponent implements OnInit {
 
     protected onSaveError() {
         this.isSaving = false;
+    }
+
+    protected onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackDocumentById(index: number, item: IDocument) {
+        return item.id;
     }
 }
