@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="costSummary">
+            <h2><span jhiTranslate="projectApp.costSummary.detail.title">Cost Summary</span> {{costSummary.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="projectApp.costSummary.costDetail">Cost Detail</span></dt>
+                <dd>
+                    <span>{{costSummary.costDetail}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.costSummary.fromPage">From Page</span></dt>
+                <dd>
+                    <span>{{costSummary.fromPage}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.costSummary.costRial">Cost Rial</span></dt>
+                <dd>
+                    <span>{{costSummary.costRial}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.costSummary.costDollar">Cost Dollar</span></dt>
+                <dd>
+                    <span>{{costSummary.costDollar}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/cost-summary', costSummary.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

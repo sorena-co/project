@@ -12,9 +12,18 @@
     <include file="config/liquibase/changelog/20190406213929_added_entity_FinancialProject.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190427111528_added_entity_Phase.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190427111529_added_entity_Action.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190511082420_added_entity_Document.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190511082421_added_entity_MainStep.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190511082422_added_entity_CollageEducation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190511082423_added_entity_ResearcherHistory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190511082424_added_entity_ExistingResearchProject.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190511082425_added_entity_OrganizationPartner.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190511082426_added_entity_CostSummary.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190511082427_added_entity_ForeCastCost.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20190406213929_added_entity_constraints_FinancialProject.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190427111529_added_entity_constraints_Action.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190511082420_added_entity_constraints_Document.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <include file="config/liquibase/changelog/20190406225457_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190407004932_changelog.xml" relativeToChangelogFile="false"/>

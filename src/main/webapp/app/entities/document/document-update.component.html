@@ -1,0 +1,631 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-document-heading" jhiTranslate="projectApp.document.home.createOrEditLabel">Create or edit a
+                Document</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.title"
+                                   for="field_title">Title</label>
+                            <input type="text" class="form-control" name="title" id="field_title"
+                                   [(ngModel)]="document.title"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="projectApp.document.protectiveClassification"
+                                   for="field_protectiveClassification">Protective Classification</label>
+                            <input type="text" class="form-control" name="protectiveClassification"
+                                   id="field_protectiveClassification"
+                                   [(ngModel)]="document.protectiveClassification"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.persianTitle"
+                                   for="field_persianTitle">Persian Title</label>
+                            <input type="text" class="form-control" name="persianTitle" id="field_persianTitle"
+                                   [(ngModel)]="document.persianTitle"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.foreignTitle"
+                                   for="field_foreignTitle">Foreign Title</label>
+                            <input type="text" class="form-control" name="foreignTitle" id="field_foreignTitle"
+                                   [(ngModel)]="document.foreignTitle"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.planType"
+                                   for="field_planType">Plan
+                                Type</label>
+                            <select class="form-control" name="planType" [(ngModel)]="document.planType"
+                                    id="field_planType">
+                                <option value="FUNDANMENTAL">{{'projectApp.PlanType.FUNDANMENTAL' | translate}}</option>
+                                <option value="PRACTICAL">{{'projectApp.PlanType.PRACTICAL' | translate}}</option>
+                                <option value="DEVELOPMENT">{{'projectApp.PlanType.DEVELOPMENT' | translate}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.detailOfProject"
+                                   for="field_detailOfProject">Detail Of Project</label>
+                            <textarea type="text" class="form-control" name="detailOfProject" id="field_detailOfProject"
+                                      [(ngModel)]="document.detailOfProject"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.visionOfProject"
+                                   for="field_visionOfProject">Vision Of Project</label>
+                            <textarea type="text" class="form-control" name="visionOfProject" id="field_visionOfProject"
+                                      [(ngModel)]="document.visionOfProject"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.executiveBidder"
+                                   for="field_executiveBidder">Executive Bidder</label>
+                            <input type="text" class="form-control" name="executiveBidder" id="field_executiveBidder"
+                                   [(ngModel)]="document.executiveBidder"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.organization"
+                                   for="field_organization">Organization</label>
+                            <input type="text" class="form-control" name="organization" id="field_organization"
+                                   [(ngModel)]="document.organization"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.industry"
+                                   for="field_industry">Industry</label>
+                            <input type="text" class="form-control" name="industry" id="field_industry"
+                                   [(ngModel)]="document.industry"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.address"
+                                   for="field_address">Address</label>
+                            <textarea type="text" class="form-control" name="address" id="field_address"
+                                      [(ngModel)]="document.address"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.exportPlanDate"
+                                   for="field_exportPlanDate">Export Plan Date</label>
+                            <div class="d-flex" style="width: 100%">
+                                <dp-date-picker
+                                    dir="ltr"
+                                    class="form-control"
+                                    [(ngModel)]="document.exportPlanDate"
+                                    id="field_exportPlanDate"
+                                    mode="day"
+                                    theme="dp-material"
+                                    [ngModelOptions]="{standalone: true}"
+                                ></dp-date-picker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.executivePlanDate"
+                                   for="field_executivePlanDate">Executive Plan Date</label>
+                            <div class="d-flex" style="width: 100%">
+                                <dp-date-picker
+                                    dir="ltr"
+                                    class="form-control"
+                                    [(ngModel)]="document.executivePlanDate"
+                                    id="field_executivePlanDate"
+                                    mode="day"
+                                    theme="dp-material"
+                                    [ngModelOptions]="{standalone: true}"
+                                ></dp-date-picker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.fromPlanDate"
+                                   for="field_fromPlanDate">From Plan Date</label>
+                            <div class="d-flex" style="width: 100%">
+                                <dp-date-picker
+                                    dir="ltr"
+                                    class="form-control"
+                                    [(ngModel)]="document.fromPlanDate"
+                                    id="field_fromPlanDate"
+                                    mode="day"
+                                    theme="dp-material"
+                                    [ngModelOptions]="{standalone: true}"
+                                ></dp-date-picker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.toPlanDate"
+                                   for="field_toPlanDate">To Plan Date</label>
+                            <div class="d-flex" style="width: 100%">
+                                <dp-date-picker
+                                    dir="ltr"
+                                    class="form-control"
+                                    [(ngModel)]="document.toPlanDate"
+                                    id="field_toPlanDate"
+                                    mode="day"
+                                    theme="dp-material"
+                                    [ngModelOptions]="{standalone: true}"
+                                ></dp-date-picker>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.rialBudget"
+                                   for="field_rialBudget">Rial Budget</label>
+                            <input type="number" class="form-control" name="rialBudget" id="field_rialBudget"
+                                   [(ngModel)]="document.rialBudget"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.foreignBudget"
+                                   for="field_foreignBudget">Foreign Budget</label>
+                            <input type="number" class="form-control" name="foreignBudget" id="field_foreignBudget"
+                                   [(ngModel)]="document.foreignBudget"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.leaderCommand"
+                                   for="field_leaderCommand">Leader Command</label>
+                            <textarea type="text" class="form-control" name="leaderCommand" id="field_leaderCommand"
+                                      [(ngModel)]="document.leaderCommand"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.fiveYearProgram"
+                                   for="field_fiveYearProgram">Five Year Program</label>
+                            <textarea type="text" class="form-control" name="fiveYearProgram" id="field_fiveYearProgram"
+                                      [(ngModel)]="document.fiveYearProgram"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.standingApprovals"
+                                   for="field_standingApprovals">Standing Approvals</label>
+                            <textarea type="text" class="form-control" name="standingApprovals"
+                                      id="field_standingApprovals"
+                                      [(ngModel)]="document.standingApprovals"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.employerOperations"
+                                   for="field_employerOperations">Employer Operations</label>
+                            <textarea type="text" class="form-control" name="employerOperations"
+                                      id="field_employerOperations"
+                                      [(ngModel)]="document.employerOperations"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.percentageOfOutsourcing"
+                                   for="field_percentageOfOutsourcing">Percentage Of Outsourcing</label>
+                            <textarea type="number" class="form-control" name="percentageOfOutsourcing"
+                                      id="field_percentageOfOutsourcing"
+                                      [(ngModel)]="document.percentageOfOutsourcing"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.approvedPattern"
+                                   for="field_approvedPattern">Approved Pattern</label>
+                            <textarea type="text" class="form-control" name="approvedPattern" id="field_approvedPattern"
+                                      [(ngModel)]="document.approvedPattern"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.industrialUser"
+                                   for="field_industrialUser">Industrial User</label>
+                            <textarea type="text" class="form-control" name="industrialUser" id="field_industrialUser"
+                                      [(ngModel)]="document.industrialUser"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.thePurposeOfTheProject"
+                                   for="field_thePurposeOfTheProject">The Purpose Of The Project</label>
+                            <textarea type="text" class="form-control" name="thePurposeOfTheProject"
+                                      id="field_thePurposeOfTheProject"
+                                      [(ngModel)]="document.thePurposeOfTheProject"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="projectApp.document.generalSpecificationOfTheDesign"
+                                   for="field_generalSpecificationOfTheDesign">General Specification Of The
+                                Design</label>
+                            <textarea type="text" class="form-control" name="generalSpecificationOfTheDesign"
+                                      id="field_generalSpecificationOfTheDesign"
+                                      [(ngModel)]="document.generalSpecificationOfTheDesign"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="projectApp.document.scientificAndTechnicalBuildings"
+                                   for="field_scientificAndTechnicalBuildings">Scientific And Technical
+                                Buildings</label>
+                            <textarea type="text" class="form-control" name="scientificAndTechnicalBuildings"
+                                      id="field_scientificAndTechnicalBuildings"
+                                      [(ngModel)]="document.scientificAndTechnicalBuildings"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.howImplementProject"
+                                   for="field_howImplementProject">How Implement Project</label>
+                            <textarea type="text" class="form-control" name="howImplementProject"
+                                      id="field_howImplementProject"
+                                      [(ngModel)]="document.howImplementProject"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="projectApp.document.historyOfStudiesAndResearch"
+                                   for="field_historyOfStudiesAndResearch">History Of Studies And Research</label>
+                            <textarea type="text" class="form-control" name="historyOfStudiesAndResearch"
+                                      id="field_historyOfStudiesAndResearch"
+                                      [(ngModel)]="document.historyOfStudiesAndResearch"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.historyOfPlan"
+                                   for="field_historyOfPlan">History Of Plan</label>
+                            <textarea type="text" class="form-control" name="historyOfPlan" id="field_historyOfPlan"
+                                      [(ngModel)]="document.historyOfPlan"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.howUse"
+                                   for="field_howUse">How
+                                Use</label>
+                            <textarea type="text" class="form-control" name="howUse" id="field_howUse"
+                                      [(ngModel)]="document.howUse"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.defenseNeeds"
+                                   for="field_defenseNeeds">Defense Needs</label>
+                            <textarea type="text" class="form-control" name="defenseNeeds" id="field_defenseNeeds"
+                                   [(ngModel)]="document.defenseNeeds"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.whichMilitary"
+                                   for="field_whichMilitary">Which Military</label>
+                            <textarea type="text" class="form-control" name="whichMilitary" id="field_whichMilitary"
+                                   [(ngModel)]="document.whichMilitary"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.civilianApplications"
+                                   for="field_civilianApplications">Civilian Applications</label>
+                            <textarea type="text" class="form-control" name="civilianApplications"
+                                   id="field_civilianApplications"
+                                   [(ngModel)]="document.civilianApplications"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.imaginedDate"
+                                   for="field_imaginedDate">Imagined Date</label>
+                            <textarea type="text" class="form-control" name="imaginedDate" id="field_imaginedDate"
+                                   [(ngModel)]="document.imaginedDate"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h4 jhiTranslate="projectApp.document.mainStep"></h4>
+                        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-action" type="button"
+                                (click)="createNewMainStep()">
+                            ایجاد
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive" *ngIf="mainSteps">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr jhiSort>
+                                    <th jhiSortBy="mainStep"><span jhiTranslate="projectApp.mainStep.mainStep">Main Step</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                                    <th jhiSortBy="actionTitle"><span jhiTranslate="projectApp.mainStep.actionTitle">Action Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                                    <th jhiSortBy="detailOfAction"><span jhiTranslate="projectApp.mainStep.detailOfAction">Detail Of Action</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                                    <th jhiSortBy="month"><span jhiTranslate="projectApp.mainStep.month">Month</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                                    <th jhiSortBy="percent"><span jhiTranslate="projectApp.mainStep.percent">Percent</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                                    <th jhiSortBy="result"><span jhiTranslate="projectApp.mainStep.result">Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let mainStep of mainSteps ;trackBy: trackId">
+                                    <td>
+                                        <input style="max-width: 150px" type="text" class="form-control" name="mainStep"
+                                               id="field_mainStep"
+                                               [(ngModel)]="mainStep.mainStep"/>
+                                    </td>
+                                    <td>
+                                        <input style="max-width: 150px" type="text" class="form-control" name="actionTitle"
+                                               id="field_actionTitle"
+                                               [(ngModel)]="mainStep.actionTitle"/>
+                                    </td>
+                                    <td>
+                                        <input style="max-width: 150px" type="text" class="form-control" name="detailOfAction"
+                                                id="field_detailOfAction"
+                                                [(ngModel)]="mainStep.detailOfAction"/>
+                                    </td>
+                                    <td>
+                                        <input style="max-width: 150px" type="number" class="form-control" name="month"
+                                               id="field_month"
+                                               [(ngModel)]="mainStep.month"/>
+                                    </td>
+                                    <td>
+                                        <input style="max-width: 150px" type="number" class="form-control" name="percent"
+                                               id="field_percent"
+                                               [(ngModel)]="mainStep.percent"/>
+                                    </td>
+                                    <td>
+                                        <input style="max-width: 150px" type="number" class="form-control" name="result"
+                                               id="field_result"
+                                               [(ngModel)]="mainStep.result"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <div class="btn-group flex-btn-group-container">
+                                            <button type="button"
+                                                    (click)="editOrCreate(mainStep)"
+                                                    class="btn btn-primary btn-sm">
+                                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                            </button>
+                                            <button type="submit"
+                                                    [routerLink]="['/', 'main-step', { outlets: { popup: mainStep.id + '/delete'} }]"
+                                                    replaceUrl="true"
+                                                    queryParamsHandling="merge"
+                                                    class="btn btn-danger btn-sm">
+                                                <fa-icon [icon]="'times'"></fa-icon>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.mainStep"
+                                   for="field_mainStep">Main
+                                Step</label>
+                            <select class="form-control" id="field_mainStep" name="mainStep"
+                                    [(ngModel)]="document.mainStepId">
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="mainStepOption.id"
+                                        *ngFor="let mainStepOption of mainsteps; trackBy: trackMainStepById">{{mainStepOption.mainStep}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.collageEducation"
+                                   for="field_collageEducation">Collage Education</label>
+                            <select class="form-control" id="field_collageEducation" name="collageEducation"
+                                    [(ngModel)]="document.collageEducationId">
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="collageEducationOption.id"
+                                        *ngFor="let collageEducationOption of collageeducations; trackBy: trackCollageEducationById">{{collageEducationOption.fullName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.researcherHistory"
+                                   for="field_researcherHistory">Researcher History</label>
+                            <select class="form-control" id="field_researcherHistory" name="researcherHistory"
+                                    [(ngModel)]="document.researcherHistoryId">
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="researcherHistoryOption.id"
+                                        *ngFor="let researcherHistoryOption of researcherhistories; trackBy: trackResearcherHistoryById">{{researcherHistoryOption.id}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.existingResearchProject"
+                                   for="field_existingResearchProject">Existing Research Project</label>
+                            <select class="form-control" id="field_existingResearchProject"
+                                    name="existingResearchProject"
+                                    [(ngModel)]="document.existingResearchProjectId">
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="existingResearchProjectOption.id"
+                                        *ngFor="let existingResearchProjectOption of existingresearchprojects; trackBy: trackExistingResearchProjectById">{{existingResearchProjectOption.id}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.organizationPartner"
+                                   for="field_organizationPartner">Organization Partner</label>
+                            <select class="form-control" id="field_organizationPartner" name="organizationPartner"
+                                    [(ngModel)]="document.organizationPartnerId">
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="organizationPartnerOption.id"
+                                        *ngFor="let organizationPartnerOption of organizationpartners; trackBy: trackOrganizationPartnerById">{{organizationPartnerOption.id}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.costSummary"
+                                   for="field_costSummary">Cost Summary</label>
+                            <select class="form-control" id="field_costSummary" name="costSummary"
+                                    [(ngModel)]="document.costSummaryId">
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="costSummaryOption.id"
+                                        *ngFor="let costSummaryOption of costsummaries; trackBy: trackCostSummaryById">{{costSummaryOption.id}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.foreCastCostConsume"
+                                   for="field_foreCastCostConsume">Fore Cast Cost Consume</label>
+                            <select class="form-control" id="field_foreCastCostConsume" name="foreCastCostConsume"
+                                    [(ngModel)]="document.foreCastCostConsumeId">
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="costSummaryOption.id"
+                                        *ngFor="let costSummaryOption of costsummaries; trackBy: trackCostSummaryById">{{costSummaryOption.id}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.foreCastCostCost"
+                                   for="field_foreCastCostCost">Fore Cast Cost Cost</label>
+                            <select class="form-control" id="field_foreCastCostCost" name="foreCastCostCost"
+                                    [(ngModel)]="document.foreCastCostCostId">
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="costSummaryOption.id"
+                                        *ngFor="let costSummaryOption of costsummaries; trackBy: trackCostSummaryById">{{costSummaryOption.id}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.foreCastCostSupport"
+                                   for="field_foreCastCostSupport">Fore Cast Cost Support</label>
+                            <select class="form-control" id="field_foreCastCostSupport" name="foreCastCostSupport"
+                                    [(ngModel)]="document.foreCastCostSupportId">
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="costSummaryOption.id"
+                                        *ngFor="let costSummaryOption of costsummaries; trackBy: trackCostSummaryById">{{costSummaryOption.id}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.foreCastCostSpace"
+                                   for="field_foreCastCostSpace">Fore Cast Cost Space</label>
+                            <select class="form-control" id="field_foreCastCostSpace" name="foreCastCostSpace"
+                                    [(ngModel)]="document.foreCastCostSpaceId">
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="costSummaryOption.id"
+                                        *ngFor="let costSummaryOption of costsummaries; trackBy: trackCostSummaryById">{{costSummaryOption.id}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="projectApp.document.foreCastCostSellContract"
+                                   for="field_foreCastCostSellContract">Fore Cast Cost Sell Contract</label>
+                            <select class="form-control" id="field_foreCastCostSellContract"
+                                    name="foreCastCostSellContract"
+                                    [(ngModel)]="document.foreCastCostSellContractId">
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="costSummaryOption.id"
+                                        *ngFor="let costSummaryOption of costsummaries; trackBy: trackCostSummaryById">{{costSummaryOption.id}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.document.foreCastCostOther"
+                                   for="field_foreCastCostOther">Fore Cast Cost Other</label>
+                            <select class="form-control" id="field_foreCastCostOther" name="foreCastCostOther"
+                                    [(ngModel)]="document.foreCastCostOtherId">
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="costSummaryOption.id"
+                                        *ngFor="let costSummaryOption of costsummaries; trackBy: trackCostSummaryById">{{costSummaryOption.id}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving"
+                        class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+{
+    "projectApp": {
+        "costSummary": {
+            "home": {
+                "title": "Cost Summaries",
+                "createLabel": "Create a new Cost Summary",
+                "createOrEditLabel": "Create or edit a Cost Summary",
+                "search": "Search for Cost Summary"
+            },
+            "created": "A new Cost Summary is created with identifier {{ param }}",
+            "updated": "A Cost Summary is updated with identifier {{ param }}",
+            "deleted": "A Cost Summary is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Cost Summary {{ id }}?"
+            },
+            "detail": {
+                "title": "Cost Summary"
+            },
+            "costDetail": "Cost Detail",
+            "fromPage": "From Page",
+            "costRial": "Cost Rial",
+            "costDollar": "Cost Dollar"
+        }
+    }
+}

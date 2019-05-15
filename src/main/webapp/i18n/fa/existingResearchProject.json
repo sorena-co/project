@@ -1,0 +1,27 @@
+{
+    "projectApp": {
+        "existingResearchProject": {
+            "home": {
+                "title": "Existing Research Projects",
+                "createLabel": "Create a new Existing Research Project",
+                "createOrEditLabel": "Create or edit a Existing Research Project",
+                "search": "Search for Existing Research Project"
+            },
+            "created": "A new Existing Research Project is created with identifier {{ param }}",
+            "updated": "A Existing Research Project is updated with identifier {{ param }}",
+            "deleted": "A Existing Research Project is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Existing Research Project {{ id }}?"
+            },
+            "detail": {
+                "title": "Existing Research Project"
+            },
+            "projectTitle": "Project Title",
+            "projectCode": "Project Code",
+            "institution": "Institution",
+            "fromDate": "From Date",
+            "toDate": "To Date",
+            "lastStatus": "Last Status"
+        }
+    }
+}

@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-collage-education-heading" jhiTranslate="projectApp.collageEducation.home.createOrEditLabel">Create or edit a Collage Education</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!collageEducation.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="collageEducation.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.collageEducation.fullName" for="field_fullName">Full Name</label>
+                    <input type="text" class="form-control" name="fullName" id="field_fullName"
+                        [(ngModel)]="collageEducation.fullName" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.collageEducation.lastDegree" for="field_lastDegree">Last Degree</label>
+                    <input type="text" class="form-control" name="lastDegree" id="field_lastDegree"
+                        [(ngModel)]="collageEducation.lastDegree" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.collageEducation.program" for="field_program">Program</label>
+                    <input type="text" class="form-control" name="program" id="field_program"
+                        [(ngModel)]="collageEducation.program" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.collageEducation.institution" for="field_institution">Institution</label>
+                    <input type="text" class="form-control" name="institution" id="field_institution"
+                        [(ngModel)]="collageEducation.institution" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.collageEducation.country" for="field_country">Country</label>
+                    <input type="text" class="form-control" name="country" id="field_country"
+                        [(ngModel)]="collageEducation.country" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.collageEducation.receiveDateDegree" for="field_receiveDateDegree">Receive Date Degree</label>
+                    <input type="text" class="form-control" name="receiveDateDegree" id="field_receiveDateDegree"
+                        [(ngModel)]="collageEducation.receiveDateDegree" />
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

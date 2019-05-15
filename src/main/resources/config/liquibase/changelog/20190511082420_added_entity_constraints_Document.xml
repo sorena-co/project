@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Document.
+    -->
+    <changeSet id="20190511082420-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="main_step_id"
+                                 baseTableName="document"
+                                 constraintName="fk_document_main_step_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="main_step"/>
+
+        <addForeignKeyConstraint baseColumnNames="collage_education_id"
+                                 baseTableName="document"
+                                 constraintName="fk_document_collage_education_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="collage_education"/>
+
+        <addForeignKeyConstraint baseColumnNames="researcher_history_id"
+                                 baseTableName="document"
+                                 constraintName="fk_document_researcher_history_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="researcher_history"/>
+
+        <addForeignKeyConstraint baseColumnNames="existing_research_project_id"
+                                 baseTableName="document"
+                                 constraintName="fk_document_existing_research_project_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="existing_research_project"/>
+
+        <addForeignKeyConstraint baseColumnNames="organization_partner_id"
+                                 baseTableName="document"
+                                 constraintName="fk_document_organization_partner_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organization_partner"/>
+
+        <addForeignKeyConstraint baseColumnNames="cost_summary_id"
+                                 baseTableName="document"
+                                 constraintName="fk_document_cost_summary_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cost_summary"/>
+
+        <addForeignKeyConstraint baseColumnNames="fore_cast_cost_consume_id"
+                                 baseTableName="document"
+                                 constraintName="fk_document_fore_cast_cost_consume_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cost_summary"/>
+
+        <addForeignKeyConstraint baseColumnNames="fore_cast_cost_cost_id"
+                                 baseTableName="document"
+                                 constraintName="fk_document_fore_cast_cost_cost_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cost_summary"/>
+
+        <addForeignKeyConstraint baseColumnNames="fore_cast_cost_support_id"
+                                 baseTableName="document"
+                                 constraintName="fk_document_fore_cast_cost_support_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cost_summary"/>
+
+        <addForeignKeyConstraint baseColumnNames="fore_cast_cost_space_id"
+                                 baseTableName="document"
+                                 constraintName="fk_document_fore_cast_cost_space_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cost_summary"/>
+
+        <addForeignKeyConstraint baseColumnNames="fore_cast_cost_sell_contract_id"
+                                 baseTableName="document"
+                                 constraintName="fk_document_fore_cast_cost_sell_contract_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cost_summary"/>
+
+        <addForeignKeyConstraint baseColumnNames="fore_cast_cost_other_id"
+                                 baseTableName="document"
+                                 constraintName="fk_document_fore_cast_cost_other_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cost_summary"/>
+
+    </changeSet>
+</databaseChangeLog>

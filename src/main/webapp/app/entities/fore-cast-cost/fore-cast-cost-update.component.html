@@ -1,0 +1,85 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-fore-cast-cost-heading" jhiTranslate="projectApp.foreCastCost.home.createOrEditLabel">Create or edit a Fore Cast Cost</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!foreCastCost.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="foreCastCost.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.foreCastCost.deviceName" for="field_deviceName">Device Name</label>
+                    <input type="text" class="form-control" name="deviceName" id="field_deviceName"
+                        [(ngModel)]="foreCastCost.deviceName" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.foreCastCost.builderCompany" for="field_builderCompany">Builder Company</label>
+                    <input type="text" class="form-control" name="builderCompany" id="field_builderCompany"
+                        [(ngModel)]="foreCastCost.builderCompany" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.foreCastCost.count" for="field_count">Count</label>
+                    <input type="number" class="form-control" name="count" id="field_count"
+                        [(ngModel)]="foreCastCost.count" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.foreCastCost.costDetail" for="field_costDetail">Cost Detail</label>
+                    <input type="text" class="form-control" name="costDetail" id="field_costDetail"
+                        [(ngModel)]="foreCastCost.costDetail" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.foreCastCost.basePriceRial" for="field_basePriceRial">Base Price Rial</label>
+                    <input type="number" class="form-control" name="basePriceRial" id="field_basePriceRial"
+                        [(ngModel)]="foreCastCost.basePriceRial" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.foreCastCost.basePriceDollar" for="field_basePriceDollar">Base Price Dollar</label>
+                    <input type="number" class="form-control" name="basePriceDollar" id="field_basePriceDollar"
+                        [(ngModel)]="foreCastCost.basePriceDollar" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.foreCastCost.totalPriceRial" for="field_totalPriceRial">Total Price Rial</label>
+                    <input type="number" class="form-control" name="totalPriceRial" id="field_totalPriceRial"
+                        [(ngModel)]="foreCastCost.totalPriceRial" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.foreCastCost.totalPriceDollar" for="field_totalPriceDollar">Total Price Dollar</label>
+                    <input type="number" class="form-control" name="totalPriceDollar" id="field_totalPriceDollar"
+                        [(ngModel)]="foreCastCost.totalPriceDollar" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.foreCastCost.space" for="field_space">Space</label>
+                    <input type="number" class="form-control" name="space" id="field_space"
+                        [(ngModel)]="foreCastCost.space" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.foreCastCost.sellContractType" for="field_sellContractType">Sell Contract Type</label>
+                    <input type="text" class="form-control" name="sellContractType" id="field_sellContractType"
+                        [(ngModel)]="foreCastCost.sellContractType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.foreCastCost.type" for="field_type">Type</label>
+                    <select class="form-control" name="type" [(ngModel)]="foreCastCost.type" id="field_type" >
+                        <option value="CONSUME">{{'projectApp.ForeCastCostType.CONSUME' | translate}}</option>
+                        <option value="COST">{{'projectApp.ForeCastCostType.COST' | translate}}</option>
+                        <option value="SUPPORT">{{'projectApp.ForeCastCostType.SUPPORT' | translate}}</option>
+                        <option value="SPACE">{{'projectApp.ForeCastCostType.SPACE' | translate}}</option>
+                        <option value="SELL_CONTRACT">{{'projectApp.ForeCastCostType.SELL_CONTRACT' | translate}}</option>
+                        <option value="OTHER">{{'projectApp.ForeCastCostType.OTHER' | translate}}</option>
+                    </select>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

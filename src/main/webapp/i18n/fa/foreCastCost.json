@@ -1,0 +1,32 @@
+{
+    "projectApp": {
+        "foreCastCost": {
+            "home": {
+                "title": "Fore Cast Costs",
+                "createLabel": "Create a new Fore Cast Cost",
+                "createOrEditLabel": "Create or edit a Fore Cast Cost",
+                "search": "Search for Fore Cast Cost"
+            },
+            "created": "A new Fore Cast Cost is created with identifier {{ param }}",
+            "updated": "A Fore Cast Cost is updated with identifier {{ param }}",
+            "deleted": "A Fore Cast Cost is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Fore Cast Cost {{ id }}?"
+            },
+            "detail": {
+                "title": "Fore Cast Cost"
+            },
+            "deviceName": "Device Name",
+            "builderCompany": "Builder Company",
+            "count": "Count",
+            "costDetail": "Cost Detail",
+            "basePriceRial": "Base Price Rial",
+            "basePriceDollar": "Base Price Dollar",
+            "totalPriceRial": "Total Price Rial",
+            "totalPriceDollar": "Total Price Dollar",
+            "space": "Space",
+            "sellContractType": "Sell Contract Type",
+            "type": "Type"
+        }
+    }
+}

@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="foreCastCost">
+            <h2><span jhiTranslate="projectApp.foreCastCost.detail.title">Fore Cast Cost</span> {{foreCastCost.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="projectApp.foreCastCost.deviceName">Device Name</span></dt>
+                <dd>
+                    <span>{{foreCastCost.deviceName}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.foreCastCost.builderCompany">Builder Company</span></dt>
+                <dd>
+                    <span>{{foreCastCost.builderCompany}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.foreCastCost.count">Count</span></dt>
+                <dd>
+                    <span>{{foreCastCost.count}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.foreCastCost.costDetail">Cost Detail</span></dt>
+                <dd>
+                    <span>{{foreCastCost.costDetail}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.foreCastCost.basePriceRial">Base Price Rial</span></dt>
+                <dd>
+                    <span>{{foreCastCost.basePriceRial}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.foreCastCost.basePriceDollar">Base Price Dollar</span></dt>
+                <dd>
+                    <span>{{foreCastCost.basePriceDollar}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.foreCastCost.totalPriceRial">Total Price Rial</span></dt>
+                <dd>
+                    <span>{{foreCastCost.totalPriceRial}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.foreCastCost.totalPriceDollar">Total Price Dollar</span></dt>
+                <dd>
+                    <span>{{foreCastCost.totalPriceDollar}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.foreCastCost.space">Space</span></dt>
+                <dd>
+                    <span>{{foreCastCost.space}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.foreCastCost.sellContractType">Sell Contract Type</span></dt>
+                <dd>
+                    <span>{{foreCastCost.sellContractType}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.foreCastCost.type">Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'projectApp.ForeCastCostType.' + foreCastCost.type}}">{{foreCastCost.type}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/fore-cast-cost', foreCastCost.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

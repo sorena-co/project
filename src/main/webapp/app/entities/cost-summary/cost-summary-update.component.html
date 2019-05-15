@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-cost-summary-heading" jhiTranslate="projectApp.costSummary.home.createOrEditLabel">Create or edit a Cost Summary</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!costSummary.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="costSummary.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.costSummary.costDetail" for="field_costDetail">Cost Detail</label>
+                    <input type="text" class="form-control" name="costDetail" id="field_costDetail"
+                        [(ngModel)]="costSummary.costDetail" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.costSummary.fromPage" for="field_fromPage">From Page</label>
+                    <input type="number" class="form-control" name="fromPage" id="field_fromPage"
+                        [(ngModel)]="costSummary.fromPage" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.costSummary.costRial" for="field_costRial">Cost Rial</label>
+                    <input type="number" class="form-control" name="costRial" id="field_costRial"
+                        [(ngModel)]="costSummary.costRial" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.costSummary.costDollar" for="field_costDollar">Cost Dollar</label>
+                    <input type="number" class="form-control" name="costDollar" id="field_costDollar"
+                        [(ngModel)]="costSummary.costDollar" />
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

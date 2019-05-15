@@ -1,0 +1,241 @@
+{
+    "name": "Document",
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "protectiveClassification",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "persianTitle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "foreignTitle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "planType",
+            "fieldType": "PlanType",
+            "fieldValues": "FUNDANMENTAL,PRACTICAL,DEVELOPMENT"
+        },
+        {
+            "fieldName": "detailOfProject",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "visionOfProject",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "executiveBidder",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "organization",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "industry",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "address",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "exportPlanDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "executivePlanDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "fromPlanDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "toPlanDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "rialBudget",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "foreignBudget",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "leaderCommand",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fiveYearProgram",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "standingApprovals",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "approvedPattern",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "percentageOfOutsourcing",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "employerOperations",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "industrialUser",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "generalSpecificationOfTheDesign",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "thePurposeOfTheProject",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "scientificAndTechnicalBuildings",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "howImplementProject",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "historyOfPlan",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "historyOfStudiesAndResearch",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "howUse",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "defenseNeeds",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "whichMilitary",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "civilianApplications",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "imaginedDate",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "mainStep",
+            "otherEntityRelationshipName": "document",
+            "relationshipName": "mainStep",
+            "otherEntityField": "mainStep"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "collageEducation",
+            "otherEntityRelationshipName": "document",
+            "relationshipName": "collageEducation",
+            "otherEntityField": "fullName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "researcherHistory",
+            "otherEntityRelationshipName": "document",
+            "relationshipName": "researcherHistory",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "existingResearchProject",
+            "otherEntityRelationshipName": "document",
+            "relationshipName": "existingResearchProject",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "organizationPartner",
+            "otherEntityRelationshipName": "document",
+            "relationshipName": "organizationPartner",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "costSummary",
+            "otherEntityRelationshipName": "document",
+            "relationshipName": "costSummary",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "costSummary",
+            "otherEntityRelationshipName": "document",
+            "relationshipName": "foreCastCostConsume",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "costSummary",
+            "otherEntityRelationshipName": "document",
+            "relationshipName": "foreCastCostCost",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "costSummary",
+            "otherEntityRelationshipName": "document",
+            "relationshipName": "foreCastCostSupport",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "costSummary",
+            "otherEntityRelationshipName": "document",
+            "relationshipName": "foreCastCostSpace",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "costSummary",
+            "otherEntityRelationshipName": "document",
+            "relationshipName": "foreCastCostSellContract",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "costSummary",
+            "otherEntityRelationshipName": "document",
+            "relationshipName": "foreCastCostOther",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190511082420",
+    "entityTableName": "document",
+    "dto": "mapstruct",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

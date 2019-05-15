@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-existing-research-project-heading" jhiTranslate="projectApp.existingResearchProject.home.createOrEditLabel">Create or edit a Existing Research Project</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!existingResearchProject.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="existingResearchProject.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.existingResearchProject.projectTitle" for="field_projectTitle">Project Title</label>
+                    <input type="text" class="form-control" name="projectTitle" id="field_projectTitle"
+                        [(ngModel)]="existingResearchProject.projectTitle" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.existingResearchProject.projectCode" for="field_projectCode">Project Code</label>
+                    <input type="text" class="form-control" name="projectCode" id="field_projectCode"
+                        [(ngModel)]="existingResearchProject.projectCode" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.existingResearchProject.institution" for="field_institution">Institution</label>
+                    <input type="text" class="form-control" name="institution" id="field_institution"
+                        [(ngModel)]="existingResearchProject.institution" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.existingResearchProject.fromDate" for="field_fromDate">From Date</label>
+                    <div class="d-flex">
+                        <input id="field_fromDate" type="datetime-local" class="form-control" name="fromDate" [(ngModel)]="fromDate" placeholder="YYYY-MM-DD HH:mm"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.existingResearchProject.toDate" for="field_toDate">To Date</label>
+                    <div class="d-flex">
+                        <input id="field_toDate" type="datetime-local" class="form-control" name="toDate" [(ngModel)]="toDate" placeholder="YYYY-MM-DD HH:mm"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.existingResearchProject.lastStatus" for="field_lastStatus">Last Status</label>
+                    <input type="text" class="form-control" name="lastStatus" id="field_lastStatus"
+                        [(ngModel)]="existingResearchProject.lastStatus" />
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

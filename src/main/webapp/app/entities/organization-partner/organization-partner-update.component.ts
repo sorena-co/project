@@ -1,0 +1,51 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+import { IOrganizationPartner } from 'app/shared/model/organization-partner.model';
+import { OrganizationPartnerService } from './organization-partner.service';
+
+@Component({
+    selector: 'jhi-organization-partner-update',
+    templateUrl: './organization-partner-update.component.html'
+})
+export class OrganizationPartnerUpdateComponent implements OnInit {
+    organizationPartner: IOrganizationPartner;
+    isSaving: boolean;
+
+    constructor(protected organizationPartnerService: OrganizationPartnerService, protected activatedRoute: ActivatedRoute) {}
+
+    ngOnInit() {
+        this.isSaving = false;
+        this.activatedRoute.data.subscribe(({ organizationPartner }) => {
+            this.organizationPartner = organizationPartner;
+        });
+    }
+
+    previousState() {
+        window.history.back();
+    }
+
+    save() {
+        this.isSaving = true;
+        if (this.organizationPartner.id !== undefined) {
+            this.subscribeToSaveResponse(this.organizationPartnerService.update(this.organizationPartner));
+        } else {
+            this.subscribeToSaveResponse(this.organizationPartnerService.create(this.organizationPartner));
+        }
+    }
+
+    protected subscribeToSaveResponse(result: Observable<HttpResponse<IOrganizationPartner>>) {
+        result.subscribe((res: HttpResponse<IOrganizationPartner>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    }
+
+    protected onSaveSuccess() {
+        this.isSaving = false;
+        this.previousState();
+    }
+
+    protected onSaveError() {
+        this.isSaving = false;
+    }
+}

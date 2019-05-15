@@ -1,0 +1,218 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="projectApp.document.home.title">Documents</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-document" [routerLink]="['/document/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span class="hidden-sm-down"  jhiTranslate="projectApp.document.home.createLabel">
+            Create new Document
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'projectApp.document.home.search' | translate }}">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon [icon]="'search'"></fa-icon>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="documents">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span jhiTranslate="projectApp.document.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="protectiveClassification"><span jhiTranslate="projectApp.document.protectiveClassification">Protective Classification</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="persianTitle"><span jhiTranslate="projectApp.document.persianTitle">Persian Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="foreignTitle"><span jhiTranslate="projectApp.document.foreignTitle">Foreign Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="planType"><span jhiTranslate="projectApp.document.planType">Plan Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="detailOfProject"><span jhiTranslate="projectApp.document.detailOfProject">Detail Of Project</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="visionOfProject"><span jhiTranslate="projectApp.document.visionOfProject">Vision Of Project</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="executiveBidder"><span jhiTranslate="projectApp.document.executiveBidder">Executive Bidder</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="organization"><span jhiTranslate="projectApp.document.organization">Organization</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="industry"><span jhiTranslate="projectApp.document.industry">Industry</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="address"><span jhiTranslate="projectApp.document.address">Address</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="exportPlanDate"><span jhiTranslate="projectApp.document.exportPlanDate">Export Plan Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="executivePlanDate"><span jhiTranslate="projectApp.document.executivePlanDate">Executive Plan Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fromPlanDate"><span jhiTranslate="projectApp.document.fromPlanDate">From Plan Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="toPlanDate"><span jhiTranslate="projectApp.document.toPlanDate">To Plan Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="rialBudget"><span jhiTranslate="projectApp.document.rialBudget">Rial Budget</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="foreignBudget"><span jhiTranslate="projectApp.document.foreignBudget">Foreign Budget</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="leaderCommand"><span jhiTranslate="projectApp.document.leaderCommand">Leader Command</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fiveYearProgram"><span jhiTranslate="projectApp.document.fiveYearProgram">Five Year Program</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="standingApprovals"><span jhiTranslate="projectApp.document.standingApprovals">Standing Approvals</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="approvedPattern"><span jhiTranslate="projectApp.document.approvedPattern">Approved Pattern</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="percentageOfOutsourcing"><span jhiTranslate="projectApp.document.percentageOfOutsourcing">Percentage Of Outsourcing</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="employerOperations"><span jhiTranslate="projectApp.document.employerOperations">Employer Operations</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="industrialUser"><span jhiTranslate="projectApp.document.industrialUser">Industrial User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="generalSpecificationOfTheDesign"><span jhiTranslate="projectApp.document.generalSpecificationOfTheDesign">General Specification Of The Design</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="thePurposeOfTheProject"><span jhiTranslate="projectApp.document.thePurposeOfTheProject">The Purpose Of The Project</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="scientificAndTechnicalBuildings"><span jhiTranslate="projectApp.document.scientificAndTechnicalBuildings">Scientific And Technical Buildings</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="howImplementProject"><span jhiTranslate="projectApp.document.howImplementProject">How Implement Project</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="historyOfPlan"><span jhiTranslate="projectApp.document.historyOfPlan">History Of Plan</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="historyOfStudiesAndResearch"><span jhiTranslate="projectApp.document.historyOfStudiesAndResearch">History Of Studies And Research</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="howUse"><span jhiTranslate="projectApp.document.howUse">How Use</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="defenseNeeds"><span jhiTranslate="projectApp.document.defenseNeeds">Defense Needs</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="whichMilitary"><span jhiTranslate="projectApp.document.whichMilitary">Which Military</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="civilianApplications"><span jhiTranslate="projectApp.document.civilianApplications">Civilian Applications</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="imaginedDate"><span jhiTranslate="projectApp.document.imaginedDate">Imagined Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="mainStepMainStep"><span jhiTranslate="projectApp.document.mainStep">Main Step</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="collageEducationFullName"><span jhiTranslate="projectApp.document.collageEducation">Collage Education</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="researcherHistoryId"><span jhiTranslate="projectApp.document.researcherHistory">Researcher History</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="existingResearchProjectId"><span jhiTranslate="projectApp.document.existingResearchProject">Existing Research Project</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="organizationPartnerId"><span jhiTranslate="projectApp.document.organizationPartner">Organization Partner</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="costSummaryId"><span jhiTranslate="projectApp.document.costSummary">Cost Summary</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="foreCastCostConsumeId"><span jhiTranslate="projectApp.document.foreCastCostConsume">Fore Cast Cost Consume</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="foreCastCostCostId"><span jhiTranslate="projectApp.document.foreCastCostCost">Fore Cast Cost Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="foreCastCostSupportId"><span jhiTranslate="projectApp.document.foreCastCostSupport">Fore Cast Cost Support</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="foreCastCostSpaceId"><span jhiTranslate="projectApp.document.foreCastCostSpace">Fore Cast Cost Space</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="foreCastCostSellContractId"><span jhiTranslate="projectApp.document.foreCastCostSellContract">Fore Cast Cost Sell Contract</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="foreCastCostOtherId"><span jhiTranslate="projectApp.document.foreCastCostOther">Fore Cast Cost Other</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let document of documents ;trackBy: trackId">
+                <td><a [routerLink]="['/document', document.id, 'view' ]">{{document.id}}</a></td>
+                <td>{{document.title}}</td>
+                <td>{{document.protectiveClassification}}</td>
+                <td>{{document.persianTitle}}</td>
+                <td>{{document.foreignTitle}}</td>
+                <td jhiTranslate="{{'projectApp.PlanType.' + document.planType}}">{{document.planType}}</td>
+                <td>{{document.detailOfProject}}</td>
+                <td>{{document.visionOfProject}}</td>
+                <td>{{document.executiveBidder}}</td>
+                <td>{{document.organization}}</td>
+                <td>{{document.industry}}</td>
+                <td>{{document.address}}</td>
+                <td>{{document.exportPlanDate | date:'medium'}}</td>
+                <td>{{document.executivePlanDate | date:'medium'}}</td>
+                <td>{{document.fromPlanDate | date:'medium'}}</td>
+                <td>{{document.toPlanDate | date:'medium'}}</td>
+                <td>{{document.rialBudget}}</td>
+                <td>{{document.foreignBudget}}</td>
+                <td>{{document.leaderCommand}}</td>
+                <td>{{document.fiveYearProgram}}</td>
+                <td>{{document.standingApprovals}}</td>
+                <td>{{document.approvedPattern}}</td>
+                <td>{{document.percentageOfOutsourcing}}</td>
+                <td>{{document.employerOperations}}</td>
+                <td>{{document.industrialUser}}</td>
+                <td>{{document.generalSpecificationOfTheDesign}}</td>
+                <td>{{document.thePurposeOfTheProject}}</td>
+                <td>{{document.scientificAndTechnicalBuildings}}</td>
+                <td>{{document.howImplementProject}}</td>
+                <td>{{document.historyOfPlan}}</td>
+                <td>{{document.historyOfStudiesAndResearch}}</td>
+                <td>{{document.howUse}}</td>
+                <td>{{document.defenseNeeds}}</td>
+                <td>{{document.whichMilitary}}</td>
+                <td>{{document.civilianApplications}}</td>
+                <td>{{document.imaginedDate}}</td>
+                <td>
+                    <div *ngIf="document.mainStepId">
+                        <a [routerLink]="['../main-step', document.mainStepId , 'view' ]" >{{document.mainStepMainStep}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="document.collageEducationId">
+                        <a [routerLink]="['../collage-education', document.collageEducationId , 'view' ]" >{{document.collageEducationFullName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="document.researcherHistoryId">
+                        <a [routerLink]="['../researcher-history', document.researcherHistoryId , 'view' ]" >{{document.researcherHistoryId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="document.existingResearchProjectId">
+                        <a [routerLink]="['../existing-research-project', document.existingResearchProjectId , 'view' ]" >{{document.existingResearchProjectId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="document.organizationPartnerId">
+                        <a [routerLink]="['../organization-partner', document.organizationPartnerId , 'view' ]" >{{document.organizationPartnerId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="document.costSummaryId">
+                        <a [routerLink]="['../cost-summary', document.costSummaryId , 'view' ]" >{{document.costSummaryId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="document.foreCastCostConsumeId">
+                        <a [routerLink]="['../cost-summary', document.foreCastCostConsumeId , 'view' ]" >{{document.foreCastCostConsumeId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="document.foreCastCostCostId">
+                        <a [routerLink]="['../cost-summary', document.foreCastCostCostId , 'view' ]" >{{document.foreCastCostCostId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="document.foreCastCostSupportId">
+                        <a [routerLink]="['../cost-summary', document.foreCastCostSupportId , 'view' ]" >{{document.foreCastCostSupportId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="document.foreCastCostSpaceId">
+                        <a [routerLink]="['../cost-summary', document.foreCastCostSpaceId , 'view' ]" >{{document.foreCastCostSpaceId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="document.foreCastCostSellContractId">
+                        <a [routerLink]="['../cost-summary', document.foreCastCostSellContractId , 'view' ]" >{{document.foreCastCostSellContractId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="document.foreCastCostOtherId">
+                        <a [routerLink]="['../cost-summary', document.foreCastCostOtherId , 'view' ]" >{{document.foreCastCostOtherId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/document', document.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/document', document.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'document', { outlets: { popup: document.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Pager is not implemented yet, so this is normal pagination instead -->
+    <div *ngIf="documents && documents.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

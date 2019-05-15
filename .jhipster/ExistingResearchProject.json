@@ -1,0 +1,39 @@
+{
+    "name": "ExistingResearchProject",
+    "fields": [
+        {
+            "fieldName": "projectTitle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "projectCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "institution",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fromDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "toDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "lastStatus",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190511082424",
+    "entityTableName": "existing_research_project",
+    "dto": "mapstruct",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

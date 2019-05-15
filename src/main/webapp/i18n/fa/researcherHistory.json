@@ -1,0 +1,26 @@
+{
+    "projectApp": {
+        "researcherHistory": {
+            "home": {
+                "title": "Researcher Histories",
+                "createLabel": "Create a new Researcher History",
+                "createOrEditLabel": "Create or edit a Researcher History",
+                "search": "Search for Researcher History"
+            },
+            "created": "A new Researcher History is created with identifier {{ param }}",
+            "updated": "A Researcher History is updated with identifier {{ param }}",
+            "deleted": "A Researcher History is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Researcher History {{ id }}?"
+            },
+            "detail": {
+                "title": "Researcher History"
+            },
+            "fromDate": "From Date",
+            "toDate": "To Date",
+            "organization": "Organization",
+            "level": "Level",
+            "job": "Job"
+        }
+    }
+}

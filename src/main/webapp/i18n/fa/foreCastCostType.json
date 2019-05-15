@@ -1,0 +1,13 @@
+{
+    "projectApp": {
+        "ForeCastCostType": {
+            "null": "",
+            "CONSUME": "CONSUME",
+            "COST": "COST",
+            "SUPPORT": "SUPPORT",
+            "SPACE": "SPACE",
+            "SELL_CONTRACT": "SELL_CONTRACT",
+            "OTHER": "OTHER"
+        }
+    }
+}

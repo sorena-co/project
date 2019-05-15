@@ -1,0 +1,27 @@
+{
+    "projectApp": {
+        "mainStep": {
+            "home": {
+                "title": "Main Steps",
+                "createLabel": "Create a new Main Step",
+                "createOrEditLabel": "Create or edit a Main Step",
+                "search": "Search for Main Step"
+            },
+            "created": "A new Main Step is created with identifier {{ param }}",
+            "updated": "A Main Step is updated with identifier {{ param }}",
+            "deleted": "A Main Step is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Main Step {{ id }}?"
+            },
+            "detail": {
+                "title": "Main Step"
+            },
+            "mainStep": "گام های اصلی",
+            "actionTitle": "عنوان اصلی فعالیت",
+            "detailOfAction": "شرح فعالیت های اصلی در این گام",
+            "month": "مدت زمان تقریبی(ماه)",
+            "percent": "درصد وزنی فعالیت",
+            "result": "دستاورد"
+        }
+    }
+}

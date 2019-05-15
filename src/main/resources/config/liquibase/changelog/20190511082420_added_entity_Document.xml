@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+    
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity Document.
+    -->
+    <changeSet id="20190511082420-1" author="jhipster">
+        <createTable tableName="document">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="protective_classification" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="persian_title" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="foreign_title" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="plan_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="detail_of_project" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="vision_of_project" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="executive_bidder" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="jhi_organization" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="industry" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="address" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="export_plan_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="executive_plan_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="from_plan_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="to_plan_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="rial_budget" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="foreign_budget" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="leader_command" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="five_year_program" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="standing_approvals" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="approved_pattern" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="percentage_of_outsourcing" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="employer_operations" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="industrial_user" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="general_specification_of_the_design" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="the_purpose_of_the_project" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="scientific_and_technical_buildings" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="how_implement_project" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="history_of_plan" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="history_of_studies_and_research" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="how_use" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="defense_needs" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="which_military" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="civilian_applications" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="imagined_date" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="main_step_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="collage_education_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="researcher_history_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="existing_research_project_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="organization_partner_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cost_summary_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="fore_cast_cost_consume_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="fore_cast_cost_cost_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="fore_cast_cost_support_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="fore_cast_cost_space_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="fore_cast_cost_sell_contract_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="fore_cast_cost_other_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="document" columnName="export_plan_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="document" columnName="executive_plan_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="document" columnName="from_plan_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="document" columnName="to_plan_date" columnDataType="datetime"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

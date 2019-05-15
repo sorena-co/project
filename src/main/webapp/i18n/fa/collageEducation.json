@@ -1,0 +1,27 @@
+{
+    "projectApp": {
+        "collageEducation": {
+            "home": {
+                "title": "Collage Educations",
+                "createLabel": "Create a new Collage Education",
+                "createOrEditLabel": "Create or edit a Collage Education",
+                "search": "Search for Collage Education"
+            },
+            "created": "A new Collage Education is created with identifier {{ param }}",
+            "updated": "A Collage Education is updated with identifier {{ param }}",
+            "deleted": "A Collage Education is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Collage Education {{ id }}?"
+            },
+            "detail": {
+                "title": "Collage Education"
+            },
+            "fullName": "Full Name",
+            "lastDegree": "Last Degree",
+            "program": "Program",
+            "institution": "Institution",
+            "country": "Country",
+            "receiveDateDegree": "Receive Date Degree"
+        }
+    }
+}

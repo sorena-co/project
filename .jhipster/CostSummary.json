@@ -1,0 +1,31 @@
+{
+    "name": "CostSummary",
+    "fields": [
+        {
+            "fieldName": "costDetail",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fromPage",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "costRial",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "costDollar",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190511082426",
+    "entityTableName": "cost_summary",
+    "dto": "mapstruct",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

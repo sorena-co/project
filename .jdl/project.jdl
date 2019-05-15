@@ -39,6 +39,120 @@ entity Action{
     isFinish Boolean
 }
 
+entity Document{
+    title String,
+    protectiveClassification String,//طبقه بندی حفاظتی
+    persianTitle String,
+    foreignTitle String,
+    planType PlanType,
+    detailOfProject String,
+    visionOfProject String,
+    executiveBidder String, //دستگاه اجرایی پیشنهاد دهنده
+    organization String,
+    industry String,
+    address String,
+    exportPlanDate ZonedDateTime,
+    executivePlanDate ZonedDateTime,
+    fromPlanDate ZonedDateTime,
+    toPlanDate ZonedDateTime,
+    rialBudget Long,
+    foreignBudget Long,
+    leaderCommand String,
+    fiveYearProgram String,
+    standingApprovals String,
+    approvedPattern String,
+    percentageOfOutsourcing Long,
+    employerOperations String,
+    industrialUser String,
+    generalSpecificationOfTheDesign String,
+    thePurposeOfTheProject String,
+    scientificAndTechnicalBuildings String,
+    howImplementProject String,
+    historyOfPlan String,
+    historyOfStudiesAndResearch String,
+    howUse String,
+    defenseNeeds String,
+    whichMilitary String,
+    civilianApplications String,
+    imaginedDate String
+}
+
+entity MainStep{ //جدول تعیین گام های اصلی
+    mainStep String,
+    actionTitle String,
+    detailOfAction String,
+    month Long,
+    percent Long,
+    result String
+}
+
+entity CollageEducation{//تحصيلات دانشگاهي
+    fullName String,
+    lastDegree String,
+    program String,
+    institution String,
+    country String,
+    receiveDateDegree String
+}
+
+entity ResearcherHistory{//سوابق تحقيقاتي طرح دهنده
+    fromDate ZonedDateTime,
+    toDate ZonedDateTime,
+    organization String,
+    level String,
+    job String
+}
+
+entity ExistingResearchProject{//پروژه‌هاي تحقيقاتي در دست اجرا
+    projectTitle String,
+    projectCode String,
+    institution String,
+    fromDate ZonedDateTime,
+    toDate ZonedDateTime,
+    lastStatus String
+}
+
+entity OrganizationPartner{//سازمانهاي دولتي يا خصوصي كه مي‌توانند در اجراي طرح همكاري نمايند:
+    organization String,
+    type String,
+    name String
+}
+
+entity CostSummary{//خلاصه هزينه‌هاي پيش‌بيني شده :
+    costDetail String,
+    fromPage Long,
+    costRial Long,
+    costDollar Long
+}
+
+entity ForeCastCost{//پيش‌بيني هزينه‌هاي اقلام سرمايه‌اي
+    deviceName String,
+    builderCompany String,
+    count Long,
+    costDetail String,
+    basePriceRial Long,
+    basePriceDollar Long,
+    totalPriceRial Long,
+    totalPriceDollar Long,
+    space Long,
+    sellContractType String,
+    type ForeCastCostType
+}
+
+enum DocumentType{
+    THIRTEEN
+}
+
+enum ForeCastCostType{
+    CONSUME,COST,SUPPORT,SPACE,SELL_CONTRACT,OTHER
+}
+
+enum PlanType{
+    FUNDANMENTAL,
+    PRACTICAL,
+    DEVELOPMENT
+}
+
 enum FinancialProjectType{
     CREDIT_ESTIMATES,
     AMOUNT_CONFIRMED,
@@ -62,7 +176,21 @@ enum ProjectType {
 relationship ManyToOne{
     FinancialProject {project(title)} to Project,
     Phase {project(title)} to Project,
-    Action {phase(title)} to Phase
+    Action {phase(title)} to Phase,
+    Document {mainStep(mainStep)} to MainStep,
+    Document {collageEducation(fullName)} to CollageEducation,
+    Document {researcherHistory} to ResearcherHistory,
+    Document {existingResearchProject} to ExistingResearchProject,
+    Document {organizationPartner} to OrganizationPartner,
+    Document {costSummary} to CostSummary,
+    Document {foreCastCostConsume} to CostSummary,
+    Document {foreCastCostCost} to CostSummary,
+    Document {foreCastCostSupport} to CostSummary,
+    Document {foreCastCostSupport} to CostSummary,
+    Document {foreCastCostSpace} to CostSummary,
+    Document {foreCastCostSellContract} to CostSummary,
+    Document {foreCastCostOther} to CostSummary
+
 }
 
 dto * with mapstruct

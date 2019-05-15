@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="collageEducation">
+            <h2><span jhiTranslate="projectApp.collageEducation.detail.title">Collage Education</span> {{collageEducation.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="projectApp.collageEducation.fullName">Full Name</span></dt>
+                <dd>
+                    <span>{{collageEducation.fullName}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.collageEducation.lastDegree">Last Degree</span></dt>
+                <dd>
+                    <span>{{collageEducation.lastDegree}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.collageEducation.program">Program</span></dt>
+                <dd>
+                    <span>{{collageEducation.program}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.collageEducation.institution">Institution</span></dt>
+                <dd>
+                    <span>{{collageEducation.institution}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.collageEducation.country">Country</span></dt>
+                <dd>
+                    <span>{{collageEducation.country}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.collageEducation.receiveDateDegree">Receive Date Degree</span></dt>
+                <dd>
+                    <span>{{collageEducation.receiveDateDegree}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/collage-education', collageEducation.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

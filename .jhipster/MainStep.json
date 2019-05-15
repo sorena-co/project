@@ -1,0 +1,39 @@
+{
+    "name": "MainStep",
+    "fields": [
+        {
+            "fieldName": "mainStep",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "actionTitle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "detailOfAction",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "month",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "percent",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "result",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190511082421",
+    "entityTableName": "main_step",
+    "dto": "mapstruct",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

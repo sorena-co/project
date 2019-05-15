@@ -1,0 +1,60 @@
+{
+    "name": "ForeCastCost",
+    "fields": [
+        {
+            "fieldName": "deviceName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "builderCompany",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "count",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "costDetail",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "basePriceRial",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "basePriceDollar",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "totalPriceRial",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "totalPriceDollar",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "space",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "sellContractType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "ForeCastCostType",
+            "fieldValues": "CONSUME,COST,SUPPORT,SPACE,SELL_CONTRACT,OTHER"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190511082427",
+    "entityTableName": "fore_cast_cost",
+    "dto": "mapstruct",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

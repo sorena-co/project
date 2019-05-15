@@ -12,6 +12,14 @@
                 "financialProject": "رکورد مالی پروژه",
                 "phase": "فاز",
                 "action": "فعالیت",
+                "document": "Document",
+                "mainStep": "Main Step",
+                "collageEducation": "Collage Education",
+                "researcherHistory": "Researcher History",
+                "existingResearchProject": "Existing Research Project",
+                "organizationPartner": "Organization Partner",
+                "costSummary": "Cost Summary",
+                "foreCastCost": "Fore Cast Cost",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

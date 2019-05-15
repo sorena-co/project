@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-main-step-heading" jhiTranslate="projectApp.mainStep.home.createOrEditLabel">Create or edit a Main Step</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!mainStep.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="mainStep.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.mainStep.mainStep" for="field_mainStep">Main Step</label>
+                    <input type="text" class="form-control" name="mainStep" id="field_mainStep"
+                        [(ngModel)]="mainStep.mainStep" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.mainStep.actionTitle" for="field_actionTitle">Action Title</label>
+                    <input type="text" class="form-control" name="actionTitle" id="field_actionTitle"
+                        [(ngModel)]="mainStep.actionTitle" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.mainStep.detailOfAction" for="field_detailOfAction">Detail Of Action</label>
+                    <input type="text" class="form-control" name="detailOfAction" id="field_detailOfAction"
+                        [(ngModel)]="mainStep.detailOfAction" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.mainStep.month" for="field_month">Month</label>
+                    <input type="number" class="form-control" name="month" id="field_month"
+                        [(ngModel)]="mainStep.month" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.mainStep.percent" for="field_percent">Percent</label>
+                    <input type="number" class="form-control" name="percent" id="field_percent"
+                        [(ngModel)]="mainStep.percent" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="projectApp.mainStep.result" for="field_result">Result</label>
+                    <input type="text" class="form-control" name="result" id="field_result"
+                        [(ngModel)]="mainStep.result" />
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="researcherHistory">
+            <h2><span jhiTranslate="projectApp.researcherHistory.detail.title">Researcher History</span> {{researcherHistory.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="projectApp.researcherHistory.fromDate">From Date</span></dt>
+                <dd>
+                    <span>{{researcherHistory.fromDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.researcherHistory.toDate">To Date</span></dt>
+                <dd>
+                    <span>{{researcherHistory.toDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.researcherHistory.organization">Organization</span></dt>
+                <dd>
+                    <span>{{researcherHistory.organization}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.researcherHistory.level">Level</span></dt>
+                <dd>
+                    <span>{{researcherHistory.level}}</span>
+                </dd>
+                <dt><span jhiTranslate="projectApp.researcherHistory.job">Job</span></dt>
+                <dd>
+                    <span>{{researcherHistory.job}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/researcher-history', researcherHistory.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
