@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="documentWord">
+            <h2><span jhiTranslate="projectApp.documentWord.detail.title">Document Word</span> {{documentWord.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="projectApp.documentWord.file">File</span></dt>
+                <dd>
+                    <div *ngIf="documentWord.file">
+                        <a (click)="openFile(documentWord.fileContentType, documentWord.file)" jhiTranslate="entity.action.open">open</a>
+                        {{documentWord.fileContentType}}, {{byteSize(documentWord.file)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="projectApp.documentWord.document">Document</span></dt>
+                <dd>
+                    <div *ngIf="documentWord.documentId">
+                        <a [routerLink]="['/document', documentWord.documentId, 'view']">{{documentWord.documentTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/document-word', documentWord.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

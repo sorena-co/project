@@ -25,7 +25,7 @@ import { RouterModule } from '@angular/router';
                 loadChildren: './action/action.module#ProjectActionModule'
             },
             {
-                path: 'document',
+                path: 'project/:projectId/document',
                 loadChildren: './document/document.module#ProjectDocumentModule'
             },
             {
@@ -95,6 +95,10 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'fore-cast-cost',
                 loadChildren: './fore-cast-cost/fore-cast-cost.module#ProjectForeCastCostModule'
+            },
+            {
+                path: 'project/:projectId/document/:documentId/document-word',
+                loadChildren: './document-word/document-word.module#ProjectDocumentWordModule'
             }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])

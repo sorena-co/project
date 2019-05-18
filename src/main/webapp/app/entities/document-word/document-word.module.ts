@@ -1,43 +1,40 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { JhiLanguageService } from 'ng-jhipster';
 import { JhiLanguageHelper } from 'app/core';
 
 import { ProjectSharedModule } from 'app/shared';
 import {
-    PhaseComponent,
-    PhaseDeleteDialogComponent,
-    PhaseDeletePopupComponent,
-    PhaseDetailComponent,
-    PhaseFinishModalComponent,
-    phasePopupRoute,
-    phaseRoute,
-    PhaseUpdateComponent
+    DocumentWordComponent,
+    DocumentWordDetailComponent,
+    DocumentWordUpdateComponent,
+    DocumentWordDeletePopupComponent,
+    DocumentWordDeleteDialogComponent,
+    documentWordRoute,
+    documentWordPopupRoute
 } from './';
 
-const ENTITY_STATES = [...phaseRoute, ...phasePopupRoute];
+const ENTITY_STATES = [...documentWordRoute, ...documentWordPopupRoute];
 
 @NgModule({
     imports: [ProjectSharedModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
-        PhaseComponent,
-        PhaseDetailComponent,
-        PhaseUpdateComponent,
-        PhaseDeleteDialogComponent,
-        PhaseDeletePopupComponent,
-        PhaseFinishModalComponent
+        DocumentWordComponent,
+        DocumentWordDetailComponent,
+        DocumentWordUpdateComponent,
+        DocumentWordDeleteDialogComponent,
+        DocumentWordDeletePopupComponent
     ],
     entryComponents: [
-        PhaseComponent,
-        PhaseUpdateComponent,
-        PhaseDeleteDialogComponent,
-        PhaseDeletePopupComponent,
-        PhaseFinishModalComponent
+        DocumentWordComponent,
+        DocumentWordUpdateComponent,
+        DocumentWordDeleteDialogComponent,
+        DocumentWordDeletePopupComponent
     ],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ProjectPhaseModule {
+export class ProjectDocumentWordModule {
     constructor(private languageService: JhiLanguageService, private languageHelper: JhiLanguageHelper) {
         this.languageHelper.language.subscribe((languageKey: string) => {
             if (languageKey !== undefined) {

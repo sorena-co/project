@@ -7,10 +7,13 @@ import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 import { IPhase, Phase } from 'app/shared/model/phase.model';
 import { AccountService } from 'app/core';
 
-import { DATE_FORMAT, DATE_TIME_FORMAT, ITEMS_PER_PAGE, JALALI_DATE_FORMAT } from 'app/shared';
+import { DATE_FORMAT, ITEMS_PER_PAGE, JALALI_DATE_FORMAT } from 'app/shared';
 import { PhaseService } from './phase.service';
 
 import * as jalali from 'jalali-moment';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PhaseFinishModalComponent } from 'app/entities/phase/phase-finish-modal.component';
+
 @Component({
     selector: 'jhi-phase',
     templateUrl: './phase.component.html'
@@ -39,7 +42,8 @@ export class PhaseComponent implements OnInit, OnDestroy {
         protected accountService: AccountService,
         protected activatedRoute: ActivatedRoute,
         protected router: Router,
-        protected eventManager: JhiEventManager
+        protected eventManager: JhiEventManager,
+        private modalService: NgbModal
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -199,5 +203,18 @@ export class PhaseComponent implements OnInit, OnDestroy {
         const phase = new Phase();
         phase.projectId = this.projectId;
         this.phases.push(phase);
+    }
+
+    doFinish(item: Phase) {
+        if (item.finishDate < new Date()) {
+            const modalRef = this.modalService.open(PhaseFinishModalComponent).result.then(value => {
+                item.reasonOfDelay = value;
+                item.isFinish = true;
+                this.phaseService.update(item).subscribe(value => this.loadAll());
+            });
+        } else {
+            item.isFinish = true;
+            this.phaseService.update(item).subscribe(value => this.loadAll());
+        }
     }
 }

@@ -46,9 +46,6 @@
                 <th jhiSortBy="cost"><span jhiTranslate="projectApp.phase.cost">Cost</span>
                     <fa-icon [icon]="'sort'"></fa-icon>
                 </th>
-                <th jhiSortBy="isFinish"><span jhiTranslate="projectApp.phase.isFinish">Is Finish</span>
-                    <fa-icon [icon]="'sort'"></fa-icon>
-                </th>
                 <th></th>
             </tr>
             </thead>
@@ -98,12 +95,14 @@
                            id="field_cost"
                            [(ngModel)]="phase.cost"/>
                 </td>
-                <td>
-                    <input type="checkbox" class="form-control" name="isFinish" id="field_isFinish"
-                           [(ngModel)]="phase.isFinish"/>
-                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
+                        <button type="button"
+                                [disabled]="phase.isFinish"
+                                (click)="doFinish(phase)"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'save'"></fa-icon>
+                        </button>
                         <button type="button"
                                 [routerLink]="['/project',projectId,'phase',phase.id,'action']"
                                 replaceUrl="true"

@@ -38,13 +38,6 @@ export class ExistingResearchProjectUpdateComponent implements OnInit {
                 this.existingResearchProject.fromDate != null ? this.existingResearchProject.fromDate.format(DATE_TIME_FORMAT) : null;
             this.toDate = this.existingResearchProject.toDate != null ? this.existingResearchProject.toDate.format(DATE_TIME_FORMAT) : null;
         });
-        this.documentService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IDocument[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IDocument[]>) => response.body)
-            )
-            .subscribe((res: IDocument[]) => (this.documents = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {

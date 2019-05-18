@@ -37,13 +37,6 @@ export class ResearcherHistoryUpdateComponent implements OnInit {
             this.fromDate = this.researcherHistory.fromDate != null ? this.researcherHistory.fromDate.format(DATE_TIME_FORMAT) : null;
             this.toDate = this.researcherHistory.toDate != null ? this.researcherHistory.toDate.format(DATE_TIME_FORMAT) : null;
         });
-        this.documentService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IDocument[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IDocument[]>) => response.body)
-            )
-            .subscribe((res: IDocument[]) => (this.documents = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {

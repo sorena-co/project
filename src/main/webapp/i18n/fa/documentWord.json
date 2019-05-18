@@ -1,0 +1,23 @@
+{
+    "projectApp": {
+        "documentWord": {
+            "home": {
+                "title": "فایل سند",
+                "createLabel": "ایجاد فایل سند",
+                "createOrEditLabel": "فایل سند",
+                "search": "Search for Document Word"
+            },
+            "created": "فایل سند با موفقیت ایجاد شد.",
+            "updated": "فایل سند با موفقیت ویرایش شد.",
+            "deleted": "فایل سند با موففیت حذف شد.",
+            "delete": {
+                "question": "Are you sure you want to delete Document Word {{ id }}?"
+            },
+            "detail": {
+                "title": "فایل سند"
+            },
+            "file": "فایل",
+            "document": "Document"
+        }
+    }
+}

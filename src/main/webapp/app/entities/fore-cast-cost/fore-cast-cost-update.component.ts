@@ -31,13 +31,6 @@ export class ForeCastCostUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ foreCastCost }) => {
             this.foreCastCost = foreCastCost;
         });
-        this.documentService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IDocument[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IDocument[]>) => response.body)
-            )
-            .subscribe((res: IDocument[]) => (this.documents = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {

@@ -2,21 +2,21 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
+import { JhiAlertService, JhiDataUtils, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 
-import { IDocument } from 'app/shared/model/document.model';
+import { DocumentWord, IDocumentWord } from 'app/shared/model/document-word.model';
 import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
-import { DocumentService } from './document.service';
+import { DocumentWordService } from './document-word.service';
 
 @Component({
-    selector: 'jhi-document',
-    templateUrl: './document.component.html'
+    selector: 'jhi-document-word',
+    templateUrl: './document-word.component.html'
 })
-export class DocumentComponent implements OnInit, OnDestroy {
+export class DocumentWordComponent implements OnInit, OnDestroy {
     currentAccount: any;
-    documents: IDocument[];
+    documentWords: IDocumentWord[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -29,14 +29,16 @@ export class DocumentComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    documentId: number;
     projectId: number;
 
     constructor(
-        protected documentService: DocumentService,
+        protected documentWordService: DocumentWordService,
         protected parseLinks: JhiParseLinks,
         protected jhiAlertService: JhiAlertService,
         protected accountService: AccountService,
         protected activatedRoute: ActivatedRoute,
+        protected dataUtils: JhiDataUtils,
         protected router: Router,
         protected eventManager: JhiEventManager
     ) {
@@ -52,11 +54,12 @@ export class DocumentComponent implements OnInit, OnDestroy {
                 ? this.activatedRoute.snapshot.params['search']
                 : '';
         this.projectId = Number(this.activatedRoute.snapshot.params['projectId']);
+        this.documentId = Number(this.activatedRoute.snapshot.params['documentId']);
     }
 
     loadAll() {
         if (this.currentSearch) {
-            this.documentService
+            this.documentWordService
                 .search({
                     page: this.page - 1,
                     query: this.currentSearch,
@@ -64,19 +67,19 @@ export class DocumentComponent implements OnInit, OnDestroy {
                     sort: this.sort()
                 })
                 .subscribe(
-                    (res: HttpResponse<IDocument[]>) => this.paginateDocuments(res.body, res.headers),
+                    (res: HttpResponse<IDocumentWord[]>) => this.paginateDocumentWords(res.body, res.headers),
                     (res: HttpErrorResponse) => this.onError(res.message)
                 );
             return;
         }
-        this.documentService
-            .query(this.projectId, {
+        this.documentWordService
+            .query(this.documentId, {
                 page: this.page - 1,
                 size: this.itemsPerPage,
                 sort: this.sort()
             })
             .subscribe(
-                (res: HttpResponse<IDocument[]>) => this.paginateDocuments(res.body, res.headers),
+                (res: HttpResponse<IDocumentWord[]>) => this.paginateDocumentWords(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
     }
@@ -89,7 +92,7 @@ export class DocumentComponent implements OnInit, OnDestroy {
     }
 
     transition() {
-        this.router.navigate(['/document'], {
+        this.router.navigate(['/document-word'], {
             queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -104,7 +107,7 @@ export class DocumentComponent implements OnInit, OnDestroy {
         this.page = 0;
         this.currentSearch = '';
         this.router.navigate([
-            '/document',
+            '/document-word',
             {
                 page: this.page,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
@@ -120,7 +123,7 @@ export class DocumentComponent implements OnInit, OnDestroy {
         this.page = 0;
         this.currentSearch = query;
         this.router.navigate([
-            '/document',
+            '/document-word',
             {
                 search: this.currentSearch,
                 page: this.page,
@@ -135,19 +138,27 @@ export class DocumentComponent implements OnInit, OnDestroy {
         this.accountService.identity().then(account => {
             this.currentAccount = account;
         });
-        this.registerChangeInDocuments();
+        this.registerChangeInDocumentWords();
     }
 
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
     }
 
-    trackId(index: number, item: IDocument) {
+    trackId(index: number, item: IDocumentWord) {
         return item.id;
     }
 
-    registerChangeInDocuments() {
-        this.eventSubscriber = this.eventManager.subscribe('documentListModification', response => this.loadAll());
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
+    }
+
+    registerChangeInDocumentWords() {
+        this.eventSubscriber = this.eventManager.subscribe('documentWordListModification', response => this.loadAll());
     }
 
     sort() {
@@ -158,13 +169,17 @@ export class DocumentComponent implements OnInit, OnDestroy {
         return result;
     }
 
-    protected paginateDocuments(data: IDocument[], headers: HttpHeaders) {
+    protected paginateDocumentWords(data: IDocumentWord[], headers: HttpHeaders) {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
-        this.documents = data;
+        this.documentWords = data;
     }
 
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    download(item: DocumentWord) {
+        return this.dataUtils.downloadFile(item.fileContentType, item.file, 'test.docx');
     }
 }

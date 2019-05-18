@@ -1,0 +1,29 @@
+{
+    "name": "DocumentWord",
+    "fields": [
+        {
+            "fieldName": "file",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "document",
+            "otherEntityRelationshipName": "documentWord",
+            "relationshipName": "document",
+            "otherEntityField": "title",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20190518063036",
+    "entityTableName": "document_word",
+    "dto": "mapstruct",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

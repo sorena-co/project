@@ -20,6 +20,7 @@
                 "organizationPartner": "Organization Partner",
                 "costSummary": "Cost Summary",
                 "foreCastCost": "Fore Cast Cost",
+                "documentWord": "Document Word",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

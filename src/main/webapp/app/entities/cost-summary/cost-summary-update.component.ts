@@ -31,13 +31,6 @@ export class CostSummaryUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ costSummary }) => {
             this.costSummary = costSummary;
         });
-        this.documentService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IDocument[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IDocument[]>) => response.body)
-            )
-            .subscribe((res: IDocument[]) => (this.documents = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {

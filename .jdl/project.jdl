@@ -139,6 +139,10 @@ entity ForeCastCost{//پيش‌بيني هزينه‌هاي اقلام سرما�
     type ForeCastCostType
 }
 
+entity DocumentWord{
+    file AnyBlob
+}
+
 enum DocumentType{
     THIRTEEN
 }
@@ -189,6 +193,10 @@ relationship OneToMany{
      Document {organizationPartner} to OrganizationPartner,
      Document {costSummary} to CostSummary,
      Document {foreCastCost} to ForeCastCost,
+}
+
+relationship OneToOne{
+    DocumentWord{ document(title)} to Document
 }
 
 dto * with mapstruct
