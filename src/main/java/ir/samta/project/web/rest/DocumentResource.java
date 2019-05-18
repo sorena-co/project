@@ -1,27 +1,32 @@
 package ir.samta.project.web.rest;
+
+import io.github.jhipster.web.util.ResponseUtil;
+import ir.samta.project.domain.MainStep;
+import ir.samta.project.repository.DocumentRepository;
+import ir.samta.project.repository.MainStepRepository;
 import ir.samta.project.service.DocumentService;
+import ir.samta.project.service.dto.DocumentDTO;
 import ir.samta.project.web.rest.errors.BadRequestAlertException;
 import ir.samta.project.web.rest.util.HeaderUtil;
 import ir.samta.project.web.rest.util.PaginationUtil;
-import ir.samta.project.service.dto.DocumentDTO;
-import io.github.jhipster.web.util.ResponseUtil;
+import org.apache.poi.xwpf.usermodel.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Document.
@@ -30,14 +35,16 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 @RequestMapping("/api")
 public class DocumentResource {
 
-    private final Logger log = LoggerFactory.getLogger(DocumentResource.class);
-
     private static final String ENTITY_NAME = "document";
-
+    private final Logger log = LoggerFactory.getLogger(DocumentResource.class);
     private final DocumentService documentService;
+    private final DocumentRepository documentRepository;
+    private final MainStepRepository mainStepRepository;
 
-    public DocumentResource(DocumentService documentService) {
+    public DocumentResource(DocumentService documentService, DocumentRepository documentRepository, MainStepRepository mainStepRepository) {
         this.documentService = documentService;
+        this.documentRepository = documentRepository;
+        this.mainStepRepository = mainStepRepository;
     }
 
     /**
@@ -124,7 +131,7 @@ public class DocumentResource {
      * SEARCH  /_search/documents?query=:query : search for the document corresponding
      * to the query.
      *
-     * @param query the query of the document search
+     * @param query    the query of the document search
      * @param pageable the pagination information
      * @return the result of the search
      */
@@ -134,6 +141,94 @@ public class DocumentResource {
         Page<DocumentDTO> page = documentService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/documents");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/documents/{id}/get-word")
+    public ResponseEntity<?> getWord(HttpServletResponse response, @PathVariable Long id) throws IOException {
+        log.debug("REST request to get Document : {}", id);
+        String fileName = "/home/mohammad/Downloads/13-page1.docx.docx";
+        InputStream fis = new FileInputStream(fileName);
+        DocumentDTO documentDTO = documentService.findOne(id).get();
+        XWPFDocument document = new XWPFDocument(fis);
+        replaceWord(document, "title", documentDTO.getTitle());
+        replaceWord(document, "protectiveClassification", documentDTO.getProtectiveClassification());
+        replaceWord(document, "persianTitle", documentDTO.getPersianTitle());
+        replaceWord(document, "foreignTitle", documentDTO.getForeignTitle());
+        replaceWord(document, "foreignTitle", documentDTO.getForeignTitle());
+        replaceWord(document, "planType", documentDTO.getPlanType().toString());
+        replaceWord(document, "visionOfProject", documentDTO.getVisionOfProject());
+        replaceWord(document, "detailOfProject", documentDTO.getDetailOfProject());
+        replaceWord(document, "executiveBidder", documentDTO.getExecutiveBidder());
+        replaceWord(document, "organization", documentDTO.getOrganization());
+        replaceWord(document, "industry", documentDTO.getIndustry());
+        replaceWord(document, "address", documentDTO.getAddress());
+      /*  replaceWord(document,"exportPlanDate",documentDTO.getExportPlanDate().toString());
+        replaceWord(document,"executivePlanDate",documentDTO.getExecutivePlanDate().toString());
+        replaceWord(document,"fromPlanDate",documentDTO.getFromPlanDate().toString());
+        replaceWord(document,"toPlanDate",documentDTO.getToPlanDate().toString());*/
+        replaceWord(document, "rialBudget", documentDTO.getRialBudget().toString());
+        replaceWord(document, "foreignBudget", documentDTO.getForeignBudget().toString());
+        replaceWord(document, "leaderCommand", documentDTO.getLeaderCommand());
+        replaceWord(document, "fiveYearProgram", documentDTO.getFiveYearProgram());
+        replaceWord(document, "standingApprovals", documentDTO.getStandingApprovals());
+        replaceWord(document, "approvedPattern", documentDTO.getApprovedPattern());
+        replaceWord(document, "percentageOfOutsourcing", documentDTO.getPercentageOfOutsourcing().toString());
+        replaceWord(document, "employerOperations", documentDTO.getEmployerOperations());
+        replaceWord(document, "industrialUser", documentDTO.getIndustrialUser());
+        replaceWord(document, "generalSpecificationOfTheDesign", documentDTO.getGeneralSpecificationOfTheDesign());
+        replaceWord(document, "thePurposeOfTheProject", documentDTO.getThePurposeOfTheProject());
+        replaceWord(document, "scientificAndTechnicalBuildings", documentDTO.getScientificAndTechnicalBuildings());
+        replaceWord(document, "howImplementProject", documentDTO.getHowImplementProject());
+        replaceWord(document, "historyOfPlan", documentDTO.getHistoryOfPlan());
+        replaceWord(document, "historyOfStudiesAndResearch", documentDTO.getHistoryOfStudiesAndResearch());
+        replaceWord(document, "howUse", documentDTO.getHowUse());
+        replaceWord(document, "defenseNeeds", documentDTO.getDefenseNeeds());
+        replaceWord(document, "whichMilitary", documentDTO.getWhichMilitary());
+        replaceWord(document, "civilianApplications", documentDTO.getCivilianApplications());
+        replaceWord(document, "imaginedDate", documentDTO.getImaginedDate());
+
+        replaceTable(document, "mainStep", "");
+        FileOutputStream fos = new FileOutputStream(fileName + "2wewqeqw.docx");
+        document.write(fos);
+        fos.close();
+        document.close();
+        return ResponseEntity.ok().build();
+    }
+
+    private void replaceWord(XWPFDocument document, String key, String value) {
+        List<XWPFParagraph> paragraphs = document.getParagraphs();
+        for (XWPFParagraph p : paragraphs) {
+            List<XWPFRun> runs = p.getRuns();
+            if (runs != null) {
+                for (XWPFRun r : runs) {
+                    String text = r.getText(0);
+                    if (text != null && text.contains(key)) {
+                        text = text.replace(key, value);
+                        r.setText(text, 0);
+                    }
+                }
+            }
+        }
+    }
+
+    private void replaceTable(XWPFDocument document, String key, String value) {
+        List<MainStep> all = mainStepRepository.findAll();
+        List<XWPFTable> tables = document.getTables();
+        XWPFTable tab = tables.get(0);
+        List<XWPFTableRow> rows = tab.getRows();
+        while (rows.size() > 1) {
+            tab.removeRow(rows.size()-1);
+        }
+        for (int i = 0; i < all.size(); i++) {
+            XWPFTableRow row = tab.createRow();
+            row.getCell(0).setText(all.get(i).getMainStep());
+            row.getCell(1).setText(all.get(i).getActionTitle());
+            row.getCell(2).setText(all.get(i).getDetailOfAction());
+            row.getCell(3).setText(all.get(i).getMonth().toString());
+            row.getCell(4).setText(all.get(i).getPercent().toString());
+            row.getCell(5).setText(all.get(i).getResult());
+
+        }
     }
 
 }

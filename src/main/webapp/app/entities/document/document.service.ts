@@ -50,6 +50,10 @@ export class DocumentService {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
 
+    getWord(id: number): Observable<HttpResponse<any>> {
+        return this.http.get<any>(`${this.resourceUrl}/${id}/get-word`, { observe: 'response' }).pipe(map((res: HttpResponse<any>) => res));
+    }
+
     search(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http

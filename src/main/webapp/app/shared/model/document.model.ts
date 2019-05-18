@@ -45,6 +45,7 @@ export interface IDocument {
     howImplementProject?: string;
     historyOfPlan?: string;
     historyOfStudiesAndResearch?: string;
+    base64?: string;
     howUse?: string;
     defenseNeeds?: string;
     whichMilitary?: string;
@@ -73,6 +74,7 @@ export class Document implements IDocument {
         public visionOfProject?: string,
         public executiveBidder?: string,
         public organization?: string,
+        public base64?: string,
         public industry?: string,
         public address?: string,
         public exportPlanDate?: Moment,
