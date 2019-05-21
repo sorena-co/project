@@ -1,84 +1,70 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="projectApp.document.home.title">Documents</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-document" [routerLink]="['/document/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-document"
+                [routerLink]="['/document/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="hidden-sm-down"  jhiTranslate="projectApp.document.home.createLabel">
+            <span class="hidden-sm-down" jhiTranslate="projectApp.document.home.createLabel">
             Create new Document
             </span>
         </button>
     </h2>
     <jhi-alert></jhi-alert>
-    <div class="row">
-        <div class="col-sm-12">
-            <form name="searchForm" class="form-inline">
-                <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'projectApp.document.home.search' | translate }}">
-                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
-                        <fa-icon [icon]="'search'"></fa-icon>
-                    </button>
-                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
-                        <fa-icon [icon]="'trash-alt'"></fa-icon>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
     <br/>
-    <div class="table-responsive table-bordered" *ngIf="documents">
-        <table class="table table-striped">
-            <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="title"><span jhiTranslate="projectApp.document.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="protectiveClassification"><span jhiTranslate="projectApp.document.protectiveClassification">Protective Classification</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="persianTitle"><span jhiTranslate="projectApp.document.persianTitle">Persian Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="foreignTitle"><span jhiTranslate="projectApp.document.foreignTitle">Foreign Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let document of documents ;trackBy: trackId">
-                <td>{{document.title}}</td>
-                <td>{{document.protectiveClassification}}</td>
-                <td>{{document.persianTitle}}</td>
-                <td>{{document.foreignTitle}}</td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/project', document.projectId, 'document',document.id,'document-word']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'save'"></fa-icon>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/document', document.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/document', document.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', 'document', { outlets: { popup: document.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <!-- Pager is not implemented yet, so this is normal pagination instead -->
-    <div *ngIf="documents && documents.length">
-        <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-        </div>
-        <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
-        </div>
+    <div *ngIf="documents">
+        <p-table [value]="documents">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th><span jhiTranslate="projectApp.document.title">Title</span></th>
+                    <th><span
+                        jhiTranslate="projectApp.document.protectiveClassification">Protective Classification</span>
+                    </th>
+                    <th><span jhiTranslate="projectApp.document.persianTitle">Persian Title</span></th>
+                    <th><span jhiTranslate="projectApp.document.foreignTitle">Foreign Title</span></th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-document let-rowIndex="rowIndex">
+                <tr>
+                    <td>{{document.title}}</td>
+                    <td>{{document.protectiveClassification}}</td>
+                    <td>{{document.persianTitle}}</td>
+                    <td>{{document.foreignTitle}}</td>
+                    <td>
+                        <div class="btn-group flex-btn-group-container">
+                            <input style="display: none" type="file" id="file_file_word"
+                                   (change)="setFileData($event, documentWord, 'file', false,document,'WORD')"
+                                   jhiTranslate="entity.action.addblob"/>
+                            <input style="display: none" type="file" id="file_file_pdf"
+                                   (change)="setFileData($event, documentPDF, 'file', false,document,'PDF')"
+                                   jhiTranslate="entity.action.addblob"/>
+
+                            <p-splitButton dir="rtl" label="File" (onClick)="loadDocumentFilePage(document)"
+                                           [model]="getItems(rowIndex)"
+                                           styleClass="ui-button-danger">
+
+                            </p-splitButton>
+                            <button type="submit"
+                                    [routerLink]="['/project', document.projectId, 'document',document.id,'document-word']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon [icon]="'save'"></fa-icon>
+                            </button>
+                            <button type="submit"
+                                    [routerLink]="['/document', document.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            </button>
+                            <button type="submit"
+                                    [routerLink]="['/', 'document', { outlets: { popup: document.id + '/delete'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
     </div>
 </div>

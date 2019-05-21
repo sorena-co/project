@@ -1,9 +1,13 @@
 package ir.samta.project.service;
 
+import ir.samta.project.domain.Action;
 import ir.samta.project.domain.Phase;
+import ir.samta.project.repository.ActionRepository;
 import ir.samta.project.repository.PhaseRepository;
 import ir.samta.project.repository.search.PhaseSearchRepository;
+import ir.samta.project.service.dto.ActionDTO;
 import ir.samta.project.service.dto.PhaseDTO;
+import ir.samta.project.service.mapper.ActionMapper;
 import ir.samta.project.service.mapper.PhaseMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
@@ -31,10 +36,15 @@ public class PhaseService {
 
     private final PhaseSearchRepository phaseSearchRepository;
 
-    public PhaseService(PhaseRepository phaseRepository, PhaseMapper phaseMapper, PhaseSearchRepository phaseSearchRepository) {
+    private final ActionRepository actionRepository;
+    private final ActionMapper actionMapper;
+
+    public PhaseService(PhaseRepository phaseRepository, PhaseMapper phaseMapper, PhaseSearchRepository phaseSearchRepository, ActionRepository actionRepository, ActionMapper actionMapper) {
         this.phaseRepository = phaseRepository;
         this.phaseMapper = phaseMapper;
         this.phaseSearchRepository = phaseSearchRepository;
+        this.actionRepository = actionRepository;
+        this.actionMapper = actionMapper;
     }
 
     /**
@@ -60,10 +70,16 @@ public class PhaseService {
      * @return the list of entities
      */
     @Transactional(readOnly = true)
-    public Page<PhaseDTO> findAll(Long projectId, Pageable pageable) {
+    public List<PhaseDTO> findAll(Long projectId, Pageable pageable) {
         log.debug("Request to get all Phases");
-        return phaseRepository.findAllByProject_Id(projectId, pageable)
-            .map(phaseMapper::toDto);
+        List<Phase> phases = phaseRepository.findAllByProject_Id(projectId);
+        List<PhaseDTO> phasesDTO = phaseMapper.toDto(phases);
+        for (PhaseDTO phaseDTO : phasesDTO) {
+            List<Action> actions = actionRepository.findAllByPhase_Id(phaseDTO.getId());
+            List<ActionDTO> actionsDTO = actionMapper.toDto(actions);
+            phaseDTO.setActions(actionsDTO);
+        }
+        return phasesDTO;
     }
 
 

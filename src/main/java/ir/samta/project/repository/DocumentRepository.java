@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 /**
  * Spring Data  repository for the Document entity.
@@ -14,5 +16,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DocumentRepository extends JpaRepository<Documents, Long> {
 
-    Page<Documents> findAllByProject_Id(Long projectId,Pageable pageable);
+    Page<Documents> findAllByProject_Id(Long projectId, Pageable pageable);
+
+    List<Documents> findAllByProject_Id(Long projectId);
 }

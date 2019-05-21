@@ -9,6 +9,7 @@ import ir.samta.project.repository.MainStepRepository;
 import ir.samta.project.repository.search.DocumentSearchRepository;
 import ir.samta.project.service.dto.DocumentDTO;
 import ir.samta.project.service.mapper.DocumentMapper;
+import ir.samta.project.service.mapper.DocumentWordMapper;
 import ir.samta.project.service.mapper.MainStepMapper;
 import org.apache.poi.xwpf.usermodel.*;
 import org.slf4j.Logger;
@@ -46,14 +47,16 @@ public class DocumentService {
     private final MainStepRepository mainStepRepository;
 
     private final DocumentWordRepository documentWordRepository;
+    private final DocumentWordMapper documentWordMapper;
 
-    public DocumentService(DocumentRepository documentRepository, DocumentMapper documentMapper, DocumentSearchRepository documentSearchRepository, MainStepMapper mainStepMapper, MainStepRepository mainStepRepository, DocumentWordRepository documentWordRepository) {
+    public DocumentService(DocumentRepository documentRepository, DocumentMapper documentMapper, DocumentSearchRepository documentSearchRepository, MainStepMapper mainStepMapper, MainStepRepository mainStepRepository, DocumentWordRepository documentWordRepository, DocumentWordMapper documentWordMapper) {
         this.documentRepository = documentRepository;
         this.documentMapper = documentMapper;
         this.documentSearchRepository = documentSearchRepository;
         this.mainStepMapper = mainStepMapper;
         this.mainStepRepository = mainStepRepository;
         this.documentWordRepository = documentWordRepository;
+        this.documentWordMapper = documentWordMapper;
     }
 
     /**
@@ -82,14 +85,17 @@ public class DocumentService {
      * Get all the documents.
      *
      * @param projectId
-     * @param pageable  the pagination information
      * @return the list of entities
      */
     @Transactional(readOnly = true)
-    public Page<DocumentDTO> findAll(Long projectId, Pageable pageable) {
+    public List<DocumentDTO> findAll(Long projectId) {
         log.debug("Request to get all Documents");
-        return documentRepository.findAllByProject_Id(projectId, pageable)
-            .map(documentMapper::toDto);
+        List<Documents> documents = documentRepository.findAllByProject_Id(projectId);
+        List<DocumentDTO> documentDTOS = documentMapper.toDto(documents);
+        for (DocumentDTO document : documentDTOS) {
+            document.setDocumentFiles(documentWordMapper.toDto(documentWordRepository.findAllByDocument_Id(document.getId())));
+        }
+        return documentDTOS;
     }
 
 

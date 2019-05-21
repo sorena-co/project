@@ -1,0 +1,25 @@
+<div style="margin-bottom: 20px;">
+    <p-card [ngStyle]="{'cursor': 'pointer'}">
+        <p-header>
+            <div style="width: 100%;height: 100%;background-color: rgb(65,210,228)">
+                <p style="text-align: center;font-size: 30px; ">{{project.title}}</p>
+            </div>
+        </p-header>
+        <div>
+            <h6>مبلغ قرار داد : {{project.amountConfirmed}}</h6>
+            <h6>هزینه شده : {{project.totalCost}}</h6>
+        </div>
+        <p-footer>
+            <button
+                    [routerLink]="['/project', project.id, 'view' ]"
+                    class="btn btn-info btn-sm">
+                <fa-icon [icon]="'eye'"></fa-icon>
+            </button>
+            <button type="submit"
+                    [routerLink]="['/project', project.id, 'edit']"
+                    class="btn btn-primary btn-sm">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+            </button>
+        </p-footer>
+    </p-card>
+</div>

@@ -83,9 +83,8 @@ public class PhaseResource {
     @GetMapping("/phases/{projectId}/project")
     public ResponseEntity<List<PhaseDTO>> getAllPhases(@PathVariable Long projectId, Pageable pageable) {
         log.debug("REST request to get a page of Phases");
-        Page<PhaseDTO> page = phaseService.findAll(projectId, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/phases");
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        List<PhaseDTO> page = phaseService.findAll(projectId, pageable);
+        return ResponseEntity.ok().body(page);
     }
 
     /**

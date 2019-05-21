@@ -1,8 +1,6 @@
 package ir.samta.project.web.rest;
 
 import io.github.jhipster.web.util.ResponseUtil;
-import ir.samta.project.domain.DocumentWord;
-import ir.samta.project.domain.MainStep;
 import ir.samta.project.repository.DocumentRepository;
 import ir.samta.project.repository.MainStepRepository;
 import ir.samta.project.service.DocumentService;
@@ -10,7 +8,6 @@ import ir.samta.project.service.dto.DocumentDTO;
 import ir.samta.project.web.rest.errors.BadRequestAlertException;
 import ir.samta.project.web.rest.util.HeaderUtil;
 import ir.samta.project.web.rest.util.PaginationUtil;
-import org.apache.poi.xwpf.usermodel.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -19,11 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -97,9 +90,8 @@ public class DocumentResource {
     @GetMapping("/documents/{projectId}/project")
     public ResponseEntity<List<DocumentDTO>> getAllDocuments(@PathVariable Long projectId, Pageable pageable) {
         log.debug("REST request to get a page of Documents");
-        Page<DocumentDTO> page = documentService.findAll(projectId, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/documents");
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        List<DocumentDTO> page = documentService.findAll(projectId);
+        return ResponseEntity.ok().body(page);
     }
 
     /**

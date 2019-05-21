@@ -1,4 +1,6 @@
 package ir.samta.project.service.dto;
+import ir.samta.project.domain.enumeration.DocumentFileType;
+
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Lob;
@@ -18,6 +20,8 @@ public class DocumentWordDTO implements Serializable {
     private Long documentId;
 
     private String documentTitle;
+
+    private DocumentFileType type;
 
     public Long getId() {
         return id;
@@ -88,5 +92,13 @@ public class DocumentWordDTO implements Serializable {
             ", document=" + getDocumentId() +
             ", document='" + getDocumentTitle() + "'" +
             "}";
+    }
+
+    public DocumentFileType getType() {
+        return type;
+    }
+
+    public void setType(DocumentFileType type) {
+        this.type = type;
     }
 }

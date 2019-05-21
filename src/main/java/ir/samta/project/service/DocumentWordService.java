@@ -7,7 +7,6 @@ import ir.samta.project.service.dto.DocumentWordDTO;
 import ir.samta.project.service.mapper.DocumentWordMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing DocumentWord.
@@ -47,6 +46,7 @@ public class DocumentWordService {
     public DocumentWordDTO save(DocumentWordDTO documentWordDTO) {
         log.debug("Request to save DocumentWord : {}", documentWordDTO);
         DocumentWord documentWord = documentWordMapper.toEntity(documentWordDTO);
+        documentWordRepository.deleteAllByDocument_IdAndType(documentWordDTO.getDocumentId(), documentWordDTO.getType());
         documentWord = documentWordRepository.save(documentWord);
         DocumentWordDTO result = documentWordMapper.toDto(documentWord);
         documentWordSearchRepository.save(documentWord);
@@ -56,15 +56,14 @@ public class DocumentWordService {
     /**
      * Get all the documentWords.
      *
-     *
      * @param documentId
-     * @param pageable the pagination information
+     * @param pageable   the pagination information
      * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<DocumentWordDTO> findAll(Long documentId, Pageable pageable) {
         log.debug("Request to get all DocumentWords");
-        return documentWordRepository.findAllByDocument_Id(documentId,pageable)
+        return documentWordRepository.findAllByDocument_Id(documentId, pageable)
             .map(documentWordMapper::toDto);
     }
 
@@ -96,7 +95,7 @@ public class DocumentWordService {
     /**
      * Search for the documentWord corresponding to the query.
      *
-     * @param query the query of the search
+     * @param query    the query of the search
      * @param pageable the pagination information
      * @return the list of entities
      */

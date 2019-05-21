@@ -1,10 +1,11 @@
 package ir.samta.project.domain;
 
 
+import ir.samta.project.domain.enumeration.DocumentFileType;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.Document;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -17,7 +18,7 @@ import java.util.Objects;
 public class DocumentWord implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
@@ -34,6 +35,11 @@ public class DocumentWord implements Serializable {
     @JoinColumn(unique = true)
     private Documents document;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false)
+    private DocumentFileType type;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -47,17 +53,21 @@ public class DocumentWord implements Serializable {
         return file;
     }
 
+    public void setFile(byte[] file) {
+        this.file = file;
+    }
+
     public DocumentWord file(byte[] file) {
         this.file = file;
         return this;
     }
 
-    public void setFile(byte[] file) {
-        this.file = file;
-    }
-
     public String getFileContentType() {
         return fileContentType;
+    }
+
+    public void setFileContentType(String fileContentType) {
+        this.fileContentType = fileContentType;
     }
 
     public DocumentWord fileContentType(String fileContentType) {
@@ -65,21 +75,17 @@ public class DocumentWord implements Serializable {
         return this;
     }
 
-    public void setFileContentType(String fileContentType) {
-        this.fileContentType = fileContentType;
-    }
-
     public Documents getDocument() {
         return document;
+    }
+
+    public void setDocument(Documents document) {
+        this.document = document;
     }
 
     public DocumentWord document(Documents document) {
         this.document = document;
         return this;
-    }
-
-    public void setDocument(Documents document) {
-        this.document = document;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -110,5 +116,13 @@ public class DocumentWord implements Serializable {
             ", file='" + getFile() + "'" +
             ", fileContentType='" + getFileContentType() + "'" +
             "}";
+    }
+
+    public DocumentFileType getType() {
+        return type;
+    }
+
+    public void setType(DocumentFileType type) {
+        this.type = type;
     }
 }

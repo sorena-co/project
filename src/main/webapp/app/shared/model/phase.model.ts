@@ -1,3 +1,5 @@
+import { Action } from 'app/shared/model/action.model';
+
 export interface IPhase {
     id?: number;
     title?: string;
@@ -9,6 +11,7 @@ export interface IPhase {
     isFinish?: boolean;
     projectTitle?: string;
     projectId?: number;
+    actions?: Action[];
 }
 
 export class Phase implements IPhase {
@@ -22,7 +25,8 @@ export class Phase implements IPhase {
         public reasonOfDelay?: string,
         public isFinish?: boolean,
         public projectTitle?: string,
-        public projectId?: number
+        public projectId?: number,
+        public actions?: Action[]
     ) {
         this.isFinish = this.isFinish || false;
     }

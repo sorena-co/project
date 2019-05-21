@@ -164,8 +164,8 @@ export class PhaseComponent implements OnInit, OnDestroy {
     }
 
     protected paginatePhases(data: IPhase[], headers: HttpHeaders) {
-        this.links = this.parseLinks.parse(headers.get('link'));
-        this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
+        /*   this.links = this.parseLinks.parse(headers.get('link'));
+           this.totalItems = parseInt(headers.get('X-Total-Count'), 10);*/
         this.phases = data;
         this.phases.forEach(phase => {
             const startDate = phase.startDate != null ? phase.startDate.format(DATE_FORMAT) : null;

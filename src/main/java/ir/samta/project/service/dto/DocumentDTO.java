@@ -1,10 +1,12 @@
 package ir.samta.project.service.dto;
-import java.time.ZonedDateTime;
+
+import ir.samta.project.domain.enumeration.PlanType;
+
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import ir.samta.project.domain.enumeration.PlanType;
 
 /**
  * A DTO for the Document entity.
@@ -91,6 +93,8 @@ public class DocumentDTO implements Serializable {
     private List<MainStepDTO> mainSteps = new ArrayList<>();
 
     private String base64;
+
+    private List<DocumentWordDTO> documentFiles = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -475,5 +479,13 @@ public class DocumentDTO implements Serializable {
 
     public void setBase64(String base64) {
         this.base64 = base64;
+    }
+
+    public List<DocumentWordDTO> getDocumentFiles() {
+        return documentFiles;
+    }
+
+    public void setDocumentFiles(List<DocumentWordDTO> documentFiles) {
+        this.documentFiles = documentFiles;
     }
 }

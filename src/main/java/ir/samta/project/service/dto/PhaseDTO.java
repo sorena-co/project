@@ -1,6 +1,9 @@
 package ir.samta.project.service.dto;
-import java.time.ZonedDateTime;
+
 import java.io.Serializable;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -28,6 +31,8 @@ public class PhaseDTO implements Serializable {
     private Long projectId;
 
     private String projectTitle;
+
+    private List<ActionDTO> actions = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -144,5 +149,13 @@ public class PhaseDTO implements Serializable {
             ", project=" + getProjectId() +
             ", project='" + getProjectTitle() + "'" +
             "}";
+    }
+
+    public List<ActionDTO> getActions() {
+        return actions;
+    }
+
+    public void setActions(List<ActionDTO> actions) {
+        this.actions = actions;
     }
 }

@@ -2,3 +2,6 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import 'rtl.css';
 @import 'my-style.css';
+@import '~primeng/resources/themes/nova-light/theme.css';
+@import '~primeng/resources/primeng.min.css';
+@import '~primeicons/primeicons.css';

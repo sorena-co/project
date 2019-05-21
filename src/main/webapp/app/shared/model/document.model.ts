@@ -6,6 +6,7 @@ import { IExistingResearchProject } from 'app/shared/model/existing-research-pro
 import { IOrganizationPartner } from 'app/shared/model/organization-partner.model';
 import { ICostSummary } from 'app/shared/model/cost-summary.model';
 import { IForeCastCost } from 'app/shared/model/fore-cast-cost.model';
+import { DocumentWord } from 'app/shared/model/document-word.model';
 
 export const enum PlanType {
     FUNDANMENTAL = 'FUNDANMENTAL',
@@ -60,6 +61,7 @@ export interface IDocument {
     foreCastCosts?: IForeCastCost[];
     projectTitle?: string;
     projectId?: number;
+    documentFiles?: DocumentWord[];
 }
 
 export class Document implements IDocument {
@@ -109,6 +111,7 @@ export class Document implements IDocument {
         public costSummaries?: ICostSummary[],
         public foreCastCosts?: IForeCastCost[],
         public projectTitle?: string,
-        public projectId?: number
+        public projectId?: number,
+        public documentFiles?: DocumentWord[]
     ) {}
 }

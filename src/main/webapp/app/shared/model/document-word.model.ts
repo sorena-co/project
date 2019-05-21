@@ -1,9 +1,15 @@
+export enum DocumentFileType {
+    WORD = 'WORD',
+    PDF = 'PDF'
+}
+
 export interface IDocumentWord {
     id?: number;
     fileContentType?: string;
     file?: any;
     documentTitle?: string;
     documentId?: number;
+    type?: any;
 }
 
 export class DocumentWord implements IDocumentWord {
@@ -12,6 +18,7 @@ export class DocumentWord implements IDocumentWord {
         public fileContentType?: string,
         public file?: any,
         public documentTitle?: string,
-        public documentId?: number
+        public documentId?: number,
+        public type?: any
     ) {}
 }

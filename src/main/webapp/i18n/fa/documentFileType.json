@@ -1,0 +1,9 @@
+{
+    "projectApp": {
+        "DocumentFileType": {
+            "null": "",
+            "WORD": "Word",
+            "PDF": "PDF"
+        }
+    }
+}
