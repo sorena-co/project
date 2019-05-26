@@ -14,6 +14,12 @@
             Create new Financial Project
             </span>
         </button>
+        <button [disabled]="!project.file" class="btn btn-primary float-right jh-create-entity create-financial-project" (click)="download()">
+            <fa-icon [icon]="'download'"></fa-icon>
+            <span class="hidden-sm-down">
+                دانلود فایل اکسل
+            </span>
+        </button>
     </h2>
     <jhi-alert></jhi-alert>
     <jhi-alert-error></jhi-alert-error>

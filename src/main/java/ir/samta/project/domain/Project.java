@@ -64,6 +64,13 @@ public class Project implements Serializable {
     @Column(name = "jhi_level")
     private Long level;
 
+    @Lob
+    @Column(name = "jhi_file")
+    private byte[] file;
+
+    @Column(name = "jhi_file_content_type")
+    private String fileContentType;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -189,5 +196,21 @@ public class Project implements Serializable {
 
     public void setParentProjectId(Long parentProjectId) {
         this.parentProjectId = parentProjectId;
+    }
+
+    public byte[] getFile() {
+        return file;
+    }
+
+    public void setFile(byte[] file) {
+        this.file = file;
+    }
+
+    public String getFileContentType() {
+        return fileContentType;
+    }
+
+    public void setFileContentType(String fileContentType) {
+        this.fileContentType = fileContentType;
     }
 }

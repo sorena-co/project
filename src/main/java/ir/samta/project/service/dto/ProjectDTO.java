@@ -3,6 +3,7 @@ package ir.samta.project.service.dto;
 import ir.samta.project.domain.Project;
 import ir.samta.project.domain.enumeration.ProjectType;
 
+import javax.persistence.Lob;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
@@ -38,6 +39,11 @@ public class ProjectDTO implements Serializable {
     private Long parentProjectId;
 
     private Long level;
+
+    @Lob
+    private byte[] file;
+
+    private String fileContentType;
 
     public Long getId() {
         return id;
@@ -158,4 +164,19 @@ public class ProjectDTO implements Serializable {
         this.parentProjectId = parentProjectId;
     }
 
+    public byte[] getFile() {
+        return file;
+    }
+
+    public void setFile(byte[] file) {
+        this.file = file;
+    }
+
+    public String getFileContentType() {
+        return fileContentType;
+    }
+
+    public void setFileContentType(String fileContentType) {
+        this.fileContentType = fileContentType;
+    }
 }

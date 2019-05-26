@@ -21,6 +21,8 @@ export interface IProject {
     parentProjectId?: number;
     level?: number;
     projectType?: any | ProjectType;
+    fileContentType?: string;
+    file?: any;
 }
 
 export class Project implements IProject {
@@ -38,6 +40,8 @@ export class Project implements IProject {
         public creditApply?: number,
         public parentProjectId?: number,
         public level?: number,
-        public projectType?: ProjectType
+        public projectType?: ProjectType,
+        public fileContentType?: string,
+        public file?: any
     ) {}
 }

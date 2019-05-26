@@ -17,6 +17,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -45,7 +46,7 @@ public class FinancialProjectResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/financial-projects")
-    public ResponseEntity<FinancialProjectDTO> createFinancialProject(@RequestBody FinancialProjectDTO financialProjectDTO) throws URISyntaxException {
+    public ResponseEntity<FinancialProjectDTO> createFinancialProject(@RequestBody FinancialProjectDTO financialProjectDTO) throws URISyntaxException, IOException {
         log.debug("REST request to save FinancialProject : {}", financialProjectDTO);
         if (financialProjectDTO.getId() != null) {
             throw new BadRequestAlertException("A new financialProject cannot already have an ID", ENTITY_NAME, "idexists");
@@ -66,7 +67,7 @@ public class FinancialProjectResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/financial-projects")
-    public ResponseEntity<FinancialProjectDTO> updateFinancialProject(@RequestBody FinancialProjectDTO financialProjectDTO) throws URISyntaxException {
+    public ResponseEntity<FinancialProjectDTO> updateFinancialProject(@RequestBody FinancialProjectDTO financialProjectDTO) throws URISyntaxException, IOException {
         log.debug("REST request to update FinancialProject : {}", financialProjectDTO);
         if (financialProjectDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

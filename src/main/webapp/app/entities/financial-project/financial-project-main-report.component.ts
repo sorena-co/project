@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
+import { JhiAlertService, JhiDataUtils, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 
 import { FinancialProjectMain, IFinancialProject } from 'app/shared/model/financial-project.model';
 import { AccountService } from 'app/core';
@@ -10,6 +10,7 @@ import { AccountService } from 'app/core';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { FinancialProjectService } from './financial-project.service';
 import { ProjectService } from 'app/entities/project';
+import { IProject } from 'app/shared/model/project.model';
 
 @Component({
     selector: 'jhi-financial-project-main-report',
@@ -32,8 +33,10 @@ export class FinancialProjectMainReportComponent implements OnInit, OnDestroy {
     reverse: any;
     projectId: number;
     financialProjectMain: FinancialProjectMain = new FinancialProjectMain();
+    project: IProject;
 
     constructor(
+        protected dataUtils: JhiDataUtils,
         protected financialProjectService: FinancialProjectService,
         protected parseLinks: JhiParseLinks,
         protected jhiAlertService: JhiAlertService,
@@ -58,6 +61,9 @@ export class FinancialProjectMainReportComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
+        this.projectService.find(this.projectId).subscribe(value => {
+            this.project = value.body;
+        });
         this.financialProjectService.getFinancialProjectMain(this.projectId).subscribe(
             (res: HttpResponse<FinancialProjectMain>) => {
                 this.financialProjectMain = res.body;
@@ -113,5 +119,9 @@ export class FinancialProjectMainReportComponent implements OnInit, OnDestroy {
 
     navigateToDetail(type) {
         this.router.navigate(['/project/' + this.projectId + '/financial-project/details-of-main/' + type]);
+    }
+
+    download() {
+        return this.dataUtils.downloadFile(this.project.fileContentType, this.project.file, this.project.title + '.xlsx');
     }
 }

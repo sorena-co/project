@@ -1,13 +1,17 @@
 package ir.samta.project.service;
 
 import ir.samta.project.domain.FinancialProject;
+import ir.samta.project.domain.Project;
 import ir.samta.project.domain.enumeration.FinancialProjectType;
 import ir.samta.project.repository.FinancialProjectRepository;
+import ir.samta.project.repository.ProjectRepository;
 import ir.samta.project.repository.search.FinancialProjectSearchRepository;
 import ir.samta.project.service.dto.FinancialProjectDTO;
 import ir.samta.project.service.dto.FinancialProjectMainDTO;
 import ir.samta.project.service.dto.FinancialProjectTypeExistDTO;
 import ir.samta.project.service.mapper.FinancialProjectMapper;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -15,6 +19,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -36,10 +42,13 @@ public class FinancialProjectService {
 
     private final FinancialProjectSearchRepository financialProjectSearchRepository;
 
-    public FinancialProjectService(FinancialProjectRepository financialProjectRepository, FinancialProjectMapper financialProjectMapper, FinancialProjectSearchRepository financialProjectSearchRepository) {
+    private final ProjectRepository projectRepository;
+
+    public FinancialProjectService(FinancialProjectRepository financialProjectRepository, FinancialProjectMapper financialProjectMapper, FinancialProjectSearchRepository financialProjectSearchRepository, ProjectRepository projectRepository) {
         this.financialProjectRepository = financialProjectRepository;
         this.financialProjectMapper = financialProjectMapper;
         this.financialProjectSearchRepository = financialProjectSearchRepository;
+        this.projectRepository = projectRepository;
     }
 
     /**
@@ -48,12 +57,13 @@ public class FinancialProjectService {
      * @param financialProjectDTO the entity to save
      * @return the persisted entity
      */
-    public FinancialProjectDTO save(FinancialProjectDTO financialProjectDTO) {
+    public FinancialProjectDTO save(FinancialProjectDTO financialProjectDTO) throws IOException {
         log.debug("Request to save FinancialProject : {}", financialProjectDTO);
         FinancialProject financialProject = financialProjectMapper.toEntity(financialProjectDTO);
         financialProject = financialProjectRepository.save(financialProject);
         FinancialProjectDTO result = financialProjectMapper.toDto(financialProject);
         financialProjectSearchRepository.save(financialProject);
+        createExcel(financialProject.getProject().getId());
         return result;
     }
 
@@ -153,5 +163,100 @@ public class FinancialProjectService {
         result.setCreditEstimatesAmount(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.CREDIT_ESTIMATES));
         result.setCreditApply(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.CREDIT_APPLY));
         return result;
+    }
+
+    private void createExcel(Long projectId) throws IOException {
+        Project project = projectRepository.getOne(projectId);
+
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("گزارش مالی");
+
+        // Create a Font for styling header cells
+        Font headerFont = workbook.createFont();
+        headerFont.setBold(true);
+        headerFont.setFontHeightInPoints((short) 14);
+        headerFont.setColor(IndexedColors.RED.getIndex());
+
+        // Create a CellStyle with the font
+        CellStyle headerCellStyle = workbook.createCellStyle();
+        headerCellStyle.setFont(headerFont);
+
+
+        // Create a Row
+        Row headerRow = sheet.createRow(0);
+
+        Cell cell0 = headerRow.createCell(0);
+        cell0.setCellValue("مبلغ مصوب");
+        cell0.setCellStyle(headerCellStyle);
+
+        Cell cell1 = headerRow.createCell(1);
+        cell1.setCellValue("جمع کل اعتبارات مصوب");
+        cell1.setCellStyle(headerCellStyle);
+
+        Cell cell2 = headerRow.createCell(2);
+        cell2.setCellValue("واریز از موسسه به سازمان");
+        cell2.setCellStyle(headerCellStyle);
+
+        Cell cell3 = headerRow.createCell(3);
+        cell3.setCellValue("واریز از سازمان به معاونت");
+        cell3.setCellStyle(headerCellStyle);
+
+        Cell cell4 = headerRow.createCell(4);
+        cell4.setCellValue("دریافتی کل برای پروژه");
+        cell4.setCellStyle(headerCellStyle);
+
+        Cell cell5 = headerRow.createCell(5);
+        cell5.setCellValue("مبلغ هزینه شده برای پروژه کد دار");
+        cell5.setCellStyle(headerCellStyle);
+
+        Cell cell6 = headerRow.createCell(6);
+        cell6.setCellValue("مبلغ هزینه شده برای پروژه بدون کد");
+        cell6.setCellStyle(headerCellStyle);
+
+        Cell cell7 = headerRow.createCell(7);
+        cell7.setCellValue("مازاد هزینه");
+        cell7.setCellStyle(headerCellStyle);
+
+        Cell cell8 = headerRow.createCell(8);
+        cell8.setCellValue("مانده اعتبار پروژه در حساب معاونت");
+        cell8.setCellStyle(headerCellStyle);
+
+        Cell cell9 = headerRow.createCell(9);
+        cell9.setCellValue("اعتبار تخصیصی");
+        cell9.setCellStyle(headerCellStyle);
+
+        Cell cell10 = headerRow.createCell(10);
+        cell10.setCellValue("مبلغ قرارداد");
+        cell10.setCellStyle(headerCellStyle);
+
+        Row row = sheet.createRow(1);
+        Long sendToProjectHaveCode = financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.SEND_TO_PROJECT_HAVE_CODE);
+        Long receiveFromOrganization = financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.RECEIVED_FROM_ORGANIZATION);
+        row.createCell(0).setCellValue(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.CREDIT_ESTIMATES));
+        row.createCell(1).setCellValue(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.AMOUNT_CONFIRMED));
+        row.createCell(2).setCellValue(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.RECEIVED_FROM_INSTITUTION));
+        row.createCell(3).setCellValue(receiveFromOrganization);
+        row.createCell(4).setCellValue(receiveFromOrganization);
+        row.createCell(5).setCellValue(sendToProjectHaveCode);
+        row.createCell(6).setCellValue(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.SEND_TO_PROJECT_NOT_HAVE_CODE));
+        if (sendToProjectHaveCode > receiveFromOrganization) {
+            row.createCell(7).setCellValue(sendToProjectHaveCode - receiveFromOrganization);
+            row.createCell(8).setCellValue(0);
+        } else {
+            row.createCell(7).setCellValue(0);
+            row.createCell(8).setCellValue(receiveFromOrganization - sendToProjectHaveCode);
+        }
+        row.createCell(9).setCellValue(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.CREDIT_APPLY));
+        row.createCell(10).setCellValue(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.SELL_CONTRACT_AMOUNT));
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        workbook.write(bos);
+        bos.close();
+        byte[] bytes = bos.toByteArray();
+
+        project.setFile(bytes);
+        project.setFileContentType("applications/ms-xlsx");
+
+        projectRepository.save(project);
     }
 }
