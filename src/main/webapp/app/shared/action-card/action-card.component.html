@@ -1,0 +1,6 @@
+<div (click)="openUrl()" class="card action-card justify-content-center" [ngStyle]="{'background':backgroundColor}"
+     style="cursor: pointer">
+    <h2>{{title}}</h2>
+    <hr/>
+    <h5 *ngFor="let detail of details">{{detail}}</h5>
+</div>

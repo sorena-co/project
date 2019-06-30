@@ -6,7 +6,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     templateUrl: './phase-finish-modal.component.html'
 })
 export class PhaseFinishModalComponent {
-    reasonOfDelay: string = '';
+    reasonOfDelay = '';
 
     constructor(public activeModal: NgbActiveModal) {}
 }

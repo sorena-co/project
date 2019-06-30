@@ -7,6 +7,9 @@ import { CardModule, SplitButtonModule, TreeTableModule } from 'primeng/primeng'
 import { ProjectCardComponent } from 'app/shared/project-card/project-card.component';
 import { RouterModule } from '@angular/router';
 import { TableModule } from 'primeng/table';
+import { MatTableModule } from '@angular/material';
+import { MatInputModule } from '@angular/material/input';
+import { ActionCardComponent } from 'app/shared/action-card/action-card.component';
 
 @NgModule({
     imports: [
@@ -16,11 +19,13 @@ import { TableModule } from 'primeng/table';
         CardModule,
         RouterModule,
         SplitButtonModule,
-        TableModule
+        TableModule,
+        MatTableModule,
+        MatInputModule
     ],
-    declarations: [JhiLoginModalComponent, HasAnyAuthorityDirective, ProjectCardComponent],
+    declarations: [JhiLoginModalComponent, HasAnyAuthorityDirective, ProjectCardComponent, ActionCardComponent],
     providers: [{ provide: NgbDateAdapter, useClass: NgbDateMomentAdapter }],
-    entryComponents: [JhiLoginModalComponent, ProjectCardComponent],
+    entryComponents: [JhiLoginModalComponent, ProjectCardComponent, ActionCardComponent],
     exports: [
         ProjectSharedCommonModule,
         JhiLoginModalComponent,
@@ -29,7 +34,10 @@ import { TableModule } from 'primeng/table';
         CardModule,
         ProjectCardComponent,
         SplitButtonModule,
-        TableModule
+        TableModule,
+        MatTableModule,
+        MatInputModule,
+        ActionCardComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

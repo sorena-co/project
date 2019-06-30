@@ -19,7 +19,7 @@ import { TreeTableModule } from 'primeng/primeng';
 const ENTITY_STATES = [...phaseRoute, ...phasePopupRoute];
 
 @NgModule({
-    imports: [ProjectSharedModule, RouterModule.forChild(ENTITY_STATES), TreeTableModule],
+    imports: [ProjectSharedModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         PhaseComponent,
         PhaseDetailComponent,

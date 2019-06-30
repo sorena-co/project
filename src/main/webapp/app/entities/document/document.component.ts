@@ -197,7 +197,7 @@ export class DocumentComponent implements OnInit, OnDestroy {
         /*  if (event) {
               event.preventDefault();
           }*/
-        let element: HTMLElement = document.getElementById('file_file_' + type) as HTMLElement;
+        const element: HTMLElement = document.getElementById('file_file_' + type) as HTMLElement;
         element.click();
     }
 
@@ -207,7 +207,7 @@ export class DocumentComponent implements OnInit, OnDestroy {
         entity.documentId = document.id;
         entity.type = type;
         entity.id = null;
-        var self = this;
+        const self = this;
         setTimeout(function() {
             self.documentWordService.create(entity).subscribe(value => {
                 console.log(value);

@@ -42,6 +42,7 @@ export class Project implements IProject {
         public level?: number,
         public projectType?: ProjectType,
         public fileContentType?: string,
+        public details?: string[],
         public file?: any
     ) {}
 }

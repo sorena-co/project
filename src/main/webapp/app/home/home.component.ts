@@ -39,14 +39,17 @@ export class HomeComponent implements OnInit {
         this.projectService.query().subscribe(value => {
             this.projects = value.body;
             this.projects.forEach(project => {
+                project.details = [];
                 this.financialProjectService
                     .findByProjectAndType(project.id, this.FinancialProjectType[this.FinancialProjectType.AMOUNT_CONFIRMED])
                     .subscribe(financialProject => {
                         project.amountConfirmed = financialProject.body && financialProject.body.amount ? financialProject.body.amount : 0;
+                        project.details.push(`مبلغ قرارداد : ${project.amountConfirmed}`);
                     });
 
                 this.financialProjectService.getCostOfProject(project.id).subscribe(financialProject => {
                     project.totalCost = financialProject.body ? financialProject.body : 0;
+                    project.details.push(`مبلغ هزینه شده : ${project.totalCost}`);
                 });
             });
         });

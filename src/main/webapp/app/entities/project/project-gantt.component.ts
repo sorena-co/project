@@ -264,7 +264,7 @@ export class ProjectGanttComponent implements OnInit, OnDestroy {
 
                     const startDate = this.project.startDate != null ? this.project.startDate.format(DATE_FORMAT) : null;
                     const finishDate = this.project.finishDate != null ? this.project.finishDate.format(DATE_FORMAT) : null;
-                    let jalaliStartYear: number =
+                    const jalaliStartYear: number =
                         startDate != null
                             ? Number(
                                   jalali(startDate, DATE_FORMAT)
@@ -272,7 +272,7 @@ export class ProjectGanttComponent implements OnInit, OnDestroy {
                                       .format('YYYY')
                               )
                             : null;
-                    let jalaliStartMonth: number =
+                    const jalaliStartMonth: number =
                         startDate != null
                             ? Number(
                                   jalali(startDate, DATE_FORMAT)

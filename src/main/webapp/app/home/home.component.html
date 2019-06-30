@@ -9,7 +9,11 @@
 
             <div class="row">
                 <ng-container *ngFor="let projectOptions of projects">
-                    <jhi-project-card class="col-md-4" [project]="projectOptions"></jhi-project-card>
+                    <jhi-action-card class="col-md-4" [url]="'/project/' +  projectOptions.id +  '/view'"
+                                     [title]="projectOptions.title"
+                                     [backgroundColor]="'#00A7E1'"
+                                     [details]="projectOptions.details"
+                                     style="width: 100%;margin-top: 40px"></jhi-action-card>
                 </ng-container>
                 <!--  <a [href]="'#/project/' + projectOptions.id + '/view'" class="col-md-4" *ngFor="let projectOptions of projects">
                       <div class="card">

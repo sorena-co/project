@@ -11,12 +11,23 @@ import { DATE_FORMAT, ITEMS_PER_PAGE, JALALI_DATE_FORMAT } from 'app/shared';
 import { PhaseService } from './phase.service';
 
 import * as jalali from 'jalali-moment';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbCalendarPersian, NgbDatepickerI18n, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PhaseFinishModalComponent } from 'app/entities/phase/phase-finish-modal.component';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { NgbDatepickerI18nPersian } from 'app/shared/jalali-datepicker/persian-datepicker.service';
 
 @Component({
     selector: 'jhi-phase',
-    templateUrl: './phase.component.html'
+    templateUrl: './phase.component.html',
+    styleUrls: ['phase.component.css'],
+    animations: [
+        trigger('detailExpand', [
+            state('collapsed', style({ height: '0px', minHeight: '0', display: 'none' })),
+            state('expanded', style({ height: '*' })),
+            transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
+        ])
+    ],
+    providers: [{ provide: NgbCalendar, useClass: NgbCalendarPersian }, { provide: NgbDatepickerI18n, useClass: NgbDatepickerI18nPersian }]
 })
 export class PhaseComponent implements OnInit, OnDestroy {
     currentAccount: any;
@@ -34,6 +45,21 @@ export class PhaseComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
     projectId: number;
+    columnsToDisplay = ['title', 'percent', 'startDate', 'finishDate', 'cost', 'edit', 'delete'];
+    expandedElement: any | null;
+    columnsToDisplayAction = [
+        'title',
+        'doPercent',
+        'finalPercent',
+        'startDate',
+        'finishDate',
+        'reasonOfDelay',
+        'isFinish',
+        'edit',
+        'delete'
+    ];
+
+    start: NgbDateStruct;
 
     constructor(
         protected phaseService: PhaseService,
@@ -43,7 +69,8 @@ export class PhaseComponent implements OnInit, OnDestroy {
         protected activatedRoute: ActivatedRoute,
         protected router: Router,
         protected eventManager: JhiEventManager,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private calendar: NgbCalendar
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {

@@ -1,0 +1,13 @@
+.action-card {
+    height: 200px;
+    text-align: center;
+    vertical-align: center;
+    border-radius: 40px;
+    color: #ffffff;
+}
+
+.action-card:hover {
+    border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 10px #888888;
+}
