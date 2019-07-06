@@ -5,7 +5,6 @@ import ir.samta.project.domain.Project;
 import ir.samta.project.domain.enumeration.FinancialProjectType;
 import ir.samta.project.repository.FinancialProjectRepository;
 import ir.samta.project.repository.ProjectRepository;
-import ir.samta.project.repository.search.ProjectSearchRepository;
 import ir.samta.project.security.SecurityUtils;
 import ir.samta.project.service.dto.ProjectDTO;
 import ir.samta.project.service.mapper.ProjectMapper;
@@ -21,7 +20,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+
 
 /**
  * Service Implementation for managing Project.
@@ -36,14 +35,13 @@ public class ProjectService {
 
     private final ProjectMapper projectMapper;
 
-    private final ProjectSearchRepository projectSearchRepository;
 
     private final FinancialProjectRepository financialProjectRepository;
 
-    public ProjectService(ProjectRepository projectRepository, ProjectMapper projectMapper, ProjectSearchRepository projectSearchRepository, FinancialProjectRepository financialProjectRepository) {
+    public ProjectService(ProjectRepository projectRepository, ProjectMapper projectMapper
+        , FinancialProjectRepository financialProjectRepository) {
         this.projectRepository = projectRepository;
         this.projectMapper = projectMapper;
-        this.projectSearchRepository = projectSearchRepository;
         this.financialProjectRepository = financialProjectRepository;
     }
 
@@ -66,7 +64,6 @@ public class ProjectService {
         financialProject.setProject(project);
         financialProjectRepository.save(financialProject);
         ProjectDTO result = projectMapper.toDto(project);
-        projectSearchRepository.save(project);
         return result;
     }
 
@@ -105,21 +102,6 @@ public class ProjectService {
     public void delete(Long id) {
         log.debug("Request to delete Project : {}", id);
         projectRepository.deleteById(id);
-        projectSearchRepository.deleteById(id);
-    }
-
-    /**
-     * Search for the project corresponding to the query.
-     *
-     * @param query    the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
-     */
-    @Transactional(readOnly = true)
-    public Page<ProjectDTO> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of Projects for query {}", query);
-        return projectSearchRepository.search(queryStringQuery(query), pageable)
-            .map(projectMapper::toDto);
     }
 
     public List<ProjectDTO> findAllWithOutAccess(Long level) {

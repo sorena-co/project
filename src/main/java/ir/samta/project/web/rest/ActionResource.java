@@ -114,22 +114,6 @@ public class ActionResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
-    /**
-     * SEARCH  /_search/actions?query=:query : search for the action corresponding
-     * to the query.
-     *
-     * @param query    the query of the action search
-     * @param pageable the pagination information
-     * @return the result of the search
-     */
-    @GetMapping("/_search/actions")
-    public ResponseEntity<List<ActionDTO>> searchActions(@RequestParam String query, Pageable pageable) {
-        log.debug("REST request to search for a page of Actions for query {}", query);
-        Page<ActionDTO> page = actionService.search(query, pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/actions");
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
-
     @GetMapping("/actions/{projectId}/project")
     public ResponseEntity<List<ActionDTO>> getAllActionsByProject(@PathVariable Long projectId, Pageable pageable) {
         log.debug("REST request to get a page of Actions");

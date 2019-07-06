@@ -113,20 +113,4 @@ public class PhaseResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
-    /**
-     * SEARCH  /_search/phases?query=:query : search for the phase corresponding
-     * to the query.
-     *
-     * @param query    the query of the phase search
-     * @param pageable the pagination information
-     * @return the result of the search
-     */
-    @GetMapping("/_search/phases")
-    public ResponseEntity<List<PhaseDTO>> searchPhases(@RequestParam String query, Pageable pageable) {
-        log.debug("REST request to search for a page of Phases for query {}", query);
-        Page<PhaseDTO> page = phaseService.search(query, pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/phases");
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
-
 }

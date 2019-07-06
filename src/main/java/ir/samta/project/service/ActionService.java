@@ -2,7 +2,6 @@ package ir.samta.project.service;
 
 import ir.samta.project.domain.Action;
 import ir.samta.project.repository.ActionRepository;
-import ir.samta.project.repository.search.ActionSearchRepository;
 import ir.samta.project.service.dto.ActionDTO;
 import ir.samta.project.service.mapper.ActionMapper;
 import org.slf4j.Logger;
@@ -15,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+
 
 /**
  * Service Implementation for managing Action.
@@ -30,12 +29,10 @@ public class ActionService {
 
     private final ActionMapper actionMapper;
 
-    private final ActionSearchRepository actionSearchRepository;
 
-    public ActionService(ActionRepository actionRepository, ActionMapper actionMapper, ActionSearchRepository actionSearchRepository) {
+    public ActionService(ActionRepository actionRepository, ActionMapper actionMapper) {
         this.actionRepository = actionRepository;
         this.actionMapper = actionMapper;
-        this.actionSearchRepository = actionSearchRepository;
     }
 
     /**
@@ -49,7 +46,6 @@ public class ActionService {
         Action action = actionMapper.toEntity(actionDTO);
         action = actionRepository.save(action);
         ActionDTO result = actionMapper.toDto(action);
-        actionSearchRepository.save(action);
         return result;
     }
 
@@ -90,21 +86,6 @@ public class ActionService {
     public void delete(Long id) {
         log.debug("Request to delete Action : {}", id);
         actionRepository.deleteById(id);
-        actionSearchRepository.deleteById(id);
-    }
-
-    /**
-     * Search for the action corresponding to the query.
-     *
-     * @param query the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
-     */
-    @Transactional(readOnly = true)
-    public Page<ActionDTO> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of Actions for query {}", query);
-        return actionSearchRepository.search(queryStringQuery(query), pageable)
-            .map(actionMapper::toDto);
     }
 
     public Page<ActionDTO> findAllByProject(Long projectId, Pageable pageable) {

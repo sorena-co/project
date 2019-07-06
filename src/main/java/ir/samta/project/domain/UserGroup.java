@@ -5,7 +5,7 @@ package ir.samta.project.domain;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import org.springframework.data.elasticsearch.annotations.Document;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -14,7 +14,6 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "user_group")
-@Document(indexName = "usergroup")
 public class UserGroup implements Serializable {
 
     private static final long serialVersionUID = 1L;

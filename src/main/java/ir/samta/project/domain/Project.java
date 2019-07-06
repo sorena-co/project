@@ -3,7 +3,7 @@ package ir.samta.project.domain;
 
 import ir.samta.project.domain.enumeration.ProjectType;
 import org.springframework.cloud.cloudfoundry.com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.elasticsearch.annotations.Document;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,7 +18,6 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "project")
-@Document(indexName = "project")
 public class Project implements Serializable {
 
     private static final long serialVersionUID = 1L;

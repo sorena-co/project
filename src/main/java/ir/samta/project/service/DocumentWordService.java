@@ -2,7 +2,6 @@ package ir.samta.project.service;
 
 import ir.samta.project.domain.DocumentWord;
 import ir.samta.project.repository.DocumentWordRepository;
-import ir.samta.project.repository.search.DocumentWordSearchRepository;
 import ir.samta.project.service.dto.DocumentWordDTO;
 import ir.samta.project.service.mapper.DocumentWordMapper;
 import org.slf4j.Logger;
@@ -14,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing DocumentWord.
@@ -29,12 +27,10 @@ public class DocumentWordService {
 
     private final DocumentWordMapper documentWordMapper;
 
-    private final DocumentWordSearchRepository documentWordSearchRepository;
 
-    public DocumentWordService(DocumentWordRepository documentWordRepository, DocumentWordMapper documentWordMapper, DocumentWordSearchRepository documentWordSearchRepository) {
+    public DocumentWordService(DocumentWordRepository documentWordRepository, DocumentWordMapper documentWordMapper) {
         this.documentWordRepository = documentWordRepository;
         this.documentWordMapper = documentWordMapper;
-        this.documentWordSearchRepository = documentWordSearchRepository;
     }
 
     /**
@@ -49,7 +45,6 @@ public class DocumentWordService {
         documentWordRepository.deleteAllByDocument_IdAndType(documentWordDTO.getDocumentId(), documentWordDTO.getType());
         documentWord = documentWordRepository.save(documentWord);
         DocumentWordDTO result = documentWordMapper.toDto(documentWord);
-        documentWordSearchRepository.save(documentWord);
         return result;
     }
 
@@ -89,20 +84,5 @@ public class DocumentWordService {
     public void delete(Long id) {
         log.debug("Request to delete DocumentWord : {}", id);
         documentWordRepository.deleteById(id);
-        documentWordSearchRepository.deleteById(id);
-    }
-
-    /**
-     * Search for the documentWord corresponding to the query.
-     *
-     * @param query    the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
-     */
-    @Transactional(readOnly = true)
-    public Page<DocumentWordDTO> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of DocumentWords for query {}", query);
-        return documentWordSearchRepository.search(queryStringQuery(query), pageable)
-            .map(documentWordMapper::toDto);
     }
 }

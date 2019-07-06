@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
-import org.springframework.data.elasticsearch.annotations.Document;
+
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;
@@ -15,7 +15,6 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "action")
-@Document(indexName = "action")
 public class Action implements Serializable {
 
     private static final long serialVersionUID = 1L;

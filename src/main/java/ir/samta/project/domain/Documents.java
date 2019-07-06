@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
-import org.springframework.data.elasticsearch.annotations.Document;
+
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
@@ -19,7 +19,6 @@ import ir.samta.project.domain.enumeration.PlanType;
  */
 @Entity
 @Table(name = "document")
-@Document(indexName = "document")
 public class Documents implements Serializable {
 
     private static final long serialVersionUID = 1L;

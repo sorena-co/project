@@ -114,20 +114,4 @@ public class DocumentWordResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
-    /**
-     * SEARCH  /_search/document-words?query=:query : search for the documentWord corresponding
-     * to the query.
-     *
-     * @param query    the query of the documentWord search
-     * @param pageable the pagination information
-     * @return the result of the search
-     */
-    @GetMapping("/_search/document-words")
-    public ResponseEntity<List<DocumentWordDTO>> searchDocumentWords(@RequestParam String query, Pageable pageable) {
-        log.debug("REST request to search for a page of DocumentWords for query {}", query);
-        Page<DocumentWordDTO> page = documentWordService.search(query, pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/document-words");
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
-
 }

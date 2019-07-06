@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
-import org.springframework.data.elasticsearch.annotations.Document;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -14,7 +14,6 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "main_step")
-@Document(indexName = "mainstep")
 public class MainStep implements Serializable {
 
     private static final long serialVersionUID = 1L;

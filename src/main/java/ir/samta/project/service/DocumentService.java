@@ -6,7 +6,6 @@ import ir.samta.project.domain.MainStep;
 import ir.samta.project.repository.DocumentRepository;
 import ir.samta.project.repository.DocumentWordRepository;
 import ir.samta.project.repository.MainStepRepository;
-import ir.samta.project.repository.search.DocumentSearchRepository;
 import ir.samta.project.service.dto.DocumentDTO;
 import ir.samta.project.service.mapper.DocumentMapper;
 import ir.samta.project.service.mapper.DocumentWordMapper;
@@ -14,8 +13,6 @@ import ir.samta.project.service.mapper.MainStepMapper;
 import org.apache.poi.xwpf.usermodel.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +23,6 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing Document.
@@ -41,7 +37,6 @@ public class DocumentService {
 
     private final DocumentMapper documentMapper;
 
-    private final DocumentSearchRepository documentSearchRepository;
 
     private final MainStepMapper mainStepMapper;
     private final MainStepRepository mainStepRepository;
@@ -49,10 +44,9 @@ public class DocumentService {
     private final DocumentWordRepository documentWordRepository;
     private final DocumentWordMapper documentWordMapper;
 
-    public DocumentService(DocumentRepository documentRepository, DocumentMapper documentMapper, DocumentSearchRepository documentSearchRepository, MainStepMapper mainStepMapper, MainStepRepository mainStepRepository, DocumentWordRepository documentWordRepository, DocumentWordMapper documentWordMapper) {
+    public DocumentService(DocumentRepository documentRepository, DocumentMapper documentMapper, MainStepMapper mainStepMapper, MainStepRepository mainStepRepository, DocumentWordRepository documentWordRepository, DocumentWordMapper documentWordMapper) {
         this.documentRepository = documentRepository;
         this.documentMapper = documentMapper;
-        this.documentSearchRepository = documentSearchRepository;
         this.mainStepMapper = mainStepMapper;
         this.mainStepRepository = mainStepRepository;
         this.documentWordRepository = documentWordRepository;
@@ -70,7 +64,6 @@ public class DocumentService {
         Documents document = documentMapper.toEntity(documentDTO);
         document = documentRepository.save(document);
         DocumentDTO result = documentMapper.toDto(document);
-        documentSearchRepository.save(document);
 
         List<MainStep> mainSteps = mainStepMapper.toEntity(documentDTO.getMainSteps());
         for (MainStep mainStep : mainSteps) {
@@ -120,21 +113,6 @@ public class DocumentService {
     public void delete(Long id) {
         log.debug("Request to delete Document : {}", id);
         documentRepository.deleteById(id);
-        documentSearchRepository.deleteById(id);
-    }
-
-    /**
-     * Search for the document corresponding to the query.
-     *
-     * @param query    the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
-     */
-    @Transactional(readOnly = true)
-    public Page<DocumentDTO> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of Documents for query {}", query);
-        return documentSearchRepository.search(queryStringQuery(query), pageable)
-            .map(documentMapper::toDto);
     }
 
     public void createWordFile(Documents documents) throws IOException {

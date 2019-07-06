@@ -2,7 +2,6 @@ package ir.samta.project.service;
 
 import ir.samta.project.domain.UserGroup;
 import ir.samta.project.repository.UserGroupRepository;
-import ir.samta.project.repository.search.UserGroupSearchRepository;
 import ir.samta.project.service.dto.UserGroupDTO;
 import ir.samta.project.service.mapper.UserGroupMapper;
 import org.slf4j.Logger;
@@ -15,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+
 
 /**
  * Service Implementation for managing UserGroup.
@@ -30,12 +29,9 @@ public class UserGroupService {
 
     private final UserGroupMapper userGroupMapper;
 
-    private final UserGroupSearchRepository userGroupSearchRepository;
-
-    public UserGroupService(UserGroupRepository userGroupRepository, UserGroupMapper userGroupMapper, UserGroupSearchRepository userGroupSearchRepository) {
+    public UserGroupService(UserGroupRepository userGroupRepository, UserGroupMapper userGroupMapper) {
         this.userGroupRepository = userGroupRepository;
         this.userGroupMapper = userGroupMapper;
-        this.userGroupSearchRepository = userGroupSearchRepository;
     }
 
     /**
@@ -49,7 +45,6 @@ public class UserGroupService {
         UserGroup userGroup = userGroupMapper.toEntity(userGroupDTO);
         userGroup = userGroupRepository.save(userGroup);
         UserGroupDTO result = userGroupMapper.toDto(userGroup);
-        userGroupSearchRepository.save(userGroup);
         return result;
     }
 
@@ -88,20 +83,5 @@ public class UserGroupService {
     public void delete(Long id) {
         log.debug("Request to delete UserGroup : {}", id);
         userGroupRepository.deleteById(id);
-        userGroupSearchRepository.deleteById(id);
-    }
-
-    /**
-     * Search for the userGroup corresponding to the query.
-     *
-     * @param query the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
-     */
-    @Transactional(readOnly = true)
-    public Page<UserGroupDTO> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of UserGroups for query {}", query);
-        return userGroupSearchRepository.search(queryStringQuery(query), pageable)
-            .map(userGroupMapper::toDto);
     }
 }

@@ -2,7 +2,6 @@ package ir.samta.project.service;
 
 import ir.samta.project.domain.OrganizationPartner;
 import ir.samta.project.repository.OrganizationPartnerRepository;
-import ir.samta.project.repository.search.OrganizationPartnerSearchRepository;
 import ir.samta.project.service.dto.OrganizationPartnerDTO;
 import ir.samta.project.service.mapper.OrganizationPartnerMapper;
 import org.slf4j.Logger;
@@ -15,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+
 
 /**
  * Service Implementation for managing OrganizationPartner.
@@ -30,12 +29,9 @@ public class OrganizationPartnerService {
 
     private final OrganizationPartnerMapper organizationPartnerMapper;
 
-    private final OrganizationPartnerSearchRepository organizationPartnerSearchRepository;
-
-    public OrganizationPartnerService(OrganizationPartnerRepository organizationPartnerRepository, OrganizationPartnerMapper organizationPartnerMapper, OrganizationPartnerSearchRepository organizationPartnerSearchRepository) {
+    public OrganizationPartnerService(OrganizationPartnerRepository organizationPartnerRepository, OrganizationPartnerMapper organizationPartnerMapper) {
         this.organizationPartnerRepository = organizationPartnerRepository;
         this.organizationPartnerMapper = organizationPartnerMapper;
-        this.organizationPartnerSearchRepository = organizationPartnerSearchRepository;
     }
 
     /**
@@ -49,7 +45,6 @@ public class OrganizationPartnerService {
         OrganizationPartner organizationPartner = organizationPartnerMapper.toEntity(organizationPartnerDTO);
         organizationPartner = organizationPartnerRepository.save(organizationPartner);
         OrganizationPartnerDTO result = organizationPartnerMapper.toDto(organizationPartner);
-        organizationPartnerSearchRepository.save(organizationPartner);
         return result;
     }
 
@@ -88,20 +83,5 @@ public class OrganizationPartnerService {
     public void delete(Long id) {
         log.debug("Request to delete OrganizationPartner : {}", id);
         organizationPartnerRepository.deleteById(id);
-        organizationPartnerSearchRepository.deleteById(id);
-    }
-
-    /**
-     * Search for the organizationPartner corresponding to the query.
-     *
-     * @param query the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
-     */
-    @Transactional(readOnly = true)
-    public Page<OrganizationPartnerDTO> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of OrganizationPartners for query {}", query);
-        return organizationPartnerSearchRepository.search(queryStringQuery(query), pageable)
-            .map(organizationPartnerMapper::toDto);
     }
 }

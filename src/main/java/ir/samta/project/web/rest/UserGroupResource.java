@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+
 
 /**
  * REST controller for managing UserGroup.
@@ -119,22 +119,6 @@ public class UserGroupResource {
         log.debug("REST request to delete UserGroup : {}", id);
         userGroupService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
-    }
-
-    /**
-     * SEARCH  /_search/user-groups?query=:query : search for the userGroup corresponding
-     * to the query.
-     *
-     * @param query the query of the userGroup search
-     * @param pageable the pagination information
-     * @return the result of the search
-     */
-    @GetMapping("/_search/user-groups")
-    public ResponseEntity<List<UserGroupDTO>> searchUserGroups(@RequestParam String query, Pageable pageable) {
-        log.debug("REST request to search for a page of UserGroups for query {}", query);
-        Page<UserGroupDTO> page = userGroupService.search(query, pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/user-groups");
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
 }

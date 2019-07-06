@@ -2,12 +2,10 @@ package ir.samta.project.service;
 
 import ir.samta.project.domain.ResearcherHistory;
 import ir.samta.project.repository.ResearcherHistoryRepository;
-import ir.samta.project.repository.search.ResearcherHistorySearchRepository;
 import ir.samta.project.service.dto.ResearcherHistoryDTO;
 import ir.samta.project.service.mapper.ResearcherHistoryMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing ResearcherHistory.
@@ -30,12 +27,9 @@ public class ResearcherHistoryService {
 
     private final ResearcherHistoryMapper researcherHistoryMapper;
 
-    private final ResearcherHistorySearchRepository researcherHistorySearchRepository;
-
-    public ResearcherHistoryService(ResearcherHistoryRepository researcherHistoryRepository, ResearcherHistoryMapper researcherHistoryMapper, ResearcherHistorySearchRepository researcherHistorySearchRepository) {
+    public ResearcherHistoryService(ResearcherHistoryRepository researcherHistoryRepository, ResearcherHistoryMapper researcherHistoryMapper) {
         this.researcherHistoryRepository = researcherHistoryRepository;
         this.researcherHistoryMapper = researcherHistoryMapper;
-        this.researcherHistorySearchRepository = researcherHistorySearchRepository;
     }
 
     /**
@@ -49,7 +43,6 @@ public class ResearcherHistoryService {
         ResearcherHistory researcherHistory = researcherHistoryMapper.toEntity(researcherHistoryDTO);
         researcherHistory = researcherHistoryRepository.save(researcherHistory);
         ResearcherHistoryDTO result = researcherHistoryMapper.toDto(researcherHistory);
-        researcherHistorySearchRepository.save(researcherHistory);
         return result;
     }
 
@@ -88,20 +81,5 @@ public class ResearcherHistoryService {
     public void delete(Long id) {
         log.debug("Request to delete ResearcherHistory : {}", id);
         researcherHistoryRepository.deleteById(id);
-        researcherHistorySearchRepository.deleteById(id);
-    }
-
-    /**
-     * Search for the researcherHistory corresponding to the query.
-     *
-     * @param query the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
-     */
-    @Transactional(readOnly = true)
-    public Page<ResearcherHistoryDTO> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of ResearcherHistories for query {}", query);
-        return researcherHistorySearchRepository.search(queryStringQuery(query), pageable)
-            .map(researcherHistoryMapper::toDto);
     }
 }

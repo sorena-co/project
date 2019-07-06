@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+
 
 /**
  * REST controller for managing OrganizationPartner.
@@ -118,22 +118,6 @@ public class OrganizationPartnerResource {
         log.debug("REST request to delete OrganizationPartner : {}", id);
         organizationPartnerService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
-    }
-
-    /**
-     * SEARCH  /_search/organization-partners?query=:query : search for the organizationPartner corresponding
-     * to the query.
-     *
-     * @param query the query of the organizationPartner search
-     * @param pageable the pagination information
-     * @return the result of the search
-     */
-    @GetMapping("/_search/organization-partners")
-    public ResponseEntity<List<OrganizationPartnerDTO>> searchOrganizationPartners(@RequestParam String query, Pageable pageable) {
-        log.debug("REST request to search for a page of OrganizationPartners for query {}", query);
-        Page<OrganizationPartnerDTO> page = organizationPartnerService.search(query, pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/organization-partners");
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
 }

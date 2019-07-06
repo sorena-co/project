@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+
 
 /**
  * REST controller for managing CollageEducation.
@@ -118,22 +118,6 @@ public class CollageEducationResource {
         log.debug("REST request to delete CollageEducation : {}", id);
         collageEducationService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
-    }
-
-    /**
-     * SEARCH  /_search/collage-educations?query=:query : search for the collageEducation corresponding
-     * to the query.
-     *
-     * @param query the query of the collageEducation search
-     * @param pageable the pagination information
-     * @return the result of the search
-     */
-    @GetMapping("/_search/collage-educations")
-    public ResponseEntity<List<CollageEducationDTO>> searchCollageEducations(@RequestParam String query, Pageable pageable) {
-        log.debug("REST request to search for a page of CollageEducations for query {}", query);
-        Page<CollageEducationDTO> page = collageEducationService.search(query, pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/collage-educations");
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
 }

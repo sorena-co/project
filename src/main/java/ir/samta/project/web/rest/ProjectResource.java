@@ -122,20 +122,4 @@ public class ProjectResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
-    /**
-     * SEARCH  /_search/projects?query=:query : search for the project corresponding
-     * to the query.
-     *
-     * @param query    the query of the project search
-     * @param pageable the pagination information
-     * @return the result of the search
-     */
-    @GetMapping("/_search/projects")
-    public ResponseEntity<List<ProjectDTO>> searchProjects(@RequestParam String query, Pageable pageable) {
-        log.debug("REST request to search for a page of Projects for query {}", query);
-        Page<ProjectDTO> page = projectService.search(query, pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/projects");
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
-
 }

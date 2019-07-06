@@ -2,7 +2,6 @@ package ir.samta.project.service;
 
 import ir.samta.project.domain.CollageEducation;
 import ir.samta.project.repository.CollageEducationRepository;
-import ir.samta.project.repository.search.CollageEducationSearchRepository;
 import ir.samta.project.service.dto.CollageEducationDTO;
 import ir.samta.project.service.mapper.CollageEducationMapper;
 import org.slf4j.Logger;
@@ -15,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+
 
 /**
  * Service Implementation for managing CollageEducation.
@@ -30,12 +29,9 @@ public class CollageEducationService {
 
     private final CollageEducationMapper collageEducationMapper;
 
-    private final CollageEducationSearchRepository collageEducationSearchRepository;
-
-    public CollageEducationService(CollageEducationRepository collageEducationRepository, CollageEducationMapper collageEducationMapper, CollageEducationSearchRepository collageEducationSearchRepository) {
+    public CollageEducationService(CollageEducationRepository collageEducationRepository, CollageEducationMapper collageEducationMapper) {
         this.collageEducationRepository = collageEducationRepository;
         this.collageEducationMapper = collageEducationMapper;
-        this.collageEducationSearchRepository = collageEducationSearchRepository;
     }
 
     /**
@@ -49,7 +45,6 @@ public class CollageEducationService {
         CollageEducation collageEducation = collageEducationMapper.toEntity(collageEducationDTO);
         collageEducation = collageEducationRepository.save(collageEducation);
         CollageEducationDTO result = collageEducationMapper.toDto(collageEducation);
-        collageEducationSearchRepository.save(collageEducation);
         return result;
     }
 
@@ -88,20 +83,5 @@ public class CollageEducationService {
     public void delete(Long id) {
         log.debug("Request to delete CollageEducation : {}", id);
         collageEducationRepository.deleteById(id);
-        collageEducationSearchRepository.deleteById(id);
-    }
-
-    /**
-     * Search for the collageEducation corresponding to the query.
-     *
-     * @param query the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
-     */
-    @Transactional(readOnly = true)
-    public Page<CollageEducationDTO> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of CollageEducations for query {}", query);
-        return collageEducationSearchRepository.search(queryStringQuery(query), pageable)
-            .map(collageEducationMapper::toDto);
     }
 }

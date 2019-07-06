@@ -5,7 +5,6 @@ import ir.samta.project.domain.Project;
 import ir.samta.project.domain.enumeration.FinancialProjectType;
 import ir.samta.project.repository.FinancialProjectRepository;
 import ir.samta.project.repository.ProjectRepository;
-import ir.samta.project.repository.search.FinancialProjectSearchRepository;
 import ir.samta.project.service.dto.FinancialProjectDTO;
 import ir.samta.project.service.dto.FinancialProjectMainDTO;
 import ir.samta.project.service.dto.FinancialProjectTypeExistDTO;
@@ -25,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing FinancialProject.
@@ -40,14 +38,11 @@ public class FinancialProjectService {
 
     private final FinancialProjectMapper financialProjectMapper;
 
-    private final FinancialProjectSearchRepository financialProjectSearchRepository;
-
     private final ProjectRepository projectRepository;
 
-    public FinancialProjectService(FinancialProjectRepository financialProjectRepository, FinancialProjectMapper financialProjectMapper, FinancialProjectSearchRepository financialProjectSearchRepository, ProjectRepository projectRepository) {
+    public FinancialProjectService(FinancialProjectRepository financialProjectRepository, FinancialProjectMapper financialProjectMapper, ProjectRepository projectRepository) {
         this.financialProjectRepository = financialProjectRepository;
         this.financialProjectMapper = financialProjectMapper;
-        this.financialProjectSearchRepository = financialProjectSearchRepository;
         this.projectRepository = projectRepository;
     }
 
@@ -62,7 +57,6 @@ public class FinancialProjectService {
         FinancialProject financialProject = financialProjectMapper.toEntity(financialProjectDTO);
         financialProject = financialProjectRepository.save(financialProject);
         FinancialProjectDTO result = financialProjectMapper.toDto(financialProject);
-        financialProjectSearchRepository.save(financialProject);
         createExcel(financialProject.getProject().getId());
         return result;
     }
@@ -104,21 +98,6 @@ public class FinancialProjectService {
     public void delete(Long id) {
         log.debug("Request to delete FinancialProject : {}", id);
         financialProjectRepository.deleteById(id);
-        financialProjectSearchRepository.deleteById(id);
-    }
-
-    /**
-     * Search for the financialProject corresponding to the query.
-     *
-     * @param query    the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
-     */
-    @Transactional(readOnly = true)
-    public Page<FinancialProjectDTO> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of FinancialProjects for query {}", query);
-        return financialProjectSearchRepository.search(queryStringQuery(query), pageable)
-            .map(financialProjectMapper::toDto);
     }
 
     public FinancialProjectDTO findByProjectAndType(Long projectId, FinancialProjectType type) {

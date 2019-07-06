@@ -2,7 +2,6 @@ package ir.samta.project.service;
 
 import ir.samta.project.domain.CostSummary;
 import ir.samta.project.repository.CostSummaryRepository;
-import ir.samta.project.repository.search.CostSummarySearchRepository;
 import ir.samta.project.service.dto.CostSummaryDTO;
 import ir.samta.project.service.mapper.CostSummaryMapper;
 import org.slf4j.Logger;
@@ -15,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+
 
 /**
  * Service Implementation for managing CostSummary.
@@ -30,12 +29,10 @@ public class CostSummaryService {
 
     private final CostSummaryMapper costSummaryMapper;
 
-    private final CostSummarySearchRepository costSummarySearchRepository;
 
-    public CostSummaryService(CostSummaryRepository costSummaryRepository, CostSummaryMapper costSummaryMapper, CostSummarySearchRepository costSummarySearchRepository) {
+    public CostSummaryService(CostSummaryRepository costSummaryRepository, CostSummaryMapper costSummaryMapper) {
         this.costSummaryRepository = costSummaryRepository;
         this.costSummaryMapper = costSummaryMapper;
-        this.costSummarySearchRepository = costSummarySearchRepository;
     }
 
     /**
@@ -49,7 +46,6 @@ public class CostSummaryService {
         CostSummary costSummary = costSummaryMapper.toEntity(costSummaryDTO);
         costSummary = costSummaryRepository.save(costSummary);
         CostSummaryDTO result = costSummaryMapper.toDto(costSummary);
-        costSummarySearchRepository.save(costSummary);
         return result;
     }
 
@@ -88,20 +84,5 @@ public class CostSummaryService {
     public void delete(Long id) {
         log.debug("Request to delete CostSummary : {}", id);
         costSummaryRepository.deleteById(id);
-        costSummarySearchRepository.deleteById(id);
-    }
-
-    /**
-     * Search for the costSummary corresponding to the query.
-     *
-     * @param query the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
-     */
-    @Transactional(readOnly = true)
-    public Page<CostSummaryDTO> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of CostSummaries for query {}", query);
-        return costSummarySearchRepository.search(queryStringQuery(query), pageable)
-            .map(costSummaryMapper::toDto);
     }
 }

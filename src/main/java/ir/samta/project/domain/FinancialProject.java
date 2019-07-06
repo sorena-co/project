@@ -3,7 +3,7 @@ package ir.samta.project.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import ir.samta.project.domain.enumeration.FinancialProjectType;
-import org.springframework.data.elasticsearch.annotations.Document;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,7 +15,6 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "financial_project")
-@Document(indexName = "financialproject")
 public class FinancialProject implements Serializable {
 
     private static final long serialVersionUID = 1L;

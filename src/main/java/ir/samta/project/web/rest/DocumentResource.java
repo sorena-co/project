@@ -120,19 +120,4 @@ public class DocumentResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
-    /**
-     * SEARCH  /_search/documents?query=:query : search for the document corresponding
-     * to the query.
-     *
-     * @param query    the query of the document search
-     * @param pageable the pagination information
-     * @return the result of the search
-     */
-    @GetMapping("/_search/documents")
-    public ResponseEntity<List<DocumentDTO>> searchDocuments(@RequestParam String query, Pageable pageable) {
-        log.debug("REST request to search for a page of Documents for query {}", query);
-        Page<DocumentDTO> page = documentService.search(query, pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/documents");
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
 }

@@ -2,12 +2,10 @@ package ir.samta.project.service;
 
 import ir.samta.project.domain.ForeCastCost;
 import ir.samta.project.repository.ForeCastCostRepository;
-import ir.samta.project.repository.search.ForeCastCostSearchRepository;
 import ir.samta.project.service.dto.ForeCastCostDTO;
 import ir.samta.project.service.mapper.ForeCastCostMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing ForeCastCost.
@@ -30,12 +27,9 @@ public class ForeCastCostService {
 
     private final ForeCastCostMapper foreCastCostMapper;
 
-    private final ForeCastCostSearchRepository foreCastCostSearchRepository;
-
-    public ForeCastCostService(ForeCastCostRepository foreCastCostRepository, ForeCastCostMapper foreCastCostMapper, ForeCastCostSearchRepository foreCastCostSearchRepository) {
+    public ForeCastCostService(ForeCastCostRepository foreCastCostRepository, ForeCastCostMapper foreCastCostMapper) {
         this.foreCastCostRepository = foreCastCostRepository;
         this.foreCastCostMapper = foreCastCostMapper;
-        this.foreCastCostSearchRepository = foreCastCostSearchRepository;
     }
 
     /**
@@ -49,7 +43,6 @@ public class ForeCastCostService {
         ForeCastCost foreCastCost = foreCastCostMapper.toEntity(foreCastCostDTO);
         foreCastCost = foreCastCostRepository.save(foreCastCost);
         ForeCastCostDTO result = foreCastCostMapper.toDto(foreCastCost);
-        foreCastCostSearchRepository.save(foreCastCost);
         return result;
     }
 
@@ -88,20 +81,5 @@ public class ForeCastCostService {
     public void delete(Long id) {
         log.debug("Request to delete ForeCastCost : {}", id);
         foreCastCostRepository.deleteById(id);
-        foreCastCostSearchRepository.deleteById(id);
-    }
-
-    /**
-     * Search for the foreCastCost corresponding to the query.
-     *
-     * @param query the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
-     */
-    @Transactional(readOnly = true)
-    public Page<ForeCastCostDTO> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of ForeCastCosts for query {}", query);
-        return foreCastCostSearchRepository.search(queryStringQuery(query), pageable)
-            .map(foreCastCostMapper::toDto);
     }
 }

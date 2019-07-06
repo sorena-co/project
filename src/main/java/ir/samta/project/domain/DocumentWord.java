@@ -2,7 +2,7 @@ package ir.samta.project.domain;
 
 
 import ir.samta.project.domain.enumeration.DocumentFileType;
-import org.springframework.data.elasticsearch.annotations.Document;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,7 +14,6 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "document_word")
-@Document(indexName = "documentword")
 public class DocumentWord implements Serializable {
 
     private static final long serialVersionUID = 1L;
