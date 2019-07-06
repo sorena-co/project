@@ -1,0 +1,11 @@
+dp-date-picker.dp-material .dp-picker-input {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 252px;
+    font-size: 13px;
+    outline: none;
+    border-radius: 20px !important;
+    height: 40px !important;
+    border-color: #ced4da !important;
+    border-width: thin !important;
+}

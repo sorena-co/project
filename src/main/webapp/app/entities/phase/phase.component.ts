@@ -27,7 +27,13 @@ import { NgbDatepickerI18nPersian } from 'app/shared/jalali-datepicker/persian-d
             transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
         ])
     ],
-    providers: [{ provide: NgbCalendar, useClass: NgbCalendarPersian }, { provide: NgbDatepickerI18n, useClass: NgbDatepickerI18nPersian }]
+    providers: [
+        { provide: NgbCalendar, useClass: NgbCalendarPersian },
+        {
+            provide: NgbDatepickerI18n,
+            useClass: NgbDatepickerI18nPersian
+        }
+    ]
 })
 export class PhaseComponent implements OnInit, OnDestroy {
     currentAccount: any;
@@ -195,7 +201,27 @@ export class PhaseComponent implements OnInit, OnDestroy {
            this.totalItems = parseInt(headers.get('X-Total-Count'), 10);*/
         this.phases = data;
         this.phases.forEach(phase => {
-            const startDate = phase.startDate != null ? phase.startDate.format(DATE_FORMAT) : null;
+            const startDate = phase.startDate.locale('en').format(DATE_FORMAT);
+            const finishDate = phase.finishDate.locale('en').format(DATE_FORMAT);
+
+            const jalaliStartDate =
+                startDate != null
+                    ? jalali(startDate, DATE_FORMAT)
+                          .locale('fa')
+                          .format(DATE_FORMAT)
+                    : null;
+
+            const jalaliFinishDate =
+                finishDate != null
+                    ? jalali(finishDate, DATE_FORMAT)
+                          .locale('fa')
+                          .format(DATE_FORMAT)
+                    : null;
+
+            phase.startDate = jalaliStartDate != null ? jalali(jalaliStartDate, JALALI_DATE_FORMAT).locale('fa') : null;
+            phase.finishDate = jalaliFinishDate != null ? jalali(jalaliFinishDate, JALALI_DATE_FORMAT).locale('fa') : null;
+
+            /*const startDate = phase.startDate != null ? phase.startDate.format(DATE_FORMAT) : null;
             const finishDate = phase.finishDate != null ? phase.finishDate.format(DATE_FORMAT) : null;
             const jalaliStartDate =
                 startDate != null
@@ -210,7 +236,7 @@ export class PhaseComponent implements OnInit, OnDestroy {
                           .format(DATE_FORMAT)
                     : null;
             phase.startDate = jalaliStartDate != null ? jalali(jalaliStartDate, JALALI_DATE_FORMAT) : null;
-            phase.finishDate = jalaliFinishDate != null ? jalali(jalaliFinishDate, JALALI_DATE_FORMAT) : null;
+            phase.finishDate = jalaliFinishDate != null ? jalali(jalaliFinishDate, JALALI_DATE_FORMAT) : null;*/
         });
     }
 
@@ -227,7 +253,8 @@ export class PhaseComponent implements OnInit, OnDestroy {
     }
 
     createNewPhase() {
-        const phase = new Phase();
+        let phase = new Phase();
+        phase.actions = [];
         phase.projectId = this.projectId;
         this.phases.push(phase);
     }

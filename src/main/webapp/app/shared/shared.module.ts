@@ -10,6 +10,7 @@ import { TableModule } from 'primeng/table';
 import { MatTableModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
 import { ActionCardComponent } from 'app/shared/action-card/action-card.component';
+import { JalaliDatePipe, JalaliDateTimePipe } from 'app/shared/jalali-pipe/jalali.pipe';
 
 @NgModule({
     imports: [
@@ -23,7 +24,14 @@ import { ActionCardComponent } from 'app/shared/action-card/action-card.componen
         MatTableModule,
         MatInputModule
     ],
-    declarations: [JhiLoginModalComponent, HasAnyAuthorityDirective, ProjectCardComponent, ActionCardComponent],
+    declarations: [
+        JhiLoginModalComponent,
+        HasAnyAuthorityDirective,
+        ProjectCardComponent,
+        ActionCardComponent,
+        JalaliDatePipe,
+        JalaliDateTimePipe
+    ],
     providers: [{ provide: NgbDateAdapter, useClass: NgbDateMomentAdapter }],
     entryComponents: [JhiLoginModalComponent, ProjectCardComponent, ActionCardComponent],
     exports: [
@@ -37,7 +45,9 @@ import { ActionCardComponent } from 'app/shared/action-card/action-card.componen
         TableModule,
         MatTableModule,
         MatInputModule,
-        ActionCardComponent
+        ActionCardComponent,
+        JalaliDatePipe,
+        JalaliDateTimePipe
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

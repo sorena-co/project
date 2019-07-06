@@ -47,11 +47,11 @@ export class PhaseDeletePopupComponent implements OnInit, OnDestroy {
                 this.ngbModalRef.componentInstance.phase = phase;
                 this.ngbModalRef.result.then(
                     result => {
-                        this.router.navigate(['/phase', { outlets: { popup: null } }]);
+                        this.router.navigate(['/project' + phase.projectId + '/phase', { outlets: { popup: null } }]);
                         this.ngbModalRef = null;
                     },
                     reason => {
-                        this.router.navigate(['/phase', { outlets: { popup: null } }]);
+                        this.router.navigate(['/project' + phase.projectId + '/phase', { outlets: { popup: null } }]);
                         this.ngbModalRef = null;
                     }
                 );
