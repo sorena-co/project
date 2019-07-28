@@ -1,6 +1,21 @@
-<div (click)="openUrl()" class="card action-card justify-content-center" [ngStyle]="{'background':backgroundColor}"
-     style="cursor: pointer">
-    <h2>{{title}}</h2>
-    <hr/>
-    <h5 *ngFor="let detail of details">{{detail}}</h5>
-</div>
+    <div class="card text-dark bg-light">
+
+        <div class="card-header bg-primary text-center text-warning"><h4 style="cursor: pointer;"
+                                                                         (click)="openUrl()">{{title}}</h4></div>
+
+        <div class="card-body ">
+
+
+            <h5 *ngFor="let detail of details">{{detail}}</h5>
+
+        </div>
+
+        <div class="card-footer bg-primary border-warning text-center">
+
+            <button (click)="openProjectFinancial()" class="btn btn-danger">$</button>
+            <button (click)="openProjectPhase()" class="btn btn-danger"><span class="fa fa-database"></span> </button>
+            <button (click)="openDocument()" class="btn btn-danger"><span class="fa fa-file-word-o"></span> </button>
+
+        </div>
+
+    </div>
