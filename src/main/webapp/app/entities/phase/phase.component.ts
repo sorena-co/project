@@ -51,19 +51,6 @@ export class PhaseComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
     projectId: number;
-    columnsToDisplay = ['title', 'percent', 'startDate', 'finishDate', 'cost', 'edit', 'delete'];
-    expandedElement: any | null;
-    columnsToDisplayAction = [
-        'title',
-        'doPercent',
-        'finalPercent',
-        'startDate',
-        'finishDate',
-        'reasonOfDelay',
-        'isFinish',
-        'edit',
-        'delete'
-    ];
 
     start: NgbDateStruct;
 
