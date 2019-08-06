@@ -1,21 +1,56 @@
-    <div class="card text-dark bg-light">
+<!--<div class="card text-dark bg-light">
 
-        <div class="card-header bg-primary text-center text-warning"><h4 style="cursor: pointer;"
-                                                                         (click)="openUrl()">{{title}}</h4></div>
+    <div class="card-header bg-primary text-center text-warning"><h4 style="cursor: pointer;"
+                                                                     (click)="openUrl()">{{title}}</h4></div>
 
-        <div class="card-body ">
+    <div class="card-body ">
 
 
-            <h5 *ngFor="let detail of details">{{detail}}</h5>
-
-        </div>
-
-        <div class="card-footer bg-primary border-warning text-center">
-
-            <button (click)="openProjectFinancial()" class="btn btn-danger">$</button>
-            <button (click)="openProjectPhase()" class="btn btn-danger"><span class="fa fa-database"></span> </button>
-            <button (click)="openDocument()" class="btn btn-danger"><span class="fa fa-file-word-o"></span> </button>
-
-        </div>
+        <h5 *ngFor="let detail of details">{{detail}}</h5>
 
     </div>
+
+    <div class="card-footer bg-primary border-warning text-center">
+
+        <button (click)="openProjectFinancial()" class="btn btn-danger">$</button>
+        <button (click)="openProjectPhase()" class="btn btn-danger"><span class="fa fa-database"></span></button>
+        <button (click)="openDocument()" class="btn btn-danger"><span class="fa fa-file-word-o"></span></button>
+
+    </div>
+
+</div>-->
+
+<div class="flip-card">
+    <div class="flip-card-inner">
+        <div class="flip-card-front align-items-center justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <h2> {{title}}</h2>
+                </div>
+                <div style="height: 100%" class="card-body">
+                    <img class="card-image" [src]="imageUrl"/>
+                </div>
+            </div>
+        </div>
+        <div class="flip-card-back">
+            <h2 style="cursor: pointer;" (click)="openUrl()"> {{title}}</h2>
+            <hr/>
+            <h5 *ngFor="let detail of details">{{detail}}</h5>
+
+            <ng-container *ngIf="homeCard">
+                <button (click)="openProjectFinancial()" class="btn btn-danger"
+                        style="border-radius: 100px;background-color: #FF1654;width: 100%;margin-top: 4px">مالی $
+                </button>
+                <button (click)="openProjectPhase()"
+                        style="margin-left: 30px;border-radius: 100px;background-color: #FF1654 ;width: 100%;margin-top: 4px"
+                        class="btn btn-danger"> فازها <span class="fa fa-database"> </span>
+                </button>
+                <button (click)="openDocument()" class="btn btn-danger"
+                        style="border-radius: 100px;background-color: #FF1654; z-index: 1000;width: 100%;margin-top: 4px">
+                    اسناد <span
+                    class="fa fa-file-word-o"></span>
+                </button>
+            </ng-container>
+        </div>
+    </div>
+</div>

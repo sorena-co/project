@@ -1,74 +1,151 @@
-<div *ngIf="project" class="row justify-content-center">
+<div *ngIf="project" class="row">
     <div class="col-md-12">
         <jhi-project-title [projectId]="project.id"></jhi-project-title>
     </div>
-    <div class="col-8">
-        <div>
-            <jhi-alert-error></jhi-alert-error>
-            <div style="margin-bottom: 20px;">
-                <p-card>
-                    <p-header>
-                        <div style="width: 100%;height: 100%;background-color: rgb(65,210,228)">
-                            <p style="text-align: center;font-size: 30px; ">عملیات های مربوط به پروژه</p>
-                        </div>
-                    </p-header>
-                    <div>
-                        <div class="row">
-                            <a [href]="'#/project/' + project.id + '/financial-project'" class="col-md-4">
-                                <p-card>
-                                    <p-header>
-                                        <div style="width: 100%;height: 100%;background-color: rgb(65,210,228)">
-                                            <p style="text-align: center;font-size: 30px; ">مالی</p>
-                                        </div>
-                                    </p-header>
-                                    <div>
-                                        <h6>مبلغ مصوب : {{project.creditEstimates}}</h6>
-                                        <h6>مبلغ قرار داد : {{project.sellContractAmount}}</h6>
-                                        <h6>مبلغ دریافتی : {{project.creditApply}}</h6>
-                                        <h6>هزینه شده : {{project.totalCost}}</h6>
-                                    </div>
-                                </p-card>
-                            </a>
-                            <div class="col-md-4">
-                                <p-card>
-                                    <p-header>
-                                        <div style="width: 100%;height: 100%;background-color: rgb(65,210,228)">
-                                            <p style="text-align: center;font-size: 30px; ">فنی</p>
-                                        </div>
-                                    </p-header>
-                                    <div>
-                                        <span>
-                                    <a [href]="'#/project/' + project.id + '/gantt'">
-                                       گانت
-                                    </a>
-                                        </span>
-                                        <br/>
-                                        <span>
-                                    <a [href]="'#/project/' + project.id + '/phase'">
-                                        فازها
-                                    </a>
-                                        </span>
-                                    </div>
-                                </p-card>
-                            </div>
-                            <div class="col-md-4">
-                                <p-card>
-                                    <p-header>
-                                        <div style="width: 100%;height: 100%;background-color: rgb(65,210,228)">
-                                            <p style="text-align: center;font-size: 30px; ">اسناد</p>
-                                        </div>
-                                    </p-header>
-                                    <div>
-                                        <a [href]="'#/project/' + project.id + '/document'">
-                                            اسناد
-                                        </a>
-                                    </div>
-                                </p-card>
-                            </div>
-                        </div>
-                    </div>
-                </p-card>
-            </div>
+</div>
+<br/>
+<br/>
+<div class="container">
+    <div class="row">
+        <jhi-action-card class="col-md-3" [url]="'/project/' + project.id + '/financial-project'"
+                         [title]="'مالی'"
+                         [imageUrl]="'../../../content/images/financial.png'"
+                         [backgroundColor]="'#00A7E1'"
+                         [projectId]="project.id"
+                         [details]="project.details"
+                         style="width: 100%;margin-top: 40px"></jhi-action-card>
+
+        <jhi-action-card class="col-md-3" [url]="'/project/' + project.id + '/gantt'"
+                         [title]="'نمودار گانت'"
+                         [imageUrl]="'../../../content/images/gantt.png'"
+                         [backgroundColor]="'#00A7E1'"
+                         [projectId]="project.id"
+                         style="width: 100%;margin-top: 40px"></jhi-action-card>
+
+        <jhi-action-card class="col-md-3" [url]="'/project/' + project.id + '/phase'"
+                         [title]="'فازها'"
+                         [imageUrl]="'../../../content/images/phase.png'"
+                         [backgroundColor]="'#00A7E1'"
+                         [projectId]="project.id"
+                         style="width: 100%;margin-top: 40px"></jhi-action-card>
+
+        <jhi-action-card class="col-md-3" [url]="'/project/' + project.id + '/document'"
+                         [title]="'اسناد'"
+                         [imageUrl]="'../../../content/images/document.png'"
+                         [backgroundColor]="'#00A7E1'"
+                         [projectId]="project.id"
+                         style="width: 100%;margin-top: 40px"></jhi-action-card>
+    </div>
+</div>
+<!--<div class="row">
+    <div class="col-md-6 ">
+        <div class="d-flex align-items-center justify-content-center"
+             style="height: 250px;border-radius: 60px;background-color: #00A8E8">
+            <h1>
+                <a [href]="'#/project/' + project.id + '/financial-project'" style="color: black;">مالی $</a>
+            </h1>
+        </div>
+    </div>
+    <div class="col-md-6 ">
+        <div class="d-flex align-items-center justify-content-center"
+             style="height: 250px;border-radius: 60px;background-color: #007EA7">
+            <h1>
+                <a [href]="'#/project/' + project.id + '/gantt'" style="color: black;">گانت <span
+                    class="fa fa-bar-chart"></span> </a>
+            </h1>
         </div>
     </div>
 </div>
+<div class="row" style="margin-top: 50px">
+    <div class="col-md-6 ">
+        <div class="d-flex align-items-center justify-content-center"
+             style="width: auto;height: 250px;border-radius: 60px;background-color: #003459">
+            <h1>
+                <a [href]="'#/project/' + project.id + '/document'">
+                    اسناد <span class="fa fa-file-word-o"></span>
+                </a>
+            </h1>
+        </div>
+    </div>
+    <div class="col-md-6 ">
+        <div class="d-flex align-items-center justify-content-center"
+             style="height: 250px;border-radius: 60px;background-color: #00171F">
+            <h1><a [href]="'#/project/' + project.id + '/phase'">فازها <span class="fa fa-pie-chart"></span> </a>
+            </h1>
+        </div>
+    </div>
+</div>
+</div>-->
+<!-- <jhi-action-card class="col-md-4" [url]="'/project/'+ project.id + '/financial-project'"
+                  [title]="'مالی'"
+                  [backgroundColor]="'#00A7E1'"
+                  [projectId]="project.id"
+                  [details]="project.details"
+                  style="width: 100%;margin-top: 40px"></jhi-action-card>
+
+ <jhi-action-card class="col-md-4" [url]="'/project/'+ project.id + '/financial-project'"
+                  [title]="'فنی'"
+                  [backgroundColor]="'#00A7E1'"
+                  [projectId]="project.id"
+                  [details]="project.details"
+                  style="width: 100%;margin-top: 40px"></jhi-action-card>
+
+ <jhi-action-card class="col-md-4" [url]="'/project/'+ project.id + '/financial-project'"
+                  [title]="'اسناد'"
+                  [backgroundColor]="'#00A7E1'"
+                  [projectId]="project.id"
+                  [details]="project.details"
+                  style="width: 100%;margin-top: 40px"></jhi-action-card>
+
+
+ <a [href]="'#/project/' + project.id + '/financial-project'" class="col-md-4">
+     <p-card>
+         <p-header>
+             <div style="width: 100%;height: 100%;background-color: rgb(65,210,228)">
+                 <p style="text-align: center;font-size: 30px; ">مالی</p>
+             </div>
+         </p-header>
+         <div>
+             <h6>مبلغ مصوب : {{project.creditEstimates}}</h6>
+             <h6>مبلغ قرار داد : {{project.sellContractAmount}}</h6>
+             <h6>مبلغ دریافتی : {{project.creditApply}}</h6>
+             <h6>هزینه شده : {{project.totalCost}}</h6>
+         </div>
+     </p-card>
+ </a>
+ <div class="col-md-4">
+     <p-card>
+         <p-header>
+             <div style="width: 100%;height: 100%;background-color: rgb(65,210,228)">
+                 <p style="text-align: center;font-size: 30px; ">فنی</p>
+             </div>
+         </p-header>
+         <div>
+                         <span>
+                     <a [href]="'#/project/' + project.id + '/gantt'">
+                        گانت
+                     </a>
+                         </span>
+             <br/>
+             <span>
+                     <a [href]="'#/project/' + project.id + '/phase'">
+                         فازها
+                     </a>
+                         </span>
+         </div>
+     </p-card>
+ </div>
+ <div class="col-md-4">
+     <p-card>
+         <p-header>
+             <div style="width: 100%;height: 100%;background-color: rgb(65,210,228)">
+                 <p style="text-align: center;font-size: 30px; ">اسناد</p>
+             </div>
+         </p-header>
+         <div>
+             <a [href]="'#/project/' + project.id + '/document'">
+                 اسناد
+             </a>
+         </div>
+     </p-card>
+ </div>-->

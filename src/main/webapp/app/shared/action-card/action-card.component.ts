@@ -9,9 +9,11 @@ import { Router } from '@angular/router';
 export class ActionCardComponent implements OnInit {
     @Input() title: string;
     @Input() url: string;
+    @Input() imageUrl: string;
     @Input() backgroundColor: string;
     @Input() details: string[];
     @Input() projectId: string;
+    @Input() homeCard: boolean;
 
     constructor(protected router: Router) {}
 

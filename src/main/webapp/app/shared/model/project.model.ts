@@ -22,6 +22,7 @@ export interface IProject {
     level?: number;
     projectType?: any | ProjectType;
     fileContentType?: string;
+    details?: string[];
     file?: any;
 }
 

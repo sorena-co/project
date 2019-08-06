@@ -211,22 +211,40 @@ public class FinancialProjectService {
         Row row = sheet.createRow(1);
         Long sendToProjectHaveCode = financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.SEND_TO_PROJECT_HAVE_CODE);
         Long receiveFromOrganization = financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.RECEIVED_FROM_ORGANIZATION);
-        row.createCell(0).setCellValue(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.CREDIT_ESTIMATES));
-        row.createCell(1).setCellValue(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.AMOUNT_CONFIRMED));
-        row.createCell(2).setCellValue(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.RECEIVED_FROM_INSTITUTION));
-        row.createCell(3).setCellValue(receiveFromOrganization);
-        row.createCell(4).setCellValue(receiveFromOrganization);
-        row.createCell(5).setCellValue(sendToProjectHaveCode);
-        row.createCell(6).setCellValue(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.SEND_TO_PROJECT_NOT_HAVE_CODE));
-        if (sendToProjectHaveCode > receiveFromOrganization) {
-            row.createCell(7).setCellValue(sendToProjectHaveCode - receiveFromOrganization);
-            row.createCell(8).setCellValue(0);
-        } else {
-            row.createCell(7).setCellValue(0);
-            row.createCell(8).setCellValue(receiveFromOrganization - sendToProjectHaveCode);
+        Long creditEstimate = financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.CREDIT_ESTIMATES);
+
+        if (creditEstimate != null)
+            row.createCell(0).setCellValue(creditEstimate);
+
+        Long amountConfirmed = financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.AMOUNT_CONFIRMED);
+        if (amountConfirmed != null)
+            row.createCell(1).setCellValue(amountConfirmed);
+
+        Long receivedFromInstitution = financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.RECEIVED_FROM_INSTITUTION);
+        if (receivedFromInstitution != null)
+            row.createCell(2).setCellValue(receivedFromInstitution);
+
+        if (receiveFromOrganization != null && sendToProjectHaveCode != null) {
+            row.createCell(3).setCellValue(receiveFromOrganization);
+            row.createCell(4).setCellValue(receiveFromOrganization);
+
+            row.createCell(5).setCellValue(sendToProjectHaveCode);
+            row.createCell(6).setCellValue(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.SEND_TO_PROJECT_NOT_HAVE_CODE));
+            if (sendToProjectHaveCode > receiveFromOrganization) {
+                row.createCell(7).setCellValue(sendToProjectHaveCode - receiveFromOrganization);
+                row.createCell(8).setCellValue(0);
+            } else {
+                row.createCell(7).setCellValue(0);
+                row.createCell(8).setCellValue(receiveFromOrganization - sendToProjectHaveCode);
+            }
         }
-        row.createCell(9).setCellValue(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.CREDIT_APPLY));
-        row.createCell(10).setCellValue(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.SELL_CONTRACT_AMOUNT));
+        Long creditApply = financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.CREDIT_APPLY);
+        if (creditApply != null)
+            row.createCell(9).setCellValue(creditApply);
+
+        Long sellContractAmount = financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.SELL_CONTRACT_AMOUNT);
+        if (sellContractAmount != null)
+            row.createCell(10).setCellValue(sellContractAmount);
 
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         workbook.write(bos);
