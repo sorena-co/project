@@ -318,6 +318,7 @@ span.gfoldercollapse {
 
 .ggroupblackendpointleft {
     overflow: hidden;
+    display: none;
     width: 0px;
     height: 0px;
     top: 2px;
@@ -329,6 +330,7 @@ span.gfoldercollapse {
 }
 
 .ggroupblackendpointright {
+    display: none;
     overflow: hidden;
     width: 0px;
     height: 0px;
@@ -715,6 +717,7 @@ td.gspanning div {
 /* border transparency tricks */
 
 .ggroupblackendpointleft {
+    display: none;
     _border-top: 4px solid black;
     _border-left: 4px solid pink;
     _border-bottom: 4px solid pink;
@@ -723,6 +726,7 @@ td.gspanning div {
 }
 
 .ggroupblackendpointright {
+    display: none;
     _border-top: 4px solid black;
     _border-left: 4px solid pink;
     _border-bottom: 4px solid pink;

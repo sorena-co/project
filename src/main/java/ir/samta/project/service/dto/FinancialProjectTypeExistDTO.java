@@ -16,6 +16,7 @@ public class FinancialProjectTypeExistDTO {
     private Boolean existFinalClearing;
     private Boolean existDebitToInstitution;
     private Boolean existCreditApply;
+    private Boolean existSendToOtherProject;
 
     public Boolean getExistCreditEstimates() {
         return existCreditEstimates;
@@ -135,5 +136,13 @@ public class FinancialProjectTypeExistDTO {
 
     public void setExistSendToProjectNotHaveCode(Boolean existSendToProjectNotHaveCode) {
         this.existSendToProjectNotHaveCode = existSendToProjectNotHaveCode;
+    }
+
+    public Boolean getExistSendToOtherProject() {
+        return existSendToOtherProject;
+    }
+
+    public void setExistSendToOtherProject(Boolean existSendToOtherProject) {
+        this.existSendToOtherProject = existSendToOtherProject;
     }
 }

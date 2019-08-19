@@ -46,7 +46,7 @@ export class FinancialProjectUpdateComponent implements OnInit {
         });
         this.financialProjectService.getStyleForType(this.projectId).subscribe(value => (this.financialProjectTypeExist = value.body));
         this.projectService.queryAll(0).subscribe(value => {
-            this.projects = value.body;
+            this.projects = value.body.filter(value1 => value1.id !== this.projectId);
         });
     }
 

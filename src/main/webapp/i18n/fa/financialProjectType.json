@@ -17,7 +17,9 @@
             "IN_CLEARING": "در حال تسویه",
             "FINAL_CLEARING": "تسویه شده",
             "DEBIT_TO_INSTITUTION": "بدهی سازمان به موسسه",
-            "CREDIT_APPLY": "اعتبار تخصیصی"
+            "CREDIT_APPLY": "اعتبار تخصیصی",
+            "SEND_TO_OTHER_PROJECT": "ارسال به پروژه دیگر",
+            "RECEIVED_FROM_OTHER_PROJECT": "دریافت از پروژه دیگر"
         }
     }
 }

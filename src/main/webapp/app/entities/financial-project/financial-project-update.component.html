@@ -61,6 +61,9 @@
                                 <option
                                     [ngStyle]="{'color': financialProjectTypeExist.existCreditApply?'green':'red'}"
                                     value="CREDIT_APPLY">{{'projectApp.FinancialProjectType.CREDIT_APPLY' | translate}}</option>
+                                <option
+                                    [ngStyle]="{'color': financialProjectTypeExist.existSendToOtherProject?'green':'red'}"
+                                    value="SEND_TO_OTHER_PROJECT">{{'projectApp.FinancialProjectType.SEND_TO_OTHER_PROJECT' | translate}}</option>
                             </select>
                         </div>
                     </div>
@@ -145,13 +148,31 @@
                             </div>
                         </div>
                     </ng-container>
-                    <div class="col-md-3" *ngIf="financialProject.financialProjectType===FinancialProjectType[FinancialProjectType.AMOUNT_CONFIRMED]">
+                    <div class="col-md-3"
+                         *ngIf="financialProject.financialProjectType===FinancialProjectType[FinancialProjectType.AMOUNT_CONFIRMED]">
                         <div class="form-group">
                             <label class="form-control-label"
                                    jhiTranslate="projectApp.financialProject.yearConfirmed"
                                    for="field_yearConfirmed">Financial Project Type</label>
                             <input type="number" class="form-control" name="yearConfirmed"
                                    [(ngModel)]="financialProject.yearConfirmed" id="field_yearConfirmed"/>
+                        </div>
+                    </div>
+                    <div
+                        *ngIf="financialProject.financialProjectType===FinancialProjectType[FinancialProjectType.SEND_TO_OTHER_PROJECT]"
+                        class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="projectApp.project.title"
+                                   for="field_parentProject">Project Type</label>
+                            <select class="field_parentProject" name="field_parentProject"
+                                    class="form-control"
+                                    [(ngModel)]="financialProject.targetProjectId"
+                                    id="field_parentProject">
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="projectOption.id"
+                                        *ngFor="let projectOption of projects">{{projectOption.title}}</option>
+                            </select>
+
                         </div>
                     </div>
                 </div>

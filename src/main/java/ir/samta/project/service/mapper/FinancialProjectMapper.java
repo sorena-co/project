@@ -13,9 +13,12 @@ public interface FinancialProjectMapper extends EntityMapper<FinancialProjectDTO
 
     @Mapping(source = "project.id", target = "projectId")
     @Mapping(source = "project.title", target = "projectTitle")
+    @Mapping(source = "targetProject.id", target = "targetProjectId")
+    @Mapping(source = "targetProject.title", target = "targetProjectTitle")
     FinancialProjectDTO toDto(FinancialProject financialProject);
 
     @Mapping(source = "projectId", target = "project")
+    @Mapping(source = "targetProjectId", target = "targetProject")
     FinancialProject toEntity(FinancialProjectDTO financialProjectDTO);
 
     default FinancialProject fromId(Long id) {

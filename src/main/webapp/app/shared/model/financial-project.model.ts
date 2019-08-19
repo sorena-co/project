@@ -13,7 +13,9 @@ export enum FinancialProjectType {
     IN_CLEARING = 'IN_CLEARING',
     FINAL_CLEARING = 'FINAL_CLEARING',
     DEBIT_TO_INSTITUTION = 'DEBIT_TO_INSTITUTION',
-    CREDIT_APPLY = 'CREDIT_APPLY'
+    CREDIT_APPLY = 'CREDIT_APPLY',
+    SEND_TO_OTHER_PROJECT = 'SEND_TO_OTHER_PROJECT',
+    RECEIVED_FROM_OTHER_PROJECT = 'RECEIVED_FROM_OTHER_PROJECT'
 }
 
 export class FinancialProjectTypeExist {
@@ -32,7 +34,8 @@ export class FinancialProjectTypeExist {
         public existInClearing?: boolean,
         public existFinalClearing?: boolean,
         public existDebitToInstitution?: boolean,
-        public existCreditApply?: boolean
+        public existCreditApply?: boolean,
+        public existSendToOtherProject?: boolean
     ) {}
 }
 export class FinancialProjectMain {
@@ -67,6 +70,8 @@ export interface IFinancialProject {
     projectId?: number;
     yearConfirmed?: number;
     getCreditProjectId?: number;
+    targetProjectId?: number;
+    targetProjectTitle?: string;
     getCreditProjectTitle?: string;
 }
 
@@ -85,7 +90,9 @@ export class FinancialProject implements IFinancialProject {
         public description?: string,
         public financialProjectType?: FinancialProjectType,
         public projectTitle?: string,
+        public targetProjectTitle?: string,
         public projectId?: number,
+        public targetProjectId?: number,
         public yearConfirmed?: number,
         public getCreditProjectId?: number
     ) {}

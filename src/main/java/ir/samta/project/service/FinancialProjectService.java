@@ -127,6 +127,7 @@ public class FinancialProjectService {
         result.setExistSellContractAmount(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.SELL_CONTRACT_AMOUNT));
         result.setExistCreditApply(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.CREDIT_APPLY));
         result.setExistSendToProjectNotHaveCode(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.SEND_TO_PROJECT_NOT_HAVE_CODE));
+        result.setExistSendToOtherProject(financialProjectRepository.existsAllByProject_IdAndFinancialProjectType(projectId, FinancialProjectType.SEND_TO_OTHER_PROJECT));
 
         return result;
     }

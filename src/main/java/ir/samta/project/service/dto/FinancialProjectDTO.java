@@ -43,6 +43,10 @@ public class FinancialProjectDTO implements Serializable {
 
     private Long yearConfirmed;
 
+    private Long targetProjectId;
+
+    private String targetProjectTitle;
+
     public Long getId() {
         return id;
     }
@@ -209,5 +213,21 @@ public class FinancialProjectDTO implements Serializable {
 
     public void setYearConfirmed(Long yearConfirmed) {
         this.yearConfirmed = yearConfirmed;
+    }
+
+    public Long getTargetProjectId() {
+        return targetProjectId;
+    }
+
+    public void setTargetProjectId(Long targetProjectId) {
+        this.targetProjectId = targetProjectId;
+    }
+
+    public String getTargetProjectTitle() {
+        return targetProjectTitle;
+    }
+
+    public void setTargetProjectTitle(String targetProjectTitle) {
+        this.targetProjectTitle = targetProjectTitle;
     }
 }

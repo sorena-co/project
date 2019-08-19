@@ -11,6 +11,7 @@ import { MatTableModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
 import { ActionCardComponent } from 'app/shared/action-card/action-card.component';
 import { JalaliDatePipe, JalaliDateTimePipe } from 'app/shared/jalali-pipe/jalali.pipe';
+import { GanttModule } from 'app/shared/gantt/gant-chart';
 
 @NgModule({
     imports: [
@@ -22,7 +23,8 @@ import { JalaliDatePipe, JalaliDateTimePipe } from 'app/shared/jalali-pipe/jalal
         SplitButtonModule,
         TableModule,
         MatTableModule,
-        MatInputModule
+        MatInputModule,
+        GanttModule
     ],
     declarations: [
         JhiLoginModalComponent,
@@ -47,7 +49,8 @@ import { JalaliDatePipe, JalaliDateTimePipe } from 'app/shared/jalali-pipe/jalal
         MatInputModule,
         ActionCardComponent,
         JalaliDatePipe,
-        JalaliDateTimePipe
+        JalaliDateTimePipe,
+        GanttModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

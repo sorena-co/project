@@ -68,6 +68,9 @@ public class FinancialProject implements Serializable {
     @Column(name = "year_confirmed")
     private Long yearConfirmed;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Project targetProject;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -280,5 +283,13 @@ public class FinancialProject implements Serializable {
 
     public void setYearConfirmed(Long yearConfirmed) {
         this.yearConfirmed = yearConfirmed;
+    }
+
+    public Project getTargetProject() {
+        return targetProject;
+    }
+
+    public void setTargetProject(Project targetProject) {
+        this.targetProject = targetProject;
     }
 }
