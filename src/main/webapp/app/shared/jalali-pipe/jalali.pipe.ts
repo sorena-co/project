@@ -5,7 +5,7 @@ import * as moment from 'jalali-moment';
 })
 export class JalaliDatePipe implements PipeTransform {
     transform(value: any, args?: any): any {
-        let MomentDate = moment(value, 'YYYY-MM-DD');
+        const MomentDate = moment(value, 'YYYY-MM-DD');
         return MomentDate.locale('fa').format('YYYY-MM-DD');
     }
 }
@@ -15,7 +15,7 @@ export class JalaliDatePipe implements PipeTransform {
 })
 export class JalaliDateTimePipe implements PipeTransform {
     transform(value: any, args?: any): any {
-        let MomentDate = moment(value, 'YYYY/MM/DD-THH:mm');
+        const MomentDate = moment(value, 'YYYY/MM/DD-THH:mm');
         return MomentDate.locale('fa').format('YYYY/MM/DD-HH:mm');
     }
 }

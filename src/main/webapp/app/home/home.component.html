@@ -1,4 +1,5 @@
 <div class="row">
+    <app-echarts></app-echarts>
     <div class="col-md-3">
         <span class="hipster img-fluid rounded"></span>
     </div>
@@ -11,32 +12,13 @@
                 <ng-container *ngFor="let projectOptions of projects">
                     <jhi-action-card class="col-md-4" [url]="'/project/' +  projectOptions.id +  '/view'"
                                      [title]="projectOptions.title"
-                                     [backgroundColor]="'#00A7E1'"
+                                     [backgroundColor]="'#00272B'"
                                      [projectId]="projectOptions.id"
                                      [imageUrl]="'../../../content/images/meeting.png'"
                                      [details]="projectOptions.details"
                                      [homeCard]="true"
                                      style="width: 100%;margin-top: 40px"></jhi-action-card>
                 </ng-container>
-                <!--  <a [href]="'#/project/' + projectOptions.id + '/view'" class="col-md-4" *ngFor="let projectOptions of projects">
-                      <div class="card">
-                          <div class="card-header">
-                              <h5>
-                                  <strong>{{projectOptions.title}}</strong>
-                              </h5>
-                              <h6>
-                                  <span>{{'projectApp.ProjectType.' + projectOptions.projectType|translate}}</span>
-                              </h6>
-                          </div>
-                          <div class="card-body">
-                              <h6>مبلغ قرار داد : {{projectOptions.amountConfirmed}}</h6>
-                              <h6>هزینه شده : {{projectOptions.totalCost}}</h6>
-                              <ngb-progressbar showValue="true" type="success" [value]="25"></ngb-progressbar>
-                              <h6>تاریخ پایان : {{projectOptions.finishDate}}</h6>
-                          </div>
-                      </div>
-                  </a>
-  -->
             </div>
             <div *ngSwitchCase="false">
                 <jhi-login-modal></jhi-login-modal>

@@ -15,6 +15,7 @@ import {
 } from './';
 import { ProjectTitleComponent } from 'app/entities/project/project-title.component';
 import { ProjectGanttComponent } from 'app/entities/project/project-gantt.component';
+import { GanttComponent } from 'app/shared/gantt/gant-chart';
 
 const ENTITY_STATES = [...projectRoute, ...projectPopupRoute];
 
@@ -27,7 +28,8 @@ const ENTITY_STATES = [...projectRoute, ...projectPopupRoute];
         ProjectDeleteDialogComponent,
         ProjectDeletePopupComponent,
         ProjectTitleComponent,
-        ProjectGanttComponent
+        ProjectGanttComponent,
+        GanttComponent
     ],
     entryComponents: [
         ProjectComponent,
@@ -35,7 +37,8 @@ const ENTITY_STATES = [...projectRoute, ...projectPopupRoute];
         ProjectDeleteDialogComponent,
         ProjectDeletePopupComponent,
         ProjectTitleComponent,
-        ProjectGanttComponent
+        ProjectGanttComponent,
+        GanttComponent
     ],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

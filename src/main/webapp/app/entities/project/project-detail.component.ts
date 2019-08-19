@@ -13,7 +13,6 @@ export class ProjectDetailComponent implements OnInit {
     project: IProject;
 
     FinancialProjectType = FinancialProjectType;
-
     constructor(protected activatedRoute: ActivatedRoute, private financialProjectService: FinancialProjectService) {}
 
     ngOnInit() {

@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <div class="flip-card-back">
+        <div class="flip-card-back" [style.background-color]="backgroundColor"">
             <h2 style="cursor: pointer;" (click)="openUrl()"> {{title}}</h2>
             <hr/>
             <h5 *ngFor="let detail of details">{{detail}}</h5>

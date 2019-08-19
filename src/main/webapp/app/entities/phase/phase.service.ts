@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IPhase } from 'app/shared/model/phase.model';
+import { IAction } from 'app/shared/model/action.model';
 
 type EntityResponseType = HttpResponse<IPhase>;
 type EntityArrayResponseType = HttpResponse<IPhase[]>;
@@ -77,6 +78,12 @@ export class PhaseService {
             res.body.forEach((phase: IPhase) => {
                 phase.startDate = phase.startDate != null ? moment(phase.startDate) : null;
                 phase.finishDate = phase.finishDate != null ? moment(phase.finishDate) : null;
+                if (phase.actions && phase.actions.length > 0) {
+                    phase.actions.forEach((action: IAction) => {
+                        action.startDate = action.startDate != null ? moment(action.startDate) : null;
+                        action.finishDate = action.finishDate != null ? moment(action.finishDate) : null;
+                    });
+                }
             });
         }
         return res;

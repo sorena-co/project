@@ -7,7 +7,7 @@ Main page styles
     width: 347px;
     height: 497px;
     background: url('../../content/images/background.jpg') no-repeat center top;
-    background-size: contain;
+    background-size: 200px 200px;
 }
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
@@ -18,6 +18,6 @@ Main page styles
     only screen and (min-resolution: 2dppx) {
     .hipster {
         background: url('../../content/images/background.jpg') no-repeat center top;
-        background-size: contain;
+        background-size: 50px 50px;
     }
 }
