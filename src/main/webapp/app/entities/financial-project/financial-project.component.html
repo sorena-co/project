@@ -8,13 +8,13 @@
         </div>
         <span jhiTranslate="projectApp.financialProject.home.title">Financial Projects</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-financial-project"
-                [routerLink]="['/project',projectId,'financial-project','new']">
+                [routerLink]="['/project',projectId,'financial-project','new',type ? type : '']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span class="hidden-sm-down" jhiTranslate="projectApp.financialProject.home.createLabel">
             Create new Financial Project
             </span>
         </button>
-        <button id="jh-back" class="btn btn-primary float-right jh-create-entity create-financial-project"
+        <button id="jh-back" class="btn btn-success float-right jh-create-entity create-financial-project"
                 [routerLink]="['/project',projectId,'financial-project']">
             <fa-icon [icon]="'exit'"></fa-icon>
             <span class="hidden-sm-down" jhiTranslate="entity.action.back">
@@ -49,6 +49,11 @@
                 <th jhiSortBy="amount"><span jhiTranslate="projectApp.financialProject.amount">Amount</span>
                     <fa-icon [icon]="'sort'"></fa-icon>
                 </th>
+                <ng-container *ngIf="type===FinancialProjectType[FinancialProjectType.SEND_TO_OTHER_PROJECT]">
+                    <th jhiSortBy="targetProjectTitle"><span jhiTranslate="projectApp.financialProject.targetProject">Amount</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                </ng-container>
                 <ng-container *ngIf="type===FinancialProjectType[FinancialProjectType.RECEIVED_FROM_INSTITUTION] ||
                                 type===FinancialProjectType[FinancialProjectType.AMOUNT_CONFIRMED] ||
                                 type===FinancialProjectType[FinancialProjectType.RECEIVED_FROM_ORGANIZATION] ||
@@ -100,6 +105,11 @@
                     <input style="max-width: 150px" type="number" class="form-control" name="amount" id="field_amount"
                            [(ngModel)]="financialProject.amount"/>
                 </td>
+
+                <ng-container *ngIf="type===FinancialProjectType[FinancialProjectType.SEND_TO_OTHER_PROJECT]">
+                    <td>{{financialProject.targetProjectTitle}}</td>
+                </ng-container>
+
                 <ng-container *ngIf="type===FinancialProjectType[FinancialProjectType.RECEIVED_FROM_INSTITUTION] ||
                                 type===FinancialProjectType[FinancialProjectType.AMOUNT_CONFIRMED] ||
                                 type===FinancialProjectType[FinancialProjectType.RECEIVED_FROM_ORGANIZATION] ||

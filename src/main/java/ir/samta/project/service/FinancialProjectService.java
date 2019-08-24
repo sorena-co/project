@@ -142,6 +142,8 @@ public class FinancialProjectService {
         result.setReceivedFromInstitution(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.RECEIVED_FROM_INSTITUTION));
         result.setCreditEstimatesAmount(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.CREDIT_ESTIMATES));
         result.setCreditApply(financialProjectRepository.getMainFinancialProject(projectId, FinancialProjectType.CREDIT_APPLY));
+        result.setSendToOtherProject(financialProjectRepository.getTotalSendToOtherProject(projectId));
+        result.setReceivedFromOtherProject(financialProjectRepository.getTotalReceivedFromOtherProject(projectId));
         return result;
     }
 

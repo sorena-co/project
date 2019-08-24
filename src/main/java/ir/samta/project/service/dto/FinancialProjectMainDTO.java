@@ -9,6 +9,8 @@ public class FinancialProjectMainDTO {
     private Long sendToProjectHaveCode;
     private Long sendToProjectNotHaveCode;
     private Long creditApply;
+    private Long sendToOtherProject;
+    private Long receivedFromOtherProject;
 
     public Long getCreditEstimatesAmount() {
         return creditEstimatesAmount;
@@ -72,5 +74,21 @@ public class FinancialProjectMainDTO {
 
     public void setCreditApply(Long creditApply) {
         this.creditApply = creditApply;
+    }
+
+    public Long getSendToOtherProject() {
+        return sendToOtherProject;
+    }
+
+    public void setSendToOtherProject(Long sendToOtherProject) {
+        this.sendToOtherProject = sendToOtherProject;
+    }
+
+    public Long getReceivedFromOtherProject() {
+        return receivedFromOtherProject;
+    }
+
+    public void setReceivedFromOtherProject(Long receivedFromOtherProject) {
+        this.receivedFromOtherProject = receivedFromOtherProject;
     }
 }

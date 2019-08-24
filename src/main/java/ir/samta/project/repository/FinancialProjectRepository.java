@@ -40,4 +40,20 @@ public interface FinancialProjectRepository extends JpaRepository<FinancialProje
             "where project.id = :projectId and financialProject.financialProjectType=:type  "
     )
     Long getMainFinancialProject(@Param("projectId") Long projectId, @Param("type") FinancialProjectType type);
+
+    @Query(
+        "select sum(financialProject.amount) from FinancialProject financialProject " +
+            "inner join financialProject.project project " +
+            "inner join financialProject.targetProject targetProject  " +
+            "where project.id = :projectId"
+    )
+    Long getTotalSendToOtherProject(@Param("projectId") Long projectId);
+
+    @Query(
+        "select sum(financialProject.amount) from FinancialProject financialProject " +
+            "inner join financialProject.project project " +
+            "inner join financialProject.targetProject targetProject  " +
+            "where targetProject.id = :projectId"
+    )
+    Long getTotalReceivedFromOtherProject(@Param("projectId") Long projectId);
 }

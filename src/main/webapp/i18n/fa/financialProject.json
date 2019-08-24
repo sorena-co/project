@@ -30,7 +30,8 @@
             "project": "پروژه",
             "factorNo": "شماره فاکتور",
             "getCreditProjectId": "اعتبار دریافتی از پروژه",
-            "yearConfirmed": "سال مصوب"
+            "yearConfirmed": "سال مصوب",
+            "targetProject": "پروژه مقصد"
         }
     }
 }

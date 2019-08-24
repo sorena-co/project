@@ -1,4 +1,4 @@
-<div style="background-color: #6D326D">
+<div>
     <div class="row">
 
     </div>
@@ -7,13 +7,13 @@
             <jhi-project-title [projectId]="projectId"></jhi-project-title>
         </div>
         <span jhiTranslate="projectApp.financialProject.home.title">Financial Projects</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-financial-project"
+     <!--   <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-financial-project"
                 [routerLink]="['/project',projectId,'financial-project','new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span class="hidden-sm-down" jhiTranslate="projectApp.financialProject.home.createLabel">
             Create new Financial Project
             </span>
-        </button>
+        </button>-->
         <button id="jh-create-report" class="btn btn-primary float-right jh-create-entity create-financial-project"
                 [routerLink]="['/project',projectId,'financial-project','details-of-main-report']">
             <fa-icon [icon]="'plus'"></fa-icon>
@@ -37,7 +37,8 @@
                         jhiTranslate="projectApp.FinancialProjectType.SELL_CONTRACT_AMOUNT">Financial Project Type</span>
                 </th>
                 <th>
-                    <span jhiTranslate="projectApp.FinancialProjectType.AMOUNT_CONFIRMED_TOTAL">Financial Project Type</span>
+                    <span
+                        jhiTranslate="projectApp.FinancialProjectType.AMOUNT_CONFIRMED_TOTAL">Financial Project Type</span>
                 </th>
                 <th>
                     <span jhiTranslate="projectApp.FinancialProjectType.RECEIVED_FROM_INSTITUTION">Financial Project Type</span>
@@ -53,6 +54,12 @@
                 </th>
                 <th>
                     <span jhiTranslate="projectApp.FinancialProjectType.CREDIT_APPLY">Financial Project Type</span>
+                </th>
+                <th>
+                    <span jhiTranslate="projectApp.FinancialProjectType.SEND_TO_OTHER_PROJECT">Financial Project Type</span>
+                </th>
+                <th>
+                    <span jhiTranslate="projectApp.FinancialProjectType.RECEIVED_FROM_OTHER_PROJECT">Financial Project Type</span>
                 </th>
             </tr>
             </thead>
@@ -74,6 +81,10 @@
                     (click)="navigateToDetail('SEND_TO_PROJECT_NOT_HAVE_CODE')">{{financialProjectMain.sendToProjectNotHaveCode}}</td>
                 <td style="cursor: pointer"
                     (click)="navigateToDetail('CREDIT_APPLY')">{{financialProjectMain.creditApply}}</td>
+                <td style="cursor: pointer"
+                    (click)="navigateToDetail('SEND_TO_OTHER_PROJECT')">{{financialProjectMain.sendToOtherProject}}</td>
+                <td style="cursor: pointer"
+                    (click)="navigateToDetail('RECEIVED_FROM_OTHER_PROJECT')">{{financialProjectMain.receivedFromOtherProject}}</td>
             </tr>
             </tbody>
         </table>

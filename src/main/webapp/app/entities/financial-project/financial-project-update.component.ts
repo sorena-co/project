@@ -24,6 +24,7 @@ export class FinancialProjectUpdateComponent implements OnInit {
     finishDate: string;
     projectId: number;
     FinancialProjectType = FinancialProjectType;
+    type: any;
     financialProjectTypeExist: FinancialProjectTypeExist = new FinancialProjectTypeExist();
 
     constructor(
@@ -33,12 +34,16 @@ export class FinancialProjectUpdateComponent implements OnInit {
         protected activatedRoute: ActivatedRoute
     ) {
         this.projectId = Number(this.activatedRoute.snapshot.params['projectId']);
+        this.type = this.activatedRoute.snapshot.params['type'];
     }
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ financialProject }) => {
             this.financialProject = financialProject;
+            if (this.type) {
+                this.financialProject.financialProjectType = this.type;
+            }
             this.financialProject.projectId = this.projectId;
             this.registerDate = this.financialProject.registerDate != null ? this.financialProject.registerDate.format(DATE_FORMAT) : null;
             this.startDate = this.financialProject.startDate != null ? this.financialProject.startDate.format(DATE_FORMAT) : null;

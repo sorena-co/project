@@ -83,7 +83,7 @@ export const financialProjectRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'new',
+        path: 'new/:type',
         component: FinancialProjectUpdateComponent,
         resolve: {
             financialProject: FinancialProjectResolve
