@@ -31,6 +31,7 @@
             "factorNo": "شماره فاکتور",
             "getCreditProjectId": "اعتبار دریافتی از پروژه",
             "yearConfirmed": "سال مصوب",
+            "accountNumber": "واریز به شماره حساب",
             "targetProject": "پروژه مقصد"
         }
     }

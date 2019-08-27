@@ -47,6 +47,8 @@ public class FinancialProjectDTO implements Serializable {
 
     private String targetProjectTitle;
 
+    private String accountNumber;
+
     public Long getId() {
         return id;
     }
@@ -229,5 +231,13 @@ public class FinancialProjectDTO implements Serializable {
 
     public void setTargetProjectTitle(String targetProjectTitle) {
         this.targetProjectTitle = targetProjectTitle;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 }

@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <jhi-project-title [projectId]="projectId"></jhi-project-title>
         </div>
-        <span jhiTranslate="projectApp.financialProject.home.title">Financial Projects</span>
+        <td jhiTranslate="{{'projectApp.FinancialProjectType.' + type}}">{{type}}</td>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-financial-project"
                 [routerLink]="['/project',projectId,'financial-project','new',type ? type : '']">
             <fa-icon [icon]="'plus'"></fa-icon>
@@ -84,6 +84,10 @@
                         jhiTranslate="projectApp.financialProject.factorNo">Sell Contract No</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
+                    <th jhiSortBy="accountNumber"><span
+                        jhiTranslate="projectApp.financialProject.accountNumber">Sell Contract No</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
                 </ng-container>
                 <th jhiSortBy="yearConfirmed"
                     *ngIf="type===FinancialProjectType[FinancialProjectType.AMOUNT_CONFIRMED]">
@@ -139,6 +143,11 @@
                         <input style="max-width: 150px" type="text" class="form-control" name="factorNo"
                                id="field_factorNo"
                                [(ngModel)]="financialProject.factorNo"/>
+                    </td>
+                    <td>
+                        <input style="max-width: 150px" type="text" class="form-control" name="factorNo"
+                               id="field_accountNumber"
+                               [(ngModel)]="financialProject.accountNumber"/>
                     </td>
                 </ng-container>
                 <td *ngIf="type===FinancialProjectType[FinancialProjectType.AMOUNT_CONFIRMED]">{{financialProject.yearConfirmed}}</td>

@@ -51,6 +51,9 @@ public class FinancialProject implements Serializable {
     @Column(name = "finish_date")
     private ZonedDateTime finishDate;
 
+    @Column(name = "account_number")
+    private String accountNumber;
+
     @Column(name = "description")
     private String description;
 
@@ -291,5 +294,13 @@ public class FinancialProject implements Serializable {
 
     public void setTargetProject(Project targetProject) {
         this.targetProject = targetProject;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 }

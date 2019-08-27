@@ -102,6 +102,15 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="projectApp.financialProject.accountNumber"
+                                       for="field_accountNumber">Financial Project Type</label>
+                                <input class="form-control" name="accountNumber"
+                                       [(ngModel)]="financialProject.accountNumber" id="field_accountNumber"/>
+                            </div>
+                        </div>
                     </ng-container>
                     <div class="col-md-3"
                          *ngIf="financialProject.financialProjectType===FinancialProjectType[FinancialProjectType.CREDIT_APPLY] ||

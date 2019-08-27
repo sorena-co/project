@@ -75,6 +75,7 @@ export interface IFinancialProject {
     targetProjectId?: number;
     targetProjectTitle?: string;
     getCreditProjectTitle?: string;
+    accountNumber?: string;
 }
 
 export class FinancialProject implements IFinancialProject {
@@ -93,6 +94,7 @@ export class FinancialProject implements IFinancialProject {
         public financialProjectType?: FinancialProjectType,
         public projectTitle?: string,
         public targetProjectTitle?: string,
+        public accountNumber?: string,
         public projectId?: number,
         public targetProjectId?: number,
         public yearConfirmed?: number,
