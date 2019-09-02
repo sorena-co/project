@@ -32,6 +32,8 @@ public interface FinancialProjectRepository extends JpaRepository<FinancialProje
 
     Page<FinancialProject> findAllByProject_IdAndFinancialProjectType(Long projectId, FinancialProjectType type, Pageable pageable);
 
+    List<FinancialProject> findAllByTargetProject_Id(Long targetProjectId);
+
     Boolean existsAllByProject_IdAndFinancialProjectType(Long projectId, FinancialProjectType type);
 
     @Query(
@@ -56,4 +58,6 @@ public interface FinancialProjectRepository extends JpaRepository<FinancialProje
             "where targetProject.id = :projectId"
     )
     Long getTotalReceivedFromOtherProject(@Param("projectId") Long projectId);
+
+    List<FinancialProject> findAllByProject_IdAndFinancialProjectType(Long projectId, FinancialProjectType financialProjectType);
 }

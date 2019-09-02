@@ -90,9 +90,8 @@ public class FinancialProjectResource {
         @RequestParam(value = "type") FinancialProjectType type,
         Pageable pageable) {
         log.debug("REST request to get a page of FinancialProjects");
-        Page<FinancialProjectDTO> page = financialProjectService.findAll(projectId, type, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/financial-projects");
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        List<FinancialProjectDTO> page = financialProjectService.findAll(projectId, type, pageable);
+        return ResponseEntity.ok().body(page);
     }
 
     /**
@@ -158,5 +157,16 @@ public class FinancialProjectResource {
         FinancialProjectMainDTO main = financialProjectService.getMainFinancialProject(projectId);
         return ResponseEntity.ok(main);
     }
+
+    @GetMapping("/financial-projects/download-excel/project/{projectId}/financial-project-type/{financialProjectType}")
+    public String downloadExcelByProjectAndFinancialProjectType(
+        @PathVariable Long projectId,
+        @PathVariable FinancialProjectType financialProjectType
+    ) throws IOException {
+        log.debug("REST request to get FinancialProject : {}", projectId);
+        String financialProjectDTO = financialProjectService.downloadFile(projectId, financialProjectType);
+        return financialProjectDTO;
+    }
+
 
 }

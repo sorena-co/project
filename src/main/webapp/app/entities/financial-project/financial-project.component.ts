@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
+import { JhiAlertService, JhiDataUtils, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 
 import { FinancialProject, FinancialProjectType, IFinancialProject } from 'app/shared/model/financial-project.model';
 import { AccountService } from 'app/core';
@@ -35,6 +35,7 @@ export class FinancialProjectComponent implements OnInit, OnDestroy {
     FinancialProjectType = FinancialProjectType;
 
     constructor(
+        protected dataUtils: JhiDataUtils,
         protected financialProjectService: FinancialProjectService,
         protected parseLinks: JhiParseLinks,
         protected jhiAlertService: JhiAlertService,
@@ -166,8 +167,6 @@ export class FinancialProjectComponent implements OnInit, OnDestroy {
     }
 
     protected paginateFinancialProjects(data: IFinancialProject[], headers: HttpHeaders) {
-        this.links = this.parseLinks.parse(headers.get('link'));
-        this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.financialProjects = data;
         this.financialProjects.forEach(value => {
             if (value.getCreditProjectId) {
@@ -184,5 +183,17 @@ export class FinancialProjectComponent implements OnInit, OnDestroy {
 
     editFinancialProject(item: FinancialProject) {
         this.financialProjectService.update(item).subscribe(value => console.log(value));
+    }
+
+    download() {
+        this.financialProjectService.download(this.projectId, this.type).subscribe(
+            value => {
+                return this.dataUtils.downloadFile('applications/ms-xlsx', value.body, this.type + '.xlsx');
+            },
+            error1 => {
+                console.log(error1);
+                return this.dataUtils.downloadFile('applications/ms-xlsx', error1.error.text, this.type + '.xlsx');
+            }
+        );
     }
 }

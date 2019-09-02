@@ -88,6 +88,14 @@ export class FinancialProjectService {
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
+    download(projectId: number, financialProjectType): Observable<HttpResponse<any>> {
+        return this.http
+            .get<any>(`${this.resourceUrl}/download-excel/project/${projectId}/financial-project-type/${financialProjectType}`, {
+                observe: 'response'
+            })
+            .pipe(map((res: HttpResponse<any>) => res));
+    }
+
     protected convertDateFromClient(financialProject: IFinancialProject): IFinancialProject {
         const copy: IFinancialProject = Object.assign({}, financialProject, {
             registerDate:
